@@ -1,5 +1,8 @@
 package Units;
 
+import Patterns.Visitor.Visitors.*;
+
+
 import java.util.Random;
 
 public abstract class Player extends Unit {
@@ -80,6 +83,9 @@ public abstract class Player extends Unit {
     public int getDefense_points(){
         return this.Defense_points;
     }
+
+    //######################### Visitors ##########################
+
 
 
 

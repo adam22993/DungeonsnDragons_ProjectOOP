@@ -1,5 +1,4 @@
 package Units;
-import GameBoard.Point;
 
 
 public abstract class Unit {
@@ -31,5 +30,6 @@ public abstract class Unit {
             enemy.Health_amount = 0;
         }
     }
+
 
 }

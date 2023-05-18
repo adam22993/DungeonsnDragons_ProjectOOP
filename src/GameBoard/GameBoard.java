@@ -4,7 +4,6 @@ import Units.Unit;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.Vector;
 
 public class GameBoard {
@@ -76,9 +75,6 @@ public class GameBoard {
         }
     }
 
-    public void moveUnit(unit currentUnit){
-
-    }
 
     private void scanForUnitsBoard() {
         /**DungeonsnDragons_ProjectOOP\src\GameBoard\GameBoard.java
@@ -87,14 +83,15 @@ public class GameBoard {
          * of units.
          * @return 2D array of Units representing the units on the board.
          */
+
         Vector<Unit> units = new Vector<Unit>();
         for (char[] chars : board) {
             for (int j = 0; j < board.length; j++) {
                 Object current = chars[j]; // could be anything
-
+                }
             }
         }
-    }
+
 
     public double calculateRange(Point p1, Point p2) {
         int x1 = p1.getX();

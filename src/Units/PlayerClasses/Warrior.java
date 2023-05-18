@@ -1,9 +1,11 @@
 package Units.PlayerClasses;
+import Patterns.Visitor.BasicAttackVisitor;
+import Patterns.Visitor.Character;
 import Units.Player;
 import Speaches_Screens.Quotes;
 import java.util.Random;
 
-public class Warrior extends Player {
+public class Warrior extends Player implements Character {
 
     Integer Health_pool;
     Integer Health_amount;
@@ -45,4 +47,18 @@ public class Warrior extends Player {
             this.abilityCD -= 1;
         }
     }
+    //################### Accepts Visitor ###################
+
+    @Override
+    public void accept(BasicAttackVisitor visitor) {
+        visitor.visitBA(this);
+    }
+
+    public void performBasicAttack(){
+        System.out.println("Warrior performed basic attack");
+    }
+
+
+
+
 }

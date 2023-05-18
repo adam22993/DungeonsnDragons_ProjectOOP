@@ -1,4 +1,4 @@
 package Units.Traps;
 
-public class DeathTrap {
+public class DeathTrap extends Trap  {
 }
