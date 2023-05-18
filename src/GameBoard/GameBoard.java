@@ -12,16 +12,18 @@ public class GameBoard {
     }
 
     private char[][] loadBoard() {
-        /**
+        /**DungeonsnDragons_ProjectOOP\src\GameBoard\Levels
          * This function loads the board from the file. Using the current_level variable, it loads the file of
          * the current level. It then counts the number of lines and columns in the file, and creates a 2D array
          * of chars with the size of the board. It then loads the board from the file into the 2D array.
          * @return 2D array of chars representing the board.
          */
-        String levelFile = "../Levels/level" + current_level + 1 + ".txt";
+        String levelFile = "DungeonsnDragons_ProjectOOP\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt";
         int countLines = 0;
         int countColumns = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\AdamS\\OneDrive\\Desktop\\Smart Stuff Folder\\Year 1 - Sapir\\Semester 2\\JavaProjects\\DungeonsnDragons_ProjectOOP\\src\\GameBoard\\Levels\\level1.txt"))) {
+        String currentDir = System.getProperty("user.dir");
+        System.out.println("Current working directory: " + currentDir);
+        try (BufferedReader br = new BufferedReader(new FileReader(levelFile))) {
             while (br.readLine() != null) {
                 countLines++;
             }
@@ -29,7 +31,7 @@ public class GameBoard {
             System.err.format("IOException: %s%n", e);
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\AdamS\\OneDrive\\Desktop\\Smart Stuff Folder\\Year 1 - Sapir\\Semester 2\\JavaProjects\\DungeonsnDragons_ProjectOOP\\src\\GameBoard\\Levels\\level1.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(levelFile))) {
             String line;
             if ((line = br.readLine()) != null) {
                 countColumns = line.length();
@@ -40,7 +42,7 @@ public class GameBoard {
 
         char[][] board = new char[countLines][countColumns];
 
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\AdamS\\OneDrive\\Desktop\\Smart Stuff Folder\\Year 1 - Sapir\\Semester 2\\JavaProjects\\DungeonsnDragons_ProjectOOP\\src\\GameBoard\\Levels\\level1.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(levelFile))) {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
