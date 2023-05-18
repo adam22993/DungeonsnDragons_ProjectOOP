@@ -1,11 +1,16 @@
 package GameBoard;
+import Units.Unit;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
+import java.util.Vector;
 
 public class GameBoard {
 
     int current_level = 0;
+
     char[][] board;
     public GameBoard(){
         this.board = loadBoard();
@@ -58,6 +63,39 @@ public class GameBoard {
         return board;
     }
 
+    public void printBoard() {
+        /**DungeonsnDragons_ProjectOOP\src\GameBoard\GameBoard.java
+         * This function prints the board to the console. It iterates through the 2D array of chars representing
+         * the board, and prints each char to the console.
+         */
+        for (char[] row : board) {
+            for (char c : row) {
+                System.out.print(c);
+            }
+            System.out.println();
+        }
+    }
+
+    public void moveUnit(unit currentUnit){
+
+    }
+
+    private void scanForUnitsBoard() {
+        /**DungeonsnDragons_ProjectOOP\src\GameBoard\GameBoard.java
+         * This function scans the board for units. It creates a 2D array of Units with the same size as the board.
+         * It then scans the board for units, and creates a new unit for each unit found. It then returns the 2D array
+         * of units.
+         * @return 2D array of Units representing the units on the board.
+         */
+        Vector<Unit> units = new Vector<Unit>();
+        for (char[] chars : board) {
+            for (int j = 0; j < board.length; j++) {
+                Object current = chars[j]; // could be anything
+
+            }
+        }
+    }
+
     public double calculateRange(Point p1, Point p2) {
         int x1 = p1.getX();
         int y1 = p1.getY();
@@ -68,6 +106,10 @@ public class GameBoard {
         int yRange = Math.abs(y1 - y2);
 
         return Math.sqrt(Math.pow(xRange, 2) + Math.pow(yRange, 2));
+    }
+
+    private void playerTurn() {
+
     }
 
 }

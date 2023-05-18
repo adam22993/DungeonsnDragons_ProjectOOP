@@ -11,11 +11,10 @@ public class Warrior extends Player {
     Integer Defense_points;
     Integer Experience_cap;
     Integer Level;
-    int abilityCD;
     Random Random = new Random();
     public Warrior(String name) {
         super(name);
-        this.abilityCD = 0;
+        this.Experience_cap = 50;
     }
 
     @Override

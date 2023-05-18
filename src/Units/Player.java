@@ -4,9 +4,11 @@ import java.util.Random;
 
 public abstract class Player extends Unit {
     //###################### Class related ######################
-    private Integer Experience_cap;
-    private Integer Experience;
-    private Integer Level;
+    protected Integer Experience_cap;
+    protected Integer Experience;
+    protected Integer Level;
+    protected int abilityCD;
+
     private Random rand = new Random();
     public Player(String name) {
         // TODO Random choose stats constructor stub
@@ -14,6 +16,7 @@ public abstract class Player extends Unit {
         this.Experience_cap = 50;
         this.Experience = 0;
         this.Level = 1;
+        this.abilityCD = 0;
     }
 
 

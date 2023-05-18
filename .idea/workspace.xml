@@ -5,9 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a2a573d-8547-407a-b529-475825b9a045" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Tests/GameBoardTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/MonsterTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/UITests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/UnitTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Bosses/bossMonster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/BearWright.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/LannisterKnight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/LannisterSolider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/NightsKing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/QueenCersei.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/QueensGuard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/TheMountain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/WhiteWalker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/Wright.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/regularMonster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Traps/BonusTrap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Traps/DeathTrap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Traps/QueensTrap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Speaches_Screens/landingPage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Speaches_Screens/landingPage.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +84,8 @@
       <option name="presentableId" value="Default" />
       <updated>1684342896181</updated>
       <workItem from="1684342897330" duration="19317000" />
-      <workItem from="1684363947738" duration="342000" />
+      <workItem from="1684363947738" duration="728000" />
+      <workItem from="1684424112460" duration="4794000" />
     </task>
     <servers />
   </component>
@@ -74,7 +97,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GameBoard/GameBoard.java</url>
-          <line>23</line>
+          <line>30</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
