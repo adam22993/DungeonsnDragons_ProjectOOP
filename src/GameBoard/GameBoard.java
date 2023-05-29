@@ -1,18 +1,25 @@
 package GameBoard;
+import Units.Tile;
 import Units.Unit;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 public class GameBoard {
 
     int current_level = 0;
 
-    char[][] board;
-    public GameBoard(){
-        this.board = loadBoard();
+    private List<Tile> tiles;
+    public GameBoard(Tile[][] board){
+        tiles = new ArrayList<>();
+        for(Tile[] line : board){
+            tiles.addAll(Arrays.asList(line));
+        }
     }
 
     private char[][] loadBoard() {
@@ -22,12 +29,12 @@ public class GameBoard {
          * of chars with the size of the board. It then loads the board from the file into the 2D array.
          * @return 2D array of chars representing the board.
          */
-        String levelFile = "DungeonsnDragons_ProjectOOP\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt";
+        String levelFile = "\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt";
         int countLines = 0;
         int countColumns = 0;
         String currentDir = System.getProperty("user.dir");
         System.out.println("Current working directory: " + currentDir);
-        try (BufferedReader br = new BufferedReader(new FileReader(levelFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
             while (br.readLine() != null) {
                 countLines++;
             }
@@ -35,7 +42,7 @@ public class GameBoard {
             System.err.format("IOException: %s%n", e);
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(levelFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
             String line;
             if ((line = br.readLine()) != null) {
                 countColumns = line.length();
@@ -46,7 +53,7 @@ public class GameBoard {
 
         char[][] board = new char[countLines][countColumns];
 
-        try (BufferedReader br = new BufferedReader(new FileReader(levelFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
@@ -110,3 +117,35 @@ public class GameBoard {
     }
 
 }
+/*
+public class GameBoard {
+    private List<Tile> tiles;
+
+    public GameBoard(Tile[][] board){
+        tiles = new ArrayList<>();
+        for(Tile[] line : board){
+            tiles.addAll(Arrays.asList(line));
+        }
+    }
+
+    public Tile get(int x, int y) {
+        for(Tile t : tiles){
+            if (t.getPosition().equals(Position.at(x, y))){
+                return t;
+            }
+        }
+        // Throw an exception if no such tile.
+    }
+
+    public void remove(Enemy e) {
+        tiles.remove(e);
+        Position p = e.getPosition();
+        tiles.add(new Empty(p));
+    }
+
+    @Override
+    public String toString() {
+        tiles = tiles.stream().sorted().collect(Collectors.toList());
+        // TODO: Implement me
+    }
+}*/
