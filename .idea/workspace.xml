@@ -4,19 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a2a573d-8547-407a-b529-475825b9a045" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Patterns/Accpets/BasicAttackAccepter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Speaches_Screens/characterCreation.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/UnitVisited.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/UnitVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Position/Position.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Monsters/Monster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/AryaStark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Bronn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/JohnSnow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Melisandre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/TheHound.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/ThorosofMyr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/Tile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DungeonsnDragons_ProjectOOP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DungeonsnDragons_ProjectOOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameBoard/MessagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/MessagesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameBoard/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/Visitor/BasicAttackVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Visitor/BasicAttackVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Speaches_Screens/characterCreation" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/MonsterTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Patterns/Visitor/TypeCheckerVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Visitor/TypeCheckerVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/Monsters/regularMonster.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Unit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,28 +55,26 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "openjdk-20",
+    "git-widget-placeholder": "Merging main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\GameBoard" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="DungeonsnDragons_ProjectOOP" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -80,26 +89,14 @@
       <workItem from="1684424112460" duration="16555000" />
       <workItem from="1684861392228" duration="36000" />
       <workItem from="1684861865906" duration="5157000" />
+      <workItem from="1685451334256" duration="13000" />
+      <workItem from="1685451354497" duration="59000" />
+      <workItem from="1685471047749" duration="4089000" />
+      <workItem from="1685619656625" duration="773000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GameBoard/GameBoard.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>7</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -1,6 +1,7 @@
 package Units.PlayerClasses;
 import Patterns.Visitor.BasicAttackVisitor;
 import Patterns.Visitor.Character;
+import Patterns.Visitor.UnitVisitor;
 import Units.Player;
 import Speaches_Screens.Quotes;
 import java.util.Random;
@@ -11,12 +12,11 @@ public class Warrior extends Player implements Character {
     Integer Health_amount;
     Integer Attack_points;
     Integer Defense_points;
-    Integer Experience_cap;
-    Integer Level;
+    protected int abilityCD;
     Random Random = new Random();
-    public Warrior(String name) {
-        super(name);
-        this.Experience_cap = 50;
+    public Warrior(String name, Integer Health_pool, Integer Health_amount, Integer Attack_points, Integer Defense_points, int abilityCD) {
+        super(name, Health_pool, Health_amount, Attack_points, Defense_points);
+        this.abilityCD = abilityCD;
     }
 
     @Override
@@ -47,6 +47,11 @@ public class Warrior extends Player implements Character {
             this.abilityCD -= 1;
         }
     }
+
+    @Override
+    public void accept(UnitVisitor visitor) {
+        visitor.visit(this);
+    }
     //################### Accepts Visitor ###################
 
     @Override
@@ -55,7 +60,7 @@ public class Warrior extends Player implements Character {
     }
 
     public void performBasicAttack(){
-        System.out.println("Warrior performed basic attack");
+        System.out.println(this.getName() + " performed a basic attack!");
     }
 
 

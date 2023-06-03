@@ -1,5 +1,6 @@
 package Units;
 
+import Patterns.Visitor.UnitVisitor;
 
 public abstract class Unit {
     String name;
@@ -30,6 +31,7 @@ public abstract class Unit {
             enemy.Health_amount = 0;
         }
     }
+    public abstract void accept(UnitVisitor visitor);
 
 
 }

@@ -6,5 +6,4 @@ import Units.Traps.*;
 
 public interface TypeCheckerVisitor {
 
-
 }

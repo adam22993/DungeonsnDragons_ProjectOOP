@@ -1,9 +1,5 @@
 package Units;
 
-import Patterns.Visitor.*;
-
-
-import java.util.Random;
 
 public abstract class Player extends Unit {
     //###################### Class related ######################
@@ -12,14 +8,12 @@ public abstract class Player extends Unit {
     protected Integer Level;
     protected int abilityCD;
 
-    private Random rand = new Random();
-    public Player(String name) {
+    public Player(String name, Integer Health_pool, Integer Health_amount, Integer Attack_points, Integer Defense_points) {
         // TODO Random choose stats constructor stub
-        super(name, 140, 140, 10, 10);
+        super(name, Health_pool, Health_amount, Attack_points, Defense_points);
         this.Experience_cap = 50;
         this.Experience = 0;
         this.Level = 1;
-        this.abilityCD = 0;
     }
 
 

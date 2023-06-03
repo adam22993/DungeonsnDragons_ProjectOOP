@@ -1,5 +1,5 @@
 package Units.PlayerClasses;
 
-public class Mage {
+public class AryaStark {
 
 }
