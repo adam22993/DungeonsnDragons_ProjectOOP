@@ -16,7 +16,7 @@ public class GameBoard {
     }
 
     private char[][] loadBoard() {
-        /**DungeonsnDragons_ProjectOOP\src\GameBoard\Levels
+        /*re
          * This function loads the board from the file. Using the current_level variable, it loads the file of
          * the current level. It then counts the number of lines and columns in the file, and creates a 2D array
          * of chars with the size of the board. It then loads the board from the file into the 2D array.
@@ -63,7 +63,7 @@ public class GameBoard {
     }
 
     public void printBoard() {
-        /**DungeonsnDragons_ProjectOOP\src\GameBoard\GameBoard.java
+        /**
          * This function prints the board to the console. It iterates through the 2D array of chars representing
          * the board, and prints each char to the console.
          */

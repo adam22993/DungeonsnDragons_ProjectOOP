@@ -1,6 +1,6 @@
 package Units;
 
-import Patterns.Visitor.Visitors.*;
+import Patterns.Visitor.*;
 
 
 import java.util.Random;

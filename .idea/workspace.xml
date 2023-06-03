@@ -5,28 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a2a573d-8547-407a-b529-475825b9a045" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/Accepts/BasicAttackAccept.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/Accepts/MoveAccept.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/Accepts/SpecialAbilityAccept.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/Accepts/TypeAccept.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/Visitors/BasicAttackVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/Visitors/Character.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/Visitors/MoveVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/Visitors/SpecialAbilityVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Patterns/Visitor/Visitors/TypeCheckerVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/TestPatterns.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Units/Traps/Trap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Patterns/Accpets/BasicAttackAccepter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Speaches_Screens/characterCreation.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DungeonsnDragons_ProjectOOP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DungeonsnDragons_ProjectOOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameInit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Patterns/Visitor/BasicAttackVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Visitor/BasicAttackVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Speaches_Screens/characterCreation" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/MonsterTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Traps/BonusTrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Traps/BonusTrap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Traps/DeathTrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Traps/DeathTrap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Traps/QueensTrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Traps/QueensTrap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Unit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +52,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "openjdk-20",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -87,6 +78,8 @@
       <workItem from="1684342897330" duration="19317000" />
       <workItem from="1684363947738" duration="728000" />
       <workItem from="1684424112460" duration="16555000" />
+      <workItem from="1684861392228" duration="36000" />
+      <workItem from="1684861865906" duration="5157000" />
     </task>
     <servers />
   </component>
@@ -103,8 +96,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>4</line>
-          <option name="timeStamp" value="3" />
+          <line>7</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
