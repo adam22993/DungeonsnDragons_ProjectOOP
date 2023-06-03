@@ -22,12 +22,15 @@ public class GameBoard {
          * of chars with the size of the board. It then loads the board from the file into the 2D array.
          * @return 2D array of chars representing the board.
          */
-        String levelFile = "DungeonsnDragons_ProjectOOP\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt";
+
+        //TODO: change to fit tiles and not print the board
+
+        String levelFile = "\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt";
         int countLines = 0;
         int countColumns = 0;
         String currentDir = System.getProperty("user.dir");
-        System.out.println("Current working directory: " + currentDir);
-        try (BufferedReader br = new BufferedReader(new FileReader(levelFile))) {
+        System.out.println("Current working directory: " + currentDir + levelFile);
+        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
             while (br.readLine() != null) {
                 countLines++;
             }
@@ -35,7 +38,7 @@ public class GameBoard {
             System.err.format("IOException: %s%n", e);
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(levelFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
             String line;
             if ((line = br.readLine()) != null) {
                 countColumns = line.length();
@@ -46,7 +49,7 @@ public class GameBoard {
 
         char[][] board = new char[countLines][countColumns];
 
-        try (BufferedReader br = new BufferedReader(new FileReader(levelFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
@@ -67,6 +70,7 @@ public class GameBoard {
          * This function prints the board to the console. It iterates through the 2D array of chars representing
          * the board, and prints each char to the console.
          */
+        //TODO: change to fit tiles and not print the board
         for (char[] row : board) {
             for (char c : row) {
                 System.out.print(c);
@@ -83,7 +87,7 @@ public class GameBoard {
          * of units.
          * @return 2D array of Units representing the units on the board.
          */
-
+        //Vector so we can know which enemies are close to the player and are accessible for attack using special ability
         Vector<Unit> units = new Vector<Unit>();
         for (char[] chars : board) {
             for (int j = 0; j < board.length; j++) {
@@ -94,6 +98,7 @@ public class GameBoard {
 
 
     public double calculateRange(Point p1, Point p2) {
+        //TODO: move to position class
         int x1 = p1.getX();
         int y1 = p1.getY();
         int x2 = p2.getX();
@@ -106,7 +111,7 @@ public class GameBoard {
     }
 
     private void playerTurn() {
-
+        //TODO: implement
     }
 
 }

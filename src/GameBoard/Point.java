@@ -1,6 +1,6 @@
 package GameBoard;
 
-public class Point {
+public class Point { // probably going to be position class TODO: change name and implement
 
         private int x;
         private int y;
