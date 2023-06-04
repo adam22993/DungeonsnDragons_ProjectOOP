@@ -3,5 +3,5 @@ package Patterns.Visitor;
 import Units.Unit;
 
 public interface UnitVisited {
-    public Unit accept(UnitVisitor visitor);
+    public Unit accept(char visitor);
 }

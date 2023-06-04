@@ -6,9 +6,9 @@ public class Main {
     public static void main(String[] args) {
 //        GameBoard gameBoard = new GameBoard();
         Warrior warrior = new Warrior("Warrior", 100, 100, 100, 100, 100);
-        Warrior warrior2 = new Bronn();
+        Warrior Bronn = new Bronn();
         warrior.performBasicAttack();
-        warrior2.performBasicAttack();
+        Bronn.performBasicAttack();
         GameBoard gameBoard = new GameBoard();
         GameUI gameUI = new GameUI();
         }

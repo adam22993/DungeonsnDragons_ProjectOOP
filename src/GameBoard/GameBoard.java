@@ -7,7 +7,8 @@ import Units.Player;
 import Units.PlayerClasses.*;
 import Units.Tile;
 import Units.Unit;
-
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.*;
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -16,14 +17,73 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class GameBoard implements UnitVisited {
+public class GameBoard {
     JFrame window;
     Container con;
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, boardPanel, statsPanel;
+    KeyListener keyboardListener = new KeyListener() {
+        @Override
+        public void keyTyped(KeyEvent e) {
+            // This method is invoked when a key is typed (pressed and released)
+            char keyPressed = e.getKeyChar();
+            JLabel label = new JLabel("Press a key...");
+            label.setText("Key typed: " + keyPressed);
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                System.out.println("Escape pressed");
+                System.exit(0);
+            }
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                System.out.println("W pressed");
+//                gameUI.moveUp();
+            }
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                System.out.println("S pressed");
+//                gameUI.moveDown();
+            }
+            if (e.getKeyCode() == KeyEvent.VK_A) {
+                System.out.println("A pressed");
+//                gameUI.moveLeft();
+            }
+            if (e.getKeyCode() == KeyEvent.VK_D) {
+                System.out.println("D pressed");
+//                gameUI.moveRight();
+            }
+            if (e.getKeyCode() == KeyEvent.VK_E) {
+                System.out.println("E pressed");
+//                gameUI.useSpecialAbility();
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            // This method is invoked when a key is released
+            char keyReleased = e.getKeyChar();
+            JLabel label = new JLabel("Press a key...");
+            label.setText("Key released: " + keyReleased);
+            if (e.getKeyCode() == KeyEvent.VK_W) {
+                System.out.println("W released");
+            }
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                System.out.println("S released");
+            }
+            if (e.getKeyCode() == KeyEvent.VK_A) {
+                System.out.println("A released");
+            }
+            if (e.getKeyCode() == KeyEvent.VK_D) {
+                System.out.println("D released");
+            }
+        }
+    };
+    JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, boardPanel;
     JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName, weaponLabelNumber, armorLabel, armorLabelName, armorLabelNumber, playerLabel, playerLabelName, playerLabelNumber;
+    JTextArea boardTextArea;
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
     Font smallFont = new Font("Times New Roman", Font.PLAIN, 18);
+    Font boardFont = new Font(Font.MONOSPACED, Font.PLAIN, 18);
     GameUI gameUI;
     int current_level = 0;
 
@@ -40,8 +100,8 @@ public class GameBoard implements UnitVisited {
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(290, 130, 600, 70);
 
-        titleNamePanel.setBackground(Color.BLACK);
         titleNameLabel = new JLabel("DUNGEONS & DRAGONS");
+        titleNamePanel.setBackground(Color.BLACK);
         titleNameLabel.setForeground(Color.white);
         titleNameLabel.setFont(titleFont);
         titleNamePanel.add(titleNameLabel);
@@ -50,13 +110,13 @@ public class GameBoard implements UnitVisited {
         startButtonPanel.setBackground(Color.black);
         JButton startButton = new JButton("START");
         startButton.setFont(normalFont);
-        startButton.setBackground(Color.black);
+        startButton.setBackground(Color.white);
         startButton.addActionListener(e -> {
             characterCreationScreen();
         });
         JButton quitButton = new JButton("QUIT");
         quitButton.setFont(normalFont);
-        quitButton.setBackground(Color.black);
+        quitButton.setBackground(Color.white);
         quitButton.addActionListener(e -> {
             window.dispose();
             System.exit(0);
@@ -102,15 +162,16 @@ public class GameBoard implements UnitVisited {
         JButton choice1 = new JButton("Jon Snow");
         choice1.setSize(50, 50);
         choice1.setBackground(Color.black);
-        choice1.setForeground(Color.black);
+        choice1.setForeground(Color.white);
         choice1.setFont(normalFont);
         choiceButtonPanel.add(choice1);
         choice1.addActionListener(e -> {
+            playerLabel.setText("Jon Snow");
             createGameScreen(new JohnSnow());
         });
         JButton choice2 = new JButton("The Hound");
         choice2.setBackground(Color.black);
-        choice2.setForeground(Color.black);
+        choice2.setForeground(Color.white);
         choice2.setFont(normalFont);
         choiceButtonPanel.add(choice2);
         choice2.addActionListener(e -> {
@@ -118,7 +179,7 @@ public class GameBoard implements UnitVisited {
         });
         JButton choice3 = new JButton("Melisandre");
         choice3.setBackground(Color.black);
-        choice3.setForeground(Color.black);
+        choice3.setForeground(Color.white);
         choice3.setFont(normalFont);
         choiceButtonPanel.add(choice3);
         choice3.addActionListener(e -> {
@@ -126,7 +187,7 @@ public class GameBoard implements UnitVisited {
         });
         JButton choice4 = new JButton("Thoros of Myr");
         choice4.setBackground(Color.black);
-        choice4.setForeground(Color.black);
+        choice4.setForeground(Color.white);
         choice4.setFont(normalFont);
         choiceButtonPanel.add(choice4);
         choice4.addActionListener(e -> {
@@ -134,7 +195,7 @@ public class GameBoard implements UnitVisited {
         });
         JButton choice5 = new JButton("Arya Stark");
         choice5.setBackground(Color.black);
-        choice5.setForeground(Color.black);
+        choice5.setForeground(Color.white);
         choice5.setFont(normalFont);
         choiceButtonPanel.add(choice5);
         choice5.addActionListener(e -> {
@@ -142,7 +203,7 @@ public class GameBoard implements UnitVisited {
         });
         JButton choice6 = new JButton("Bronn");
         choice6.setBackground(Color.black);
-        choice6.setForeground(Color.black);
+        choice6.setForeground(Color.white);
         choice6.setFont(normalFont);
         choiceButtonPanel.add(choice6);
         choice6.addActionListener(e -> {
@@ -150,7 +211,7 @@ public class GameBoard implements UnitVisited {
         });
         JButton choice7 = new JButton("Ygritte");
         choice7.setBackground(Color.black);
-        choice7.setForeground(Color.black);
+        choice7.setForeground(Color.white);
         choice7.setFont(normalFont);
         choiceButtonPanel.add(choice7);
         choice7.addActionListener(e -> {
@@ -159,21 +220,21 @@ public class GameBoard implements UnitVisited {
         });
         JButton choice8 = new JButton("Custom character");
         choice8.setBackground(Color.black);
-        choice8.setForeground(Color.black);
+        choice8.setForeground(Color.white);
         choice8.setFont(normalFont);
         choiceButtonPanel.add(choice8);
         choice8.addActionListener(e -> {
             JOptionPane.showMessageDialog(null, "I'm crazy... but not that crazy!", "Custom character", JOptionPane.ERROR_MESSAGE);
         });
         playerPanel = new JPanel();
-        playerPanel.setBounds(100, 15, 600, 50);
+        playerPanel.setBounds(50, 15, 600, 50);
+        playerLabel = new JLabel("Choose your character:");
+        playerLabel.setForeground(Color.white);
         playerPanel.setBackground(Color.black);
         playerPanel.setLayout(new GridLayout(1, 4));
-        con.add(playerPanel);
-        playerLabel = new JLabel("Choose your character:");
         playerLabel.setFont(normalFont);
-        playerLabel.setForeground(Color.white);
         playerPanel.add(playerLabel);
+        con.add(playerPanel);
 
     }
 
@@ -187,14 +248,26 @@ public class GameBoard implements UnitVisited {
     public void createGameScreen(Player playerUnit) {
         mainTextPanel.setVisible(false);
         choiceButtonPanel.setVisible(false);
-        playerPanel.setVisible(false);
+        boardPanel = new JPanel();
+        boardTextArea = new JTextArea();
+        boardPanel.setSize(300, 300);
         boardPanel.setVisible(true);
         boardPanel.setLayout(null);
-        boardPanel.setSize(600, 600);
         boardPanel.setBackground(Color.black);
-        boardPanel.setForeground(Color.black);
+        boardPanel.setForeground(Color.white);
         this.board = loadBoard();
-        boardPanel.add(new JLabel(returnBoard()));
+        boardTextArea = new JTextArea(returnBoard());
+        boardTextArea.setBounds(50, 100, 600, 600);
+        boardTextArea.setFont(boardFont);
+        boardTextArea.setForeground(Color.white);
+        boardTextArea.setBackground(Color.black);
+        boardTextArea.setVisible(true);
+        printBoard();
+        boardPanel.setBounds(0, 0, 600, 600);
+        boardTextArea.setLineWrap(true);
+        boardPanel.add(boardTextArea);
+        con.add(boardPanel);
+
     }
 
     private char[][] loadBoard() {
@@ -236,13 +309,20 @@ public class GameBoard implements UnitVisited {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
-                char[] values = line.toCharArray();
-                System.arraycopy(values, 0, board[i], 0, values.length);
+                for (int j = 0; j < countColumns; j++) {
+                    board[i][j] = line.charAt(j);
+                }
                 i++;
             }
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        }
+        Unit[][] units = new Unit[countLines][countColumns];
+        for (char[] row: board){
+            for (char c: row){
+
+            }
         }
         current_level++;
         return board;
@@ -267,14 +347,14 @@ public class GameBoard implements UnitVisited {
          * This function prints the board to the console. It iterates through the 2D array of chars representing
          * the board, and prints each char to the console.
          */
-        String boardString = "";
+        StringBuilder boardString = new StringBuilder();
         for (char[] row : board) {
             for (char c : row) {
-                boardString += c;
+                boardString.append(c);
             }
-            boardString += "\n";
+            boardString.append("\n");
         }
-        return boardString;
+        return boardString.toString();
 
 
 //        private Vector<Unit> scanForUnitsBoard() {
@@ -303,11 +383,5 @@ public class GameBoard implements UnitVisited {
 //            //TODO: implement
 //        }
 
-    }
-
-    @Override
-    public Unit accept(UnitVisitor visitor) {
-//        return visitor.visit(visitor);
-        return null;
     }
 }
