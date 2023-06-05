@@ -1,4 +1,4 @@
-package GameBoard;
+package Units;
 
 public class Point { // probably going to be position class TODO: change name and implement
 
