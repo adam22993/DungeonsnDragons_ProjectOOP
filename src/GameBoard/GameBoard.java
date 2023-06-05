@@ -1,25 +1,12 @@
 package GameBoard;
 import UI.GameUI;
-import Units.Player;
-import Units.PlayerClasses.*;
-import Units.Unit;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.*;
-import javax.swing.*;
+import Units.Abstracts.Unit;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class GameBoard {
-
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel, characterSelectOptions, playerPanel, boardPanel, playerChoices;
-    JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName, weaponLabelNumber, armorLabel, armorLabelName, armorLabelNumber, playerLabel, playerLabelName, playerLabelNumber;
-    JTextArea boardTextArea;
-    Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
-    Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
-    Font smallFont = new Font("Times New Roman", Font.PLAIN, 18);
-    Font boardFont = new Font(Font.MONOSPACED, Font.PLAIN, 18);
     GameUI gameUI = new GameUI();
     int current_level = 0;
 
@@ -147,9 +134,14 @@ public class GameBoard {
 ////            return units;
 //        }
 
-
+//        private void gameTick(){
+//            // TODO: implement
+//        }
 //        private void playerTurn () {
 //            //TODO: implement
+//        }
+//        private void monsterTurn(){
+//            // TODO: implement
 //        }
 
     }

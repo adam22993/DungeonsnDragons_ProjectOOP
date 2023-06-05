@@ -1,10 +1,8 @@
 
 package UI;
 
-import Units.Player;
-import Units.PlayerClasses.Bronn;
-import Units.PlayerClasses.JohnSnow;
-import Units.PlayerClasses.TheHound;
+import Units.Abstracts.Player;
+import Units.PlayerClasses.Warrior;
 
 import javax.swing.*;
 import java.awt.*;
@@ -194,7 +192,7 @@ public class GameUI {
         characterSelectOptions.add(choice1);
         choice1.addActionListener(e -> {
             playerLabel.setText("Jon Snow");
-            createGameScreen(new JohnSnow());
+            createGameScreen(new Warrior("Jon Snow", 300, 30, 4, 0, 3));
         });
         JButton choice2 = new JButton("The Hound");
         choice2.setBackground(Color.black);
@@ -202,7 +200,7 @@ public class GameUI {
         choice2.setFont(normalFont);
         characterSelectOptions.add(choice2);
         choice2.addActionListener(e -> {
-            createGameScreen(new TheHound());
+            createGameScreen(new Warrior("The Hound", 400, 20, 6, 0, 5));
         });
         JButton choice3 = new JButton("Melisandre");
         choice3.setBackground(Color.black);
@@ -234,7 +232,7 @@ public class GameUI {
         choice6.setFont(normalFont);
         characterSelectOptions.add(choice6);
         choice6.addActionListener(e -> {
-            createGameScreen(new Bronn());
+            createGameScreen(new Warrior("Bronn", 250, 35, 3, 0, 5));
         });
         JButton choice7 = new JButton("Ygritte");
         choice7.setBackground(Color.black);

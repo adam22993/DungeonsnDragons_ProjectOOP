@@ -1,7 +1,6 @@
 package Units.PlayerClasses;
 
-import Patterns.Visitor.UnitVisitor;
-import Units.Player;
+import Units.Abstracts.Player;
 
 public class Rogue extends Player {
     protected Integer energy;
