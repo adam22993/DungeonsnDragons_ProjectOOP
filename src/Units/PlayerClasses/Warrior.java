@@ -5,16 +5,13 @@ import Speaches_Screens.Quotes;
 import java.util.Random;
 
 public class Warrior extends Player {
-
-    Integer Health_pool;
-    Integer Health_amount;
-    Integer Attack_points;
-    Integer Defense_points;
     protected int abilityCD;
+    protected int currentAbilityCD;
     Random Random = new Random();
-    public Warrior(char Char, String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int abilityCD, Position position) {
-        super(Char, name, Health_pool, Attack_points, Defense_points, position);
+    public Warrior(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int abilityCD) {
+        super(name, Health_pool, Attack_points, Defense_points);
         this.abilityCD = abilityCD;
+        this.currentAbilityCD = 0;
     }
 
     @Override
@@ -28,9 +25,9 @@ public class Warrior extends Player {
         }
         super.levelUp();
         abilityCD = 0;
-        Health_amount = Health_pool + 5 * level;
-        Attack_points = Attack_points + 2 * level;
-        Defense_points = Defense_points + level;
+        this.healthAmount = this.healthAmount + 5 * this.level;
+        this.attackPoints = this.attackPoints + 2 * this.level;
+        this.defensePoints = this.defensePoints + this.level;
         this.levelUp();
     }
     //################### Accepts Visitor ###################

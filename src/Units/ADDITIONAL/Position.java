@@ -47,4 +47,5 @@ public class Position {
     public double Range(Position other){
         return Math.floor(Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2)));
     }
+
 }

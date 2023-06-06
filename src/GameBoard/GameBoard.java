@@ -1,19 +1,26 @@
 package GameBoard;
+import Patterns.Factory.TileFactory;
 import UI.GameUI;
-import Units.Abstracts.Unit;
+import Units.ADDITIONAL.Position;
+import Units.Abstracts.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Vector;
 
 public class GameBoard {
+
+    Vector<Tile> turnSequence = new Vector<Tile>();
+    int playerSelected;
     GameUI gameUI = new GameUI();
+    TileFactory tileFactory;
     int current_level = 0;
 
-    char[][] board;
+    Tile[][] board;
 
     public GameBoard() {
-        this.board = loadBoard(current_level);
+        this.board = loadCurrentLevelBoard(current_level);
         gameUI.openWelcomeScreen();
     }
 
@@ -26,7 +33,7 @@ public class GameBoard {
 //    }
 
 
-    private char[][] loadBoard(int current_level) {
+    private Tile[][] loadCurrentLevelBoard(int current_level) {
         /*re
          * This function loads the board from the file. Using the current_level variable, it loads the file of
          * the current level. It then counts the number of lines and columns in the file, and creates a 2D array
@@ -37,7 +44,7 @@ public class GameBoard {
         //TODO: change to fit tiles and not print the board
 
         String levelFile = "/src/GameBoard/Levels/level" + (current_level + 1) + ".txt";
-        //String levelFile = "\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt";
+        //String levelFile = "\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt"; // for some reason this works on windows only, mac needs the /src/ instead of \\src\\ and windows still works with /src/.
         int countLines = 0;
         int countColumns = 0;
         String currentDir = System.getProperty("user.dir");
@@ -59,14 +66,28 @@ public class GameBoard {
             System.err.format("IOException: %s%n", e);
         }
 
-        char[][] board = new char[countLines][countColumns];
-
+        Tile[][] tiles = new Tile[countLines][countColumns];
+        tileFactory = new TileFactory(1);
         try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
             String line;
             int i = 0;
             while ((line = br.readLine()) != null) {
                 for (int j = 0; j < countColumns; j++) {
-                    board[i][j] = line.charAt(j);
+                    char Char = line.charAt(j);
+                    if(Char == '.'){
+                        tiles[i][j] = tileFactory.produceEmpty(new Position(i, j));
+                    } else if(Char == '#'){
+                        tiles[i][j] = tileFactory.produceWall(new Position(i, j));
+                    } else if (Char == '@'){
+                        tiles[i][j] = tileFactory.producePlayer(1, new Position(i, j));  // TODO: change to playerSelected
+                        turnSequence.insertElementAt(tiles[i][j], 0); // add player to the beginning of the turn sequence
+                    } else if (tileFactory.getEnemiesMap().containsKey(Char)){
+                        tiles[i][j] = tileFactory.produceEnemy(Char, new Position(i, j));
+                        turnSequence.add(tiles[i][j]);
+                    } else {
+                        tiles[i][j] = tileFactory.produceEmpty(new Position(i, j)); // nothing found to create, so create an empty tile. - this should never happen - this is for damage control.
+                    }
+
                 }
                 i++;
             }
@@ -74,14 +95,9 @@ public class GameBoard {
             e.printStackTrace();
             return null;
         }
-        Unit[][] units = new Unit[countLines][countColumns];
-        for (char[] row: board){
-            for (char c: row){
-
-            }
-        }
         current_level++;
-        return board;
+        System.out.println(turnSequence);
+        return tiles;
     }
 
     public void printBoard() {
@@ -90,8 +106,8 @@ public class GameBoard {
          * the board, and prints each char to the console.
          */
         //TODO: change to fit tiles and not print the board
-        for (char[] row : board) {
-            for (char c : row) {
+        for (Tile[] row : board) {
+            for (Tile c : row) {
                 System.out.print(c);
             }
             System.out.println();
@@ -104,8 +120,8 @@ public class GameBoard {
          * the board, and prints each char to the console.
          */
         StringBuilder boardString = new StringBuilder();
-        for (char[] row : board) {
-            for (char c : row) {
+        for (Tile[] row : board) {
+            for (Tile c : row) {
                 boardString.append(c);
             }
             boardString.append("\n");

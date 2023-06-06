@@ -1,28 +1,24 @@
 package Units.PlayerClasses;
 
+import Units.ADDITIONAL.Position;
 import Units.Abstracts.Player;
 
 public class Rogue extends Player {
-    protected Integer energy;
-    protected Integer energyMax;
+    protected int currEnergy, energyMax, castCost;
 
-    public Rogue(String name, Integer Health_pool, Integer Health_amount, Integer Attack_points, Integer Defense_points) {
-        super(name, Health_pool, Health_amount, Attack_points, Defense_points);
-        this.energy = 100;
+    public Rogue(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int castCost) {
+        super(name, Health_pool, Attack_points, Defense_points);
+        this.currEnergy = 100;
         this.energyMax = 100;
-
+        this.castCost = castCost;
     }
 
-    @Override
-    public void accept(UnitVisitor visitor) {
-        visitor.visit(this);
-    }
 
     @Override
     protected void levelUp(){
         super.levelUp();
         this.energyMax += 10;
-        this.energy = this.energyMax;
+        this.currEnergy = this.energyMax;
     }
     @Override
     protected void castSpecialAbility() {

@@ -1,7 +1,9 @@
 
 package UI;
 
+import Units.ADDITIONAL.Position;
 import Units.Abstracts.Player;
+import Units.Abstracts.Tile;
 import Units.PlayerClasses.Warrior;
 
 import javax.swing.*;
@@ -192,7 +194,7 @@ public class GameUI {
         characterSelectOptions.add(choice1);
         choice1.addActionListener(e -> {
             playerLabel.setText("Jon Snow");
-            createGameScreen(new Warrior("Jon Snow", 300, 30, 4, 0, 3));
+            createGameScreen(new Warrior("Jon Snow", 300, 30, 4, 0));
         });
         JButton choice2 = new JButton("The Hound");
         choice2.setBackground(Color.black);
@@ -200,7 +202,7 @@ public class GameUI {
         choice2.setFont(normalFont);
         characterSelectOptions.add(choice2);
         choice2.addActionListener(e -> {
-            createGameScreen(new Warrior("The Hound", 400, 20, 6, 0, 5));
+            createGameScreen(new Warrior("The Hound", 400, 20, 6, 0));
         });
         JButton choice3 = new JButton("Melisandre");
         choice3.setBackground(Color.black);
@@ -232,7 +234,7 @@ public class GameUI {
         choice6.setFont(normalFont);
         characterSelectOptions.add(choice6);
         choice6.addActionListener(e -> {
-            createGameScreen(new Warrior("Bronn", 250, 35, 3, 0, 5));
+            createGameScreen(new Warrior("Bronn", 250, 35, 3, 0));
         });
         JButton choice7 = new JButton("Ygritte");
         choice7.setBackground(Color.black);
@@ -319,7 +321,7 @@ public class GameUI {
         // create board panel and text area - currently set to testing
 //        boardPanel = new JPanel(); // defaulted to a white square and unnecessary
         boardTextArea = new JTextArea();
-        boardTextArea = new JTextArea("\t\t\t\t\t###\n\n\n\n\n\n\n\n\n#\t\t\t\t\tthis is a test\n\n\n\n\n\n\n\n\n\t\t\t\t\t###");
+        boardTextArea = new JTextArea(/*"\t\t\t\t\t###\n\n\n\n\n\n\n\n\n#\t\t\t\t\tthis is a test\n\n\n\n\n\n\n\n\n\t\t\t\t\t###"*/);
         boardTextArea.setBounds(50, 100, 600, 600);
         boardTextArea.setFont(boardFont);
         boardTextArea.setForeground(Color.white);

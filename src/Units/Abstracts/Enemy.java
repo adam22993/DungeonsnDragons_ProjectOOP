@@ -2,14 +2,17 @@ package Units.Abstracts;
 
 import Units.ADDITIONAL.Position;
 
-public abstract class Enemy extends Unit {
-    int experienceValue;
-    int visionRange;
+import java.util.function.Supplier;
 
-    public Enemy(char Char, String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, Position position, int experienceValue, int visionRange) {
-        super(Char, name, Health_pool, Attack_points, Defense_points, position);
+public abstract class Enemy extends Unit {
+    protected int experienceValue, visionRange;
+    protected char Char;
+
+    public Enemy(char Char, String name, Integer Health_pool, Integer Attack_points, Integer Defense_points,int visionRange, int experienceValue) {
+        super(name, Health_pool, Attack_points, Defense_points);
         this.experienceValue = experienceValue;
         this.visionRange = visionRange;
+        this.Char = Char;
     }
 
     @Override
@@ -21,4 +24,7 @@ public abstract class Enemy extends Unit {
         return experienceValue;
     }
 
+    public char getChar() {
+        return Char;
+    }
 }

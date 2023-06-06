@@ -1,10 +1,13 @@
 package Units.Abstracts;
 
+import Units.ADDITIONAL.Empty;
 import Units.ADDITIONAL.Position;
 
-public abstract class Tile {
+public class Tile {
     private char Char;
     private Position pos;
+
+    private Unit unit;
 
     public Tile(char Character, Position position){
         this.Char = Character;
@@ -25,6 +28,15 @@ public abstract class Tile {
 
     public void setChar(char Character){
         this.Char = Character;
+    }
+
+    public Unit getUnit(){
+        if (this.unit == null)
+            return null;
+        return this.unit;
+    }
+    public void setUnit(Unit unit){
+        this.unit = unit;
     }
 
     public boolean equals(Tile other){
