@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Empty.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Wall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/Factory/DeathCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Factory/CHECK/DeathCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/Factory/GameInitialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Factory/CHECK/GameInitialize.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/Factory/MessageCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Factory/CHECK/MessageCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/Factory/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Factory/CHECK/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/Factory/TileFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Factory/TileFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/Factory/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Factory/CHECK/Unit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Unit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Monster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" afterDir="false" />
-    </list>
+    <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,6 +38,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -99,7 +77,7 @@
       <workItem from="1685451354497" duration="59000" />
       <workItem from="1685471047749" duration="4089000" />
       <workItem from="1685619656625" duration="773000" />
-      <workItem from="1686037349392" duration="13329000" />
+      <workItem from="1686037349392" duration="14475000" />
     </task>
     <servers />
   </component>
@@ -111,7 +89,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GameBoard/GameBoard.java</url>
-          <line>133</line>
+          <line>135</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

@@ -158,7 +158,7 @@ public class GameUI {
         window.setVisible(true);
     }
 
-    public int characterCreationScreen(){
+    public void characterCreationScreen(){
         titleNamePanel.setVisible(false);
         startButtonPanel.setVisible(false);
         //JOptionPane.showInputDialog("Enter your name: ");
