@@ -127,6 +127,8 @@ public class GameBoard {
             boardString.append("\n");
         }
         return boardString.toString();
+    }
+
 
 
 //        private Vector<Unit> scanForUnitsBoard() {
@@ -160,5 +162,5 @@ public class GameBoard {
 //            // TODO: implement
 //        }
 
-    }
+
 }
