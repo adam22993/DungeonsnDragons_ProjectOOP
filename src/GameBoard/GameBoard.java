@@ -1,6 +1,7 @@
 package GameBoard;
 import Patterns.Factory.TileFactory;
 import UI.GameUI;
+import UI.Inputs.ButtonSelectionListener;
 import Units.ADDITIONAL.Position;
 import Units.Abstracts.*;
 
@@ -10,9 +11,11 @@ import java.io.IOException;
 import java.util.Vector;
 
 public class GameBoard {
-
-    Vector<Tile> turnSequence = new Vector<Tile>();
-    int playerSelected;
+    /**
+     * This class represents the game board. It holds the board itself, and the turn sequence.
+     * It also holds the current level.
+     */
+    Vector<Unit> turnSequence = new Vector<Unit>();
     GameUI gameUI = new GameUI();
     TileFactory tileFactory;
     int current_level = 0;
@@ -21,6 +24,7 @@ public class GameBoard {
 
     public GameBoard() {
         this.board = loadCurrentLevelBoard(current_level);
+
         gameUI.openWelcomeScreen();
     }
 
@@ -80,10 +84,10 @@ public class GameBoard {
                         tiles[i][j] = tileFactory.produceWall(new Position(i, j));
                     } else if (Char == '@'){
                         tiles[i][j] = tileFactory.producePlayer(1, new Position(i, j));  // TODO: change to playerSelected
-                        turnSequence.insertElementAt(tiles[i][j], 0); // add player to the beginning of the turn sequence
+                        turnSequence.insertElementAt(tiles[i][j].getUnit(), 0); // add player to the beginning of the turn sequence
                     } else if (tileFactory.getEnemiesMap().containsKey(Char)){
                         tiles[i][j] = tileFactory.produceEnemy(Char, new Position(i, j));
-                        turnSequence.add(tiles[i][j]);
+                        turnSequence.add(tiles[i][j].getUnit());
                     } else {
                         tiles[i][j] = tileFactory.produceEmpty(new Position(i, j)); // nothing found to create, so create an empty tile. - this should never happen - this is for damage control.
                     }
@@ -152,15 +156,11 @@ public class GameBoard {
 ////            return units;
 //        }
 
-//        private void gameTick(){
-//            // TODO: implement
-//        }
-//        private void playerTurn () {
-//            //TODO: implement
-//        }
-//        private void monsterTurn(){
-//            // TODO: implement
-//        }
+        private void gameTick(){
+            for (Unit unit : turnSequence) {
+//                unit.onGameTick(); // this is an error because Unit is abstract - its 1:30 am and I'm tired, I'll fix it tomorrow - fuck you all
+            }
+        }
 
 
 }

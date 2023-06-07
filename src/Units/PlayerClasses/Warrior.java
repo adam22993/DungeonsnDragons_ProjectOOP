@@ -1,7 +1,6 @@
 package Units.PlayerClasses;
-import Units.ADDITIONAL.Position;
 import Units.Abstracts.Player;
-import Speaches_Screens.Quotes;
+
 import java.util.Random;
 
 public class Warrior extends Player {
@@ -35,8 +34,5 @@ public class Warrior extends Player {
     public void performBasicAttack(){
         System.out.println(this.getName() + " performed a basic attack!");
     }
-
-
-
 
 }

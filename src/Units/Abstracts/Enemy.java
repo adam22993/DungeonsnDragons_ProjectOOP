@@ -1,10 +1,10 @@
 package Units.Abstracts;
 
-import Units.ADDITIONAL.Position;
+import Patterns.Visitor.*;
+import Units.ADDITIONAL.Empty;
+import Units.ADDITIONAL.Wall;
 
-import java.util.function.Supplier;
-
-public abstract class Enemy extends Unit {
+public abstract class Enemy extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     protected int experienceValue, visionRange;
     protected char Char;
 
@@ -26,5 +26,30 @@ public abstract class Enemy extends Unit {
 
     public char getChar() {
         return Char;
+    }
+
+    @Override
+    public void accept(UnitInteractionVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public void visit(Enemy enemy) {
+        return;
+    }
+
+    @Override
+    public void visit(Player player) {
+        this.attack(player);
+    }
+
+    @Override
+    public void visit(Empty empty) {
+        return;
+    }
+
+    @Override
+    public void visit(Wall wall) {
+        return;
     }
 }

@@ -19,6 +19,13 @@ public class Trap extends Monster {
 
     @Override
     protected void onGameTick() {
-        // TODO create trap logic
+        this.ticksCount++;
+        if (this.ticksCount % (this.visibilityTime + this.invisibilityTime) + 1 == (this.visibilityTime + this.invisibilityTime) ){ // TODO: check if this is the correct way to do it
+            this.ticksCount = 0;
+            this.visible = true;
+        }
+        if (this.ticksCount == this.visibilityTime){
+            this.visible = false;
+        }
     }
 }

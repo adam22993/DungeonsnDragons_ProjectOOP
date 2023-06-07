@@ -1,7 +1,7 @@
 package Units.PlayerClasses;
 
 import Units.ADDITIONAL.Position;
-import Units.Abstracts.Player;
+import Units.Abstracts.*;
 
 public class Mage extends Player {
     private int manaPool, manaCost, spellPower, hitCount, range;

@@ -1,8 +1,6 @@
 package Patterns.Factory;
 
-import Units.ADDITIONAL.Empty;
-import Units.ADDITIONAL.Position;
-import Units.ADDITIONAL.Wall;
+import Units.ADDITIONAL.*;
 import Units.Abstracts.*;
 import Units.EnemyTypes.*;
 import Units.PlayerClasses.*;
@@ -10,6 +8,7 @@ import Units.PlayerClasses.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -99,14 +98,18 @@ public class TileFactory {
     }
 
     public Tile produceEmpty(Position position){
-        Tile e = new Empty('.', position);
-        e.setPosition(position);
-        return e;
+        Unit e = new Empty("An empty tile");
+        Tile T = new Tile('.', position);
+        T.setUnit(e);
+        T.setPosition(position);
+        return T;
     }
 
     public Tile produceWall(Position position){
-        Wall w = new Wall('#', position);
-        w.setPosition(position);
-        return w;
+        Wall w = new Wall("A wall");
+        Tile T = new Tile('#', position);
+        T.setUnit(w);
+        T.setPosition(position);
+        return T;
     }
 }

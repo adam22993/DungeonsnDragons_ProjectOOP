@@ -1,10 +1,12 @@
 package Units.Abstracts;
 
 
+import Patterns.Visitor.UnitInteractionVisited;
+import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.Empty;
-import Units.ADDITIONAL.Position;
+import Units.ADDITIONAL.Wall;
 
-public abstract class Player extends Unit {
+public abstract class Player extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     //###################### Class related ######################
     protected Integer maxEXP; // TODO change to consumablePoints one day
     protected Integer currEXP;
@@ -67,7 +69,30 @@ public abstract class Player extends Unit {
 
     //######################### Visitors ##########################
 
+    @Override
+    public void accept(UnitInteractionVisitor visitor) {
+        visitor.visit(this);
+    }
 
+    @Override
+    public void visit(Enemy enemy) {
+
+    }
+
+    @Override
+    public void visit(Player player) {
+
+    }
+
+    @Override
+    public void visit(Empty empty) {
+
+    }
+
+    @Override
+    public void visit(Wall wall) {
+
+    }
 
 
 

@@ -1,7 +1,9 @@
 package Units.ADDITIONAL;
+import Units.Abstracts.NonIntractable;
 import Units.Abstracts.Tile;
-public class Empty extends Tile {
-    public Empty(char Character, Position position) {
-        super(Character, position);
+public class Empty extends NonIntractable {
+
+    public Empty(String name) {
+        super(name);
     }
 }

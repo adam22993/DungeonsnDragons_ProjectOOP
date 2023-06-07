@@ -2,12 +2,15 @@ package Units.Abstracts;
 
 import Units.ADDITIONAL.Position;
 
+import java.util.Random;
+
 public abstract class Unit {
     protected String name;
     protected int healthPool; //TODO: implement ConsumablePoints
     protected int healthAmount;
     protected int attackPoints;
     protected int defensePoints;
+    Random Random = new Random();
 
     public Unit(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points) {
         this.name = name;
@@ -22,7 +25,13 @@ public abstract class Unit {
 
     abstract protected void onGameTick();
     public void attack(Unit enemy){
-
+        int damage = Random.nextInt(0, this.attackPoints - enemy.defensePoints);
+        if (damage - enemy.defensePoints < 0) {
+            damage = 0;
+        } else {
+            damage = damage - enemy.defensePoints;
+        }
+        enemy.healthAmount = enemy.getHealthAmount() - damage;
     }
 //    public abstract void accept(UnitVisitor visitor); //TODO: implement interact visitor
 
@@ -55,6 +64,10 @@ public abstract class Unit {
     }
     protected void setName(String name) {
         this.name = name;
+    }
+
+    public String toString(){
+        return this.name;
     }
 
 

@@ -13,5 +13,7 @@ public class Main {
         GameBoard gameBoard = new GameBoard();
         GameUI gameUI = new GameUI();
         System.out.println(gameBoard.getBoardString());
+        System.out.println();
+        gameBoard.printBoard();
         }
     }

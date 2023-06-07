@@ -1,6 +1,8 @@
 
 package UI;
 
+import Patterns.Factory.TileFactory;
+import UI.Inputs.ButtonSelectionListener;
 import Units.ADDITIONAL.Position;
 import Units.Abstracts.Player;
 import Units.Abstracts.Tile;
@@ -15,7 +17,19 @@ import java.awt.event.KeyListener;
 
 public class GameUI {
 
-    private char playerChoice;
+    private ButtonSelectionListener buttonSelectionListener;
+
+    public void setButtonSelectionListener(ButtonSelectionListener listener) {
+        this.buttonSelectionListener = listener;
+    }
+
+    private void handleButtonSelection(int buttonIndex) {
+        if (buttonSelectionListener != null) {
+            buttonSelectionListener.onButtonSelected(buttonIndex);
+        }
+        System.out.println("Button " + buttonIndex + " was selected");
+    }
+
     ActionListener mouseButtonListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -195,7 +209,7 @@ public class GameUI {
         choice1.setFont(normalFont);
         characterSelectOptions.add(choice1);
         choice1.addActionListener(e -> {
-//            createGameScreen(new Warrior("Jon Snow", 300, 30, 4, 0));
+            handleButtonSelection(1);
         });
 
         JButton choice2 = new JButton("The Hound");
@@ -204,7 +218,7 @@ public class GameUI {
         choice2.setFont(normalFont);
         characterSelectOptions.add(choice2);
         choice2.addActionListener(e -> {
-//            createGameScreen(new Warrior("The Hound", 400, 20, 6, 0));
+            handleButtonSelection(2);
         });
         JButton choice3 = new JButton("Melisandre");
         choice3.setBackground(Color.black);
