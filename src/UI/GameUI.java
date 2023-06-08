@@ -18,6 +18,7 @@ public class GameUI {
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
     private final Font smallFont = new Font("Times New Roman", Font.PLAIN, 18);
     private final Font boardFont = new Font(Font.MONOSPACED, Font.PLAIN, 18);
+    private final String currentDir = System.getProperty("user.dir");
 
     public GameUI() {}
 
@@ -27,15 +28,27 @@ public class GameUI {
 
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(290, 130, 600, 70);
-
+        ImageIcon backgroundImage = new ImageIcon(currentDir + "/src/UI/Assets/Images/WelcomeScreenImage.jpg");
+        Image bgImage = backgroundImage.getImage();
+        bgImage = bgImage.getScaledInstance(window.getWidth(), window.getHeight(), Image.SCALE_SMOOTH);
+        JLabel backgroundLabel = new JLabel(new ImageIcon(bgImage));
+        backgroundLabel.setBounds(0, 0, window.getWidth(), window.getHeight());
+        con.add(backgroundLabel);
+        // Set the content pane of the JFrame
+        titleNamePanel.setBackground(Color.pink);
         titleNameLabel = new JLabel("DUNGEONS & DRAGONS");
-        titleNamePanel.setBackground(Color.BLACK);
+        titleNamePanel.setBounds(290, 130, 600, 70);
         titleNameLabel.setForeground(Color.white);
+        titleNameLabel.setBackground(Color.black);
         titleNameLabel.setFont(titleFont);
         titleNamePanel.add(titleNameLabel);
+        titleNameLabel.setVisible(true);
         titleNamePanel.setVisible(true);
         con.add(titleNamePanel);
+        window.setContentPane(con);
         startButtonPanel = startButtonsPanel;
+        startButtonPanel.setBackground(new Color(0, 0, 0, 0));
+        startButtonPanel.setOpaque(false);
     }
 
     public void characterCreationScreen(JPanel characterSelectPanel){
@@ -59,6 +72,11 @@ public class GameUI {
         mainTextArea.setForeground(Color.white);
         mainTextArea.setFont(smallFont);
         mainTextArea.setLineWrap(true);
+//        JLabel mainTextLabel = new JLabel();            // the text area is better than the label because
+//        mainTextLabel.setBounds(100, 100, 1100, 300);   // it allows wrapping and by that we can see the whole text
+//        mainTextLabel.setBackground(Color.black);
+//        mainTextLabel.setForeground(Color.white);
+//        mainTextLabel.setFont(smallFont);
         mainTextPanel.add(mainTextArea);
         characterSelectOptions = characterSelectPanel;
 //        characterSelectOptions.addKeyListener(controlLayer.keyboardButtonListener);

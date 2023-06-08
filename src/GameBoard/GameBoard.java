@@ -18,7 +18,7 @@ public class GameBoard {
     int current_level = 0;
     private Tile[][] board;
     private String playerName;
-    private Vector<Integer> playerChoice;
+    private Vector<Integer> playerChoice = new Vector<Integer>();
     private Vector<Player> players = new Vector<Player>(); // implement more than one player
 
     public GameBoard() {
@@ -99,6 +99,7 @@ public class GameBoard {
         current_level++;
         System.out.println(turnSequence);
         System.out.println("Level " + current_level + " loaded successfully!");
+        this.board = tiles;
         return tiles;
     }
 
@@ -142,6 +143,7 @@ public class GameBoard {
 
 
 //        private Vector<Unit> scanForUnitsBoard() {
+/*TODO: This is used to scan for the player by the enemies and helps the player select the enemy to attack with the special ability.
 //            /**DungeonsnDragons_ProjectOOP\src\GameBoard\GameBoard.java
 //             * This function scans the board for units. It creates a 2D array of Units with the same size as the board.
 //             * It then scans the board for units, and creates a new unit for each unit found. It then returns the 2D array
@@ -168,9 +170,9 @@ public class GameBoard {
             }
         }
 
-        public int getCurrentLevelCounter(){
-            return this.current_level;
-        }
+    public int getCurrentLevelCounter(){
+        return this.current_level;
+    }
 
 
     public void incrementCurrentLevelCounter() {

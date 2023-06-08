@@ -49,23 +49,46 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     public JFrame createWindow(){
         window = new JFrame();
+        con = new Container();
         window.setSize(1200, 720);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
+        JPanel titleNamePanel = new JPanel();
+        titleNamePanel.setBounds(290, 130, 600, 70);
+
+        JLabel titleNameLabel = new JLabel("DUNGEONS & DRAGONS");
+        titleNameLabel.setBounds(290, 130, 600, 70);
+        titleNamePanel.setBackground(Color.pink); // we cant see the label during the game because of the background color, to see it we need to change the background color to something else.
+        titleNameLabel.setForeground(Color.green);
+        titleNameLabel.setFont(titleFont);
+        titleNamePanel.add(titleNameLabel);
+        con.add(titleNamePanel);
+        con.add(titleNameLabel);
+        titleNamePanel.setVisible(true);
+        titleNameLabel.setVisible(true);
         con = window.getContentPane();
         return window;
     }
 
     public JPanel welcomeScreenControls(){
         JPanel startButtonPanel = new JPanel();
-        startButtonPanel.setBounds(500, 400, 200, 100);
+        startButtonPanel.setBounds(500, 570, 200, 100);
         startButtonPanel.setBackground(Color.black);
         JButton startButton = new JButton("START");
         startButton.setFont(normalFont);
-        startButton.setBackground(Color.white);
+        startButton.setBackground(Color.black);
         startButton.addActionListener(e -> {
             gameUI.characterCreationScreen(characterChoice());
+        });
+        JButton debugAccessGameButton = new JButton("DEBUG");
+        debugAccessGameButton.setFont(normalFont);
+        debugAccessGameButton.setBackground(Color.black);
+        debugAccessGameButton.addActionListener(e -> {
+            gameBoard.setPlayerChoice(1);
+            gameBoard.loadCurrentLevelBoard(gameBoard.getCurrentLevelCounter());
+            gameBoard.incrementCurrentLevelCounter(); // increment for next level
+            gameUI.createGameScreen(gameBoard.getBoardString(), playerControls());
         });
         JButton quitButton = new JButton("QUIT");
         quitButton.setFont(normalFont);
@@ -172,6 +195,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         playerChoicesPanel.setBounds(750, 400, 300, 150);
         playerChoicesPanel.setBackground(Color.black);
         playerChoicesPanel.setForeground(Color.white);
+        playerChoicesPanel.addKeyListener(this);
 
         // create player control buttons
         JButton qButton = new JButton("Q");
@@ -480,7 +504,8 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     @Override
     public void mouseMoved(MouseEvent e) {  // not sure what this does
-        System.out.println("Mouse moved" + counter + " (x: " + e.getX() + ", y: " + e.getY() + ")");
+        if (counter % 100 == 0)
+            System.out.println("Mouse moved" + counter + " (x: " + e.getX() + ", y: " + e.getY() + ")");
         counter++;
         window.requestFocus();
     }
