@@ -11,8 +11,8 @@ public class GameUI {
 
     private JFrame window;
     private Container con;
-    private JPanel titleNamePanel, startButtonPanel, mainTextPanel, characterSelectOptions, playerPanel, boardPanel, playerChoicesPanel;
-    private JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName, weaponLabelNumber, armorLabel, armorLabelName, armorLabelNumber, playerLabel, playerLabelName, playerLabelNumber;
+    private JPanel startButtonPanel, mainTextPanel, characterSelectOptions, playerPanel, boardPanel, playerChoicesPanel, WSImagesPanel;
+    private JLabel backgroundLabel, titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName, weaponLabelNumber, armorLabel, armorLabelName, armorLabelNumber, playerLabel, playerLabelName, playerLabelNumber;
     private JTextArea boardTextArea;
     private final Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
@@ -26,37 +26,41 @@ public class GameUI {
         window = currWindow;
         con = window.getContentPane();
 
-        titleNamePanel = new JPanel();
-        titleNamePanel.setBounds(290, 130, 600, 70);
+        //TODO: check resizing of the window and how to fix the images being not in the right place.
+        // Create WSImagesPanel
+        WSImagesPanel = new JPanel();
+        WSImagesPanel.setBounds(0, 0, window.getWidth(), window.getHeight());
+
+
+        ImageIcon titleImage = new ImageIcon(currentDir + "/src/UI/Assets/Images/titleName.jpg");
+        JLabel titleImageLabel = new JLabel(titleImage);
+        titleImageLabel.setBounds(400, 50, 400, 300);
+
         ImageIcon backgroundImage = new ImageIcon(currentDir + "/src/UI/Assets/Images/WelcomeScreenImage.jpg");
         Image bgImage = backgroundImage.getImage();
         bgImage = bgImage.getScaledInstance(window.getWidth(), window.getHeight(), Image.SCALE_SMOOTH);
-        JLabel backgroundLabel = new JLabel(new ImageIcon(bgImage));
+
+        backgroundLabel = new JLabel(new ImageIcon(bgImage));
         backgroundLabel.setBounds(0, 0, window.getWidth(), window.getHeight());
-        con.add(backgroundLabel);
-        // Set the content pane of the JFrame
-        titleNamePanel.setBackground(Color.pink);
-        titleNameLabel = new JLabel("DUNGEONS & DRAGONS");
-        titleNamePanel.setBounds(290, 130, 600, 70);
-        titleNameLabel.setForeground(Color.white);
-        titleNameLabel.setBackground(Color.black);
-        titleNameLabel.setFont(titleFont);
-        titleNamePanel.add(titleNameLabel);
-        titleNameLabel.setVisible(true);
-        titleNamePanel.setVisible(true);
-        con.add(titleNamePanel);
-        window.setContentPane(con);
+
+        WSImagesPanel.add(backgroundLabel);
+        WSImagesPanel.add(titleImageLabel);
+
         startButtonPanel = startButtonsPanel;
         startButtonPanel.setBackground(new Color(0, 0, 0, 0));
         startButtonPanel.setOpaque(false);
+        con.add(WSImagesPanel);
+        startButtonPanel.setVisible(true);
+        con.add(startButtonPanel);
+        window.setVisible(true);
     }
 
     public void characterCreationScreen(JPanel characterSelectPanel){
-        titleNamePanel.setVisible(false);
         startButtonPanel.setVisible(false);
+        WSImagesPanel.setVisible(false);
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(50, 75, 1100, 300);
-        mainTextPanel.setBackground(Color.black);
+        mainTextPanel.setForeground(Color.darkGray);
         con.add(mainTextPanel);
         JTextArea mainTextArea = new JTextArea("   name\t\t          HP\t\t     ATT\t     DEF\tCAST SOURCE\t ADD STATS\n" +
                 "1. Jon Snow\t\tHealth: 300/300\tAttack: 30\tDefense: 4\tCooldown: 0/3\n" +
@@ -68,7 +72,7 @@ public class GameUI {
                 "7. Ygritte\t\tHealth: 220/220\tAttack: 30\tDefense: 2\tArrows: 10\t\tRange: 6" +
                 "\n8. Custom character\t\t\tplayer creation screen TBI");
         mainTextArea.setBounds(100, 100, 1100, 300);
-        mainTextArea.setBackground(Color.black);
+        mainTextArea.setBackground(Color.darkGray);
         mainTextArea.setForeground(Color.white);
         mainTextArea.setFont(smallFont);
         mainTextArea.setLineWrap(true);
@@ -109,9 +113,5 @@ public class GameUI {
         boardTextArea.setBackground(Color.black);
         boardTextArea.setVisible(true);
         boardTextArea.setLineWrap(true);
-    }
-
-    public void addKeyListener(KeyListener keyboardButtonListener) {
-        window.addKeyListener(keyboardButtonListener);
     }
 }

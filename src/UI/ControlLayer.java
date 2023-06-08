@@ -38,12 +38,18 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 //        } catch (Exception e) {
 //            System.out.println("Error setting native LAF: " + e);
 //        }
+//
         gameBoard = new GameBoard();
         gameUI = new GameUI();
         window.addKeyListener(this);
         window.addMouseListener(this);
         window.addMouseMotionListener(this);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        con = window.getContentPane();
+        con.addKeyListener(this);
+        con.addMouseListener(this);
+        con.addMouseMotionListener(this);
+        window.setContentPane(con);
         gameUI.openWelcomeScreen(welcomeScreenControls(), window);
     }
 
@@ -54,20 +60,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
-        JPanel titleNamePanel = new JPanel();
-        titleNamePanel.setBounds(290, 130, 600, 70);
-
-        JLabel titleNameLabel = new JLabel("DUNGEONS & DRAGONS");
-        titleNameLabel.setBounds(290, 130, 600, 70);
-        titleNamePanel.setBackground(Color.pink); // we cant see the label during the game because of the background color, to see it we need to change the background color to something else.
-        titleNameLabel.setForeground(Color.green);
-        titleNameLabel.setFont(titleFont);
-        titleNamePanel.add(titleNameLabel);
-        con.add(titleNamePanel);
-        con.add(titleNameLabel);
-        titleNamePanel.setVisible(true);
-        titleNameLabel.setVisible(true);
-        con = window.getContentPane();
         return window;
     }
 
@@ -496,14 +488,14 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) { // not sure what this does
+    public void mouseDragged(MouseEvent e) {
         System.out.println("Mouse dragged" + counter);
         counter++;
         window.requestFocus();
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {  // not sure what this does
+    public void mouseMoved(MouseEvent e) {
         if (counter % 100 == 0)
             System.out.println("Mouse moved" + counter + " (x: " + e.getX() + ", y: " + e.getY() + ")");
         counter++;
