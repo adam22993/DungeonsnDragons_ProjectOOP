@@ -74,7 +74,7 @@ public class GameUI {
         con.add(playerPanel);
     }
 
-    public void createGameScreen(Player playerUnit, String board, JPanel playerControlsPanel) {
+    public void createGameScreen(String board, JPanel playerControlsPanel) {
         mainTextPanel.setVisible(false);
         characterSelectOptions.setVisible(false);
 

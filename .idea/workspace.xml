@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Patterns/Factory/TileFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Factory/TileFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/ControlLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/ControlLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
     </list>
@@ -85,7 +84,7 @@
       <workItem from="1685451354497" duration="59000" />
       <workItem from="1685471047749" duration="4089000" />
       <workItem from="1685619656625" duration="773000" />
-      <workItem from="1686037349392" duration="33292000" />
+      <workItem from="1686037349392" duration="36887000" />
     </task>
     <servers />
   </component>
@@ -102,8 +101,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/UI/ControlLayer.java</url>
-          <line>61</line>
+          <line>46</line>
           <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/UI/ControlLayer.java</url>
+          <line>99</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

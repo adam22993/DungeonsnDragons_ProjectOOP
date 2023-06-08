@@ -17,25 +17,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             window.requestFocus();
         }
     };
-//    KeyListener keyboardButtonListener = new KeyListener() {
-//        @Override
-//        public void keyTyped(KeyEvent e) {
-//            System.out.println(e.getKeyChar() + " button activated");
-//            window.requestFocus();
-//        }
-//
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//            System.out.println(e.getKeyChar() + " button activated");
-//            window.requestFocus();
-//        }
-//
-//        @Override
-//        public void keyReleased(KeyEvent e) {
-//            System.out.println(e.getKeyChar() + " button activated");
-//            window.requestFocus();
-//        }
-//    };
+
 
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
@@ -47,18 +29,21 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     private final GameBoard gameBoard;
     private final GameUI gameUI;
 
-    public ControlLayer() {
+    public ControlLayer() {              // TODO: Think of a way to bypass game loading moves while player still pressing buttons.
+        // Check the interface changes in the UI package.
         window = createWindow();
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            System.out.println(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            System.out.println("Error setting native LAF: " + e);
-        }
+//        try {
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//            System.out.println(UIManager.getSystemLookAndFeelClassName());
+//        } catch (Exception e) {
+//            System.out.println("Error setting native LAF: " + e);
+//        }
         gameBoard = new GameBoard();
         gameUI = new GameUI();
         window.addKeyListener(this);
         window.addMouseListener(this);
+        window.addMouseMotionListener(this);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameUI.openWelcomeScreen(welcomeScreenControls(), window);
     }
 
@@ -102,7 +87,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         gameBoard.setPlayerName(playerName);
         JPanel characterSelectOptions = new JPanel();
         characterSelectOptions.setBounds(300, 380, 600, 250);
-        characterSelectOptions.setBackground(Color.black);
+        characterSelectOptions.setBackground(Color.white);
         characterSelectOptions.setLayout(new GridLayout(4, 1));
 
 //        Mage Melisandre = new Mage("Melisandre", 100, 5, 5, 1, 75, 300, 15);
@@ -113,7 +98,10 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice1.setFont(normalFont);
         characterSelectOptions.add(choice1);
         choice1.addActionListener(e -> {
-            handleButtonSelection('Q');
+            gameBoard.setPlayerChoice(1);
+            gameBoard.loadCurrentLevelBoard(gameBoard.getCurrentLevelCounter());
+            gameBoard.incrementCurrentLevelCounter(); // increment for next level
+            gameUI.createGameScreen(gameBoard.getBoardString(), playerControls());
         });
 
         JButton choice2 = new JButton("The Hound");
@@ -286,6 +274,12 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         }
     }
 
+//    public void handleCharacterSelectionScreenOptions(char Char){
+//        switch (char){
+//            if (Char)
+//        }
+//    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -302,7 +296,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     public void keyPressed(KeyEvent e) {
         // This method is invoked when a key is released
         char keyPressed = Character.toUpperCase(e.getKeyChar());
-
         if (e.getKeyCode() == KeyEvent.VK_W && !keys[0]) {
             System.out.println("W Pressed");
             keys[0] = true;
@@ -358,6 +351,22 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         if (e.getKeyCode() == KeyEvent.VK_8 && !keys[13]) {
             System.out.println("8 Pressed");
             keys[13] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            System.out.println("Escape Pressed");
+            int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit the game?", "Quit Game", JOptionPane.YES_NO_CANCEL_OPTION);
+
+            // Handle the user's choice
+            if (choice == JOptionPane.YES_OPTION) {
+                System.out.println("Quitting the game...");
+                System.exit(0);
+            } else if (choice == JOptionPane.NO_OPTION) {
+                System.out.println("Continuing the game...");
+                // Perform any necessary actions to continue the game
+            } else if (choice == JOptionPane.CANCEL_OPTION) {
+                System.out.println("Canceling the quit operation...");
+                // Perform any necessary actions to cancel the quit operation
+            }
         }
     }
 
@@ -471,7 +480,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     @Override
     public void mouseMoved(MouseEvent e) {  // not sure what this does
-        System.out.println("Mouse moved" + counter);
+        System.out.println("Mouse moved" + counter + " (x: " + e.getX() + ", y: " + e.getY() + ")");
         counter++;
         window.requestFocus();
     }

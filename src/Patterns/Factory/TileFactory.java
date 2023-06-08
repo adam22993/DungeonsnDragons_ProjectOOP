@@ -88,7 +88,7 @@ public class TileFactory {
         return e;
     }
 
-    public Tile producePlayer(int idx, Position position/*, MessageCallback messageCallback, PlayerDeathCallback playerDeathCallback*/){
+    public Player producePlayer(int idx, Position position/*, MessageCallback messageCallback, PlayerDeathCallback playerDeathCallback*/){
 		Player p = playersList.get(idx).get();
         p.setPosition(position);
         p.setUnit(p);

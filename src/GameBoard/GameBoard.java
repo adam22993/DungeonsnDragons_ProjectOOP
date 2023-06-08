@@ -18,22 +18,22 @@ public class GameBoard {
     int current_level = 0;
     private Tile[][] board;
     private String playerName;
-
-    private int player;
+    private Vector<Integer> playerChoice;
+    private Vector<Player> players = new Vector<Player>(); // implement more than one player
 
     public GameBoard() {
-        this.board = loadCurrentLevelBoard(current_level);
+//        this.board = loadCurrentLevelBoard(current_level);
     }
     public void setPlayerName(String player){
         this.playerName = player;
     }
 
-    public void setPlayer(int player){
-        this.player = player;
+    public void setPlayerChoice(int playerChoice){
+        this.playerChoice.add(playerChoice);
     }
 
 
-    private Tile[][] loadCurrentLevelBoard(int current_level) {
+    public Tile[][] loadCurrentLevelBoard(int current_level) {
         /*re
          * This function loads the board from the file. Using the current_level variable, it loads the file of
          * the current level. It then counts the number of lines and columns in the file, and creates a 2D array
@@ -80,7 +80,7 @@ public class GameBoard {
                     } else if(Char == '#'){
                         tiles[i][j] = tileFactory.produceWall(new Position(i, j));
                     } else if (Char == '@'){
-                        tiles[i][j] = tileFactory.producePlayer(player, new Position(i, j));  // TODO: change to playerSelected
+                        tiles[i][j] = tileFactory.producePlayer(playerChoice.remove(0), new Position(i, j));  // TODO: change to playerSelected
                         turnSequence.insertElementAt(tiles[i][j].getUnit(), 0); // add player to the beginning of the turn sequence
                     } else if (tileFactory.getEnemiesMap().containsKey(Char)){
                         tiles[i][j] = tileFactory.produceEnemy(Char, new Position(i, j));
@@ -168,5 +168,12 @@ public class GameBoard {
             }
         }
 
+        public int getCurrentLevelCounter(){
+            return this.current_level;
+        }
 
+
+    public void incrementCurrentLevelCounter() {
+        this.current_level++;
+    }
 }
