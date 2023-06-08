@@ -1,5 +1,6 @@
 package GameBoard;
 import Patterns.Factory.TileFactory;
+import UI.ControlLayer;
 import UI.GameUI;
 import UI.Inputs.ButtonSelectionListener;
 import Units.ADDITIONAL.Position;
@@ -17,6 +18,7 @@ public class GameBoard {
      */
     Vector<Unit> turnSequence = new Vector<Unit>();
     GameUI gameUI = new GameUI();
+    ControlLayer controlLayer = new ControlLayer();
     TileFactory tileFactory;
     int current_level = 0;
 
@@ -24,7 +26,6 @@ public class GameBoard {
 
     public GameBoard() {
         this.board = loadCurrentLevelBoard(current_level);
-
         gameUI.openWelcomeScreen();
     }
 
@@ -101,6 +102,7 @@ public class GameBoard {
         }
         current_level++;
         System.out.println(turnSequence);
+        System.out.println("Level " + current_level + " loaded successfully!");
         return tiles;
     }
 
@@ -133,6 +135,14 @@ public class GameBoard {
         return boardString.toString();
     }
 
+    public Tile getTile(Position position) {
+        /**
+         * This function returns the tile in the given position.
+         * @param position Position of the tile to return.
+         * @return Tile in the given position.
+         */
+        return board[position.getX()][position.getY()];
+    }
 
 
 //        private Vector<Unit> scanForUnitsBoard() {
@@ -158,7 +168,7 @@ public class GameBoard {
 
         private void gameTick(){
             for (Unit unit : turnSequence) {
-//                unit.onGameTick(); // this is an error because Unit is abstract - its 1:30 am and I'm tired, I'll fix it tomorrow - fuck you all
+                unit.onGameTick(); // this is an error because Unit is abstract - its 1:30 am and I'm tired, I'll fix it tomorrow - fuck you all
             }
         }
 

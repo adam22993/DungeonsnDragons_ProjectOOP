@@ -48,12 +48,12 @@ public class TileFactory {
 
     private List<Supplier<Player>> initPlayers() {
         return Arrays.asList(
-                () -> new Warrior("Jon Snow", 300, 30, 4, 3),
-                () -> new Warrior("The Hound", 400, 20, 6, 5),
-                () -> new Mage("Melisandre", 100, 5, 1, 300, 30, 15, 5, 6),
-                () -> new Mage("Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4),
-                () -> new Rogue("Arya Stark", 150, 40, 2, 20),
-                () -> new Rogue("Bronn", 250, 35, 3, 50)
+                () -> new Warrior("Jon Snow", 300, 30, 4, 3, '@', new Position(0,0)),
+                () -> new Warrior("The Hound", 400, 20, 6, 5, '@', new Position(0,0)),
+                () -> new Mage("Melisandre", 100, 5, 1, 300, 30, 15, 5, 6, '@', new Position(0,0)),
+                () -> new Mage("Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4, '@', new Position(0,0)),
+                () -> new Rogue("Arya Stark", 150, 40, 2, 20, '@', new Position(0,0)),
+                () -> new Rogue("Bronn", 250, 35, 3, 50, '@', new Position(0,0))
 //                () -> new Hunter("Ygritte", 220, 30, 2, 6) // TODO: Implement for bonus
         );
     }
@@ -83,33 +83,29 @@ public class TileFactory {
 
     public Tile produceEnemy(char tile, Position position/*, MessageCallback messageCallback, EnemyDeathCallback enemyDeathCallback*/) {
         Enemy e = enemiesMap.get(tile).get();
-        Tile T = new Tile(tile, new Position(0,0));
-        T.setUnit(e);
-        T.setPosition(position);
-        return T;
+        e.setPosition(position);
+        e.setUnit(e);
+        return e;
     }
 
     public Tile producePlayer(int idx, Position position/*, MessageCallback messageCallback, PlayerDeathCallback playerDeathCallback*/){
 		Player p = playersList.get(idx).get();
-        Tile T = new Tile('@', position);
-        T.setUnit(p);
-        T.setPosition(position);
-        return T;
+        p.setPosition(position);
+        p.setUnit(p);
+        return p;
     }
 
     public Tile produceEmpty(Position position){
-        Unit e = new Empty("An empty tile");
-        Tile T = new Tile('.', position);
-        T.setUnit(e);
-        T.setPosition(position);
-        return T;
+        Unit e = new Empty('.', "An empty tile");
+        e.setPosition(position);
+        e.setUnit(e);
+        return e;
     }
 
     public Tile produceWall(Position position){
-        Wall w = new Wall("A wall");
-        Tile T = new Tile('#', position);
-        T.setUnit(w);
-        T.setPosition(position);
-        return T;
+        Wall w = new Wall('#', "A wall");
+        w.setPosition(position);
+        w.setUnit(w);
+        return w;
     }
 }

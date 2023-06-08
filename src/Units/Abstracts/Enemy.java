@@ -2,21 +2,22 @@ package Units.Abstracts;
 
 import Patterns.Visitor.*;
 import Units.ADDITIONAL.Empty;
+import Units.ADDITIONAL.Position;
 import Units.ADDITIONAL.Wall;
 
 public abstract class Enemy extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     protected int experienceValue, visionRange;
     protected char Char;
 
-    public Enemy(char Char, String name, Integer Health_pool, Integer Attack_points, Integer Defense_points,int visionRange, int experienceValue) {
-        super(name, Health_pool, Attack_points, Defense_points);
+    public Enemy(char Char, String name, Integer Health_pool, Integer Attack_points, Integer Defense_points,int visionRange, int experienceValue, Position position) {
+        super(name, Health_pool, Attack_points, Defense_points, Char, position);
         this.experienceValue = experienceValue;
         this.visionRange = visionRange;
         this.Char = Char;
     }
 
     @Override
-    protected void onGameTick() {
+    public void onGameTick() {
         // TODO create enemy logic
     }
 
@@ -45,7 +46,7 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
 
     @Override
     public void visit(Empty empty) {
-        return;
+        this.swapPosition(empty);
     }
 
     @Override

@@ -4,6 +4,7 @@ package Units.Abstracts;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.Empty;
+import Units.ADDITIONAL.Position;
 import Units.ADDITIONAL.Wall;
 
 public abstract class Player extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
@@ -12,9 +13,9 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     protected Integer currEXP;
     protected Integer level;
 
-    public Player(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points) {
+    public Player(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, char Char, Position position) {
         // TODO Random choose stats constructor stub
-        super(name, Health_pool, Attack_points, Defense_points);
+        super(name, Health_pool, Attack_points, Defense_points, Char, new Position(0,0));
         this.maxEXP = 50;
         this.currEXP = 0;
         this.level = 1;
@@ -37,18 +38,18 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     public void gainExperience(int experience){
         this.currEXP += experience;
     }
-    protected void onGameTick(){
+    public void onGameTick(){
         //TODO: implement player logic
     }
 
-//    public void kill(Enemy e){
-//        gainExperience(e.giveExperience());
-//        this.swapPosition(e);
-//        Empty em = new Empty('.', e.getPosition());
-//        if (this.currEXP >= this.maxEXP){
-//            this.levelUp();
-//        }
-//    }
+    public void kill(Enemy e){
+        gainExperience(e.giveExperience());
+        this.swapPosition(e);
+        Empty em = new Empty('.', "An empty space");
+        if (this.currEXP >= this.maxEXP){
+            this.levelUp();
+        }
+    }
 
     //###################### Name related ######################
     private void renamePlayer(String name){
@@ -76,22 +77,23 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
 
     @Override
     public void visit(Enemy enemy) {
-
+        this.attack(enemy);
     }
 
     @Override
     public void visit(Player player) {
-
+        return;
     }
 
     @Override
     public void visit(Empty empty) {
-
+        this.swapPosition(empty);
     }
 
     @Override
     public void visit(Wall wall) {
-
+        System.out.println("You can't walk through walls!");
+        return;
     }
 
 

@@ -6,8 +6,9 @@ import Units.Abstracts.*;
 public class Mage extends Player {
     private int manaPool, manaCost, spellPower, hitCount, range;
 
-    public Mage(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int manaPool, int manaCost, int spellPower, int hitCount, int range) {
-        super(name, Health_pool, Attack_points, Defense_points);
+    public Mage(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int manaPool,
+                int manaCost, int spellPower, int hitCount, int range, char Char, Position position) {
+        super(name, Health_pool, Attack_points, Defense_points, Char, position);
         this.manaPool = manaPool;
         this.manaCost = manaCost;
         this.spellPower = spellPower;

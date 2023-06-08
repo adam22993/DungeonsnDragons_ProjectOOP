@@ -4,7 +4,7 @@ import Units.ADDITIONAL.Position;
 
 import java.util.Random;
 
-public abstract class Unit {
+public abstract class Unit extends Tile{
     protected String name;
     protected int healthPool; //TODO: implement ConsumablePoints
     protected int healthAmount;
@@ -12,7 +12,8 @@ public abstract class Unit {
     protected int defensePoints;
     Random Random = new Random();
 
-    public Unit(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points) {
+    public Unit(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, char Char, Position position) {
+        super(Char, position);
         this.name = name;
         this.healthPool = Health_pool;
         this.healthAmount = Health_pool; // Start with full health
@@ -23,7 +24,7 @@ public abstract class Unit {
 
     //###################### Actions related ######################
 
-    abstract protected void onGameTick();
+    abstract public void onGameTick();
     public void attack(Unit enemy){
         int damage = Random.nextInt(0, this.attackPoints - enemy.defensePoints);
         if (damage - enemy.defensePoints < 0) {
@@ -67,7 +68,7 @@ public abstract class Unit {
     }
 
     public String toString(){
-        return this.name;
+        return String.format("%s", this.getChar());
     }
 
 

@@ -1,4 +1,5 @@
 package Units.PlayerClasses;
+import Units.ADDITIONAL.Position;
 import Units.Abstracts.Player;
 
 import java.util.Random;
@@ -7,8 +8,8 @@ public class Warrior extends Player {
     protected int abilityCD;
     protected int currentAbilityCD;
     Random Random = new Random();
-    public Warrior(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int abilityCD) {
-        super(name, Health_pool, Attack_points, Defense_points);
+    public Warrior(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int abilityCD, char Char, Position position) {
+        super(name, Health_pool, Attack_points, Defense_points, Char, position);
         this.abilityCD = abilityCD;
         this.currentAbilityCD = 0;
     }

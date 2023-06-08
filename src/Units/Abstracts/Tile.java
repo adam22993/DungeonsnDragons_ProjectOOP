@@ -6,11 +6,10 @@ import Units.ADDITIONAL.Position;
 public class Tile {
     private char Char;
     private Position pos;
-
     private Unit unit;
 
-    public Tile(char Character, Position position){
-        this.Char = Character;
+    public Tile(char Char, Position position){
+        this.Char = Char;
         this.pos = position;
     }
 
@@ -37,6 +36,7 @@ public class Tile {
     }
     public void setUnit(Unit unit){
         this.unit = unit;
+        this.Char = unit.getChar();
     }
 
     public boolean equals(Tile other){
@@ -48,7 +48,7 @@ public class Tile {
     }
 
     public String toString(){
-        return String.format("%c", this.Char);
+        return String.format("%s", this.unit);
     }
 
     public double Range(Tile other){ // uses floor to round down
