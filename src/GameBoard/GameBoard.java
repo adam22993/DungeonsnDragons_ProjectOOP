@@ -1,8 +1,5 @@
 package GameBoard;
 import Patterns.Factory.TileFactory;
-import UI.ControlLayer;
-import UI.GameUI;
-import UI.Inputs.ButtonSelectionListener;
 import Units.ADDITIONAL.Position;
 import Units.Abstracts.*;
 
@@ -16,26 +13,24 @@ public class GameBoard {
      * This class represents the game board. It holds the board itself, and the turn sequence.
      * It also holds the current level.
      */
-    Vector<Unit> turnSequence = new Vector<Unit>();
-    GameUI gameUI = new GameUI();
-    ControlLayer controlLayer = new ControlLayer();
-    TileFactory tileFactory;
+    private Vector<Unit> turnSequence = new Vector<Unit>();
+    private TileFactory tileFactory;
     int current_level = 0;
+    private Tile[][] board;
+    private String playerName;
 
-    Tile[][] board;
+    private int player;
 
     public GameBoard() {
         this.board = loadCurrentLevelBoard(current_level);
-        gameUI.openWelcomeScreen();
+    }
+    public void setPlayerName(String player){
+        this.playerName = player;
     }
 
-
-//    public void createGameUI() {
-//        boardPanel = new JPanel();
-//        boardPanel.setBounds(100, 100, 600, 250);
-//        boardPanel.setBackground(Color.black);
-//        con.add(boardPanel);
-//    }
+    public void setPlayer(int player){
+        this.player = player;
+    }
 
 
     private Tile[][] loadCurrentLevelBoard(int current_level) {
@@ -46,7 +41,8 @@ public class GameBoard {
          * @return 2D array of chars representing the board.
          */
 
-        //TODO: change to fit tiles and not print the board
+        //TODO: load all levels as files, load all of the levels into a level class and then load the levels as indexes
+        //TODO: this allows us to receive and not receive levels from the tester.
 
         String levelFile = "/src/GameBoard/Levels/level" + (current_level + 1) + ".txt";
         //String levelFile = "\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt"; // for some reason this works on windows only, mac needs the /src/ instead of \\src\\ and windows still works with /src/.
@@ -84,7 +80,7 @@ public class GameBoard {
                     } else if(Char == '#'){
                         tiles[i][j] = tileFactory.produceWall(new Position(i, j));
                     } else if (Char == '@'){
-                        tiles[i][j] = tileFactory.producePlayer(1, new Position(i, j));  // TODO: change to playerSelected
+                        tiles[i][j] = tileFactory.producePlayer(player, new Position(i, j));  // TODO: change to playerSelected
                         turnSequence.insertElementAt(tiles[i][j].getUnit(), 0); // add player to the beginning of the turn sequence
                     } else if (tileFactory.getEnemiesMap().containsKey(Char)){
                         tiles[i][j] = tileFactory.produceEnemy(Char, new Position(i, j));

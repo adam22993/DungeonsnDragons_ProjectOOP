@@ -1,14 +1,14 @@
 package UI;
 
+import GameBoard.GameBoard;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
-public class ControlLayer {
-    JFrame window = new JFrame();
+public class ControlLayer implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
+    final boolean[] keys = new boolean[14]; // used to check if a key is pressed
+    int counter = 1;
     ActionListener mouseButtonListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -17,290 +17,91 @@ public class ControlLayer {
             window.requestFocus();
         }
     };
-    KeyListener keyboardButtonListener = new KeyListener() {
-        final boolean[] keys = new boolean[14]; // used to check if a key is pressed
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-            // This method is invoked when a key is typed (pressed and released)
-            char keyPressed = e.getKeyChar();
-            JLabel label = new JLabel("Press a key...");
-            label.setText("Key typed: " + keyPressed);
-            window.requestFocus();
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                System.out.println("Escape pressed");
-                System.exit(0);
-            }
-            if (e.getKeyCode() == KeyEvent.VK_W && !keys[0]) {
-                System.out.println("W pressed");
-                keys[0] = true;
-//                player.moveUp();
-            }
-            if (e.getKeyCode() == KeyEvent.VK_S && !keys[1]) {
-                System.out.println("S pressed");
-                keys[1] = true;
-//                player.moveDown();
-            }
-            if (e.getKeyCode() == KeyEvent.VK_A && !keys[2]) {
-                System.out.println("A pressed");
-                keys[2] = true;
-//                player.moveLeft();
-            }
-            if (e.getKeyCode() == KeyEvent.VK_D && !keys[3]) {
-                System.out.println("D pressed");
-                keys[3] = true;
-//                player.moveRight();
-            }
-            if (e.getKeyCode() == KeyEvent.VK_E && !keys[4]) {
-                System.out.println("E pressed");
-                keys[4] = true;
-//                player.useSpecialAbility();
-            }
-            if (e.getKeyCode() == KeyEvent.VK_Q && !keys[5]) {
-                System.out.println("Q pressed");
-                keys[5] = true;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_1 && !keys[6]) {
-                System.out.println("1 pressed");
-                keys[6] = true;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_2 && !keys[7]) {
-                System.out.println("2 pressed");
-                keys[7] = true;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_3 && !keys[8]) {
-                System.out.println("3 pressed");
-                keys[8] = true;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_4 && !keys[9]) {
-                System.out.println("4 pressed");
-                keys[9] = true;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_5 && !keys[10]) {
-                System.out.println("5 pressed");
-                keys[10] = true;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_6 && !keys[11]) {
-                System.out.println("6 pressed");
-                keys[11] = true;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_7 && !keys[12]) {
-                System.out.println("7 pressed");
-                keys[12] = true;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_8 && !keys[13]) {
-                System.out.println("8 pressed");
-                keys[13] = true;
-            }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            // This method is invoked when a key is released
-            char keyReleased = e.getKeyChar();
-            JLabel label = new JLabel("Press a key..."); // what to do if i want to avoid pressed keys continue to be printed? (i.e. if i press 'a' and hold it, it will print 'a' many times) - maybe use a boolean array to check if a key is pressed? this can be done in the keyPressed method
-            label.setText("Key released: " + keyReleased);
-            if (e.getKeyCode() == KeyEvent.VK_W) {
-                System.out.println("W released");
-                keys[0] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_S) {
-                System.out.println("S released");
-                keys[1] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_A) {
-                System.out.println("A released");
-                keys[2] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_D) {
-                System.out.println("D released");
-                keys[3] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_E) {
-                System.out.println("E released");
-                keys[4] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_Q) {
-                System.out.println("Q released");
-                keys[5] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_1) {
-                System.out.println("1 released");
-                keys[6] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_2) {
-                System.out.println("2 released");
-                keys[7] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_3) {
-                System.out.println("3 released");
-                keys[8] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_4) {
-                System.out.println("4 released");
-                keys[9] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_5) {
-                System.out.println("5 released");
-                keys[10] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_6) {
-                System.out.println("6 released");
-                keys[11] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_7) {
-                System.out.println("7 released");
-                keys[12] = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_8) {
-                System.out.println("8 released");
-                keys[13] = false;
-            }
-        }
-        public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            switch (action){
-                case "Q":
-                    System.out.println("Q pressed");
-                    break;
-                case "1":
-                    System.out.println("1 pressed");
-                    break;
-                case "2":
-                    System.out.println("2 pressed");
-                    break;
-                case "3":
-                    System.out.println("3 pressed");
-                    break;
-                case "4":
-                    System.out.println("4 pressed");
-                    break;
-                case "5":
-                    System.out.println("5 pressed");
-                    break;
-                case "6":
-                    System.out.println("6 pressed");
-                    break;
-                case "7":
-                    System.out.println("7 pressed");
-                    break;
-                case "8":
-                    System.out.println("8 pressed");
-                    break;
-            }
-        }
-
-    };
+//    KeyListener keyboardButtonListener = new KeyListener() {
+//        @Override
+//        public void keyTyped(KeyEvent e) {
+//            System.out.println(e.getKeyChar() + " button activated");
+//            window.requestFocus();
+//        }
+//
+//        @Override
+//        public void keyPressed(KeyEvent e) {
+//            System.out.println(e.getKeyChar() + " button activated");
+//            window.requestFocus();
+//        }
+//
+//        @Override
+//        public void keyReleased(KeyEvent e) {
+//            System.out.println(e.getKeyChar() + " button activated");
+//            window.requestFocus();
+//        }
+//    };
 
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
     Font smallFont = new Font("Times New Roman", Font.PLAIN, 18);
     Font boardFont = new Font(Font.MONOSPACED, Font.PLAIN, 18);
 
-    Container con;
+    private Container con;
+    private JFrame window;
+    private final GameBoard gameBoard;
+    private final GameUI gameUI;
 
     public ControlLayer() {
+        window = createWindow();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            System.out.println(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            System.out.println("Error setting native LAF: " + e);
+        }
+        gameBoard = new GameBoard();
+        gameUI = new GameUI();
+        window.addKeyListener(this);
+        window.addMouseListener(this);
+        gameUI.openWelcomeScreen(welcomeScreenControls(), window);
     }
 
-    public JPanel playerControls() {
-        // create player panel
-        JPanel playerChoicesPanel = new JPanel();
-        playerChoicesPanel.setLayout(new GridLayout(2, 3));
-        playerChoicesPanel.setBounds(750, 400, 300, 150);
-        playerChoicesPanel.setBackground(Color.black);
-        playerChoicesPanel.setForeground(Color.white);
-
-        // create player control buttons
-        JButton qButton = new JButton("Q");
-        qButton.setFont(normalFont);
-        qButton.setBackground(Color.black);
-        qButton.setForeground(Color.white);
-        qButton.addActionListener(mouseButtonListener);
-        qButton.addKeyListener(keyboardButtonListener);
-        JButton wButton = new JButton("W");
-        wButton.setFont(normalFont);
-        wButton.setBackground(Color.black);
-        wButton.setForeground(Color.white);
-        wButton.addActionListener(mouseButtonListener);
-        JButton eButton = new JButton("E");
-        eButton.setFont(normalFont);
-        eButton.setBackground(Color.black);
-        eButton.setForeground(Color.white);
-        eButton.addActionListener(mouseButtonListener);
-        JButton aButton = new JButton("A");
-        aButton.setFont(normalFont);
-        aButton.setBackground(Color.black);
-        aButton.setForeground(Color.white);
-        aButton.addActionListener(mouseButtonListener);
-        JButton sButton = new JButton("S");
-        sButton.setFont(normalFont);
-        sButton.setBackground(Color.black);
-        sButton.setForeground(Color.white);
-        sButton.addActionListener(mouseButtonListener);
-        JButton dButton = new JButton("D");
-        dButton.setFont(normalFont);
-        dButton.setBackground(Color.black);
-        dButton.setForeground(Color.white);
-        dButton.addActionListener(mouseButtonListener);
-
-        // add them to panel
-        playerChoicesPanel.add(qButton);
-        playerChoicesPanel.add(wButton);
-        playerChoicesPanel.add(eButton);
-        playerChoicesPanel.add(aButton);
-        playerChoicesPanel.add(sButton);
-        playerChoicesPanel.add(dButton);
-        playerChoicesPanel.setVisible(true);
-        con.add(playerChoicesPanel);
-        playerChoicesPanel.addKeyListener(keyboardButtonListener);
-        playerChoicesPanel.setFocusable(true);
-        playerChoicesPanel.requestFocusInWindow();
-        return playerChoicesPanel;
+    public JFrame createWindow(){
+        window = new JFrame();
+        window.setSize(1200, 720);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.getContentPane().setBackground(Color.black);
+        window.setLayout(null);
+        con = window.getContentPane();
+        return window;
     }
 
-    public JPanel playerInfo() { // TODO: Check moving this to UI layer
-        // create player info panel
-        JPanel playerInfoPanel = new JPanel();
-        playerInfoPanel.setLayout(new GridLayout(2, 1));
-        playerInfoPanel.setBounds(750, 100, 300, 300);
-        playerInfoPanel.setBackground(Color.black);
-        playerInfoPanel.setForeground(Color.white);
-
-        // create player info labels
-        JLabel playerInfoLabel = new JLabel("Player Info");
-        playerInfoLabel.setFont(titleFont);
-        playerInfoLabel.setForeground(Color.white);
-        JLabel playerHealthLabel = new JLabel("Health: "/* + player.getHealth()*/);
-        playerHealthLabel.setFont(normalFont);
-        playerHealthLabel.setForeground(Color.white);
-        JLabel playerAttackLabel = new JLabel("Attack: "/* + player.getAttack()*/);
-        playerAttackLabel.setFont(normalFont);
-        playerAttackLabel.setForeground(Color.white);
-        JLabel playerDefenseLabel = new JLabel("Defense: "/* + player.getDefense()*/);
-        playerDefenseLabel.setFont(normalFont);
-        playerDefenseLabel.setForeground(Color.white);
-        JLabel playerSpecialAbilityLabel = new JLabel("Special Ability: "/* + player.getSpecialAbility()*/);
-        playerSpecialAbilityLabel.setFont(normalFont);
-        playerSpecialAbilityLabel.setForeground(Color.white);
-
-        // add them to panel
-        playerInfoPanel.add(playerInfoLabel);
-        playerInfoPanel.add(playerHealthLabel);
-        playerInfoPanel.add(playerAttackLabel);
-        playerInfoPanel.add(playerDefenseLabel);
-        playerInfoPanel.add(playerSpecialAbilityLabel);
-        playerInfoPanel.setVisible(true);
-        con.add(playerInfoPanel);
-        return playerInfoPanel;
+    public JPanel welcomeScreenControls(){
+        JPanel startButtonPanel = new JPanel();
+        startButtonPanel.setBounds(500, 400, 200, 100);
+        startButtonPanel.setBackground(Color.black);
+        JButton startButton = new JButton("START");
+        startButton.setFont(normalFont);
+        startButton.setBackground(Color.white);
+        startButton.addActionListener(e -> {
+            gameUI.characterCreationScreen(characterChoice());
+        });
+        JButton quitButton = new JButton("QUIT");
+        quitButton.setFont(normalFont);
+        quitButton.setBackground(Color.white);
+        quitButton.addActionListener(e -> {
+            window.dispose();
+            System.exit(0);
+        });
+        quitButton.addKeyListener(this);
+        startButtonPanel.add(startButton);
+        startButtonPanel.add(quitButton);
+        con.add(startButtonPanel);
+        window.setContentPane(con);
+        window.setVisible(true);
+        return startButtonPanel;
     }
-
     public JPanel characterChoice(){
+        String playerName = JOptionPane.showInputDialog("Choose your character: ");
+        gameBoard.setPlayerName(playerName);
         JPanel characterSelectOptions = new JPanel();
-        characterSelectOptions.setBounds(400, 380, 450, 250);
+        characterSelectOptions.setBounds(300, 380, 600, 250);
         characterSelectOptions.setBackground(Color.black);
         characterSelectOptions.setLayout(new GridLayout(4, 1));
 
@@ -312,7 +113,7 @@ public class ControlLayer {
         choice1.setFont(normalFont);
         characterSelectOptions.add(choice1);
         choice1.addActionListener(e -> {
-//            handleButtonSelection(1);
+            handleButtonSelection('Q');
         });
 
         JButton choice2 = new JButton("The Hound");
@@ -364,7 +165,7 @@ public class ControlLayer {
             JOptionPane.showMessageDialog(null, "Bruh! finish the assignment first", "Bonus Class", JOptionPane.ERROR_MESSAGE);
 //            createGameScreen(new Ygritte());
         });
-        JButton choice8 = new JButton("Custom character");
+        JButton choice8 = new JButton(playerName + " (Custom)");
         choice8.setBackground(Color.black);
         choice8.setForeground(Color.white);
         choice8.setFont(normalFont);
@@ -372,6 +173,306 @@ public class ControlLayer {
         choice8.addActionListener(e -> {
             JOptionPane.showMessageDialog(null, "I'm crazy... but not that crazy!", "Custom character", JOptionPane.ERROR_MESSAGE);
         });
+        characterSelectOptions.addKeyListener(this);
+        characterSelectOptions.addMouseListener(this);
         return characterSelectOptions;
+    }
+    public JPanel playerControls() {
+        // create player panel
+        JPanel playerChoicesPanel = new JPanel();
+        playerChoicesPanel.setLayout(new GridLayout(2, 3));
+        playerChoicesPanel.setBounds(750, 400, 300, 150);
+        playerChoicesPanel.setBackground(Color.black);
+        playerChoicesPanel.setForeground(Color.white);
+
+        // create player control buttons
+        JButton qButton = new JButton("Q");
+        qButton.setFont(normalFont);
+        qButton.setBackground(Color.black);
+        qButton.setForeground(Color.white);
+        qButton.addActionListener(this);
+        qButton.addKeyListener(this);
+        JButton wButton = new JButton("W");
+        wButton.setFont(normalFont);
+        wButton.setBackground(Color.black);
+        wButton.setForeground(Color.white);
+        wButton.addActionListener(this);
+        JButton eButton = new JButton("E");
+        eButton.setFont(normalFont);
+        eButton.setBackground(Color.black);
+        eButton.setForeground(Color.white);
+        eButton.addActionListener(this);
+        JButton aButton = new JButton("A");
+        aButton.setFont(normalFont);
+        aButton.setBackground(Color.black);
+        aButton.setForeground(Color.white);
+        aButton.addActionListener(this);
+        JButton sButton = new JButton("S");
+        sButton.setFont(normalFont);
+        sButton.setBackground(Color.black);
+        sButton.setForeground(Color.white);
+        sButton.addActionListener(this);
+        JButton dButton = new JButton("D");
+        dButton.setFont(normalFont);
+        dButton.setBackground(Color.black);
+        dButton.setForeground(Color.white);
+        dButton.addActionListener(this);
+
+        // add them to the panel
+        playerChoicesPanel.add(qButton);
+        playerChoicesPanel.add(wButton);
+        playerChoicesPanel.add(eButton);
+        playerChoicesPanel.add(aButton);
+        playerChoicesPanel.add(sButton);
+        playerChoicesPanel.add(dButton);
+        playerChoicesPanel.setVisible(true);
+        con.add(playerChoicesPanel);
+        playerChoicesPanel.addKeyListener(this);
+        playerChoicesPanel.addMouseListener(this);
+        playerChoicesPanel.setFocusable(true);
+        playerChoicesPanel.requestFocusInWindow();
+        return playerChoicesPanel;
+    }
+
+    public JPanel playerInfo() { // TODO: Check moving this to UI layer
+        // create player info panel
+        JPanel playerInfoPanel = new JPanel();
+        playerInfoPanel.setLayout(new GridLayout(2, 1));
+        playerInfoPanel.setBounds(750, 100, 300, 300);
+        playerInfoPanel.setBackground(Color.black);
+        playerInfoPanel.setForeground(Color.white);
+
+        // create player info labels
+        JLabel playerInfoLabel = new JLabel("Player Info");
+        playerInfoLabel.setFont(titleFont);
+        playerInfoLabel.setForeground(Color.white);
+        JLabel playerHealthLabel = new JLabel("Health: "/* + player.getHealth()*/);
+        playerHealthLabel.setFont(normalFont);
+        playerHealthLabel.setForeground(Color.white);
+        JLabel playerAttackLabel = new JLabel("Attack: "/* + player.getAttack()*/);
+        playerAttackLabel.setFont(normalFont);
+        playerAttackLabel.setForeground(Color.white);
+        JLabel playerDefenseLabel = new JLabel("Defense: "/* + player.getDefense()*/);
+        playerDefenseLabel.setFont(normalFont);
+        playerDefenseLabel.setForeground(Color.white);
+        JLabel playerSpecialAbilityLabel = new JLabel("Special Ability: "/* + player.getSpecialAbility()*/);
+        playerSpecialAbilityLabel.setFont(normalFont);
+        playerSpecialAbilityLabel.setForeground(Color.white);
+
+        // add them to the panel
+        playerInfoPanel.add(playerInfoLabel);
+        playerInfoPanel.add(playerHealthLabel);
+        playerInfoPanel.add(playerAttackLabel);
+        playerInfoPanel.add(playerDefenseLabel);
+        playerInfoPanel.add(playerSpecialAbilityLabel);
+        playerInfoPanel.setVisible(true);
+        con.add(playerInfoPanel);
+        return playerInfoPanel;
+    }
+
+    public void handleButtonSelection(char Char){
+        if (Char == 'Q') {
+            System.out.println("Q");
+        } else if (Char == 'W') {
+            System.out.println("W");
+        } else if (Char == 'E') {
+            System.out.println("E");
+        } else if (Char == 'A') {
+            System.out.println("A");
+        } else if (Char == 'S') {
+            System.out.println("S");
+        } else if (Char == 'D') {
+            System.out.println("D");
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+//        char keyPressed = e.getKeyChar();
+//        System.out.println("Key released: " + keyPressed);
+//        window.requestFocus();
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // This method is invoked when a key is released
+        char keyPressed = Character.toUpperCase(e.getKeyChar());
+
+        if (e.getKeyCode() == KeyEvent.VK_W && !keys[0]) {
+            System.out.println("W Pressed");
+            keys[0] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_S && !keys[1]) {
+            System.out.println("S Pressed");
+            keys[1] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_A && !keys[2]) {
+            System.out.println("A Pressed");
+            keys[2] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_D && !keys[3]) {
+            System.out.println("D Pressed");
+            keys[3] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_E && !keys[4]) {
+            System.out.println("E Pressed");
+            keys[4] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_Q && !keys[5]) {
+            System.out.println("Q Pressed");
+            keys[5] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_1 && !keys[6]) {
+            System.out.println("1 Pressed");
+            keys[6] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_2 && !keys[7]) {
+            System.out.println("2 Pressed");
+            keys[7] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_3 && !keys[8]) {
+            System.out.println("3 Pressed");
+            keys[8] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_4 && !keys[9]) {
+            System.out.println("4 Pressed");
+            keys[9] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_5 && !keys[10]) {
+            System.out.println("5 Pressed");
+            keys[10] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_6 && !keys[11]) {
+            System.out.println("6 Pressed");
+            keys[11] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_7 && !keys[12]) {
+            System.out.println("7 Pressed");
+            keys[12] = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_8 && !keys[13]) {
+            System.out.println("8 Pressed");
+            keys[13] = true;
+        }
+    }
+
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // This method is invoked when a key is released
+        char keyReleased = e.getKeyChar();
+//        System.out.println("Key released: " + keyReleased);
+
+
+        if (e.getKeyCode() == KeyEvent.VK_W) {
+            System.out.println("W released");
+            keys[0] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_S) {
+            System.out.println("S released");
+            keys[1] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_A) {
+            System.out.println("A released");
+            keys[2] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_D) {
+            System.out.println("D released");
+            keys[3] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_E) {
+            System.out.println("E released");
+            keys[4] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_Q) {
+            System.out.println("Q released");
+            keys[5] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_1) {
+            System.out.println("1 released");
+            keys[6] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_2) {
+            System.out.println("2 released");
+            keys[7] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_3) {
+            System.out.println("3 released");
+            keys[8] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_4) {
+            System.out.println("4 released");
+            keys[9] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_5) {
+            System.out.println("5 released");
+            keys[10] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_6) {
+            System.out.println("6 released");
+            keys[11] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_7) {
+            System.out.println("7 released");
+            keys[12] = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_8) {
+            System.out.println("8 released");
+            keys[13] = false;
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) { // checks if mouse is clicked - after releasing press
+        System.out.println("Mouse clicked" + counter);
+        counter++;
+        window.requestFocus();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) { // checks if mouse is pressed - initial press
+        System.out.println("Mouse pressed" + counter);
+        counter++;
+        window.requestFocus();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) { // checks if mouse is released - after pressing is released
+        System.out.println("Mouse released" + counter);
+        counter++;
+        window.requestFocus();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) { // checks if mouse is entered - when mouse enters the window - not labels or panels
+//        System.out.println("Mouse entered" + counter);
+//        counter++;
+//        window.requestFocus();
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) { // checks if mouse is exited - when mouse exits the window - not labels or panels
+//        System.out.println("Mouse exited" + counter);
+//        counter++;
+//        window.requestFocus();
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) { // not sure what this does
+        System.out.println("Mouse dragged" + counter);
+        counter++;
+        window.requestFocus();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {  // not sure what this does
+        System.out.println("Mouse moved" + counter);
+        counter++;
+        window.requestFocus();
     }
 }
