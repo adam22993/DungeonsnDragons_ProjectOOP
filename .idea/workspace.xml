@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/Assets/Images/DNDICON.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/Assets/Images/DNDICON32x32.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Images/dungeons-and-dragons-4th-edition-logo-dungeons-amp-dragons-tomb-of-annihilation-board-png-image-with-transparent-background-toppng_prev_ui-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Assets/Images/titleName.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/xDeviruchi - And The Journey Begins (Loop).wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/xDeviruchi - Exploring The Unknown (Loop).wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/xDeviruchi - Prepare for Battle! (Loop).wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/xDeviruchi - Title Theme (Loop).wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/ControlLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/ControlLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
     </list>
@@ -35,29 +42,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/AdamS/OneDrive/Desktop/Smart Stuff Folder/Year 1 - Sapir/Semester 2/JavaProjects/VisitorUsingCosts&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/AdamS/OneDrive/Desktop/Smart Stuff Folder/Year 1 - Sapir/Semester 2/JavaProjects/DungeonsnDragons_ProjectOOP",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\UI\Assets\Images" />
       <recent name="$PROJECT_DIR$/src/UI/Assets/Images" />
       <recent name="$PROJECT_DIR$/src/UI/Assets/Audio" />
       <recent name="$PROJECT_DIR$/src/UI/Assets" />
       <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\Patterns\Factory\CHECK" />
-      <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\GameBoard" />
     </key>
   </component>
   <component name="RunManager">
@@ -86,7 +94,8 @@
       <workItem from="1685451354497" duration="59000" />
       <workItem from="1685471047749" duration="4089000" />
       <workItem from="1685619656625" duration="773000" />
-      <workItem from="1686037349392" duration="36887000" />
+      <workItem from="1686037349392" duration="47006000" />
+      <workItem from="1686254598247" duration="9787000" />
     </task>
     <servers />
   </component>
@@ -98,18 +107,23 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GameBoard/GameBoard.java</url>
-          <line>147</line>
+          <line>145</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UI/ControlLayer.java</url>
-          <line>118</line>
-          <option name="timeStamp" value="29" />
+          <url>file://$PROJECT_DIR$/src/GameBoard/GameBoard.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GameBoard/GameBoard.java</url>
-          <line>131</line>
-          <option name="timeStamp" value="30" />
+          <url>file://$PROJECT_DIR$/src/UI/GameUI.java</url>
+          <line>205</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/UI/GameUI.java</url>
+          <line>111</line>
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

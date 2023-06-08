@@ -29,9 +29,18 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     private final GameBoard gameBoard;
     private final GameUI gameUI;
 
-    public ControlLayer() {              // TODO: Think of a way to bypass game loading moves while player still pressing buttons.
+    public ControlLayer() {  // TODO: Think of a way to bypass game loading moves while player still pressing buttons.
         // Check the interface changes in the UI package.
         window = createWindow();
+        gameBoard = new GameBoard();
+        gameUI = new GameUI();
+        window.addKeyListener(this);
+        window.addMouseListener(this);
+        window.addMouseMotionListener(this);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        window.add(welcomeScreenControls());
+//        window.revalidate();
+        gameUI.openWelcomeScreen(welcomeScreenControls(), window);
 //        try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 //            System.out.println(UIManager.getSystemLookAndFeelClassName());
@@ -39,27 +48,40 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 //            System.out.println("Error setting native LAF: " + e);
 //        }
 //
-        gameBoard = new GameBoard();
-        gameUI = new GameUI();
-        window.addKeyListener(this);
-        window.addMouseListener(this);
-        window.addMouseMotionListener(this);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        con = window.getContentPane();
-        con.addKeyListener(this);
-        con.addMouseListener(this);
-        con.addMouseMotionListener(this);
-        window.setContentPane(con);
-        gameUI.openWelcomeScreen(welcomeScreenControls(), window);
     }
+
+//    public JPanel musicControlPanel(){
+//        JPanel musicControlPanel = new JPanel();
+//        musicControlPanel.setBounds(0, 0, 1200, 50);
+//        musicControlPanel.setBackground(Color.black);
+//        JButton musicButton = new JButton("MUSIC");
+//        musicButton.setFont(normalFont);
+//        musicButton.setBackground(Color.white);
+//        musicButton.addActionListener(e -> {
+//            if (gameUI.getMusicStatus()) {
+//                gameUI.setMusicStatus(false);
+//                gameUI.stopMusic();
+//                musicButton.setText("MUSIC OFF");
+//            } else {
+//                gameUI.setMusicStatus(true);
+//                gameUI.playMusic();
+//                musicButton.setText("MUSIC ON");
+//            }
+//        });
+//
+//    }
 
     public JFrame createWindow(){
         window = new JFrame();
-        con = new Container();
+        window.setTitle("Dungeons & Dragons OOP Project");
+        window.setVisible(true);
+        window.setIconImage(new ImageIcon(System.getProperty("user.dir") + "/src/UI/Assets/Images/DNDICON.png").getImage());
         window.setSize(1200, 720);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
+        window.getContentPane().setBackground(Color.black);
+
+        window.setResizable(false);
         return window;
     }
 
@@ -69,13 +91,16 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         startButtonPanel.setBackground(Color.black);
         JButton startButton = new JButton("START");
         startButton.setFont(normalFont);
-        startButton.setBackground(Color.black);
+        startButton.setBackground(Color.white);
+        startButton.setFocusable(false);
         startButton.addActionListener(e -> {
+            con = new Container();
             gameUI.characterCreationScreen(characterChoice());
         });
-        JButton debugAccessGameButton = new JButton("DEBUG");
+        JButton debugAccessGameButton = new JButton("DEBUG"); // TODO: Implement debug button
         debugAccessGameButton.setFont(normalFont);
         debugAccessGameButton.setBackground(Color.black);
+        debugAccessGameButton.setFocusable(false);
         debugAccessGameButton.addActionListener(e -> {
             gameBoard.setPlayerChoice(1);
             gameBoard.loadCurrentLevelBoard(gameBoard.getCurrentLevelCounter());
@@ -85,6 +110,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         JButton quitButton = new JButton("QUIT");
         quitButton.setFont(normalFont);
         quitButton.setBackground(Color.white);
+        quitButton.setFocusable(false);
         quitButton.addActionListener(e -> {
             window.dispose();
             System.exit(0);
@@ -92,25 +118,37 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         quitButton.addKeyListener(this);
         startButtonPanel.add(startButton);
         startButtonPanel.add(quitButton);
-        con.add(startButtonPanel);
-        window.setContentPane(con);
-        window.setVisible(true);
+        startButtonPanel.setBackground(new Color(0, 0, 0, 0));
+        startButtonPanel.setOpaque(false);
+        startButtonPanel.setVisible(true);
         return startButtonPanel;
     }
     public JPanel characterChoice(){
-        String playerName = JOptionPane.showInputDialog("Choose your character: ");
+        String playerName = JOptionPane.showInputDialog("Enter your name: ");
+        int counter = 0;
+        while (playerName == null || !playerName.matches("[a-zA-Z0-9]+") && !playerName.matches("[a-zA-Z]+")) {
+            playerName = JOptionPane.showInputDialog("Enter alphanumeric name! ");
+            counter++;
+            if (counter == 2){
+                JOptionPane.showMessageDialog(null, "You have failed to enter a valid name 3 times. You will be named 'Player' by default.");
+                playerName = "Player";
+                break;
+            }
+        }
         gameBoard.setPlayerName(playerName);
+
         JPanel characterSelectOptions = new JPanel();
-        characterSelectOptions.setBounds(300, 380, 600, 250);
-        characterSelectOptions.setBackground(Color.white);
+        characterSelectOptions.setBounds(300, 400, 600, 250);
+        characterSelectOptions.setBackground(Color.black);
         characterSelectOptions.setLayout(new GridLayout(4, 1));
 
 //        Mage Melisandre = new Mage("Melisandre", 100, 5, 5, 1, 75, 300, 15);
         JButton choice1 = new JButton("Jon Snow");
         choice1.setSize(50, 50);
-        choice1.setBackground(Color.black);
-        choice1.setForeground(Color.white);
+        choice1.setBackground(Color.white);
+        choice1.setForeground(Color.black);
         choice1.setFont(normalFont);
+        choice1.setFocusable(false);
         characterSelectOptions.add(choice1);
         choice1.addActionListener(e -> {
             gameBoard.setPlayerChoice(1);
@@ -120,64 +158,72 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         });
 
         JButton choice2 = new JButton("The Hound");
-        choice2.setBackground(Color.black);
-        choice2.setForeground(Color.white);
+        choice2.setBackground(Color.white);
+        choice2.setForeground(Color.black);
         choice2.setFont(normalFont);
+        choice2.setFocusable(false);
         characterSelectOptions.add(choice2);
         choice2.addActionListener(e -> {
 //            handleButtonSelection(2);
         });
         JButton choice3 = new JButton("Melisandre");
-        choice3.setBackground(Color.black);
-        choice3.setForeground(Color.white);
+        choice3.setBackground(Color.white);
+        choice3.setForeground(Color.black);
         choice3.setFont(normalFont);
+        choice3.setFocusable(false);
         characterSelectOptions.add(choice3);
         choice3.addActionListener(e -> {
 //            createGameScreen(new Melisandre());
         });
         JButton choice4 = new JButton("Thoros of Myr");
-        choice4.setBackground(Color.black);
-        choice4.setForeground(Color.white);
+        choice4.setBackground(Color.white);
+        choice4.setForeground(Color.black);
         choice4.setFont(normalFont);
+        choice4.setFocusable(false);
         characterSelectOptions.add(choice4);
         choice4.addActionListener(e -> {
 //            createGameScreen(new ThorosofMyr());
         });
         JButton choice5 = new JButton("Arya Stark");
-        choice5.setBackground(Color.black);
-        choice5.setForeground(Color.white);
+        choice5.setBackground(Color.white);
+        choice5.setForeground(Color.black);
         choice5.setFont(normalFont);
+        choice5.setFocusable(false);
         characterSelectOptions.add(choice5);
         choice5.addActionListener(e -> {
 //            createGameScreen(new AryaStark());
         });
         JButton choice6 = new JButton("Bronn");
-        choice6.setBackground(Color.black);
-        choice6.setForeground(Color.white);
+        choice6.setBackground(Color.white);
+        choice6.setForeground(Color.black);
         choice6.setFont(normalFont);
+        choice6.setFocusable(false);
         characterSelectOptions.add(choice6);
         choice6.addActionListener(e -> {
 //            createGameScreen(new Warrior("Bronn", 250, 35, 3, 0));
         });
         JButton choice7 = new JButton("Ygritte");
-        choice7.setBackground(Color.black);
-        choice7.setForeground(Color.white);
+        choice7.setBackground(Color.white);
+        choice7.setForeground(Color.black);
         choice7.setFont(normalFont);
+        choice7.setFocusable(false);
         characterSelectOptions.add(choice7);
         choice7.addActionListener(e -> {
             JOptionPane.showMessageDialog(null, "Bruh! finish the assignment first", "Bonus Class", JOptionPane.ERROR_MESSAGE);
 //            createGameScreen(new Ygritte());
         });
         JButton choice8 = new JButton(playerName + " (Custom)");
-        choice8.setBackground(Color.black);
-        choice8.setForeground(Color.white);
+        choice8.setBackground(Color.white);
+        choice8.setForeground(Color.black);
         choice8.setFont(normalFont);
+        choice8.setFocusable(false);
         characterSelectOptions.add(choice8);
         choice8.addActionListener(e -> {
             JOptionPane.showMessageDialog(null, "I'm crazy... but not that crazy!", "Custom character", JOptionPane.ERROR_MESSAGE);
         });
         characterSelectOptions.addKeyListener(this);
         characterSelectOptions.addMouseListener(this);
+        characterSelectOptions.setFocusable(false);
         return characterSelectOptions;
     }
     public JPanel playerControls() {
@@ -194,33 +240,41 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         qButton.setFont(normalFont);
         qButton.setBackground(Color.black);
         qButton.setForeground(Color.white);
-        qButton.addActionListener(this);
-        qButton.addKeyListener(this);
+        qButton.addActionListener(e -> {
+//            gameBoard.movesPlayer("Q");
+            System.out.println("Q");
+        });
+        qButton.setFocusable(false);
         JButton wButton = new JButton("W");
         wButton.setFont(normalFont);
         wButton.setBackground(Color.black);
         wButton.setForeground(Color.white);
         wButton.addActionListener(this);
+        wButton.setFocusable(false);
         JButton eButton = new JButton("E");
         eButton.setFont(normalFont);
         eButton.setBackground(Color.black);
         eButton.setForeground(Color.white);
         eButton.addActionListener(this);
+        eButton.setFocusable(false);
         JButton aButton = new JButton("A");
         aButton.setFont(normalFont);
         aButton.setBackground(Color.black);
         aButton.setForeground(Color.white);
         aButton.addActionListener(this);
+        aButton.setFocusable(false);
         JButton sButton = new JButton("S");
         sButton.setFont(normalFont);
         sButton.setBackground(Color.black);
         sButton.setForeground(Color.white);
         sButton.addActionListener(this);
+        sButton.setFocusable(false);
         JButton dButton = new JButton("D");
         dButton.setFont(normalFont);
         dButton.setBackground(Color.black);
         dButton.setForeground(Color.white);
         dButton.addActionListener(this);
+        dButton.setFocusable(false);
 
         // add them to the panel
         playerChoicesPanel.add(qButton);

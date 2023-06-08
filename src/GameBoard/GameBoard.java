@@ -21,9 +21,7 @@ public class GameBoard {
     private Vector<Integer> playerChoice = new Vector<Integer>();
     private Vector<Player> players = new Vector<Player>(); // implement more than one player
 
-    public GameBoard() {
-//        this.board = loadCurrentLevelBoard(current_level);
-    }
+    public GameBoard() {}
     public void setPlayerName(String player){
         this.playerName = player;
     }
@@ -177,5 +175,8 @@ public class GameBoard {
 
     public void incrementCurrentLevelCounter() {
         this.current_level++;
+    }
+    public String toString(){
+        return "current level " + current_level;
     }
 }
