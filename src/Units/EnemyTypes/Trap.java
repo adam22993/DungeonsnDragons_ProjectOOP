@@ -1,16 +1,18 @@
 package Units.EnemyTypes;
 
 import Units.ADDITIONAL.Position;
+import Units.Abstracts.Enemy;
+import Units.Abstracts.Tile;
 import Units.Abstracts.Unit;
 
-public class Trap extends Monster {
+public class Trap extends Enemy {
     int visibilityTime;
     int invisibilityTime;
     int ticksCount;
     boolean visible;
 
     public Trap(char Char, String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int experienceValue, int visibilityTime, int invisibilityTime) {
-        super(Char, name, Health_pool, Attack_points, Defense_points, experienceValue,0);
+        super(Char, name, Health_pool, Attack_points, Defense_points, 0, experienceValue, new Position(0,0));
         this.visibilityTime = visibilityTime;
         this.invisibilityTime = invisibilityTime;
         this.ticksCount = 0;
@@ -18,7 +20,7 @@ public class Trap extends Monster {
     }
 
     @Override
-    public char onGameTick() {
+    public char onGameTick(Position playerPosition, Tile[][] Surroundings) {
         this.ticksCount++;
         if (this.ticksCount % (this.visibilityTime + this.invisibilityTime) + 1 == (this.visibilityTime + this.invisibilityTime) ){ // TODO: check if this is the correct way to do it
             this.ticksCount = 0;
@@ -41,4 +43,9 @@ public class Trap extends Monster {
         getUnit().setChar(Character);
     }
 
+
+    @Override
+    public void accept(Unit visitor) {
+        visitor.visit(this);
+    }
 }

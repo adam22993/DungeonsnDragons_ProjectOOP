@@ -13,7 +13,7 @@ public abstract class NonIntractable extends Unit implements UnitInteractionVisi
     }
 
     @Override
-    abstract public char onGameTick();
+    abstract public char onGameTick(Position playerPosition, Tile[][] Surroundings);
 
 
     @Override

@@ -36,8 +36,8 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     public void gainExperience(int experience){
         this.currEXP += experience;
     }
-    public char onGameTick(){
-        return 'w';
+    public char onGameTick(Position playerPosition, Tile[][] surroundings){
+        return 'd';
     }
 
     public void kill(Enemy e){

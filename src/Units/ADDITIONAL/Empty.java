@@ -9,9 +9,10 @@ public class Empty extends NonIntractable{
     }
 
     @Override
-    public char onGameTick() {
-        return 'g';
+    public char onGameTick(Position playerPosition, Tile[][] Surroundings) {
+        return 0;
     }
+
 
     @Override
     public void accept(Unit visitor) {

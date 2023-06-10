@@ -180,34 +180,34 @@ public class GameBoard {
 
     public void gameTick(char playerInput){
         char temp;
-        Position currUnitPos;
+        Position posBeforeAction;
         for (Unit unit : turnSequence) {
             if (unit.getChar() == '@') {
                 temp = playerInput;
             } else {
-                temp = unit.onGameTick();
+                temp = unit.onGameTick(turnSequence.get(0).getPosition(), getBoard());
             }
-            currUnitPos = unit.getPosition();
-            System.out.println("Unit " + unit.getChar() + " is on position " + currUnitPos + " and is moving " + temp); // debugging use
+            posBeforeAction = unit.getPosition();
+            System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving " + temp); // debugging use
             switch (temp) {
                 case 'w':
-                    unit.accept(board[unit.getPosition().getX() - 1][unit.getPosition().getY()].getUnit());
+                    unit.accept(board[unit.getPosition().getY() - 1][unit.getPosition().getX()].getUnit());
                     break;
                 case 'a':
-                    unit.accept(board[unit.getPosition().getX()][unit.getPosition().getY() - 1].getUnit());
+                    unit.accept(board[unit.getPosition().getY()][unit.getPosition().getX() - 1].getUnit());
                     break;
                 case 's':
-                    unit.accept(board[unit.getPosition().getX() + 1][unit.getPosition().getY()].getUnit());
+                    unit.accept(board[unit.getPosition().getY() + 1][unit.getPosition().getX()].getUnit());
                     break;
                 case 'd':
-                    unit.accept(board[unit.getPosition().getX()][unit.getPosition().getY() + 1].getUnit());
+                    unit.accept(board[unit.getPosition().getY()][unit.getPosition().getX() + 1].getUnit());
                     break;
                 case 'e':
                     continue;
                 case 'q':
                     continue;
                 case 'v':
-                    board[unit.getPosition().getX()][unit.getPosition().getY()].getUnit().setCharInUnit('.');
+                    board[unit.getPosition().getY()][unit.getPosition().getX()].getUnit().setChar('.');
 
             }
             try{
@@ -215,17 +215,21 @@ public class GameBoard {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            updateBoard(getTileByPosition(new Position(unit.getPosition().getX(),unit.getPosition().getY())), currUnitPos);
+            updateBoard(new Position(unit.getPosition().getY(),unit.getPosition().getX()), posBeforeAction);
         }
-        printBoard();
+
     }
+
+
     private Tile getTileByPosition(Position position) {
-        return board[position.getX()][position.getY()];
+        return board[position.getY()][position.getX()];
     }
-    private void updateBoard(Tile tile, Position position) {
-        board[tile.getPosition().getX()][tile.getPosition().getY()] = tile;
-        if (position != tile.getPosition())
-            board[position.getX()][position.getY()] = tileFactory.produceEmpty(position);
+    private void updateBoard(Position posAfterAction, Position posBeforeAction) {
+        if (posAfterAction.getX() != posBeforeAction.getX() || posAfterAction.getY() != posBeforeAction.getY()) {
+            Tile temp = getTileByPosition(posAfterAction);
+            board[posAfterAction.getY()][posAfterAction.getX()] = getTileByPosition(posBeforeAction);
+            board[posBeforeAction.getY()][posBeforeAction.getX()] = temp;
+        }
     }
 
     public int getCurrentLevelCounter(){
@@ -255,5 +259,8 @@ public class GameBoard {
         return players;
     }
 
+    private Tile[][] getBoard() {
+        return board;
+    }
 
 }

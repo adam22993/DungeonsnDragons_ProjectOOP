@@ -5,14 +5,15 @@ import Units.Abstracts.*;
 
 public class Wall extends NonIntractable {
 
-        public Wall(char Char, String name) {
-            super(Char, name);
-        }
+    public Wall(char Char, String name) {
+        super(Char, name);
+    }
 
     @Override
-    public char onGameTick() {
-        return 'g';
+    public char onGameTick(Position playerPosition, Tile[][] Surroundings) {
+        return 0;
     }
+
 
     @Override
     public void accept(Unit visitor) {

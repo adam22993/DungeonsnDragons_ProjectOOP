@@ -4,9 +4,10 @@ public class Position {
     private int x;
     private int y;
 
+    @SuppressWarnings("SuspiciousNameCombination")
     public Position(int x, int y){
-        this.x = x;
-        this.y = y;
+        this.x = y;
+        this.y = x; //represented backwards for easier use
     }
 
     public int getX(){

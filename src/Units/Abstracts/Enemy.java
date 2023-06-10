@@ -24,7 +24,6 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
         return Char;
     }
 
-
     @Override
     public void visit(Enemy enemy) {
         return;
