@@ -15,7 +15,7 @@ public class GameBoard {
      * This class represents the game board. It holds the board itself, and the turn sequence.
      * It also holds the current level.
      */
-    private Vector<Tile> turnSequence = new Vector<Tile>();
+    private Vector<Unit> turnSequence = new Vector<Unit>();
     private TileFactory tileFactory;
     private int current_level = 0;
     private Tile[][] board;
@@ -130,15 +130,11 @@ public class GameBoard {
          * the board, and prints each char to the console.
          */
         StringBuilder boardString = new StringBuilder();
-        int i = 0;
         for (Tile[] row : board) {
-            int j = 0;
             for (Tile c : row) {
-                boardString.append(this.getTileByPosition(new Position(i, j)).getChar());
-                j++;
+                boardString.append(c.getChar());
             }
             boardString.append("\n");
-            i++;
         }
         return boardString.toString();
     }
@@ -175,7 +171,7 @@ public class GameBoard {
 ////            return units;
 //        }
     public boolean playerIsDead(){
-        return turnSequence.get(0).getUnit().getHealthPool() <= 0;
+        return turnSequence.get(0).getHealthPool() <= 0;
     }
 
     public boolean playerIsAloneInTurnSequence(){
@@ -184,49 +180,43 @@ public class GameBoard {
 
     public void gameTick(char playerInput){
         char temp;
-        Unit unit;
-
         Position currUnitPos;
-        for (int line = 0; line < board.length; line++) {
-            for (int row = 0; row < board[line].length; row++) {
-                unit = board[line][row].getUnit();
-                if (unit.getChar() == '@') {
-                    temp = playerInput;
-                } else {
-                    temp = unit.onGameTick();
-                }
-                currUnitPos = unit.getPosition();
-                System.out.println("Unit " + unit.getChar() + " is on position " + currUnitPos + " and is moving " + temp); // debugging use
-                switch (temp) {
-                    case 'w':
-                        unit.accept(board[unit.getPosition().getX() - 1][unit.getPosition().getY()].getUnit());
-                        break;
-                    case 'a':
-                        unit.accept(board[unit.getPosition().getX()][unit.getPosition().getY() - 1].getUnit());
-                        break;
-                    case 's':
-                        unit.accept(board[unit.getPosition().getX() + 1][unit.getPosition().getY()].getUnit());
-                        break;
-                    case 'd':
-                        unit.accept(board[unit.getPosition().getX()][unit.getPosition().getY() + 1].getUnit());
-                        break;
-                    case 'e':
-                        continue;
-                    case 'q':
-                        continue;
-                    case 'v':
-                        unit.setChar('.');
-                        board[unit.getPosition().getX()][unit.getPosition().getY()].getUnit().setCharInUnit('.');
+        for (Unit unit : turnSequence) {
+            if (unit.getChar() == '@') {
+                temp = playerInput;
+            } else {
+                temp = unit.onGameTick();
+            }
+            currUnitPos = unit.getPosition();
+            System.out.println("Unit " + unit.getChar() + " is on position " + currUnitPos + " and is moving " + temp); // debugging use
+            switch (temp) {
+                case 'w':
+                    unit.accept(board[unit.getPosition().getX() - 1][unit.getPosition().getY()].getUnit());
+                    break;
+                case 'a':
+                    unit.accept(board[unit.getPosition().getX()][unit.getPosition().getY() - 1].getUnit());
+                    break;
+                case 's':
+                    unit.accept(board[unit.getPosition().getX() + 1][unit.getPosition().getY()].getUnit());
+                    break;
+                case 'd':
+                    unit.accept(board[unit.getPosition().getX()][unit.getPosition().getY() + 1].getUnit());
+                    break;
+                case 'e':
+                    continue;
+                case 'q':
+                    continue;
+                case 'v':
+                    board[unit.getPosition().getX()][unit.getPosition().getY()].getUnit().setCharInUnit('.');
 
-                }
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                updateBoard(getTileByPosition(new Position(unit.getPosition().getX(),unit.getPosition().getY())), currUnitPos);
             }
+            try{
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            updateBoard(getTileByPosition(new Position(unit.getPosition().getX(),unit.getPosition().getY())), currUnitPos);
+        }
         printBoard();
     }
     private Tile getTileByPosition(Position position) {

@@ -5,28 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/GameBoard/Levels/Level.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GameBoard/Levels/level2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameBoard/Levels/level1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/Levels/level1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/Visitor/UnitInteractionVisited.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Visitor/UnitInteractionVisited.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/ControlLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/ControlLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Inputs/Keyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/Inputs/Keyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Empty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Wall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/NonIntractable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/NonIntractable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Unit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Monster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +91,7 @@
       <workItem from="1686314849264" duration="20696000" />
       <workItem from="1686387054169" duration="1575000" />
       <workItem from="1686389303749" duration="352000" />
-      <workItem from="1686400150994" duration="17753000" />
+      <workItem from="1686400150994" duration="19394000" />
     </task>
     <servers />
   </component>
@@ -138,7 +118,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GameBoard/GameBoard.java</url>
-          <line>195</line>
+          <line>187</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
       </breakpoints>
