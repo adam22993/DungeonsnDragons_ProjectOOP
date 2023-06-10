@@ -18,14 +18,27 @@ public class Trap extends Monster {
     }
 
     @Override
-    public void onGameTick() {
+    public char onGameTick() {
         this.ticksCount++;
         if (this.ticksCount % (this.visibilityTime + this.invisibilityTime) + 1 == (this.visibilityTime + this.invisibilityTime) ){ // TODO: check if this is the correct way to do it
             this.ticksCount = 0;
             this.visible = true;
+            this.setChar('B');
+            this.setUnitChar('B');
+            setTrapChar('B');
         }
         if (this.ticksCount == this.visibilityTime){
             this.visible = false;
+            this.setChar('.');
+            this.setUnitChar('.');
+            setTrapChar('.');
         }
+        return 'v';
     }
+
+    private void setTrapChar(char Character){
+        setChar(Character);
+        getUnit().setChar(Character);
+    }
+
 }

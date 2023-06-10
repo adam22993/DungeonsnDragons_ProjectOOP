@@ -16,11 +16,6 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
         this.Char = Char;
     }
 
-    @Override
-    public void onGameTick() {
-        // TODO create enemy logic
-    }
-
     public int giveExperience(){
         return experienceValue;
     }
@@ -29,10 +24,6 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
         return Char;
     }
 
-    @Override
-    public void accept(UnitInteractionVisitor visitor) {
-        visitor.visit(this);
-    }
 
     @Override
     public void visit(Enemy enemy) {

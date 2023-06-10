@@ -19,6 +19,7 @@ public class GameUI {
     private JPanel startButtonPanel, mainTextPanel, characterSelectOptions, playerPanel, boardPanel, playerChoicesPanel, WSImagesPanel;
     private JLabel backgroundLabel, titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName, weaponLabelNumber, armorLabel, armorLabelName, armorLabelNumber, playerLabel, playerLabelName, playerLabelNumber;
     private JTextArea boardTextArea;
+    private JLayeredPane gameScreenPanel, CCSBGPanel;
     private final Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
     private final Font smallFont = new Font("Times New Roman", Font.PLAIN, 18);
@@ -35,7 +36,7 @@ public class GameUI {
 
     public void openWelcomeScreen(JPanel startButtonsPanel, JFrame currWindow) {
         window = currWindow;
-        con = window.getContentPane();
+//        con = window.getContentPane();
         clip = clips.get(0);
         if (clip != null) {
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -63,10 +64,10 @@ public class GameUI {
         startButtonPanel = startButtonsPanel;
         startButtonPanel.setOpaque(false);
         startButtonPanel.setFocusable(false);
-        con.add(startButtonPanel);
-        con.add(WSImagesPanel);
-        con.revalidate();
-        con.repaint();
+        window.add(startButtonPanel);
+        window.add(WSImagesPanel);
+        window.revalidate();
+        window.repaint();
 
 //
 //
@@ -78,7 +79,8 @@ public class GameUI {
     public void characterCreationScreen(JPanel characterSelectPanel){
         startButtonPanel.setVisible(false);
         WSImagesPanel.setVisible(false);
-        JPanel CCSBGPanel = new JPanel();
+        CCSBGPanel = new JLayeredPane();
+
         CCSBGPanel.setLayout(null);
         CCSBGPanel.setBounds(0, 0, window.getWidth(), window.getHeight());
         ImageIcon backgroundImage = new ImageIcon(currentDir + "/src/UI/Assets/Images/WelcomeScreenImage.jpg");
@@ -87,17 +89,17 @@ public class GameUI {
         backgroundImage = new ImageIcon(bgImage);
         backgroundLabel = new JLabel(backgroundImage);
         backgroundLabel.setBounds(0, 0, window.getWidth(), window.getHeight());
+
         CCSBGPanel.add(backgroundLabel);
-        con.add(CCSBGPanel);
+        window.add(CCSBGPanel);
         characterSelectOptions = characterSelectPanel;
         characterSelectOptions.setOpaque(false);
-//        startButtonPanel.setVisible(false);
-//        WSImagesPanel.setVisible(false);
+        characterSelectOptions.setFocusable(false);
         mainTextPanel = new JPanel();
         mainTextPanel.setBackground(Color.black);
         mainTextPanel.setLayout(new GridLayout(9,1));
         mainTextPanel.setBounds(50, 75, 1100, 300);
-        con.add(mainTextPanel);
+        window.add(mainTextPanel);
         String infoText =
                 "      name        |       HP        |     ATT    |     DEF    |    CAST SOURCE   |    ADD STATS\n" +
                 " 1. Jon Snow      | Health: 300/300 | Attack: 30 | Defense: 4 | Cooldown: 0/3    |\n" +
@@ -121,34 +123,43 @@ public class GameUI {
         }
 
         characterSelectOptions = characterSelectPanel;
-        con.add(characterSelectOptions);
+        window.add(characterSelectOptions);
         playerPanel = new JPanel();
-        playerPanel.setBounds(50, 15, 600, 50);
+        playerPanel.setBounds(450, 35, 300, 50);
         playerLabel = new JLabel("Choose your character:");
+        playerLabel.setHorizontalAlignment(JLabel.CENTER);
         playerLabel.setForeground(Color.white);
         playerPanel.setBackground(Color.black);
         playerPanel.setLayout(new GridLayout(1, 4));
         playerLabel.setFont(normalFont);
         playerPanel.add(playerLabel);
-        con.add(CCSBGPanel);
-        con.add(playerPanel);
-        con.revalidate();
-        con.repaint();
+        window.add(playerPanel);
+        window.add(CCSBGPanel);
+        window.revalidate();
+        window.repaint();
     }
 
-    public void createGameScreen(String board, JPanel playerControlsPanel) {
-//        clip.stop();
-//        clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
-//        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        playRandomClip();
+    public void createGameScreen(String board, JFrame window) {
+        clip.stop();
+        clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        volumeControl.setValue(-10.0f); // inplace change of volume - change is done in decibels
+//        playRandomClip();
         mainTextPanel.setVisible(false);
         characterSelectOptions.setVisible(false);
-
+        CCSBGPanel.setVisible(false);
         // create player panel
-        playerPanel = playerControlsPanel;
+//        playerPanel = playerControlsPanel;///////////////////////
+//        gameScreenPanel = new JLayeredPane();
+//        gameScreenPanel.setLayout(null);
+//        gameScreenPanel.setBounds(50, 75, 700, 500);
+//        gameScreenPanel.setBackground(Color.pink);
+//        gameScreenPanel.setForeground(Color.white);
+//        gameScreenPanel.setOpaque(true);
+//        gameScreenPanel.setVisible(true);
+//        window.add(playerPanel); ////////////////////////////
 
-        // create board panel and text area - currently set to testing
-//        boardPanel = new JPanel(); // defaulted to a white square and unnecessary
         boardTextArea = new JTextArea();
         boardTextArea = new JTextArea(board/*"\t\t\t\t\t###\n\n\n\n\n\n\n\n\n#\t\t\t\t\tthis is a test\n\n\n\n\n\n\n\n\n\t\t\t\t\t###"*/);
         boardTextArea.setBounds(50, 100, 600, 600);
@@ -157,6 +168,19 @@ public class GameUI {
         boardTextArea.setBackground(Color.black);
         boardTextArea.setVisible(true);
         boardTextArea.setLineWrap(true);
+        boardTextArea.setWrapStyleWord(true);
+        boardTextArea.setEditable(false);
+        window.add(boardTextArea);
+
+//        window.add(con);
+        window.revalidate();
+        window.repaint();
+
+    }
+
+    public void updateBoard(String board) {
+        System.out.println(board);
+        boardTextArea.setText(board);
     }
 
     private Clip loadMusic(String filePath) { // loads the music file
@@ -206,12 +230,11 @@ public class GameUI {
             Random random = new Random();
             System.out.println(clips.size());
             Clip clip = clips.get(random.nextInt(1, clips.size() - 1));
-
             try {
                 // Open and play the clip
                 clip.open();
                 FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                volumeControl.setValue(-10.0f);
+                volumeControl.setValue(-10.0f); // inplace change of volume - change is done in decibels
                 clip.start();
 
                 // Wait for the clip to finish playing
@@ -223,6 +246,7 @@ public class GameUI {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+//            playRandomClip();
         }
     }
     public void clipsIterator() {

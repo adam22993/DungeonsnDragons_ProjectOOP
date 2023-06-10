@@ -20,4 +20,6 @@ public class Mage extends Player {
     protected void castSpecialAbility() {
 
     }
+
+
 }

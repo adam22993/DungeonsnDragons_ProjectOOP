@@ -1,4 +1,6 @@
 package UI.Inputs;
 
-public class Keyboard {
-}
+import java.awt.event.KeyListener;
+
+//public class Keyboard implements KeyListener {
+//}

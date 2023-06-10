@@ -1,10 +1,7 @@
 package Units.ADDITIONAL;
 
 import Patterns.Visitor.UnitInteractionVisitor;
-import Units.Abstracts.Enemy;
-import Units.Abstracts.NonIntractable;
-import Units.Abstracts.Player;
-import Units.Abstracts.Tile;
+import Units.Abstracts.*;
 
 public class Wall extends NonIntractable {
 
@@ -13,12 +10,12 @@ public class Wall extends NonIntractable {
         }
 
     @Override
-    public void onGameTick() {
-        return;
+    public char onGameTick() {
+        return 'g';
     }
 
     @Override
-    public void accept(UnitInteractionVisitor visitor) {
+    public void accept(Unit visitor) {
         visitor.visit(this);
     }
 

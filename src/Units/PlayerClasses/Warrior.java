@@ -1,6 +1,7 @@
 package Units.PlayerClasses;
 import Units.ADDITIONAL.Position;
 import Units.Abstracts.Player;
+import Units.Abstracts.Unit;
 
 import java.util.Random;
 
@@ -36,4 +37,8 @@ public class Warrior extends Player {
         System.out.println(this.getName() + " performed a basic attack!");
     }
 
+    @Override
+    public void accept(Unit visitor) {
+        visitor.visit(this);
+    }
 }

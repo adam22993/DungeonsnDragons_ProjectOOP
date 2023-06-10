@@ -13,11 +13,8 @@ public abstract class NonIntractable extends Unit implements UnitInteractionVisi
     }
 
     @Override
-    abstract public void onGameTick();
+    abstract public char onGameTick();
 
-
-    @Override
-    abstract public void accept(UnitInteractionVisitor visitor);
 
     @Override
     abstract public void visit(Enemy enemy);

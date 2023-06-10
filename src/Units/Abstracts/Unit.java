@@ -1,10 +1,14 @@
 package Units.Abstracts;
 
+import Patterns.Visitor.UnitInteractionVisited;
+import Patterns.Visitor.UnitInteractionVisitor;
+import Units.ADDITIONAL.Empty;
 import Units.ADDITIONAL.Position;
+import Units.ADDITIONAL.Wall;
 
 import java.util.Random;
 
-public abstract class Unit extends Tile{
+public abstract class Unit extends Tile implements UnitInteractionVisited, UnitInteractionVisitor {
     protected String name;
     protected int healthPool; //TODO: implement ConsumablePoints
     protected int healthAmount;
@@ -24,7 +28,7 @@ public abstract class Unit extends Tile{
 
     //###################### Actions related ######################
 
-    abstract public void onGameTick();
+    abstract public char onGameTick();
     public void attack(Unit enemy){
         int damage = Random.nextInt(0, this.attackPoints - enemy.defensePoints);
         if (damage - enemy.defensePoints < 0) {
@@ -41,6 +45,10 @@ public abstract class Unit extends Tile{
     }
     public int getHealthPool() {
         return healthPool;
+    }
+    public void setCharInUnit(char Char) {
+        super.setChar(Char);
+        super.setUnitChar(Char);
     }
     public int getHealthAmount() {
         return healthAmount;
@@ -70,6 +78,13 @@ public abstract class Unit extends Tile{
     public String toString(){
         return String.format("%s", this.getChar());
     }
+
+    abstract public void accept(Unit visitor);
+    abstract public void visit(Enemy enemy);
+    abstract public void visit(Player player);
+    abstract public void visit(Empty empty);
+    abstract public void visit(Wall wall);
+
 
 
 }

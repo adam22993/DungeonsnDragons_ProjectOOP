@@ -33,13 +33,11 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     }
 
     abstract protected void castSpecialAbility(); // TODO: implement special ability in subclasses - think of way to add more attacks
-
-
     public void gainExperience(int experience){
         this.currEXP += experience;
     }
-    public void onGameTick(){
-        //TODO: implement player logic
+    public char onGameTick(){
+        return 'w';
     }
 
     public void kill(Enemy e){
@@ -71,7 +69,7 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     //######################### Visitors ##########################
 
     @Override
-    public void accept(UnitInteractionVisitor visitor) {
+    public void accept(Unit visitor) {
         visitor.visit(this);
     }
 

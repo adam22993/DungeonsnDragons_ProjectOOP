@@ -1,8 +1,10 @@
 package GameBoard;
+import GameBoard.Levels.Level;
 import Patterns.Factory.TileFactory;
 import Units.ADDITIONAL.Position;
 import Units.Abstracts.*;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,13 +15,18 @@ public class GameBoard {
      * This class represents the game board. It holds the board itself, and the turn sequence.
      * It also holds the current level.
      */
-    private Vector<Unit> turnSequence = new Vector<Unit>();
+    private Vector<Tile> turnSequence = new Vector<Tile>();
     private TileFactory tileFactory;
-    int current_level = 0;
+    private int current_level = 0;
     private Tile[][] board;
     private String playerName;
     private Vector<Integer> playerChoice = new Vector<Integer>();
     private Vector<Player> players = new Vector<Player>(); // implement more than one player
+
+    private Vector<Level> levels = new Vector<Level>();
+
+    private int gameLoadingStage = 0; // 0 - Welcome Screen, 1 - Character Creating , 2 - Game Started
+
 
     public GameBoard() {}
     public void setPlayerName(String player){
@@ -32,7 +39,7 @@ public class GameBoard {
 
 
     public Tile[][] loadCurrentLevelBoard(int current_level) {
-        /*re
+        /**
          * This function loads the board from the file. Using the current_level variable, it loads the file of
          * the current level. It then counts the number of lines and columns in the file, and creates a 2D array
          * of chars with the size of the board. It then loads the board from the file into the 2D array.
@@ -49,6 +56,7 @@ public class GameBoard {
         String currentDir = System.getProperty("user.dir");
         System.out.println("Current working directory: " + currentDir + levelFile);
         try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
+            // TODO: Look For the longets line in the file and set the countColumns to that number
             while (br.readLine() != null) {
                 countLines++;
             }
@@ -98,6 +106,7 @@ public class GameBoard {
         System.out.println(turnSequence);
         System.out.println("Level " + current_level + " loaded successfully!");
         this.board = tiles;
+//        printBoard();
         return tiles;
     }
 
@@ -121,11 +130,15 @@ public class GameBoard {
          * the board, and prints each char to the console.
          */
         StringBuilder boardString = new StringBuilder();
+        int i = 0;
         for (Tile[] row : board) {
+            int j = 0;
             for (Tile c : row) {
-                boardString.append(c);
+                boardString.append(this.getTileByPosition(new Position(i, j)).getChar());
+                j++;
             }
             boardString.append("\n");
+            i++;
         }
         return boardString.toString();
     }
@@ -161,12 +174,69 @@ public class GameBoard {
 //            }
 ////            return units;
 //        }
+    public boolean playerIsDead(){
+        return turnSequence.get(0).getUnit().getHealthPool() <= 0;
+    }
 
-        private void gameTick(){
-            for (Unit unit : turnSequence) {
-                unit.onGameTick(); // this is an error because Unit is abstract - its 1:30 am and I'm tired, I'll fix it tomorrow - fuck you all
+    public boolean playerIsAloneInTurnSequence(){
+        return turnSequence.size() == 1 && turnSequence.get(0).getChar() == '@';
+    }
+
+    public void gameTick(char playerInput){
+        char temp;
+        Unit unit;
+
+        Position currUnitPos;
+        for (int line = 0; line < board.length; line++) {
+            for (int row = 0; row < board[line].length; row++) {
+                unit = board[line][row].getUnit();
+                if (unit.getChar() == '@') {
+                    temp = playerInput;
+                } else {
+                    temp = unit.onGameTick();
+                }
+                currUnitPos = unit.getPosition();
+                System.out.println("Unit " + unit.getChar() + " is on position " + currUnitPos + " and is moving " + temp); // debugging use
+                switch (temp) {
+                    case 'w':
+                        unit.accept(board[unit.getPosition().getX() - 1][unit.getPosition().getY()].getUnit());
+                        break;
+                    case 'a':
+                        unit.accept(board[unit.getPosition().getX()][unit.getPosition().getY() - 1].getUnit());
+                        break;
+                    case 's':
+                        unit.accept(board[unit.getPosition().getX() + 1][unit.getPosition().getY()].getUnit());
+                        break;
+                    case 'd':
+                        unit.accept(board[unit.getPosition().getX()][unit.getPosition().getY() + 1].getUnit());
+                        break;
+                    case 'e':
+                        continue;
+                    case 'q':
+                        continue;
+                    case 'v':
+                        unit.setChar('.');
+                        board[unit.getPosition().getX()][unit.getPosition().getY()].getUnit().setCharInUnit('.');
+
+                }
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                updateBoard(getTileByPosition(new Position(unit.getPosition().getX(),unit.getPosition().getY())), currUnitPos);
             }
-        }
+            }
+        printBoard();
+    }
+    private Tile getTileByPosition(Position position) {
+        return board[position.getX()][position.getY()];
+    }
+    private void updateBoard(Tile tile, Position position) {
+        board[tile.getPosition().getX()][tile.getPosition().getY()] = tile;
+        if (position != tile.getPosition())
+            board[position.getX()][position.getY()] = tileFactory.produceEmpty(position);
+    }
 
     public int getCurrentLevelCounter(){
         return this.current_level;
@@ -179,4 +249,21 @@ public class GameBoard {
     public String toString(){
         return "current level " + current_level;
     }
+
+    public void incrementGameLoadingStage(){
+        this.gameLoadingStage++;
+    }
+    public int getGameLoadingStage(){
+        return this.gameLoadingStage;
+    }
+
+    public Vector<Level> getLevels() {
+        return levels;
+    }
+
+    public Vector<Player> getPlayers() {
+        return players;
+    }
+
+
 }

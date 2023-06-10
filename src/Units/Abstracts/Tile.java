@@ -1,6 +1,5 @@
 package Units.Abstracts;
 
-import Units.ADDITIONAL.Empty;
 import Units.ADDITIONAL.Position;
 
 public class Tile {
@@ -26,7 +25,17 @@ public class Tile {
     }
 
     public void setChar(char Character){
-        this.Char = Character;
+        Char = Character;
+    }
+    public void setUnitChar(char Character){
+        Unit unit = getUnit();
+        if (unit != null)
+            unit.setChar(Character);
+    }
+
+    private static void setChar(Unit unit, char Character){
+        if (unit != null)
+            unit.setChar(Character);
     }
 
     public Unit getUnit(){
@@ -48,7 +57,7 @@ public class Tile {
     }
 
     public String toString(){
-        return String.format("%s", this.unit);
+        return String.format("%s", this.Char);
     }
 
     public double Range(Tile other){ // uses floor to round down
