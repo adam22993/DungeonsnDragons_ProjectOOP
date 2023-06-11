@@ -1,9 +1,9 @@
 # DungeonsnDragons_ProjectOOP
 A 2D dnd style game to test and implement OOP principles.
 
-The project is attempting to create a 2D game that is in the light of Dungeons and Dragons taking the form 
-of a roguelike game. 
-The game will be a turn based game where the player will be able to move around a map and interact with objects and enemies. 
+The project is attempting to create a 2D game that is in the light of Dungeons and Dragons taking the form
+of a roguelike game.
+The game will be a turn based game where the player will be able to move around a map and interact with objects and enemies.
 The game will be created using the pure java to create the logic and the JFrame library for the view and the controls.
 In the project, we will attempt to implement the following OOP principles:
 

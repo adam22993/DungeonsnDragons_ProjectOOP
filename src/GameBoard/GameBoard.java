@@ -151,7 +151,7 @@ public class GameBoard {
     }
 
 
-//        private Vector<Unit> scanForUnitsBoard() {
+    //        private Vector<Unit> scanForUnitsBoard() {
 /*TODO: This is used to scan for the player by the enemies and helps the player select the enemy to attack with the special ability.
 //            /**DungeonsnDragons_ProjectOOP\src\GameBoard\GameBoard.java
 //             * This function scans the board for units. It creates a 2D array of Units with the same size as the board.
@@ -217,11 +217,11 @@ public class GameBoard {
 
 
             }
-//            try{
-//                Thread.sleep(500);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+            try{
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             updateBoard(new Position(unit.getPosition().getY(),unit.getPosition().getX()), posBeforeAction);
         }
         checkForDeathsAndRemoveFromTurnSequence();

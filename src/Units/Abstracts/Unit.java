@@ -25,6 +25,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
         this.healthAmount = Health_pool; // Start with full health
         this.attackPoints = Attack_points;
         this.defensePoints = Defense_points;
+        this.setChar(Char);
 
     }
 
