@@ -5,25 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/UnitMessageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GameBoard/Levels/level1Debug.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameBoard/Levels/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/Levels/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameBoard/Levels/level1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/Levels/level1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameBoard/Levels/level2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/Levels/level1Real.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameBoard/MessagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/MessagesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/Factory/TileFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Factory/TileFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/ControlLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ControlLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Inputs/ButtonSelectionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Inputs/ButtonSelectionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Inputs/Keyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Inputs/Keyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/Inputs/Mouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Inputs/Mouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Unit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +120,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GameBoard/GameBoard.java</url>
-          <line>185</line>
+          <line>188</line>
           <option name="timeStamp" value="87" />
         </line-breakpoint>
       </breakpoints>

@@ -37,7 +37,7 @@ public class GameUI {
     public void openWelcomeScreen(JPanel startButtonsPanel, JFrame currWindow) {
         window = currWindow;
 //        con = window.getContentPane();
-        clip = clips.get(2);
+        clip = clips.get(0);  // mac for some reason loads differently than windows, sequence is different
         if (clip != null) {
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             volumeControl.setValue(-10.0f);

@@ -27,6 +27,8 @@ public class GameBoard {
 
     private int gameLoadingStage = 0; // 0 - Welcome Screen, 1 - Character Creating , 2 - Game Started
 
+    private int gameTickCounter = 1;
+
 
     public GameBoard() {}
     public void setPlayerName(String player){
@@ -179,6 +181,7 @@ public class GameBoard {
     }
 
     public void gameTick(char playerInput){
+        System.out.println("Game tick " + gameTickCounter++ + " started!");
         char temp;
         Position posBeforeAction;
         for (Unit unit : turnSequence) {
@@ -188,32 +191,37 @@ public class GameBoard {
                 temp = unit.onGameTick(turnSequence.get(0).getPosition(), getBoard());
             }
             posBeforeAction = unit.getPosition();
-            System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving " + temp); // debugging use
             switch (temp) {
                 case 'w':
+                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving up"); // debugging use
                     unit.accept(board[unit.getPosition().getY() - 1][unit.getPosition().getX()]);
                     break;
                 case 'a':
+                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving left");
                     unit.accept(board[unit.getPosition().getY()][unit.getPosition().getX() - 1]);
                     break;
                 case 's':
+                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving down");
                     unit.accept(board[unit.getPosition().getY() + 1][unit.getPosition().getX()]);
                     break;
                 case 'd':
+                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving right");
                     unit.accept(board[unit.getPosition().getY()][unit.getPosition().getX() + 1]);
                     break;
                 case 'e':
                     continue;
                 case 'q':
                     continue;
+                case 'v':
+                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is doing whatever a trap does");
 
 
             }
-            try{
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try{
+//                Thread.sleep(500);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             updateBoard(new Position(unit.getPosition().getY(),unit.getPosition().getX()), posBeforeAction);
         }
         checkForDeathsAndRemoveFromTurnSequence();
