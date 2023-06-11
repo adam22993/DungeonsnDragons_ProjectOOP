@@ -10,7 +10,7 @@ public class Empty extends NonIntractable{
 
     @Override
     public char onGameTick(Position playerPosition, Tile[][] Surroundings) {
-        return 0;
+        return '\u0000';
     }
 
 

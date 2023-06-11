@@ -14,4 +14,8 @@ public class UnitMessageController implements MessagesController {
         return String.format("%s attacked %s for %d damage", unitAttacking.getName(), unitDefending.getName(), damageDealt);
     }
 
+    public String deathMessage(Unit enemy) {
+        System.out.println(enemy.getName() + " has been slain!");
+        return null;
+    }
 }

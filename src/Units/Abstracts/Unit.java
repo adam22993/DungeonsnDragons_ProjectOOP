@@ -32,17 +32,6 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     //###################### Actions related ######################
 
     abstract public char onGameTick(Position playerPosition, Tile[][] Surroundings);
-    public String attack(Unit enemy){
-        int damage = Random.nextInt(0, this.attackPoints - enemy.defensePoints);
-        if (damage - enemy.defensePoints < 0) {
-            damage = 0;
-        } else {
-            damage = damage - enemy.defensePoints;
-        }
-        enemy.healthAmount = enemy.getHealthAmount() - damage;
-        return unitMessageController.attackUpdate(this, enemy, damage);
-    }
-//    public abstract void accept(UnitVisitor visitor); //TODO: implement interact visitor
 
     public String getName() {
         return name;
@@ -60,7 +49,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
         return defensePoints;
     }
     protected void setHealthAmount(int healthAmount) {
-        this.healthAmount = healthAmount;
+        this.healthAmount = Math.max(healthAmount, 0);
     }
     protected void setHealthPool(int healthPool) {
         this.healthPool = healthPool;

@@ -214,8 +214,8 @@ public class GameBoard {
                     continue;
                 case 'v':
                     System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is doing whatever a trap does");
-
-
+                case '\u0000':
+                    continue;
             }
             try{
                 Thread.sleep(500);
@@ -223,9 +223,9 @@ public class GameBoard {
                 e.printStackTrace();
             }
             updateBoard(new Position(unit.getPosition().getY(),unit.getPosition().getX()), posBeforeAction);
+            checkForDeathsInTurnSequence();
         }
-        checkForDeathsAndRemoveFromTurnSequence();
-
+        removeDeadUnitsFromTurnSequence();
     }
 
 
@@ -240,8 +240,16 @@ public class GameBoard {
         }
     }
 
-    private void checkForDeathsAndRemoveFromTurnSequence() {
-        turnSequence.removeIf(unit -> unit.getHealthPool() <= 0);
+    private void checkForDeathsInTurnSequence() {
+        for (Unit unit : this.turnSequence)
+            if (unit.getHealthAmount() <= 0) {
+                board[unit.getPosition().getY()][unit.getPosition().getX()] = tileFactory.produceEmpty(unit.getPosition());
+
+            }
+    }
+
+    private void removeDeadUnitsFromTurnSequence() {
+        this.turnSequence.removeIf(unit -> unit.getHealthAmount() <= 0);
     }
 
     public int getCurrentLevelCounter(){

@@ -40,11 +40,23 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
         return 'd';
     }
 
+    public String attack(Enemy enemy){
+        int damage = Random.nextInt(0, this.attackPoints);
+        damage = Math.max(damage - enemy.defensePoints, 0);
+        enemy.setHealthAmount(enemy.getHealthAmount() - damage);
+        System.out.println(this.name + " attacked " + enemy.name + " for " + damage + " damage!, " + enemy.name + " health is now " + enemy.healthAmount + "!" );
+        if (enemy.healthAmount == 0){
+            unitMessageController.deathMessage(enemy);
+            this.kill(enemy);
+        }
+        return unitMessageController.attackUpdate(this, enemy, damage);
+    }
+
     public void kill(Enemy e){
         gainExperience(e.giveExperience());
         this.swapPosition(e);
-        Empty em = new Empty('.', "An empty space");
         if (this.currEXP >= this.maxEXP){
+
             this.levelUp();
         }
     }
@@ -75,7 +87,7 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
 
     @Override
     public void visit(Enemy enemy) {
-        this.attack(enemy);
+        enemy.attack(this);
     }
 
     @Override

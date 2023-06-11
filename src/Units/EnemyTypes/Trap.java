@@ -51,7 +51,7 @@ public class Trap extends Enemy {
     @Override
     public String toString() {
         if (this.visible){
-            return String.format("%c", this.Char);
+            return String.format("%c", this.getChar());
         } else {
             return ".";
         }
