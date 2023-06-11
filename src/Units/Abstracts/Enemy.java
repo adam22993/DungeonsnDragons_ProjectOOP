@@ -13,15 +13,10 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
         super(name, Health_pool, Attack_points, Defense_points, Char, position);
         this.experienceValue = experienceValue;
         this.visionRange = visionRange;
-        this.Char = Char;
     }
 
     public int giveExperience(){
         return experienceValue;
-    }
-
-    public char getChar() {
-        return Char;
     }
 
     @Override

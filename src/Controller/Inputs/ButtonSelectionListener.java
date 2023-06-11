@@ -1,4 +1,4 @@
-package UI.Inputs;
+package Controller.Inputs;
 
 public class ButtonSelectionListener implements Patterns.ButtonSelectionListener{
     @Override

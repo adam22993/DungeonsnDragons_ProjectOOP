@@ -1,5 +1,6 @@
 package Units.Abstracts;
 
+import Controller.UnitMessageController;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.Empty;
@@ -15,6 +16,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     protected int attackPoints;
     protected int defensePoints;
     Random Random = new Random();
+    UnitMessageController unitMessageController = new UnitMessageController();
 
     public Unit(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, char Char, Position position) {
         super(Char, position);
@@ -29,7 +31,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     //###################### Actions related ######################
 
     abstract public char onGameTick(Position playerPosition, Tile[][] Surroundings);
-    public void attack(Unit enemy){
+    public String attack(Unit enemy){
         int damage = Random.nextInt(0, this.attackPoints - enemy.defensePoints);
         if (damage - enemy.defensePoints < 0) {
             damage = 0;
@@ -37,6 +39,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
             damage = damage - enemy.defensePoints;
         }
         enemy.healthAmount = enemy.getHealthAmount() - damage;
+        return unitMessageController.attackUpdate(this, enemy, damage);
     }
 //    public abstract void accept(UnitVisitor visitor); //TODO: implement interact visitor
 

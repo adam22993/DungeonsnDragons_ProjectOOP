@@ -18,7 +18,7 @@ public class GameBoard {
     private Vector<Unit> turnSequence = new Vector<Unit>();
     private TileFactory tileFactory;
     private int current_level = 0;
-    private Tile[][] board;
+    private Unit[][] board;
     private String playerName;
     private Vector<Integer> playerChoice = new Vector<Integer>();
     private Vector<Player> players = new Vector<Player>(); // implement more than one player
@@ -73,7 +73,7 @@ public class GameBoard {
             System.err.format("IOException: %s%n", e);
         }
 
-        Tile[][] tiles = new Tile[countLines][countColumns];
+        Unit[][] tiles = new Unit[countLines][countColumns];
         tileFactory = new TileFactory(1);
         try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
             String line;
@@ -87,10 +87,10 @@ public class GameBoard {
                         tiles[i][j] = tileFactory.produceWall(new Position(i, j));
                     } else if (Char == '@'){
                         tiles[i][j] = tileFactory.producePlayer(playerChoice.remove(0), new Position(i, j));  // TODO: change to playerSelected
-                        turnSequence.insertElementAt(tiles[i][j].getUnit(), 0); // add player to the beginning of the turn sequence
+                        turnSequence.insertElementAt(tiles[i][j], 0); // add player to the beginning of the turn sequence
                     } else if (tileFactory.getEnemiesMap().containsKey(Char)){
                         tiles[i][j] = tileFactory.produceEnemy(Char, new Position(i, j));
-                        turnSequence.add(tiles[i][j].getUnit());
+                        turnSequence.add(tiles[i][j]);
                     } else {
                         tiles[i][j] = tileFactory.produceEmpty(new Position(i, j)); // nothing found to create, so create an empty tile. - this should never happen - this is for damage control.
                     }
@@ -130,9 +130,9 @@ public class GameBoard {
          * the board, and prints each char to the console.
          */
         StringBuilder boardString = new StringBuilder();
-        for (Tile[] row : board) {
-            for (Tile c : row) {
-                boardString.append(c.getChar());
+        for (Unit[] row : board) {
+            for (Unit c : row) {
+                boardString.append(c);
             }
             boardString.append("\n");
         }
@@ -191,45 +191,49 @@ public class GameBoard {
             System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving " + temp); // debugging use
             switch (temp) {
                 case 'w':
-                    unit.accept(board[unit.getPosition().getY() - 1][unit.getPosition().getX()].getUnit());
+                    unit.accept(board[unit.getPosition().getY() - 1][unit.getPosition().getX()]);
                     break;
                 case 'a':
-                    unit.accept(board[unit.getPosition().getY()][unit.getPosition().getX() - 1].getUnit());
+                    unit.accept(board[unit.getPosition().getY()][unit.getPosition().getX() - 1]);
                     break;
                 case 's':
-                    unit.accept(board[unit.getPosition().getY() + 1][unit.getPosition().getX()].getUnit());
+                    unit.accept(board[unit.getPosition().getY() + 1][unit.getPosition().getX()]);
                     break;
                 case 'd':
-                    unit.accept(board[unit.getPosition().getY()][unit.getPosition().getX() + 1].getUnit());
+                    unit.accept(board[unit.getPosition().getY()][unit.getPosition().getX() + 1]);
                     break;
                 case 'e':
                     continue;
                 case 'q':
                     continue;
-                case 'v':
-                    board[unit.getPosition().getY()][unit.getPosition().getX()].getUnit().setChar('.');
+
 
             }
             try{
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             updateBoard(new Position(unit.getPosition().getY(),unit.getPosition().getX()), posBeforeAction);
         }
+        checkForDeathsAndRemoveFromTurnSequence();
 
     }
 
 
-    private Tile getTileByPosition(Position position) {
+    private Unit getTileByPosition(Position position) {
         return board[position.getY()][position.getX()];
     }
     private void updateBoard(Position posAfterAction, Position posBeforeAction) {
         if (posAfterAction.getX() != posBeforeAction.getX() || posAfterAction.getY() != posBeforeAction.getY()) {
-            Tile temp = getTileByPosition(posAfterAction);
+            Unit temp = getTileByPosition(posAfterAction);
             board[posAfterAction.getY()][posAfterAction.getX()] = getTileByPosition(posBeforeAction);
             board[posBeforeAction.getY()][posBeforeAction.getX()] = temp;
         }
+    }
+
+    private void checkForDeathsAndRemoveFromTurnSequence() {
+        turnSequence.removeIf(unit -> unit.getHealthPool() <= 0);
     }
 
     public int getCurrentLevelCounter(){

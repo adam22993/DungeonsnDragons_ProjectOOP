@@ -32,7 +32,7 @@ public class TileFactory {
                 () -> new Monster('q', "Queen's Guard", 400, 20, 15, 100,  5),
 //                () -> new Boss('M', "The Mountain", 1000, 60, 25, 500, 6, 5),
 //                () -> new Boss('C', "Queen Cersei", 100, 10, 10,1000, 1, 8),
-                () -> new Trap('B', "Bonus Trap", 1, 1, 1, 250,  1, 10),
+                () -> new Trap('B', "Bonus Trap", 1, 1, 1, 250,  1, 2),
                 () -> new Trap('Q', "Queen's Trap", 250, 50, 10, 100, 3, 10),
 
                 () -> new Monster('z', "Wright", 600, 30, 15,100, 3),
@@ -81,31 +81,31 @@ public class TileFactory {
         return enemiesMap;
     }
 
-    public Tile produceEnemy(char tile, Position position/*, MessageCallback messageCallback, EnemyDeathCallback enemyDeathCallback*/) {
+    public Unit produceEnemy(char tile, Position position/*, MessageCallback messageCallback, EnemyDeathCallback enemyDeathCallback*/) {
         Enemy e = enemiesMap.get(tile).get();
         e.setPosition(position);
-        e.setUnit(e);
+//        e.setUnit(e);
         return e;
     }
 
     public Player producePlayer(int idx, Position position/*, MessageCallback messageCallback, PlayerDeathCallback playerDeathCallback*/){
 		Player p = playersList.get(idx).get();
         p.setPosition(position);
-        p.setUnit(p);
+//        p.setUnit(p);
         return p;
     }
 
-    public Tile produceEmpty(Position position){
+    public Unit produceEmpty(Position position){
         Unit e = new Empty('.', "An empty tile");
         e.setPosition(position);
-        e.setUnit(e);
+//        e.setUnit(e);
         return e;
     }
 
-    public Tile produceWall(Position position){
+    public Unit produceWall(Position position){
         Wall w = new Wall('#', "A wall");
         w.setPosition(position);
-        w.setUnit(w);
+//        w.setUnit(w);
         return w;
     }
 }

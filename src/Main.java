@@ -1,8 +1,4 @@
-import GameBoard.GameBoard;
-import UI.ControlLayer;
-import UI.GameUI;
-import Units.ADDITIONAL.Position;
-import Units.PlayerClasses.*;
+import Controller.ControlLayer;
 
 public class Main {
     public static void main(String[] args) {

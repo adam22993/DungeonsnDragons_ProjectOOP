@@ -20,20 +20,20 @@ public record Level(String name, Tile[][] tiles) {
         return this.name;
     }
 
-    public void printLevel() {
-        for (Tile[] tile : tiles) {
-            for (Tile value : tile) {
-                if (value.getUnit() instanceof Player) {
-                    System.out.print("P");
-                } else if (value.getUnit() instanceof Enemy) {
-                    System.out.print("E");
-                } else if (value.getUnit() instanceof Wall) {
-                    System.out.print("W");
-                } else if (value.getUnit() instanceof Empty) {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
-    }
+//    public void printLevel() {
+//        for (Tile[] tile : tiles) {
+//            for (Tile value : tile) {
+//                if (value.getUnit() instanceof Player) {
+//                    System.out.print("P");
+//                } else if (value.getUnit() instanceof Enemy) {
+//                    System.out.print("E");
+//                } else if (value.getUnit() instanceof Wall) {
+//                    System.out.print("W");
+//                } else if (value.getUnit() instanceof Empty) {
+//                    System.out.print(" ");
+//                }
+//            }
+//            System.out.println();
+//        }
+//    }
 }

@@ -1,6 +1,7 @@
-package UI;
+package Controller;
 
 import GameBoard.GameBoard;
+import UI.GameUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     private int counter = 1;
     private boolean keyboardPressed = false;
     private boolean playerGamePlayInput = false;
-    private char playerGamePlayInputVal = ' ';
+    private char playerGamePlayInputVal = 'd';
 
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
@@ -139,7 +140,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice1 = new JButton("Jon Snow");
         choice1.setBackground(Color.white);
         choice1.setForeground(Color.black);
-        choice1.setFont(normalFont);
+        choice1.setFont(boardFont);
         choice1.setFocusable(false);
         characterSelectOptions.add(choice1);
         choice1.addActionListener(e -> {
@@ -154,7 +155,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice2 = new JButton("The Hound");
         choice2.setBackground(Color.white);
         choice2.setForeground(Color.black);
-        choice2.setFont(normalFont);
+        choice2.setFont(boardFont);
         choice2.setFocusable(false);
         characterSelectOptions.add(choice2);
         choice2.addActionListener(e -> {
@@ -168,7 +169,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice3 = new JButton("Melisandre");
         choice3.setBackground(Color.white);
         choice3.setForeground(Color.black);
-        choice3.setFont(normalFont);
+        choice3.setFont(boardFont);
         choice3.setFocusable(false);
         characterSelectOptions.add(choice3);
         choice3.addActionListener(e -> {
@@ -182,7 +183,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice4 = new JButton("Thoros of Myr");
         choice4.setBackground(Color.white);
         choice4.setForeground(Color.black);
-        choice4.setFont(normalFont);
+        choice4.setFont(boardFont);
         choice4.setFocusable(false);
         characterSelectOptions.add(choice4);
         choice4.addActionListener(e -> {
@@ -196,7 +197,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice5 = new JButton("Arya Stark");
         choice5.setBackground(Color.white);
         choice5.setForeground(Color.black);
-        choice5.setFont(normalFont);
+        choice5.setFont(boardFont);
         choice5.setFocusable(false);
         characterSelectOptions.add(choice5);
         choice5.addActionListener(e -> {
@@ -210,7 +211,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice6 = new JButton("Bronn");
         choice6.setBackground(Color.white);
         choice6.setForeground(Color.black);
-        choice6.setFont(normalFont);
+        choice6.setFont(boardFont);
         choice6.setFocusable(false);
         characterSelectOptions.add(choice6);
         choice6.addActionListener(e -> {
@@ -224,7 +225,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice7 = new JButton("Ygritte");
         choice7.setBackground(Color.white);
         choice7.setForeground(Color.black);
-        choice7.setFont(normalFont);
+        choice7.setFont(boardFont);
         choice7.setFocusable(false);
         characterSelectOptions.add(choice7);
         choice7.addActionListener(e -> {
@@ -234,7 +235,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice8 = new JButton(playerName + " (Custom)");
         choice8.setBackground(Color.white);
         choice8.setForeground(Color.black);
-        choice8.setFont(normalFont);
+        choice8.setFont(boardFont);
         choice8.setFocusable(false);
         characterSelectOptions.add(choice8);
         choice8.addActionListener(e -> {
@@ -254,6 +255,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         playerChoicesPanel.setBackground(Color.black);
         playerChoicesPanel.setForeground(Color.white);
         playerChoicesPanel.addKeyListener(this);
+        playerChoicesPanel.requestFocus();
 
         // create player control buttons
         qButton = new JButton("Q");
@@ -379,7 +381,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     @Override
     public void keyPressed(KeyEvent e) {
         // This method is invoked when a key is released
-        if (e.getKeyCode() == KeyEvent.VK_W && !keyboardPressed && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_W && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("W Pressed");
             keyboardPressed = true;
             playerGamePlayInput = true;
@@ -388,7 +390,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             wButton.getModel().setPressed(true);
             wButton.getModel().setArmed(true);
         }
-        if (e.getKeyCode() == KeyEvent.VK_S && !keyboardPressed && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_S && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("S Pressed");
             keyboardPressed = true;
             playerGamePlayInput = true;
@@ -397,7 +399,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             sButton.getModel().setPressed(true);
             sButton.getModel().setArmed(true);
         }
-        if (e.getKeyCode() == KeyEvent.VK_A && !keyboardPressed && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_A && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("A Pressed");
             keyboardPressed = true;
             playerGamePlayInput = true;
@@ -406,7 +408,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             aButton.getModel().setPressed(true);
             aButton.getModel().setArmed(true);
         }
-        if (e.getKeyCode() == KeyEvent.VK_D && !keyboardPressed && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_D && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("D Pressed");
             keyboardPressed = true;
             playerGamePlayInput = true;
@@ -415,7 +417,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             dButton.getModel().setPressed(true);
             dButton.getModel().setArmed(true);
         }
-        if (e.getKeyCode() == KeyEvent.VK_E && !keyboardPressed && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_E && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("E Pressed");
             keyboardPressed = true;
             playerGamePlayInput = true;
@@ -424,7 +426,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             eButton.getModel().setPressed(true);
             eButton.getModel().setArmed(true);
         }
-        if (e.getKeyCode() == KeyEvent.VK_Q && !keyboardPressed && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_Q && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("Q Pressed");
             keyboardPressed = true;
             playerGamePlayInput = true;
@@ -515,7 +517,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 //        System.out.println("Key released: " + keyReleased);
 
 
-        if (e.getKeyCode() == KeyEvent.VK_W && keyboardPressed && keysPressedWSADEQ12345678[0] && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_W && keyboardPressed && keysPressedWSADEQ12345678[0] && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("W released");
             keyboardPressed = false;
             playerGamePlayInput = false;
@@ -523,7 +525,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             wButton.getModel().setPressed(false);
             wButton.getModel().setArmed(false);
         }
-        if (e.getKeyCode() == KeyEvent.VK_S && keyboardPressed && keysPressedWSADEQ12345678[1] && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_S && keyboardPressed && keysPressedWSADEQ12345678[1] && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("S released");
             keyboardPressed = false;
             playerGamePlayInput = false;
@@ -531,7 +533,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             sButton.getModel().setPressed(false);
             sButton.getModel().setArmed(false);
         }
-        if (e.getKeyCode() == KeyEvent.VK_A && keyboardPressed && keysPressedWSADEQ12345678[2] && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_A && keyboardPressed && keysPressedWSADEQ12345678[2] && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("A released");
             keyboardPressed = false;
             playerGamePlayInput = false;
@@ -539,7 +541,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             aButton.getModel().setPressed(false);
             aButton.getModel().setArmed(false);
         }
-        if (e.getKeyCode() == KeyEvent.VK_D && keyboardPressed && keysPressedWSADEQ12345678[3] && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_D && keyboardPressed && keysPressedWSADEQ12345678[3] && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("D released");
             keyboardPressed = false;
             playerGamePlayInput = false;
@@ -547,7 +549,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             dButton.getModel().setPressed(false);
             dButton.getModel().setArmed(false);
         }
-        if (e.getKeyCode() == KeyEvent.VK_E && keyboardPressed && keysPressedWSADEQ12345678[4] && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_E && keyboardPressed && keysPressedWSADEQ12345678[4] && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("E released");
             keyboardPressed = false;
             playerGamePlayInput = false;
@@ -555,7 +557,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             eButton.getModel().setPressed(false);
             eButton.getModel().setArmed(false);
         }
-        if (e.getKeyCode() == KeyEvent.VK_Q && keyboardPressed && keysPressedWSADEQ12345678[5] && gameBoard.getGameLoadingStage() == 2) {
+        if (e.getKeyCode() == KeyEvent.VK_Q && keyboardPressed && keysPressedWSADEQ12345678[5] && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("Q released");
             keyboardPressed = false;
             playerGamePlayInput = false;
@@ -628,12 +630,21 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     private void waitOnPlayerInput(JPanel playerControls){
         JPanel PlayerControls = playerControls;
-        playerControls.addKeyListener(this);
+        PlayerControls.addKeyListener(this);
+        PlayerControls.setBounds(0, 0, 10000, 10000);
+        PlayerControls.requestFocus();
+        PlayerControls.requestFocusInWindow();
+        PlayerControls.setRequestFocusEnabled(true);
+        PlayerControls.setFocusable(true);
+        window.add(PlayerControls);
+        window.revalidate();
         while (!playerGamePlayInput) {
-            if (didPlayerEneterInput()) {
+            if (didPlayerEnterInput()) {
                 break;
             }
             try {
+                if(didPlayerEnterInput())
+                    break;
                 Thread.sleep(500);
                 System.out.println("Waiting for player input");
             } catch (InterruptedException e) {
@@ -644,7 +655,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     }
 
-    private boolean didPlayerEneterInput(){
+    private boolean didPlayerEnterInput(){
         return playerGamePlayInput;
     }
 

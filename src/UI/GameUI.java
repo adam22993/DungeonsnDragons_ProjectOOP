@@ -37,7 +37,7 @@ public class GameUI {
     public void openWelcomeScreen(JPanel startButtonsPanel, JFrame currWindow) {
         window = currWindow;
 //        con = window.getContentPane();
-        clip = clips.get(0);
+        clip = clips.get(2);
         if (clip != null) {
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             volumeControl.setValue(-10.0f);
@@ -131,7 +131,7 @@ public class GameUI {
         playerLabel.setForeground(Color.white);
         playerPanel.setBackground(Color.black);
         playerPanel.setLayout(new GridLayout(1, 4));
-        playerLabel.setFont(normalFont);
+        playerLabel.setFont(boardFont);
         playerPanel.add(playerLabel);
         window.add(playerPanel);
         window.add(CCSBGPanel);
