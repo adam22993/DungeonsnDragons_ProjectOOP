@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Messages;
 
 import GameBoard.MessagesController;
 import Units.Abstracts.Unit;
@@ -15,7 +15,7 @@ public class UnitMessageController implements MessagesController {
     }
 
     public String deathMessage(Unit enemy) {
-        System.out.println(enemy.getName() + " has been slain!");
-        return null;
+        System.out.printf("%s has been slain!%n", enemy.getName());
+        return String.format("%s has been slain!", enemy.getName());
     }
 }

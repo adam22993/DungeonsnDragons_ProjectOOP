@@ -3,6 +3,8 @@ package Units.ADDITIONAL;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.Abstracts.*;
 
+import java.util.Vector;
+
 public class Wall extends NonIntractable {
 
     public Wall(char Char, String name) {
@@ -10,7 +12,7 @@ public class Wall extends NonIntractable {
     }
 
     @Override
-    public char onGameTick(Position playerPosition, Tile[][] Surroundings) {
+    public char onGameTick(Position playerPosition, Vector<Unit> units) {
         return 0;
     }
 

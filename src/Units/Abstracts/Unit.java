@@ -1,6 +1,6 @@
 package Units.Abstracts;
 
-import Controller.UnitMessageController;
+import Controller.Messages.UnitMessageController;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.Empty;
@@ -8,6 +8,7 @@ import Units.ADDITIONAL.Position;
 import Units.ADDITIONAL.Wall;
 
 import java.util.Random;
+import java.util.Vector;
 
 public abstract class Unit extends Tile implements UnitInteractionVisited, UnitInteractionVisitor {
     protected String name;
@@ -31,7 +32,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
 
     //###################### Actions related ######################
 
-    abstract public char onGameTick(Position playerPosition, Tile[][] Surroundings);
+    abstract public char onGameTick(Position playerPosition, Vector<Unit> units);
 
     public String getName() {
         return name;

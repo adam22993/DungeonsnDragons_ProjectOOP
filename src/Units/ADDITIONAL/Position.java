@@ -4,10 +4,9 @@ public class Position {
     private int x;
     private int y;
 
-    @SuppressWarnings("SuspiciousNameCombination")
     public Position(int x, int y){
-        this.x = y;
-        this.y = x; //represented backwards for easier use
+        this.x = x;
+        this.y = y;
     }
 
     public int getX(){
@@ -47,6 +46,18 @@ public class Position {
     }
     public double Range(Position other){
         return Math.floor(Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2)));
+    }
+    // create a compare function for sorting
+    public int compareTo(Position other){
+        if (this.x == other.x && this.y == other.y)
+            return 0;
+        if (this.y < other.y)
+            return -1;
+        if (this.y > other.y)
+            return 1;
+        if (this.x < other.x)
+            return -1;
+        return 1;
     }
 
 }

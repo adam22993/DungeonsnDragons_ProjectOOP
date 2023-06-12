@@ -2,6 +2,8 @@ package Units.ADDITIONAL;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.Abstracts.*;
 
+import java.util.Vector;
+
 public class Empty extends NonIntractable{
 
     public Empty(char Char, String name) {
@@ -9,7 +11,7 @@ public class Empty extends NonIntractable{
     }
 
     @Override
-    public char onGameTick(Position playerPosition, Tile[][] Surroundings) {
+    public char onGameTick(Position playerPosition, Vector<Unit> units) {
         return '\u0000';
     }
 

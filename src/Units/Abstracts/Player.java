@@ -7,6 +7,8 @@ import Units.ADDITIONAL.Empty;
 import Units.ADDITIONAL.Position;
 import Units.ADDITIONAL.Wall;
 
+import java.util.Vector;
+
 public abstract class Player extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     //###################### Class related ######################
     protected Integer maxEXP; // TODO change to consumablePoints one day
@@ -36,7 +38,7 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     public void gainExperience(int experience){
         this.currEXP += experience;
     }
-    public char onGameTick(Position playerPosition, Tile[][] surroundings){
+    public char onGameTick(Position playerPosition, Vector<Unit> units){
         return 'd';
     }
 

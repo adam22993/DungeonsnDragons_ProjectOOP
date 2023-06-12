@@ -6,6 +6,8 @@ import Units.ADDITIONAL.Empty;
 import Units.ADDITIONAL.Position;
 import Units.ADDITIONAL.Wall;
 
+import java.util.Vector;
+
 public abstract class NonIntractable extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     // TODO: OVERWRITE ANY METHOD THAT A NON-INTRACTABLE UNIT SHOULD NOT HAVE
     public NonIntractable(char Char, String name) {
@@ -13,7 +15,7 @@ public abstract class NonIntractable extends Unit implements UnitInteractionVisi
     }
 
     @Override
-    abstract public char onGameTick(Position playerPosition, Tile[][] Surroundings);
+    abstract public char onGameTick(Position playerPosition, Vector<Unit> units);
 
 
     @Override

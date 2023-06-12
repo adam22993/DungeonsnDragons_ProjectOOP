@@ -40,7 +40,7 @@ public class GameUI {
         clip = clips.get(0);  // mac for some reason loads differently than windows, sequence is different
         if (clip != null) {
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volumeControl.setValue(-10.0f);
+            volumeControl.setValue(-30.0f);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
         window.setVisible(true);
@@ -114,12 +114,13 @@ public class GameUI {
         String[] lines = infoText.split("\n");
 
         for (String line : lines) {
-            JLabel label = new JLabel(line);
-            label.setFont(boardFont);
-            label.setBounds(0, 20, 1100, 500);
-            label.setForeground(Color.white);
-            label.setHorizontalAlignment(JLabel.LEFT);
-            mainTextPanel.add(label);
+            JButton charButton = new JButton(line);
+            charButton.setFont(boardFont);
+            charButton.setBounds(0, 20, 1100, 500);
+            charButton.setForeground(Color.black);
+            charButton.setBackground(Color.white);
+            charButton.setHorizontalAlignment(JButton.LEFT);
+            mainTextPanel.add(charButton);
         }
 
         characterSelectOptions = characterSelectPanel;
@@ -144,7 +145,7 @@ public class GameUI {
         clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        volumeControl.setValue(-10.0f); // inplace change of volume - change is done in decibels
+        volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
 //        playRandomClip();
         mainTextPanel.setVisible(false);
         characterSelectOptions.setVisible(false);

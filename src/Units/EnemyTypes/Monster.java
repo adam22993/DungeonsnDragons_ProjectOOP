@@ -7,6 +7,7 @@ import Units.Abstracts.Unit;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Vector;
 
 public class Monster extends Enemy  {
     int experienceValue;
@@ -16,9 +17,9 @@ public class Monster extends Enemy  {
     }
 
     @Override
-    public char onGameTick(Position playerPosition, Tile[][] Surroundings) {
+    public char onGameTick(Position playerPosition, Vector<Unit> units) {
         if (this.getPosition().Range(playerPosition) <= this.visionRange){
-            return this.moveTowardsPlayer(playerPosition, Surroundings);
+            return this.moveTowardsPlayer(playerPosition, units);
         }
         switch (new Random().nextInt(4)) {
             case 0:
@@ -32,24 +33,33 @@ public class Monster extends Enemy  {
         }
         return 's';
     }
-    public char moveTowardsPlayer(Position playerPosition, Tile[][] Surroundings){
+    public char moveTowardsPlayer(Position playerPosition, Vector<Unit> units) {
+        int countCols = 0;
+        for (Unit unit : units) {
+            if (unit.getPosition().getY() == 0) {
+                countCols++;
+            } else {
+            break;
+            }
+        }
         int x = this.getPosition().getX();
         int y = this.getPosition().getY();
         int playerX = playerPosition.getX();
         int playerY = playerPosition.getY();
-        if (playerX > x && Surroundings[y][x-1].getChar() == '.'){
+
+        if (playerX > x && units.get(y * countCols + x + 1).getChar() == '.' || units.get(y * countCols + x + 1).getChar() == '@'){
             return 'd';
         }
-        if (playerX < x && Surroundings[y][x-1].getChar() == '.'){
+        if (playerX < x && units.get(y * countCols + x - 1).getChar() == '.' || units.get(y * countCols + x - 1).getChar() == '@'){
             return 'a';
         }
-        if (playerY > y && Surroundings[y+1][x].getChar() == '.'){
+        if (playerY > y && units.get((y+1) * countCols + x).getChar() == '.' || units.get((y+1) * countCols + x).getChar() == '@'){
             return 's';
         }
-        if (playerY < y && Surroundings[y-1][x].getChar() == '.'){
+        if (playerY < y && units.get((y-1) * countCols + x).getChar() == '.' || units.get((y-1) * countCols + x).getChar() == '@'){
             return 'w';
         }
-        return findBestWay(playerPosition, Surroundings);
+        return 'o';   //findBestWay(playerPosition, Surroundings);
     }
 
     private char findBestWay(Position playerPosition, Tile[][] Surroundings){

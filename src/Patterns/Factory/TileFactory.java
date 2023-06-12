@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class TileFactory {
     private final List<Supplier<Player>> playersList;
     private final Map<Character, Supplier<Enemy>> enemiesMap;
-    private final Player selected;
+    private Player selected;
 
     public TileFactory(int playerChoice){
         this.playersList = initPlayers();
@@ -30,7 +30,7 @@ public class TileFactory {
                 () -> new Monster('s', "Lannister Solider", 80, 8, 3, 25, 15),
                 () -> new Monster('k', "Lannister Knight", 200, 14, 8, 50,   4),
                 () -> new Monster('q', "Queen's Guard", 400, 20, 15, 100,  5),
-//                () -> new Boss('M', "The Mountain", 1000, 60, 25, 500, 6, 5),
+//                () -> new Boss('M', "The Mountain", 1000, 60, 25, 500, 6, 5), // TODO: Implement bosses
 //                () -> new Boss('C', "Queen Cersei", 100, 10, 10,1000, 1, 8),
                 () -> new Trap('B', "Bonus Trap", 1, 1, 1, 250,  1, 2),
                 () -> new Trap('Q', "Queen's Trap", 250, 50, 10, 100, 3, 10),
@@ -81,31 +81,36 @@ public class TileFactory {
         return enemiesMap;
     }
 
-    public Unit produceEnemy(char tile, Position position/*, MessageCallback messageCallback, EnemyDeathCallback enemyDeathCallback*/) {
+    public Enemy produceEnemy(char tile, Position position/*, MessageCallback messageCallback, EnemyDeathCallback enemyDeathCallback*/) {
         Enemy e = enemiesMap.get(tile).get();
         e.setPosition(position);
-//        e.setUnit(e);
         return e;
     }
 
     public Player producePlayer(int idx, Position position/*, MessageCallback messageCallback, PlayerDeathCallback playerDeathCallback*/){
 		Player p = playersList.get(idx).get();
         p.setPosition(position);
-//        p.setUnit(p);
         return p;
     }
 
     public Unit produceEmpty(Position position){
         Unit e = new Empty('.', "An empty tile");
         e.setPosition(position);
-//        e.setUnit(e);
         return e;
     }
 
     public Unit produceWall(Position position){
         Wall w = new Wall('#', "A wall");
         w.setPosition(position);
-//        w.setUnit(w);
         return w;
+    }
+
+    public Unit produceTile(char c, Position position) {
+        switch (c) {
+            case '#' -> {return produceWall(position);}
+            case '.' -> {return produceEmpty(position);}
+            case '@' -> {return producePlayer(0, position);}
+            default -> {return produceEnemy(c, position);}
+        }
     }
 }
