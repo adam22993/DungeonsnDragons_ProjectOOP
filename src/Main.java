@@ -1,6 +1,8 @@
 import Controller.ControlLayer;
 import GameBoard.GameBoard;
 import UI.GUI_Elements.Window;
+import Units.ADDITIONAL.Position;
+import Units.Abstracts.Enemy;
 
 public class Main {
     public static void main(String[] args) {

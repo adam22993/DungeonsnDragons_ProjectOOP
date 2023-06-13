@@ -4,6 +4,8 @@ import Patterns.Factory.TileFactory;
 import Units.ADDITIONAL.Position;
 import Units.Abstracts.*;
 
+import javax.swing.*;
+import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -20,10 +22,9 @@ public class GameBoard {
     private Vector<Unit> tilesOfBoard;
     private TileFactory tileFactory;
     private int current_level = 0;
-
     private int countLines;
     private int countColumns;
-    private Unit[][] board;
+    private Unit[][] board; // remove later
     private String playerName;
     private Vector<Integer> playerChoice = new Vector<Integer>();
     private Vector<Player> players = new Vector<Player>(); // implement more than one player
@@ -118,19 +119,19 @@ public class GameBoard {
 //        return tiles;
 //    }
 
-    public void printBoard() {
-        /**
-         * This function prints the board to the console. It iterates through the 2D array of chars representing
-         * the board, and prints each char to the console.
-         */
-        //TODO: change to fit tiles and not print the board
-        for (Tile[] row : board) {
-            for (Tile c : row) {
-                System.out.print(c);
-            }
-            System.out.println();
-        }
-    }
+//    public void printBoard() {
+//        /**
+//         * This function prints the board to the console. It iterates through the 2D array of chars representing
+//         * the board, and prints each char to the console.
+//         */
+//        //TODO: change to fit tiles and not print the board
+//        for (Tile[] row : board) {
+//            for (Tile c : row) {
+//                System.out.print(c);
+//            }
+//            System.out.println();
+//        }
+//    }
 
     public String getBoardString() {
         /**
@@ -240,13 +241,13 @@ public class GameBoard {
 //
 //
     public void vectorGameTick(char playerInput){
-        System.out.println("Game tick " + gameTickCounter++ + " started!");
+        System.out.println("Game tick " + gameTickCounter++ + " started!");  // debugging use
         char currUnitAction;
         Position posBeforeAction;
         for (Unit unit : turnSequence) {
             if (unit.getChar() == '@') {
                 currUnitAction = playerInput;
-                System.out.println("Player health: " + unit.getHealthAmount());
+                System.out.println("Player health: " + unit.getHealthAmount()); // debugging use
             } else {
                 currUnitAction = unit.onGameTick(turnSequence.get(0).getPosition(), getBoard());
             }
@@ -283,14 +284,10 @@ public class GameBoard {
                 default:
                     System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is doing nothing" + " because the input was " + currUnitAction);
             }
-            try{
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             tilesOfBoard.sort((s,t) -> s.getPosition().compareTo(t.getPosition()));
             setDeadUnitsFromTurnSequenceAsEmpty();
         }
+            System.out.println(getBoardString());
 //        setDeadUnitsFromTurnSequenceAsEmpty();
     }
 
@@ -304,30 +301,35 @@ public class GameBoard {
 
 
 
-    private void loadLevel(int level) {
+    private void loadLevel(int level) {  // the correct version that loads a vector of units to the tilesOfBoard vector
         String levelFile = "/src/GameBoard/Levels/level" + (current_level) + ".txt";
         //String levelFile = "\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt"; // for some reason this works on windows only, mac needs the /src/ instead of \\src\\ and windows still works with /src/.
         countLines = 0;
         countColumns = 0;
         String currentDir = System.getProperty("user.dir");
-        System.out.println("Current working directory: " + currentDir + levelFile);
+        System.out.println("Current working directory: " + currentDir + levelFile); // debugging use
         try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
+            String line = br.readLine();
             // TODO: Look For the longets line in the file and set the countColumns to that number
-            while (br.readLine() != null) {
+            while (line != null) {
+                if (countLines == 0) {
+                    countColumns = line.length();
+                }
                 countLines++;
+                line = br.readLine();
             }
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
-            String line;
-            if ((line = br.readLine()) != null) {
-                countColumns = line.length();
-            }
-        } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
-        }
+//        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
+//            String line;
+//            if ((line = br.readLine()) != null) {
+//                countColumns = line.length();
+//            }
+//        } catch (IOException e) {
+//            System.err.format("IOException: %s%n", e);
+//        }
         tileFactory = new TileFactory(1);
         tilesOfBoard = new Vector<Unit>();
         BufferedReader br;
@@ -355,7 +357,7 @@ public class GameBoard {
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
         }
-
+        System.out.println("The level is " + countColumns + " columns wide and " + countLines + " lines long, level " + current_level);
     }
 
     public Vector<Unit> getBoard() {
@@ -365,7 +367,7 @@ public class GameBoard {
         return tilesOfBoard;
     }
 
-    public void incrementLevel() {
+    public void incrementLevel() { // loads the next level to the vector on the board, creates turnSequence and sets the current level to ++1
         loadLevel(++current_level);
     }
 

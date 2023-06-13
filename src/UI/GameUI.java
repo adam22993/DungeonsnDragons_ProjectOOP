@@ -1,12 +1,11 @@
 
 package UI;
 
-import Units.Abstracts.Player;
-
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -16,7 +15,7 @@ public class GameUI {
 
     private JFrame window;
     private Container con;
-    private JPanel startButtonPanel, mainTextPanel, characterSelectOptions, playerPanel, boardPanel, playerChoicesPanel, WSImagesPanel;
+    private JPanel startButtonPanel, mainTextPanel, characterSelectOptions, headerLabelCS, boardPanel, playerControlPanel, WSImagesPanel;
     private JLabel backgroundLabel, titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName, weaponLabelNumber, armorLabel, armorLabelName, armorLabelNumber, playerLabel, playerLabelName, playerLabelNumber;
     private JTextArea boardTextArea;
     private JLayeredPane gameScreenPanel, CCSBGPanel;
@@ -26,24 +25,29 @@ public class GameUI {
     private final Font boardFont = new Font(Font.MONOSPACED, Font.PLAIN, 18);
     private final String currentDir = System.getProperty("user.dir");
     private Clip clip;
-    private Vector<Clip> clips = new Vector<Clip>();
+    private final Vector<Clip> clips = new Vector<Clip>();
     private JPanel MusicPanel;
     boolean musicPlaying = false;
 
-    public GameUI() {
+    public GameUI(JFrame controlLayerWindow) {
         loadMusicFolderToVector(currentDir + "/src/UI/Assets/Audio/");
+        window = controlLayerWindow;
+        System.out.println("GameUI constructor hash code " + window.hashCode());
+        System.out.println();
     }
 
-    public void openWelcomeScreen(JPanel startButtonsPanel, JFrame currWindow) {
-        window = currWindow;
+    public void openWelcomeScreen(JPanel startButtonsPanel) {
+//        window = controlLayerWindow;
 //        con = window.getContentPane();
+
+        System.out.println("open welcome screen hash code " + window.hashCode());
+        System.out.println("startButtonsPanel hash code " + startButtonsPanel.hashCode());
         clip = clips.get(0);  // mac for some reason loads differently than windows, sequence is different
         if (clip != null) {
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             volumeControl.setValue(-30.0f);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
-        window.setVisible(true);
         WSImagesPanel = new JPanel();
         WSImagesPanel.setLayout(null);
         WSImagesPanel.setBounds(0, 0, window.getWidth(), window.getHeight());
@@ -68,6 +72,7 @@ public class GameUI {
         window.add(WSImagesPanel);
         window.revalidate();
         window.repaint();
+        System.out.println("open welcome screen finished hash code " + window.hashCode());
 
 //
 //
@@ -77,6 +82,8 @@ public class GameUI {
     }
 
     public void characterCreationScreen(JPanel characterSelectPanel){
+        System.out.println("Opening Character Creation Screen " + window.hashCode());
+        System.out.println("characterSelectPanel hash code " + characterSelectPanel.hashCode());
         startButtonPanel.setVisible(false);
         WSImagesPanel.setVisible(false);
         CCSBGPanel = new JLayeredPane();
@@ -90,7 +97,7 @@ public class GameUI {
         backgroundLabel = new JLabel(backgroundImage);
         backgroundLabel.setBounds(0, 0, window.getWidth(), window.getHeight());
 
-        CCSBGPanel.add(backgroundLabel);
+        CCSBGPanel.add(backgroundLabel, 0);
         window.add(CCSBGPanel);
         characterSelectOptions = characterSelectPanel;
         characterSelectOptions.setOpaque(false);
@@ -125,41 +132,45 @@ public class GameUI {
 
         characterSelectOptions = characterSelectPanel;
         window.add(characterSelectOptions);
-        playerPanel = new JPanel();
-        playerPanel.setBounds(450, 35, 300, 50);
+        headerLabelCS = new JPanel();
+        headerLabelCS.setBounds(450, 35, 300, 50);
         playerLabel = new JLabel("Choose your character:");
         playerLabel.setHorizontalAlignment(JLabel.CENTER);
         playerLabel.setForeground(Color.white);
-        playerPanel.setBackground(Color.black);
-        playerPanel.setLayout(new GridLayout(1, 4));
+        headerLabelCS.setBackground(Color.black);
+        headerLabelCS.setLayout(new GridLayout(1, 4));
         playerLabel.setFont(boardFont);
-        playerPanel.add(playerLabel);
-        window.add(playerPanel);
+        headerLabelCS.add(playerLabel);
+        window.add(headerLabelCS);
         window.add(CCSBGPanel);
         window.revalidate();
         window.repaint();
+        System.out.println("character creation screen finished hash code " + window.hashCode());
+        System.out.println();
     }
 
-    public void createGameScreen(String board, JFrame window) {
+    public void createGameScreen(String board, JFrame windowGiven, JPanel playerControlsPanel) {
+        System.out.println("Opening Game Screen " + window.hashCode());
+        System.out.println("playerControlsPanel hash code " + playerControlsPanel.hashCode());
+
         clip.stop();
         clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+//        clip.loop(Clip.LOOP_CONTINUOUSLY);
         FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
 //        playRandomClip();
-        mainTextPanel.setVisible(false);
-        characterSelectOptions.setVisible(false);
         CCSBGPanel.setVisible(false);
-        // create player panel
-//        playerPanel = playerControlsPanel;///////////////////////
-//        gameScreenPanel = new JLayeredPane();
-//        gameScreenPanel.setLayout(null);
-//        gameScreenPanel.setBounds(50, 75, 700, 500);
-//        gameScreenPanel.setBackground(Color.pink);
-//        gameScreenPanel.setForeground(Color.white);
-//        gameScreenPanel.setOpaque(true);
-//        gameScreenPanel.setVisible(true);
-//        window.add(playerPanel); ////////////////////////////
+        characterSelectOptions.setVisible(false);
+        headerLabelCS.setVisible(false);
+        mainTextPanel.setVisible(false);
+        playerControlPanel = playerControlsPanel; ///////////////////////
+        gameScreenPanel = new JLayeredPane();
+        gameScreenPanel.setLayout(null);
+        gameScreenPanel.setBounds(50, 75, 700, 500);
+        gameScreenPanel.setBackground(Color.pink);
+        gameScreenPanel.setForeground(Color.white);
+        gameScreenPanel.setOpaque(true);
+        gameScreenPanel.setVisible(true);
 
         boardTextArea = new JTextArea();
         boardTextArea = new JTextArea(board/*"\t\t\t\t\t###\n\n\n\n\n\n\n\n\n#\t\t\t\t\tthis is a test\n\n\n\n\n\n\n\n\n\t\t\t\t\t###"*/);
@@ -171,12 +182,16 @@ public class GameUI {
         boardTextArea.setLineWrap(true);
         boardTextArea.setWrapStyleWord(true);
         boardTextArea.setEditable(false);
-        window.add(boardTextArea);
 
+        window.add(gameScreenPanel);
+        gameScreenPanel.add(boardTextArea, 1);
+        gameScreenPanel.add(playerControlPanel, 2);
+//        window.setVisible(false);
 //        window.add(con);
         window.revalidate();
         window.repaint();
-
+        System.out.println("game screen finished hash code " + window.hashCode());
+        System.out.println();
     }
 
     public void updateBoard(String board) {
