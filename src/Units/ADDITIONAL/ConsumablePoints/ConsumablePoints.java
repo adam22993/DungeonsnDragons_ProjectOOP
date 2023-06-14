@@ -10,12 +10,13 @@ public abstract class ConsumablePoints {
      * setMax(int) - sets max value
      * add(int) - adds to current value
      * subtract(int) - subtracts from current value
-     * set(int) - sets current value
+     * setCurrentInBounds(int) - sets current value
      */
     int current;
     int max;
     public ConsumablePoints(int max) {
         this.max = max;
+        this.current = max;
         // children must set current - HP needs to be full and EXP needs to be empty for example.
     }
     public int getCurrent() {
@@ -32,9 +33,6 @@ public abstract class ConsumablePoints {
     }
     public void add(int amount) {
         current += amount;
-        if (current > max) {
-            current = max;
-        }
     }
     public void subtract(int amount) {
         current -= amount;
@@ -42,7 +40,7 @@ public abstract class ConsumablePoints {
             current = 0;
         }
     }
-    public void set(int amount) {
+    public void setCurrentInBounds(int amount) {
         current = amount;
         if (current > max) {
             current = max;

@@ -22,6 +22,9 @@ public class Wall extends NonIntractable {
         visitor.visit(this);
     }
 
+
+
+    // Each unit that interacts with a wall will lose its turn.
     @Override
     public void visit(Enemy enemy) {
         return;
@@ -41,4 +44,5 @@ public class Wall extends NonIntractable {
     public void visit(Wall wall) {
         return;
     }
+
 }

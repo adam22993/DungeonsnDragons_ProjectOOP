@@ -2,7 +2,6 @@ package Units.Abstracts;
 
 import Patterns.Visitor.*;
 import Units.ADDITIONAL.Empty;
-import Units.ADDITIONAL.Position;
 import Units.ADDITIONAL.Wall;
 
 public abstract class Enemy extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
@@ -21,9 +20,9 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
     public String attack(Unit player){
         int damage = Random.nextInt(0, this.attackPoints);
         damage = Math.max(damage - player.defensePoints, 0);
-        player.setHealthAmount(player.getHealthAmount() - damage);
-        System.out.println(this.name + " attacked " + player.name + " for " + damage + " damage!, " + player.name + " health is now " + player.healthAmount + "!" );
-        if (player.healthAmount == 0){
+        player.setHealthAmount(player.getHealthCurrent() - damage);
+        System.out.println(this.name + " attacked " + player.name + " for " + damage + " damage!, " + player.name + " health is now " + player.getHealthCurrent() + "!" );
+        if (player.getHealthCurrent() == 0){
             unitMessageController.deathMessage(player);
             this.swapPosition(player);
         }

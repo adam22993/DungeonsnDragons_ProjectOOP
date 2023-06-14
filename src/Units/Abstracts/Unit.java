@@ -3,6 +3,7 @@ package Units.Abstracts;
 import Controller.Messages.UnitMessageController;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
+import Units.ADDITIONAL.ConsumablePoints.HP;
 import Units.ADDITIONAL.Empty;
 import Units.ADDITIONAL.Position;
 import Units.ADDITIONAL.Wall;
@@ -12,20 +13,18 @@ import java.util.Vector;
 
 public abstract class Unit extends Tile implements UnitInteractionVisited, UnitInteractionVisitor {
     protected String name;
-    protected int healthPool; //TODO: implement ConsumablePoints
-    protected int healthAmount;
+    protected HP health;
     protected int attackPoints;
     protected int defensePoints;
     Random Random = new Random();
     UnitMessageController unitMessageController = new UnitMessageController();
 
-    public Unit(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, char Char) {
+    public Unit(String name, int healthPool, Integer attackPoints, Integer defensePoints, char Char) {
         super(Char);
         this.name = name;
-        this.healthPool = Health_pool;
-        this.healthAmount = Health_pool; // Start with full health
-        this.attackPoints = Attack_points;
-        this.defensePoints = Defense_points;
+        this.health = new HP(healthPool);
+        this.attackPoints = attackPoints;
+        this.defensePoints = defensePoints;
         this.setChar(Char);
 
     }
@@ -38,10 +37,10 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
         return name;
     }
     public int getHealthPool() {
-        return healthPool;
+        return health.getMax();
     }
-    public int getHealthAmount() {
-        return healthAmount;
+    public int getHealthCurrent() {
+        return health.getCurrent();
     }
     public int getAttackPoints() {
         return attackPoints;
@@ -50,10 +49,10 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
         return defensePoints;
     }
     protected void setHealthAmount(int healthAmount) {
-        this.healthAmount = Math.max(healthAmount, 0);
+        this.health.setCurrentInBounds(Math.max(healthAmount, 0));
     }
     protected void setHealthPool(int healthPool) {
-        this.healthPool = healthPool;
+        this.health.setMax(healthPool);
     }
     protected void setAttackPoints(int attackPoints) {
         this.attackPoints = attackPoints;
@@ -61,10 +60,6 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     protected void setDefensePoints(int defensePoints) {
         this.defensePoints = defensePoints;
     }
-    protected void setName(String name) {
-        this.name = name;
-    }
-
     public String toString(){
         return String.format("%s", this.getChar());
     }

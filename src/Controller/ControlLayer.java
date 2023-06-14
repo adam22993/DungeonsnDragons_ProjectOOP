@@ -258,16 +258,17 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         playerChoicesPanel.addKeyListener(this);
         playerChoicesPanel.requestFocus();
 
+
         // create player control buttons
         qButton = new JButton("Q");
         qButton.setFont(normalFont);
         qButton.setBackground(Color.black);
         qButton.setForeground(Color.white);
         qButton.addActionListener(this);
-        qButton.addActionListener(e -> {
-            playerGamePlayInput = true;
-            playerGamePlayInputVal = 'q';
-        });
+//        qButton.addActionListener(e -> {
+//            playerGamePlayInput = true;
+//            playerGamePlayInputVal = 'q';
+//        });
         qButton.setFocusable(false);
 
         wButton = new JButton("W");
@@ -275,10 +276,10 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         wButton.setBackground(Color.black);
         wButton.setForeground(Color.white);
         wButton.addActionListener(this);
-        wButton.addActionListener(e -> {
-            playerGamePlayInput = true;
-            playerGamePlayInputVal = 'w';
-        });
+//        wButton.addActionListener(e -> {
+//            playerGamePlayInput = true;
+//            playerGamePlayInputVal = 'w';
+//        });
         wButton.setFocusable(false);
 
         eButton = new JButton("E");
@@ -286,21 +287,21 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         eButton.setBackground(Color.black);
         eButton.setForeground(Color.white);
         eButton.addActionListener(this);
-        eButton.addActionListener(e -> {
-            playerGamePlayInput = true;
-            playerGamePlayInputVal = 'e';
-        });
-
+//        eButton.addActionListener(e -> {
+//            playerGamePlayInput = true;
+//            playerGamePlayInputVal = 'e';
+//        });
         eButton.setFocusable(false);
+
         aButton = new JButton("A");
         aButton.setFont(normalFont);
         aButton.setBackground(Color.black);
         aButton.setForeground(Color.white);
         aButton.addActionListener(this);
-        aButton.addActionListener(e -> {
-            playerGamePlayInput = true;
-            playerGamePlayInputVal = 'a';
-        });
+//        aButton.addActionListener(e -> {
+//            playerGamePlayInput = true;
+//            playerGamePlayInputVal = 'a';
+//        });
 
         aButton.setFocusable(false);
         sButton = new JButton("S");
@@ -308,10 +309,10 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         sButton.setBackground(Color.black);
         sButton.setForeground(Color.white);
         sButton.addActionListener(this);
-        sButton.addActionListener(e -> {
-            playerGamePlayInput = true;
-            playerGamePlayInputVal = 's';
-        });
+//        sButton.addActionListener(e -> {
+//            playerGamePlayInput = true;
+//            playerGamePlayInputVal = 's';
+//        });
 
         sButton.setFocusable(false);
         dButton = new JButton("D");
@@ -319,10 +320,10 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         dButton.setBackground(Color.black);
         dButton.setForeground(Color.white);
         dButton.addActionListener(this);
-        dButton.addActionListener(e -> {
-            playerGamePlayInput = true;
-            playerGamePlayInputVal = 'd';
-        });
+//        dButton.addActionListener(e -> {
+//            playerGamePlayInput = true;
+//            playerGamePlayInputVal = 'd';
+//        });
 
         dButton.setFocusable(false);
 

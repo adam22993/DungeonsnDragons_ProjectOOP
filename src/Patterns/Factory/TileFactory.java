@@ -29,7 +29,7 @@ public class TileFactory {
 
     private Map<Character, Supplier<Enemy>> initEnemies() {
         List<Supplier<Enemy>> enemies = Arrays.asList(
-                () -> new Monster('s', "Lannister Solider", 80, 8, 3, 25, 15, UMC),
+                () -> new Monster('s', "Lannister Solider", 80, 8, 3, 25, 1, UMC),
                 () -> new Monster('k', "Lannister Knight", 200, 14, 8, 50,   4, UMC),
                 () -> new Monster('q', "Queen's Guard", 400, 20, 15, 100,  5, UMC),
 //                () -> new Boss('M', "The Mountain", 1000, 60, 25, 500, 6, 5, UMC), // TODO: Implement bosses

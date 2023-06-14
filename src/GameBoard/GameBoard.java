@@ -5,8 +5,6 @@ import Patterns.Factory.TileFactory;
 import Units.ADDITIONAL.Position;
 import Units.Abstracts.*;
 
-import javax.swing.*;
-import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -250,7 +248,7 @@ public class GameBoard {
         for (Unit unit : turnSequence) {
             if (unit.getChar() == '@') {
                 currUnitAction = playerInput;
-                System.out.println("Player health: " + unit.getHealthAmount()); // debugging use
+                System.out.println("Player health: " + unit.getHealthCurrent()); // debugging use
             } else {
                 currUnitAction = unit.onGameTick(turnSequence.get(0).getPosition(), getBoard());
             }
@@ -377,25 +375,25 @@ public class GameBoard {
     private Unit getTileByPosition(Position position) {
         return board[position.getY()][position.getX()];
     }
-    private void updateBoard(Position posAfterAction, Position posBeforeAction) {
-        if (posAfterAction.getX() != posBeforeAction.getX() || posAfterAction.getY() != posBeforeAction.getY()) {
-            Unit temp = getTileByPosition(posAfterAction);
-            board[posAfterAction.getY()][posAfterAction.getX()] = getTileByPosition(posBeforeAction);
-            board[posBeforeAction.getY()][posBeforeAction.getX()] = temp;
-        }
-    }
+//    private void updateBoard(Position posAfterAction, Position posBeforeAction) {
+//        if (posAfterAction.getX() != posBeforeAction.getX() || posAfterAction.getY() != posBeforeAction.getY()) {
+//            Unit temp = getTileByPosition(posAfterAction);
+//            board[posAfterAction.getY()][posAfterAction.getX()] = getTileByPosition(posBeforeAction);
+//            board[posBeforeAction.getY()][posBeforeAction.getX()] = temp;
+//        }
+//    }
 
-    private void checkForDeathsInTurnSequence() {
-        for (Unit unit : this.turnSequence)
-            if (unit.getHealthAmount() <= 0) {
-                board[unit.getPosition().getY()][unit.getPosition().getX()] = tileFactory.produceEmpty(unit.getPosition()); //TODO: change to tilesOfBoard
-
-            }
-    }
+//    private void checkForDeathsInTurnSequence() {
+//        for (Unit unit : this.turnSequence)
+//            if (unit.getHealthAmount() <= 0) {
+//                board[unit.getPosition().getY()][unit.getPosition().getX()] = tileFactory.produceEmpty(unit.getPosition()); //TODO: change to tilesOfBoard
+//
+//            }
+//    }
 
     private void setDeadUnitsFromTurnSequenceAsEmpty() {
-        for (int i = 0; i < turnSequence.size() - 1; i++) {
-            if (turnSequence.get(i).getHealthAmount() <= 0) {
+        for (int i = 0; i < turnSequence.size(); i++) {
+            if (turnSequence.get(i).getHealthCurrent() <= 0) {
                 Position pos = turnSequence.get(i).getPosition();
                 int x = pos.getX();
                 int y = pos.getY();

@@ -16,7 +16,8 @@ In the project, we will attempt to implement the following OOP principles:
 - **Association** - The units will be associated with each other using interactions and design patterns.
 - **Delegation** - The interactions will be delegated to the units they interact with.
 - **Dependency** - The units will be dependent on the map, and the map will be dependent on the units.
-- **Coupling** - The units will be coupled to the map, so they can interact with other units and tiles.
+- **Coupling** - We will attempt to create a low coupling between the units and the map.
+- **Cohesion** - We will attempt to create a high cohesion between the units and the map. Cohesion is the degree to which the elements inside a module belong together.
 
 We are also implementing the MVC design pattern to the project. A control layer is added to control the inputs and
 the flow of information with in the game, passing the information from the player to the model and the view.

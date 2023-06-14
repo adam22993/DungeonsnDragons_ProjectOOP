@@ -4,8 +4,6 @@ package UI;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -165,16 +163,16 @@ public class GameUI {
         mainTextPanel.setVisible(false);
 //        playerControlPanel = playerControlsPanel; ///////////////////////
         gameScreenPanel = new JLayeredPane();
-        gameScreenPanel.setLayout(null);
-        gameScreenPanel.setBounds(50, 75, 700, 500);
-        gameScreenPanel.setBackground(Color.pink);
+        gameScreenPanel.setLayout(new BorderLayout());
+        gameScreenPanel.setBounds(0, 0, 750, window.getHeight());
+
+        gameScreenPanel.setBackground(Color.black);
         gameScreenPanel.setForeground(Color.white);
         gameScreenPanel.setOpaque(true);
         gameScreenPanel.setVisible(true);
 
         boardTextArea = new JTextArea();
         boardTextArea = new JTextArea(board);
-        boardTextArea.setBounds(50, 0, 600, 600);
         boardTextArea.setFont(boardFont);
         boardTextArea.setForeground(Color.white);
         boardTextArea.setBackground(Color.black);
@@ -183,8 +181,9 @@ public class GameUI {
         boardTextArea.setWrapStyleWord(true);
         boardTextArea.setEditable(false);
 
+
+        gameScreenPanel.add(boardTextArea, BorderLayout.CENTER);
         window.add(gameScreenPanel);
-        gameScreenPanel.add(boardTextArea, 1);
 //        gameScreenPanel.add(playerControlPanel, 2);
 //        window.setVisible(false);
 //        window.add(con);
