@@ -155,7 +155,7 @@ public class GameUI {
 
         clip.stop();
         clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
-//        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
         FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
 //        playRandomClip();
@@ -163,7 +163,7 @@ public class GameUI {
         characterSelectOptions.setVisible(false);
         headerLabelCS.setVisible(false);
         mainTextPanel.setVisible(false);
-        playerControlPanel = playerControlsPanel; ///////////////////////
+//        playerControlPanel = playerControlsPanel; ///////////////////////
         gameScreenPanel = new JLayeredPane();
         gameScreenPanel.setLayout(null);
         gameScreenPanel.setBounds(50, 75, 700, 500);
@@ -173,8 +173,8 @@ public class GameUI {
         gameScreenPanel.setVisible(true);
 
         boardTextArea = new JTextArea();
-        boardTextArea = new JTextArea(board/*"\t\t\t\t\t###\n\n\n\n\n\n\n\n\n#\t\t\t\t\tthis is a test\n\n\n\n\n\n\n\n\n\t\t\t\t\t###"*/);
-        boardTextArea.setBounds(50, 100, 600, 600);
+        boardTextArea = new JTextArea(board);
+        boardTextArea.setBounds(50, 0, 600, 600);
         boardTextArea.setFont(boardFont);
         boardTextArea.setForeground(Color.white);
         boardTextArea.setBackground(Color.black);
@@ -185,7 +185,47 @@ public class GameUI {
 
         window.add(gameScreenPanel);
         gameScreenPanel.add(boardTextArea, 1);
-        gameScreenPanel.add(playerControlPanel, 2);
+//        gameScreenPanel.add(playerControlPanel, 2);
+//        window.setVisible(false);
+//        window.add(con);
+        window.revalidate();
+        window.repaint();
+        System.out.println("game screen finished hash code " + window.hashCode());
+        System.out.println();
+    }
+
+    public void debugStart(String board){
+        System.out.println("Debug opening Game Screen " + window.hashCode());
+
+        clip.stop();
+        clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
+        WSImagesPanel.setVisible(false);
+        startButtonPanel.setVisible(false);
+        gameScreenPanel = new JLayeredPane();
+        gameScreenPanel.setLayout(null);
+        gameScreenPanel.setBounds(50, 75, 700, 500);
+        gameScreenPanel.setBackground(Color.pink);
+        gameScreenPanel.setForeground(Color.white);
+        gameScreenPanel.setOpaque(true);
+        gameScreenPanel.setVisible(true);
+
+        boardTextArea = new JTextArea();
+        boardTextArea = new JTextArea(board);
+        boardTextArea.setBounds(50, 0, 600, 600);
+        boardTextArea.setFont(boardFont);
+        boardTextArea.setForeground(Color.white);
+        boardTextArea.setBackground(Color.black);
+        boardTextArea.setVisible(true);
+        boardTextArea.setLineWrap(true);
+        boardTextArea.setWrapStyleWord(true);
+        boardTextArea.setEditable(false);
+
+        window.add(gameScreenPanel);
+        gameScreenPanel.add(boardTextArea, 1);
+//        gameScreenPanel.add(playerControlPanel, 2);
 //        window.setVisible(false);
 //        window.add(con);
         window.revalidate();

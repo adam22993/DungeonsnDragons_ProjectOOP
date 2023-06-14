@@ -6,7 +6,8 @@ import Units.Abstracts.Unit;
 public class UnitMessageController implements MessagesController {
     @Override
     public String update(String message) {
-        return null;
+        System.out.println(message);
+        return message;
     }
 
     @Override

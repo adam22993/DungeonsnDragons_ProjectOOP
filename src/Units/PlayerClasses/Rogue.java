@@ -1,16 +1,19 @@
 package Units.PlayerClasses;
 
+import Controller.Messages.UnitMessageController;
 import Units.ADDITIONAL.Position;
 import Units.Abstracts.Player;
 
 public class Rogue extends Player {
     protected int currEnergy, energyMax, castCost;
+    UnitMessageController unitMessageController;
 
-    public Rogue(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int castCost, char Char, Position position) {
-        super(name, Health_pool, Attack_points, Defense_points, Char, position);
+    public Rogue(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int castCost, UnitMessageController UMC) {
+        super(name, Health_pool, Attack_points, Defense_points, UMC);
         this.currEnergy = 100;
         this.energyMax = 100;
         this.castCost = castCost;
+        this.unitMessageController = UMC;
     }
 
 

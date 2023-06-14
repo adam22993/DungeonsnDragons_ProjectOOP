@@ -39,6 +39,8 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 //        window.add(welcomeScreenControls());
 //        window.revalidate();
         gameUI.openWelcomeScreen(welcomeScreenControls());
+
+
         System.out.println("end of controlLayer constractor " + window.hashCode());
         System.out.println();
     }
@@ -89,23 +91,13 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         System.out.println("start of welcomeScreenControls startButtonPanel code " + startButtonPanel.hashCode());
         startButtonPanel.setBounds(500, 560, 200, 100);
         startButtonPanel.setBackground(Color.black);
+        startButtonPanel.setLayout(new BorderLayout());
         JButton startButton = new JButton("START");
         startButton.setFont(normalFont);
         startButton.setBackground(Color.white);
         startButton.setFocusable(false);
         startButton.addActionListener(e -> {
             gameUI.characterCreationScreen(characterChoice());
-        });
-        JButton debugAccessGameButton = new JButton("DEBUG"); // TODO: Implement debug button
-        debugAccessGameButton.setFont(normalFont);
-        debugAccessGameButton.setBackground(Color.black);
-        debugAccessGameButton.setFocusable(false);
-        debugAccessGameButton.addActionListener(e -> {
-            window.add(playerControls());
-            gameBoard.setPlayerChoice(0);
-            gameBoard.incrementLevel();
-            gameBoard.incrementCurrentLevelCounter(); // increment for next level
-            gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
         });
         JButton quitButton = new JButton("QUIT");
         quitButton.setFont(normalFont);
@@ -116,8 +108,9 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             System.exit(0);
         });
         quitButton.addKeyListener(this);
-        startButtonPanel.add(startButton);
-        startButtonPanel.add(quitButton);
+        startButtonPanel.add(startButton, BorderLayout.NORTH);
+        startButtonPanel.add(quitButton, BorderLayout.SOUTH);
+        startButtonPanel.add(createDebugStart(), BorderLayout.EAST);
         startButtonPanel.setBackground(new Color(0, 0, 0, 0));
         startButtonPanel.setOpaque(false);
         startButtonPanel.setVisible(true);
@@ -125,6 +118,21 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         System.out.println("end of welcomeScreenControls window code " + window.hashCode());
         System.out.println();
         return startButtonPanel;
+    }
+
+    private JButton createDebugStart(){
+        JButton debugAccessGameButton = new JButton("DEBUG"); // TODO: Implement debug button
+        debugAccessGameButton.setBounds(500, 560, 400, 100);
+        debugAccessGameButton.setFont(normalFont);
+        debugAccessGameButton.setBackground(Color.black);
+        debugAccessGameButton.setForeground(Color.white);
+        debugAccessGameButton.setFocusable(false);
+        debugAccessGameButton.setVisible(true);
+        debugAccessGameButton.addActionListener(e -> {
+            gameBoard.setPlayerChoice(0);
+            gameUI.debugStart(gameBoard.getBoardString());
+        });
+        return debugAccessGameButton;
     }
     public JPanel characterChoice(){
 
@@ -729,35 +737,35 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     public void mouseClicked(MouseEvent e) { // checks if mouse is clicked - after releasing press
 //        System.out.println("Mouse clicked" + counter);
 //        counter++;
-//        window.requestFocus();
+        window.requestFocus();
     }
 
     @Override
     public void mousePressed(MouseEvent e) { // checks if mouse is pressed - initial press
 //        System.out.println("Mouse pressed" + counter);
 //        counter++;
-//        window.requestFocus();
+        window.requestFocus();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) { // checks if mouse is released - after pressing is released
 //        System.out.println("Mouse released" + counter);
 //        counter++;
-//        window.requestFocus();
+        window.requestFocus();
     }
 
     @Override
     public void mouseEntered(MouseEvent e) { // checks if mouse is entered - when mouse enters the window - not labels or panels
 //        System.out.println("Mouse entered" + counter);
 //        counter++;
-//        window.requestFocus();
+        window.requestFocus();
     }
 
     @Override
     public void mouseExited(MouseEvent e) { // checks if mouse is exited - when mouse exits the window - not labels or panels
 //        System.out.println("Mouse exited" + counter);
 //        counter++;
-//        window.requestFocus();
+        window.requestFocus();
     }
 
     @Override
@@ -765,7 +773,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 //        if (counter % 25 == 0)
 //            System.out.println("Mouse dragged" + counter);
 //        counter++;
-//        window.requestFocus();
+        window.requestFocus();
     }
 
     @Override
@@ -773,7 +781,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 //        if (counter % 100 == 0)
 //            System.out.println("Mouse moved" + counter + " (x: " + e.getX() + ", y: " + e.getY() + ")");
 //        counter++;
-//        window.requestFocus();
+        window.requestFocus();
     }
 
     public boolean isKeyboardPressed() {

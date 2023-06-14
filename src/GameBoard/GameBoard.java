@@ -1,4 +1,5 @@
 package GameBoard;
+import Controller.Messages.UnitMessageController;
 import GameBoard.Levels.Level;
 import Patterns.Factory.TileFactory;
 import Units.ADDITIONAL.Position;
@@ -34,6 +35,8 @@ public class GameBoard {
     private int gameLoadingStage = 0; // 0 - Welcome Screen, 1 - Character Creating , 2 - Game Started
 
     private int gameTickCounter = 1;
+
+    public UnitMessageController unitMessageController;
 
 
     public GameBoard() {}

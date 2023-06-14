@@ -1,5 +1,6 @@
 package Units.EnemyTypes;
 
+import Controller.Messages.UnitMessageController;
 import Units.ADDITIONAL.Position;
 import Units.Abstracts.Enemy;
 import Units.Abstracts.Tile;
@@ -11,9 +12,11 @@ import java.util.Vector;
 
 public class Monster extends Enemy  {
     int experienceValue;
-    public Monster(char Char, String name, Integer healthPool, Integer attackPoints, Integer defensePoints,int experienceValue, int visionRange) {
-        super(Char, name, healthPool, attackPoints, defensePoints ,visionRange , experienceValue , new Position(0,0));
+    UnitMessageController unitMessageController;
+    public Monster(char Char, String name, Integer healthPool, Integer attackPoints, Integer defensePoints, int experienceValue, int visionRange, UnitMessageController UMC) {
+        super(Char, name, healthPool, attackPoints, defensePoints ,visionRange , experienceValue);
         this.experienceValue = experienceValue;
+        this.unitMessageController = UMC;
     }
 
     @Override

@@ -11,6 +11,10 @@ public class Tile {
         this.Char = Char;
         this.pos = position;
     }
+    public Tile(char Char){
+        this.Char = Char;
+        this.pos = new Position(0,0);
+    }
 
     public char getChar(){
         return this.Char;

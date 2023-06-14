@@ -8,8 +8,8 @@ import Units.ADDITIONAL.Wall;
 public abstract class Enemy extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     protected int experienceValue, visionRange;
 
-    public Enemy(char Char, String name, Integer Health_pool, Integer Attack_points, Integer Defense_points,int visionRange, int experienceValue, Position position) {
-        super(name, Health_pool, Attack_points, Defense_points, Char, position);
+    public Enemy(char Char, String name, Integer Health_pool, Integer Attack_points, Integer Defense_points,int visionRange, int experienceValue) {
+        super(name, Health_pool, Attack_points, Defense_points, Char);
         this.experienceValue = experienceValue;
         this.visionRange = visionRange;
     }

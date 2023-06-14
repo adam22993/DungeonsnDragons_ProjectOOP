@@ -19,8 +19,8 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     Random Random = new Random();
     UnitMessageController unitMessageController = new UnitMessageController();
 
-    public Unit(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, char Char, Position position) {
-        super(Char, position);
+    public Unit(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, char Char) {
+        super(Char);
         this.name = name;
         this.healthPool = Health_pool;
         this.healthAmount = Health_pool; // Start with full health

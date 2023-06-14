@@ -1,6 +1,7 @@
 package Units.Abstracts;
 
 
+import Controller.Messages.UnitMessageController;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.Empty;
@@ -15,12 +16,15 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     protected Integer currEXP;
     protected Integer level;
 
-    public Player(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, char Char, Position position) {
+    protected UnitMessageController unitMessageController;
+
+    public Player(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, UnitMessageController UMC) {
         // TODO Random choose stats constructor stub
-        super(name, Health_pool, Attack_points, Defense_points, Char, new Position(0,0));
+        super(name, Health_pool, Attack_points, Defense_points, '@');
         this.maxEXP = 50;
         this.currEXP = 0;
         this.level = 1;
+        this.unitMessageController = UMC;
     }
 
 
