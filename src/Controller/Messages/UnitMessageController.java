@@ -1,7 +1,7 @@
 package Controller.Messages;
 
 import GameBoard.MessagesController;
-import Units.Abstracts.Unit;
+import Units.AbstractsAndInterfaces.Unit;
 
 public class UnitMessageController implements MessagesController {
     @Override

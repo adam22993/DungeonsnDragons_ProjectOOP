@@ -12,8 +12,8 @@ public abstract class ConsumablePoints {
      * subtract(int) - subtracts from current value
      * setCurrentInBounds(int) - sets current value
      */
-    int current;
-    int max;
+    protected int current;
+    protected int max;
     public ConsumablePoints(int max) {
         this.max = max;
         this.current = max;

@@ -1,14 +1,11 @@
-package Units.Abstracts;
+package Units.AbstractsAndInterfaces;
 
 
 import Controller.Messages.UnitMessageController;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.ConsumablePoints.EXP;
-import Units.ADDITIONAL.Empty;
-import Units.ADDITIONAL.Position;
-import Units.ADDITIONAL.Wall;
-
+import Units.ADDITIONAL.*;
 import java.util.Vector;
 
 public abstract class Player extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
@@ -29,7 +26,7 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
 
     protected void levelUp() {
         this.experience.subtract(this.getMaxEXP());
-        this.increamentLevel();
+        this.incrementLevel();
         this.setMaxEXP(50 * this.getLevel());
         this.attackPoints += 5 * this.getLevel();
         this.defensePoints += 2 * this.getLevel();
@@ -37,22 +34,21 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
         this.health.setCurrentInBounds(getHealthPool());
     }
 
-    private void increamentLevel() {
+    private void incrementLevel() {
         this.level++;
     }
 
-    abstract protected void castSpecialAbility(); // TODO: implement special ability in subclasses - think of way to add more attacks
+    protected abstract void castAbility(Unit opponent); // TODO: implement special ability in subclasses - think of way to add more attacks
 
     protected void gainExperience(int experience) {
         this.setCurrEXP(experience);
     }
 
-    public char onGameTick(Unit playerPosition, Vector<Unit> units) {
-        return ' ';
-    }
+    abstract public char onGameTick(Unit playerPosition, Vector<Unit> units) ;
 
     protected String attack(Enemy enemy) {
-        int damage = Random.nextInt(0, this.attackPoints);
+//        Clip clip = soundController.getClip("attack");  // an idea for sound effects - will be implemented later
+        int damage = this.roleAD();
         damage = Math.max(damage - enemy.defensePoints, 0);
         enemy.setHealthAmount(enemy.getHealthCurrent() - damage);
         System.out.println(this.name + " attacked " + enemy.name + " for " + damage + " damage!, " + enemy.name + " health is now " + enemy.getHealthCurrent() + "!");
@@ -119,7 +115,6 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
 
     @Override
     public void visit(Wall wall) {
-        System.out.println("You can't walk through walls!");
         return;
     }
 

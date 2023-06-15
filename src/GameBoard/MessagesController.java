@@ -1,6 +1,6 @@
 package GameBoard;
 
-import Units.Abstracts.*;
+import Units.AbstractsAndInterfaces.*;
 
 public interface MessagesController { // suppose to be observer of some kind
     String update(String message);

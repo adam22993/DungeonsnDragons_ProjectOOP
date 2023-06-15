@@ -1,10 +1,14 @@
 package Units.PlayerClasses;
 
 import Controller.Messages.UnitMessageController;
-import Units.ADDITIONAL.Position;
-import Units.Abstracts.Player;
+import Units.AbstractsAndInterfaces.Enemy;
+import Units.AbstractsAndInterfaces.HeroicUnit;
+import Units.AbstractsAndInterfaces.Player;
+import Units.AbstractsAndInterfaces.Unit;
 
-public class Rogue extends Player {
+import java.util.Vector;
+
+public class Rogue extends Player implements HeroicUnit {
     protected int currEnergy, energyMax, castCost;
     UnitMessageController unitMessageController;
 
@@ -15,6 +19,11 @@ public class Rogue extends Player {
         this.castCost = castCost;
         this.unitMessageController = UMC;
     }
+    @Override
+    public char onGameTick(Unit playerPosition, Vector<Unit> units) {
+        // gain things rogues have... maybe... you know... like... energy and stuff.............
+        return 0;
+    }
 
 
     @Override
@@ -24,9 +33,26 @@ public class Rogue extends Player {
         this.currEnergy = this.energyMax;
     }
     @Override
-    protected void castSpecialAbility() {
+    public void castAbility(Unit opponent) {
 
     }
+
+
+    @Override
+    public void acceptSA(Unit visitor, Vector<Unit> units) {
+
+    }
+
+    @Override
+    public void visitSA(Player player, Vector<Unit> units) {
+
+    }
+
+    @Override
+    public void visitSA(Enemy enemy, Vector<Unit> units) {
+
+    }
+
 
     //################### Accepts Visitor ###################
 

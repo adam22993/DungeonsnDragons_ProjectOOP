@@ -2,7 +2,6 @@ package Controller;
 
 import GameBoard.GameBoard;
 import UI.GameUI;
-import Units.Abstracts.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,11 +26,11 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     private JButton choice1, choice2, choice3, choice4, choice5, choice6, choice7, choice8, qButton, wButton, eButton, aButton, sButton, dButton;
 
-    public ControlLayer() {  // TODO: Think of a way to bypass game loading moves while player still pressing buttons.
+    public ControlLayer(GameBoard gameboard) {  // TODO: Think of a way to bypass game loading moves while player still pressing buttons.
         // Check the interface changes in the UI package.
         window = createWindow();
         gameUI = new GameUI(window);
-        gameBoard = new GameBoard();
+        gameBoard = new GameBoard(); // TODO: Change this to a singleton.
         window.addKeyListener(this);
         window.addMouseListener(this);
         window.addMouseMotionListener(this);
@@ -41,9 +40,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 //        window.revalidate();
         gameUI.openWelcomeScreen(welcomeScreenControls());
 
-
-        System.out.println("end of controlLayer constractor " + window.hashCode());
-        System.out.println();
     }
 
 //    public JPanel musicControlPanel(){
@@ -69,7 +65,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     public JFrame createWindow(){
         window = new JFrame();
-        System.out.println("start of createWindow window code " + window.hashCode());
         window.setTitle("Dungeons & Dragons OOP Project");
         window.setVisible(true);
         window.setIconImage(new ImageIcon(System.getProperty("user.dir") + "/src/UI/Assets/Images/DNDICON.png").getImage());
@@ -79,17 +74,13 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         window.getContentPane().setBackground(Color.black);
 
         window.setResizable(false);
-        System.out.println("end of createWindow window code " + window.hashCode());
-        System.out.println();
         return window;
     }
 
 
     public JPanel welcomeScreenControls(){
-        System.out.println("start of welcomeScreenControls window code " + window.hashCode());
 
         JPanel startButtonPanel = new JPanel();
-        System.out.println("start of welcomeScreenControls startButtonPanel code " + startButtonPanel.hashCode());
         startButtonPanel.setBounds(500, 560, 200, 100);
         startButtonPanel.setBackground(Color.black);
         startButtonPanel.setLayout(new BorderLayout());
@@ -115,9 +106,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         startButtonPanel.setBackground(new Color(0, 0, 0, 0));
         startButtonPanel.setOpaque(false);
         startButtonPanel.setVisible(true);
-        System.out.println("end of welcomeScreenControls startButtonPanel code " + startButtonPanel.hashCode());
-        System.out.println("end of welcomeScreenControls window code " + window.hashCode());
-        System.out.println();
         return startButtonPanel;
     }
 
@@ -150,9 +138,8 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         }
         gameBoard.setPlayerName(playerName);
         gameBoard.incrementGameLoadingStage();
+
         JPanel characterSelectOptions = new JPanel();
-        System.out.println("start of characterChoice window code " + window.hashCode());
-        System.out.println("start of characterChoice characterSelectOptions code " + characterSelectOptions.hashCode());
         characterSelectOptions.setBounds(300, 380, 600, 250);
         characterSelectOptions.setBackground(Color.black);
         characterSelectOptions.setLayout(new GridLayout(4, 1));
@@ -164,10 +151,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice1.setFocusable(false);
         characterSelectOptions.add(choice1);
         choice1.addActionListener(e -> {
-            gameBoard.setPlayerChoice(0);
-            gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
-            gameUI.updateBoard(gameBoard.getBoardString());
-
+            handleGameStart(0);
         });
 
         choice2 = new JButton("The Hound");
@@ -177,10 +161,9 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice2.setFocusable(false);
         characterSelectOptions.add(choice2);
         choice2.addActionListener(e -> {
-            gameBoard.setPlayerChoice(1);
-            gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
-            gameUI.updateBoard(gameBoard.getBoardString());
+            handleGameStart(1);
         });
+
         choice3 = new JButton("Melisandre");
         choice3.setBackground(Color.white);
         choice3.setForeground(Color.black);
@@ -188,10 +171,9 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice3.setFocusable(false);
         characterSelectOptions.add(choice3);
         choice3.addActionListener(e -> {
-            gameBoard.setPlayerChoice(2);
-            gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
-            gameUI.updateBoard(gameBoard.getBoardString());
+            handleGameStart(2);
         });
+
         choice4 = new JButton("Thoros of Myr");
         choice4.setBackground(Color.white);
         choice4.setForeground(Color.black);
@@ -199,11 +181,9 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice4.setFocusable(false);
         characterSelectOptions.add(choice4);
         choice4.addActionListener(e -> {
-            gameBoard.setPlayerChoice(3);
-            window.add(playerControls());
-            gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
-            gameUI.updateBoard(gameBoard.getBoardString());
+            handleGameStart(3);
         });
+
         choice5 = new JButton("Arya Stark");
         choice5.setBackground(Color.white);
         choice5.setForeground(Color.black);
@@ -211,10 +191,9 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice5.setFocusable(false);
         characterSelectOptions.add(choice5);
         choice5.addActionListener(e -> {
-            gameBoard.setPlayerChoice(4);
-            gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
-            gameUI.updateBoard(gameBoard.getBoardString());
+            handleGameStart(4);
         });
+
         choice6 = new JButton("Bronn");
         choice6.setBackground(Color.white);
         choice6.setForeground(Color.black);
@@ -222,10 +201,9 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice6.setFocusable(false);
         characterSelectOptions.add(choice6);
         choice6.addActionListener(e -> {
-            gameBoard.setPlayerChoice(5);
-            gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
-            gameUI.updateBoard(gameBoard.getBoardString());
+            handleGameStart(5);
         });
+
         choice7 = new JButton("Ygritte");
         choice7.setBackground(Color.white);
         choice7.setForeground(Color.black);
@@ -236,6 +214,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             JOptionPane.showMessageDialog(null, "Bruh! finish the assignment first", "Bonus Class", JOptionPane.ERROR_MESSAGE);
 //            createGameScreen(new Ygritte());
         });
+
         choice8 = new JButton(playerName + " (Custom)");
         choice8.setBackground(Color.white);
         choice8.setForeground(Color.black);
@@ -245,20 +224,17 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice8.addActionListener(e -> {
             JOptionPane.showMessageDialog(null, "I'm crazy... but not that crazy!", "Custom character", JOptionPane.ERROR_MESSAGE);
         });
+
+
         characterSelectOptions.addKeyListener(this);
         characterSelectOptions.addMouseListener(this);
         characterSelectOptions.setFocusable(false);
-        System.out.println("end of characterChoice characterSelectOptions code " + characterSelectOptions.hashCode());
-        System.out.println("end of characterChoice window code " + window.hashCode());
-        System.out.println();
         return characterSelectOptions;
     }
     public JPanel playerControls() {
         gameBoard.incrementGameLoadingStage();
-        gameBoard.incrementLevel();
         // create player panel
         JPanel playerChoicesPanel = new JPanel();
-        System.out.println("start of playerControls playerChoicesPanel code " + window.hashCode());
         playerChoicesPanel.setLayout(new GridLayout(2, 3));
         playerChoicesPanel.setBounds(750, 400, 300, 150);
         playerChoicesPanel.setBackground(Color.black);
@@ -348,64 +324,8 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         playerChoicesPanel.addMouseListener(this);
         playerChoicesPanel.setFocusable(true);
 //        playerChoicesPanel.requestFocusInWindow();
-        System.out.println("end of playerControls playerChoicesPanel code " + playerChoicesPanel.hashCode());
-        System.out.println();
         return playerChoicesPanel;
     }
-
-    public JPanel playerInfo(Player player) { // TODO: Check moving this to UI layer
-        // create player info panel
-        JPanel playerInfoPanel = new JPanel();
-        playerInfoPanel.setLayout(new GridLayout(7, 1));
-        playerInfoPanel.setBounds(750, 100, 300, 300);
-        playerInfoPanel.setBackground(Color.black);
-        playerInfoPanel.setForeground(Color.white);
-
-        // create player info labels
-        JLabel playerInfoLabel = new JLabel("Player Info");
-        playerInfoLabel.setFont(titleFont);
-        playerInfoLabel.setForeground(Color.white);
-        JProgressBar playerHealthLabel = new JProgressBar(0, player.getHealthPool());
-        playerHealthLabel.setValue(player.getHealthPool());
-        playerHealthLabel.setFont(normalFont);
-        playerHealthLabel.setForeground(Color.white);
-        JLabel playerAttackLabel = new JLabel("Attack: "/* + player.getAttack()*/);
-        playerAttackLabel.setFont(normalFont);
-        playerAttackLabel.setForeground(Color.white);
-        JLabel playerDefenseLabel = new JLabel("Defense: "/* + player.getDefense()*/);
-        playerDefenseLabel.setFont(normalFont);
-        playerDefenseLabel.setForeground(Color.white);
-        JLabel playerSpecialAbilityLabel = new JLabel("Special Ability: "/* + player.getSpecialAbility()*/);
-        playerSpecialAbilityLabel.setFont(normalFont);
-        playerSpecialAbilityLabel.setForeground(Color.white);
-
-        // add them to the panel
-        playerInfoPanel.add(playerInfoLabel);
-        playerInfoPanel.add(playerHealthLabel);
-        playerInfoPanel.add(playerAttackLabel);
-        playerInfoPanel.add(playerDefenseLabel);
-        playerInfoPanel.add(playerSpecialAbilityLabel);
-        playerInfoPanel.setVisible(true);
-        window.add(playerInfoPanel);
-        return playerInfoPanel;
-    }
-
-    public void handleButtonSelection(char Char){
-        if (Char == 'Q') {
-            System.out.println("Q");
-        } else if (Char == 'W') {
-            System.out.println("W");
-        } else if (Char == 'E') {
-            System.out.println("E");
-        } else if (Char == 'A') {
-            System.out.println("A");
-        } else if (Char == 'S') {
-            System.out.println("S");
-        } else if (Char == 'D') {
-            System.out.println("D");
-        }
-    }
-
 
 
     @Override
@@ -681,6 +601,13 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     private void handlePlayerChoice(){
         gameBoard.vectorGameTick(playerGamePlayInputVal);
+        gameUI.updateBoard(gameBoard.getBoardString());
+    }
+
+    private void handleGameStart(int choice){
+        gameBoard.setPlayerChoice(choice);
+        gameBoard.incrementLevel();
+        gameUI.createGameScreen(gameBoard.getBoardString(), gameBoard.getPlayers().get(0), playerControls());
         gameUI.updateBoard(gameBoard.getBoardString());
     }
 

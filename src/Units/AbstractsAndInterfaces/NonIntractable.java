@@ -1,12 +1,9 @@
-package Units.Abstracts;
+package Units.AbstractsAndInterfaces;
 
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.Empty;
-import Units.ADDITIONAL.Position;
 import Units.ADDITIONAL.Wall;
-
-import java.util.Vector;
 
 public abstract class NonIntractable extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     // TODO: OVERWRITE ANY METHOD THAT A NON-INTRACTABLE UNIT SHOULD NOT HAVE

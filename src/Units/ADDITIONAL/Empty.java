@@ -1,6 +1,5 @@
 package Units.ADDITIONAL;
-import Patterns.Visitor.UnitInteractionVisitor;
-import Units.Abstracts.*;
+import Units.AbstractsAndInterfaces.*;
 
 import java.util.Vector;
 

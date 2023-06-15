@@ -2,12 +2,10 @@ package Units.EnemyTypes;
 
 import Controller.Messages.UnitMessageController;
 import Units.ADDITIONAL.Position;
-import Units.Abstracts.Enemy;
-import Units.Abstracts.Player;
-import Units.Abstracts.Tile;
-import Units.Abstracts.Unit;
+import Units.AbstractsAndInterfaces.Enemy;
+import Units.AbstractsAndInterfaces.Tile;
+import Units.AbstractsAndInterfaces.Unit;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Vector;
 

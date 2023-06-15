@@ -1,7 +1,6 @@
 package Units.ADDITIONAL;
 
-import Patterns.Visitor.UnitInteractionVisitor;
-import Units.Abstracts.*;
+import Units.AbstractsAndInterfaces.*;
 
 import java.util.Vector;
 
@@ -32,7 +31,7 @@ public class Wall extends NonIntractable {
 
     @Override
     public void visit(Player player) {
-        return;
+        System.out.println("You hit a wall! You lose your turn.");
     }
 
     @Override

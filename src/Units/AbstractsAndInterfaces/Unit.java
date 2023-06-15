@@ -1,11 +1,10 @@
-package Units.Abstracts;
+package Units.AbstractsAndInterfaces;
 
 import Controller.Messages.UnitMessageController;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.ConsumablePoints.HP;
 import Units.ADDITIONAL.Empty;
-import Units.ADDITIONAL.Position;
 import Units.ADDITIONAL.Wall;
 
 import java.util.Random;
@@ -33,6 +32,14 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
 
     abstract public char onGameTick(Unit player, Vector<Unit> units);
 
+    protected int roleAD(){
+        return Random.nextInt(0, this.attackPoints);
+    }
+
+    protected int roleDEF(){
+        return Random.nextInt(0, this.defensePoints);
+    }
+
     public String getName() {
         return name;
     }
@@ -48,7 +55,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     public int getDefensePoints() {
         return defensePoints;
     }
-    protected void setHealthAmount(int healthAmount) {
+    public void setHealthAmount(int healthAmount) {
         this.health.setCurrentInBounds(Math.max(healthAmount, 0));
     }
     protected void setHealthPool(int healthPool) {
@@ -64,12 +71,16 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
         return String.format("%s", this.getChar());
     }
 
+
+
     abstract public void accept(Unit visitor);
     abstract public void visit(Enemy enemy);
     abstract public void visit(Player player);
     abstract public void visit(Empty empty);
     abstract public void visit(Wall wall);
 
-
+    public void acceptSA(Unit visitor, Vector<Unit> units){}
+    public void visitSA(Player player, Vector<Unit> units){}
+    public void visitSA(Enemy enemy, Vector<Unit> units){}
 
 }

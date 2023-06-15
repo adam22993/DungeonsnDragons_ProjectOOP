@@ -6,12 +6,26 @@ public class ABCD extends ConsumablePoints{
         current = 0; // initial cd for all abilities is 0 - allowing players to use them immediately.
     } // AbilityCD
 
-    public void use() {
+    public boolean use() {
         if (current == 0) {
             current = max;
         } else {
-            System.out.println("Ability is on cooldown."); // needs to be changed to a callbackmessage.
+            return false; // needs to be changed to a callbackmessage.
+        }
+        return true;
+    }
+
+    public void tick() {
+        if (current > 0) {
+            current--;
         }
     }
 
+    public void reset() {
+        current = 0;
+    }
+
+    public int getCD() {
+        return current;
+    }
 }

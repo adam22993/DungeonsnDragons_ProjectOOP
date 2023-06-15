@@ -1,10 +1,11 @@
 package Units.PlayerClasses;
 
 import Controller.Messages.UnitMessageController;
-import Units.ADDITIONAL.Position;
-import Units.Abstracts.*;
+import Units.AbstractsAndInterfaces.*;
 
-public class Mage extends Player {
+import java.util.Vector;
+
+public class Mage extends Player implements HeroicUnit {
     private int manaPool, manaCost, spellPower, hitCount, range;
     UnitMessageController unitMessageController;
 
@@ -20,9 +21,32 @@ public class Mage extends Player {
     }
 
     @Override
-    protected void castSpecialAbility() {
+    public void castAbility(Unit opponent) {
 
     }
+
+    @Override
+    public char onGameTick(Unit playerPosition, Vector<Unit> units) {
+        // gain mana and stuff things mages do... maybe... you know... like... casting spells and stuff.............
+        return 0;
+    }
+
+    @Override
+    public void acceptSA(Unit visitor, Vector<Unit> units) {
+
+    }
+
+    @Override
+    public void visitSA(Player player, Vector<Unit> units) {
+
+    }
+
+    @Override
+    public void visitSA(Enemy enemy, Vector<Unit> units) {
+
+    }
+
+
 
 
 }

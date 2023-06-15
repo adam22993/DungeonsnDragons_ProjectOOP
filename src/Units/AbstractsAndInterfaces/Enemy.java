@@ -1,8 +1,10 @@
-package Units.Abstracts;
+package Units.AbstractsAndInterfaces;
 
 import Patterns.Visitor.*;
 import Units.ADDITIONAL.Empty;
 import Units.ADDITIONAL.Wall;
+
+import java.util.Vector;
 
 public abstract class Enemy extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     protected int experienceValue, visionRange;
@@ -18,14 +20,13 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
     }
 
     public String attack(Unit player){
-        int damage = Random.nextInt(0, this.attackPoints);
+        int damage = this.roleAD();
         damage = Math.max(damage - player.defensePoints, 0);
         player.setHealthAmount(player.getHealthCurrent() - damage);
         System.out.println(this.name + " attacked " + player.name + " for " + damage + " damage!, " + player.name + " health is now " + player.getHealthCurrent() + "!" );
         if (player.getHealthCurrent() == 0){
             unitMessageController.deathMessage(player);
             player.setChar('X');
-//            this.swapPosition(player);
         }
         return unitMessageController.attackUpdate(this, player, damage);
     }
@@ -49,4 +50,9 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
     public void visit(Wall wall) {
         return;
     }
+
+    public void visitSA(Player player, Vector<Unit> units) {}
+
+    @Override
+    public void visitSA(Enemy enemy, Vector<Unit> units) {}
 }

@@ -5,20 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Units/Abstracts/HeroicUnit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameBoard/Levels/LevelLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameBoard/Levels/level2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameBoard/Levels/level3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameBoard/Levels/level4.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordhit1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordhit2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordhit3.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordkill1.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordkill2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordkill3.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/HeroicUnit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ControlLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ControlLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Messages/UnitMessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Messages/UnitMessageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameBoard/Levels/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/Levels/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameBoard/MessagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/MessagesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Patterns/Factory/TileFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Factory/TileFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/HP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/HP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Patterns/Visitor/UnitInteractionVisited.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Visitor/UnitInteractionVisited.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Patterns/Visitor/UnitInteractionVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Visitor/UnitInteractionVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/ABCD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/ABCD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/ConsumablePoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/ConsumablePoints.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Empty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Wall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/NonIntractable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/NonIntractable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/Abstracts/Unit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/HeroicUnit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/NonIntractable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/NonIntractable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/Abstracts/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Unit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Boss.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Monster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +52,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -50,7 +74,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/AdamS/OneDrive/Desktop/Smart Stuff Folder/Year 1 - Sapir/Semester 2/JavaProjects/DungeonsnDragons_ProjectOOP&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/AdamS/OneDrive/Desktop/Smart Stuff Folder/Year 1 - Sapir/Semester 2/JavaProjects/DungeonsnDragons_ProjectOOP/src/UI/Assets/Audio/Sword&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -65,6 +89,9 @@
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Controller.Messages" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\UI\Assets\Audio\Sword" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\UI\Assets\Images" />
@@ -110,27 +137,12 @@
       <workItem from="1686459125942" duration="7453000" />
       <workItem from="1686560915511" duration="20306000" />
       <workItem from="1686681792563" duration="5197000" />
+      <workItem from="1686856767562" duration="8629000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Controller/ControlLayer.java</url>
-          <line>723</line>
-          <option name="timeStamp" value="140" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Controller/ControlLayer.java</url>
-          <line>191</line>
-          <option name="timeStamp" value="168" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DungeonsnDragons_ProjectOOP$Main.ic" NAME="Main Coverage Results" MODIFIED="1686434387333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -1,6 +1,9 @@
 
 package UI;
 
+import Units.AbstractsAndInterfaces.Player;
+import Units.AbstractsAndInterfaces.Unit;
+
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
@@ -25,21 +28,18 @@ public class GameUI {
     private Clip clip;
     private final Vector<Clip> clips = new Vector<Clip>();
     private JPanel MusicPanel;
-    boolean musicPlaying = false;
+    private boolean musicPlaying = false;
+    private Player player;
 
     public GameUI(JFrame controlLayerWindow) {
         loadMusicFolderToVector(currentDir + "/src/UI/Assets/Audio/");
         window = controlLayerWindow;
-        System.out.println("GameUI constructor hash code " + window.hashCode());
-        System.out.println();
     }
 
     public void openWelcomeScreen(JPanel startButtonsPanel) {
 //        window = controlLayerWindow;
 //        con = window.getContentPane();
 
-        System.out.println("open welcome screen hash code " + window.hashCode());
-        System.out.println("startButtonsPanel hash code " + startButtonsPanel.hashCode());
         clip = clips.get(0);  // mac for some reason loads differently than windows, sequence is different
         if (clip != null) {
             FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -70,7 +70,6 @@ public class GameUI {
         window.add(WSImagesPanel);
         window.revalidate();
         window.repaint();
-        System.out.println("open welcome screen finished hash code " + window.hashCode());
 
 //
 //
@@ -80,13 +79,13 @@ public class GameUI {
     }
 
     public void characterCreationScreen(JPanel characterSelectPanel){
-        System.out.println("Opening Character Creation Screen " + window.hashCode());
-        System.out.println("characterSelectPanel hash code " + characterSelectPanel.hashCode());
+
         startButtonPanel.setVisible(false);
         WSImagesPanel.setVisible(false);
         CCSBGPanel = new JLayeredPane();
 
         CCSBGPanel.setLayout(null);
+        CCSBGPanel.setOpaque(false);
         CCSBGPanel.setBounds(0, 0, window.getWidth(), window.getHeight());
         ImageIcon backgroundImage = new ImageIcon(currentDir + "/src/UI/Assets/Images/WelcomeScreenImage.jpg");
         Image bgImage = backgroundImage.getImage();
@@ -143,13 +142,9 @@ public class GameUI {
         window.add(CCSBGPanel);
         window.revalidate();
         window.repaint();
-        System.out.println("character creation screen finished hash code " + window.hashCode());
-        System.out.println();
     }
 
-    public void createGameScreen(String board, JFrame windowGiven, JPanel playerControlsPanel) {
-        System.out.println("Opening Game Screen " + window.hashCode());
-        System.out.println("playerControlsPanel hash code " + playerControlsPanel.hashCode());
+    public void createGameScreen(String board, Unit player1, JPanel playerControlsPanel) {
 
         clip.stop();
         clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
@@ -158,6 +153,7 @@ public class GameUI {
         volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
 //        playRandomClip();
         CCSBGPanel.setVisible(false);
+
         characterSelectOptions.setVisible(false);
         headerLabelCS.setVisible(false);
         mainTextPanel.setVisible(false);
@@ -168,7 +164,7 @@ public class GameUI {
 
         gameScreenPanel.setBackground(Color.black);
         gameScreenPanel.setForeground(Color.white);
-        gameScreenPanel.setOpaque(true);
+        gameScreenPanel.setOpaque(false);
         gameScreenPanel.setVisible(true);
 
         boardTextArea = new JTextArea();
@@ -179,22 +175,37 @@ public class GameUI {
         boardTextArea.setVisible(true);
         boardTextArea.setLineWrap(true);
         boardTextArea.setWrapStyleWord(true);
-        boardTextArea.setEditable(false);
-
+//        boardTextArea.setEditable(false);
+//        Font font = boardTextArea.getFont();
+//        int fontSize = font.getSize();
+//        int preferredSize = boardTextArea.getPreferredSize().height;
+//        int boardHeight = boardTextArea.getHeight();
+//        while (preferredSize > boardHeight) {
+//            fontSize--;
+//            boardTextArea.setFont(new Font(font.getName(), font.getStyle(), fontSize));
+//            preferredSize = boardTextArea.getPreferredSize().height;
+//            boardHeight = boardTextArea.getHeight();
+//            if (fontSize == 10) {
+//                break;
+//            }
+//        }
 
         gameScreenPanel.add(boardTextArea, BorderLayout.CENTER);
         window.add(gameScreenPanel);
-//        gameScreenPanel.add(playerControlPanel, 2);
+        JPanel playerControls = playerControlsPanel;
+        playerControls.setBounds(750, 450, 200, 150);
+        playerControls.setBackground(Color.black);
+        playerControls.setForeground(Color.white);
+        playerControls.setOpaque(false);
+        window.add(playerControls);
 //        window.setVisible(false);
 //        window.add(con);
         window.revalidate();
         window.repaint();
-        System.out.println("game screen finished hash code " + window.hashCode());
-        System.out.println();
+
     }
 
     public void debugStart(String board){
-        System.out.println("Debug opening Game Screen " + window.hashCode());
 
         clip.stop();
         clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
@@ -211,9 +222,8 @@ public class GameUI {
         gameScreenPanel.setOpaque(true);
         gameScreenPanel.setVisible(true);
 
-        boardTextArea = new JTextArea();
         boardTextArea = new JTextArea(board);
-        boardTextArea.setBounds(50, 0, 600, 600);
+        boardTextArea.setBounds(50, 0, 300, 300);
         boardTextArea.setFont(boardFont);
         boardTextArea.setForeground(Color.white);
         boardTextArea.setBackground(Color.black);
@@ -229,13 +239,48 @@ public class GameUI {
 //        window.add(con);
         window.revalidate();
         window.repaint();
-        System.out.println("game screen finished hash code " + window.hashCode());
-        System.out.println();
     }
 
     public void updateBoard(String board) {
         System.out.println(board);
         boardTextArea.setText(board);
+    }
+
+    public JPanel playerInfo(Player player) { // TODO: Check moving this to UI layer
+        // create player info panel
+        JPanel playerInfoPanel = new JPanel();
+        playerInfoPanel.setLayout(new GridLayout(7, 1));
+        playerInfoPanel.setBounds(750, 100, 300, 300);
+        playerInfoPanel.setBackground(Color.black);
+        playerInfoPanel.setForeground(Color.white);
+
+        // create player info labels
+        JLabel playerInfoLabel = new JLabel(player.getName() + " Info");
+        playerInfoLabel.setFont(titleFont);
+        playerInfoLabel.setForeground(Color.white);
+        JProgressBar playerHealthLabel = new JProgressBar(0, player.getHealthPool());
+        playerHealthLabel.setValue(player.getHealthPool());
+        playerHealthLabel.setFont(normalFont);
+        playerHealthLabel.setForeground(Color.white);
+        JLabel playerAttackLabel = new JLabel("Attack: "/* + player.getAttack()*/);
+        playerAttackLabel.setFont(normalFont);
+        playerAttackLabel.setForeground(Color.white);
+        JLabel playerDefenseLabel = new JLabel("Defense: "/* + player.getDefense()*/);
+        playerDefenseLabel.setFont(normalFont);
+        playerDefenseLabel.setForeground(Color.white);
+        JLabel playerSpecialAbilityLabel = new JLabel("Special Ability: "/* + player.getSpecialAbility()*/);
+        playerSpecialAbilityLabel.setFont(normalFont);
+        playerSpecialAbilityLabel.setForeground(Color.white);
+
+        // add them to the panel
+        playerInfoPanel.add(playerInfoLabel);
+        playerInfoPanel.add(playerHealthLabel);
+        playerInfoPanel.add(playerAttackLabel);
+        playerInfoPanel.add(playerDefenseLabel);
+        playerInfoPanel.add(playerSpecialAbilityLabel);
+        playerInfoPanel.setVisible(true);
+        window.add(playerInfoPanel);
+        return playerInfoPanel;
     }
 
     private Clip loadMusic(String filePath) { // loads the music file

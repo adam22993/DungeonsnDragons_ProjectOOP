@@ -3,7 +3,7 @@ import Controller.Messages.UnitMessageController;
 import GameBoard.Levels.Level;
 import Patterns.Factory.TileFactory;
 import Units.ADDITIONAL.Position;
-import Units.Abstracts.*;
+import Units.AbstractsAndInterfaces.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -81,9 +81,10 @@ public class GameBoard {
         for (Unit unit : turnSequence) {
             if (unit.getChar() == '@') {
                 currUnitAction = playerInput;
+                unit.onGameTick(turnSequence.get(0), getBoard());
                 System.out.println("Player health: " + unit.getHealthCurrent()); // debugging use
             } else {
-                currUnitAction = unit.onGameTick(turnSequence.get(0), getBoard());
+                currUnitAction = unit.onGameTick(turnSequence.get(0), getBoard()); // sending the player for everyone to seek
             }
             posBeforeAction = unit.getPosition();
             switch (currUnitAction) {
@@ -108,7 +109,10 @@ public class GameBoard {
                     System.out.println("Unit " + unit.getChar() + " is on position " + unit.getPosition() + " after moving right");
                     break;
                 case 'e':
-                    continue;
+                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is attacking");
+                    unit.acceptSA(tilesOfBoard.get(getBoard().indexOf(unit)), turnSequence);
+                    System.out.println("Unit " + unit.getChar() + " is on position " + unit.getPosition() + " after attacking");
+                    break;
                 case 'q':
                     continue;
                 case 'v':
@@ -136,7 +140,7 @@ public class GameBoard {
 
 
     private void loadLevel(int level) {  // the correct version that loads a vector of units to the tilesOfBoard vector
-        String levelFile = "/src/GameBoard/Levels/level" + (current_level) + ".txt";
+        String levelFile = "/src/GameBoard/Levels/level" + (2) + ".txt";
         //String levelFile = "\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt"; // for some reason this works on windows only, mac needs the /src/ instead of \\src\\ and windows still works with /src/.
         countLines = 0;
         countColumns = 0;
@@ -168,17 +172,19 @@ public class GameBoard {
         int lineCounter = 0;
         try {
             while ((sentence = br.readLine()) != null) {
+                Player player;
                 for (int i = 0; i < countColumns; i++) {
                     if (sentence.charAt(i) == '@') {
-                        tilesOfBoard.add(tileFactory.producePlayer(playerChoice.get(0), new Position(i, lineCounter)));
+                        player = tileFactory.producePlayer(playerChoice.get(0), new Position(i, lineCounter));
+                        tilesOfBoard.add(player);
+                        turnSequence.add(0, player); // the last player to pick a character is the first to play
+                        players.add(player);
                     } else {
-                        tilesOfBoard.add(tileFactory.produceTile(sentence.charAt(i), new Position(i, lineCounter)));
-                    }
-                    char Char = sentence.charAt(i);
-                    if (Char == '@') {
-                        turnSequence.add(0, tilesOfBoard.get(tilesOfBoard.size() - 1));
-                    } else if (Char != '.' && Char != '#') {
-                        turnSequence.add(tilesOfBoard.get(tilesOfBoard.size() - 1));
+                        Unit unit = tileFactory.produceTile(sentence.charAt(i), new Position(i, lineCounter));
+                        tilesOfBoard.add(unit);
+                        if (unit.getChar() != '.' && unit.getChar() != '#') {
+                            turnSequence.add(unit);
+                        }
                     }
                 }
                 lineCounter++;
@@ -257,5 +263,9 @@ public class GameBoard {
 
     public List<Unit> getTurnSequence() {
         return turnSequence;
+    }
+
+    public void loadAdditions(String arg) {
+
     }
 }

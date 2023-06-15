@@ -1,19 +1,15 @@
 import Controller.ControlLayer;
 import GameBoard.GameBoard;
-import UI.GUI_Elements.Window;
-import Units.ADDITIONAL.Position;
-import Units.Abstracts.Enemy;
+import GameBoard.Levels.Level;
+import GameBoard.Levels.LevelLoader;
 
 public class Main {
     public static void main(String[] args) {
 //        GameBoard gameBoard = new GameBoard();
-//        Warrior warrior = new Warrior("Warrior", 100, 100, 100, 100);
-//        Warrior Bronn = new Warrior("Bronn", 100, 100, 100, 100);
-//        warrior.performBasicAttack();
-//        Bronn.performBasicAttack();
-        ControlLayer controlLayer = new ControlLayer();
-//        Window window = new Window();
-//        GameBoard gameBoard = new GameBoard();
-//        gameBoard.getBoard();
+//        if (args.length == 1){
+//            gameBoard.loadAdditions(args[0]);
+//        }
+        ControlLayer controlLayer = new ControlLayer(new GameBoard());
+//        LevelLoader levelLoader = new LevelLoader("src\\GameBoard\\Levels");
     }
 }
