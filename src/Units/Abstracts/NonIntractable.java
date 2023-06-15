@@ -14,9 +14,6 @@ public abstract class NonIntractable extends Unit implements UnitInteractionVisi
         super(name, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, Char); // a non-intractable unit has infinite health and defense but no attack... a wall can't attack you... but maybe you can attack it? could be funny
     }
 
-    @Override
-    abstract public char onGameTick(Position playerPosition, Vector<Unit> units);
-
 
     @Override
     abstract public void visit(Enemy enemy);

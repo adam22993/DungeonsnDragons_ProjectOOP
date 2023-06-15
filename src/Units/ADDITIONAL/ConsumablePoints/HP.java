@@ -5,9 +5,7 @@ public class HP extends ConsumablePoints {
         super(max);
     }
 
-    public void isDead() {
-        if (current <= 0) {
-            System.out.println("Unit is dead.");
-        }
+    public boolean isDead() {
+        return this.getCurrent() == 0;
     }
 }

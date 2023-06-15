@@ -3,6 +3,7 @@ package Units.EnemyTypes;
 import Controller.Messages.UnitMessageController;
 import Units.ADDITIONAL.Position;
 import Units.Abstracts.Enemy;
+import Units.Abstracts.Player;
 import Units.Abstracts.Tile;
 import Units.Abstracts.Unit;
 
@@ -20,9 +21,9 @@ public class Monster extends Enemy  {
     }
 
     @Override
-    public char onGameTick(Position playerPosition, Vector<Unit> units) {
-        if (this.getPosition().Range(playerPosition) <= this.visionRange){
-            return this.moveTowardsPlayer(playerPosition, units);
+    public char onGameTick(Unit player, Vector<Unit> units) {
+        if (this.getPosition().Range(player.getPosition()) <= this.visionRange && player.getChar() == '@') {
+            return this.moveTowardsPlayer(player.getPosition(), units);
         }
         switch (new Random().nextInt(4)) {
             case 0:

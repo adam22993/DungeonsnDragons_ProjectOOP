@@ -24,7 +24,8 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
         System.out.println(this.name + " attacked " + player.name + " for " + damage + " damage!, " + player.name + " health is now " + player.getHealthCurrent() + "!" );
         if (player.getHealthCurrent() == 0){
             unitMessageController.deathMessage(player);
-            this.swapPosition(player);
+            player.setChar('X');
+//            this.swapPosition(player);
         }
         return unitMessageController.attackUpdate(this, player, damage);
     }

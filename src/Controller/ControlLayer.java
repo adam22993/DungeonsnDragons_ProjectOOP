@@ -2,6 +2,7 @@ package Controller;
 
 import GameBoard.GameBoard;
 import UI.GameUI;
+import Units.Abstracts.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     private int counter = 1;
     private boolean keyboardPressed = false;
     private boolean playerGamePlayInput = false;
-    private char playerGamePlayInputVal = 'd';
+    private char playerGamePlayInputVal = ' ';
 
     private final Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
@@ -165,6 +166,8 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice1.addActionListener(e -> {
             gameBoard.setPlayerChoice(0);
             gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
+            gameUI.updateBoard(gameBoard.getBoardString());
+
         });
 
         choice2 = new JButton("The Hound");
@@ -176,6 +179,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice2.addActionListener(e -> {
             gameBoard.setPlayerChoice(1);
             gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
+            gameUI.updateBoard(gameBoard.getBoardString());
         });
         choice3 = new JButton("Melisandre");
         choice3.setBackground(Color.white);
@@ -186,6 +190,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice3.addActionListener(e -> {
             gameBoard.setPlayerChoice(2);
             gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
+            gameUI.updateBoard(gameBoard.getBoardString());
         });
         choice4 = new JButton("Thoros of Myr");
         choice4.setBackground(Color.white);
@@ -197,6 +202,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             gameBoard.setPlayerChoice(3);
             window.add(playerControls());
             gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
+            gameUI.updateBoard(gameBoard.getBoardString());
         });
         choice5 = new JButton("Arya Stark");
         choice5.setBackground(Color.white);
@@ -207,6 +213,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice5.addActionListener(e -> {
             gameBoard.setPlayerChoice(4);
             gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
+            gameUI.updateBoard(gameBoard.getBoardString());
         });
         choice6 = new JButton("Bronn");
         choice6.setBackground(Color.white);
@@ -217,6 +224,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         choice6.addActionListener(e -> {
             gameBoard.setPlayerChoice(5);
             gameUI.createGameScreen(gameBoard.getBoardString(), window, playerControls());
+            gameUI.updateBoard(gameBoard.getBoardString());
         });
         choice7 = new JButton("Ygritte");
         choice7.setBackground(Color.white);
@@ -345,10 +353,10 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         return playerChoicesPanel;
     }
 
-    public JPanel playerInfo() { // TODO: Check moving this to UI layer
+    public JPanel playerInfo(Player player) { // TODO: Check moving this to UI layer
         // create player info panel
         JPanel playerInfoPanel = new JPanel();
-        playerInfoPanel.setLayout(new GridLayout(2, 1));
+        playerInfoPanel.setLayout(new GridLayout(7, 1));
         playerInfoPanel.setBounds(750, 100, 300, 300);
         playerInfoPanel.setBackground(Color.black);
         playerInfoPanel.setForeground(Color.white);
@@ -357,7 +365,8 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         JLabel playerInfoLabel = new JLabel("Player Info");
         playerInfoLabel.setFont(titleFont);
         playerInfoLabel.setForeground(Color.white);
-        JLabel playerHealthLabel = new JLabel("Health: "/* + player.getHealth()*/);
+        JProgressBar playerHealthLabel = new JProgressBar(0, player.getHealthPool());
+        playerHealthLabel.setValue(player.getHealthPool());
         playerHealthLabel.setFont(normalFont);
         playerHealthLabel.setForeground(Color.white);
         JLabel playerAttackLabel = new JLabel("Attack: "/* + player.getAttack()*/);

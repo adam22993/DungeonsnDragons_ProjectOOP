@@ -12,7 +12,7 @@ public class Wall extends NonIntractable {
     }
 
     @Override
-    public char onGameTick(Position playerPosition, Vector<Unit> units) {
+    public char onGameTick(Unit player, Vector<Unit> units) {
         return 0;
     }
 

@@ -27,7 +27,7 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     }
 
 
-    protected void levelUp(){
+    protected void levelUp() {
         this.experience.subtract(this.getMaxEXP());
         this.increamentLevel();
         this.setMaxEXP(50 * this.getLevel());
@@ -42,55 +42,57 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     }
 
     abstract protected void castSpecialAbility(); // TODO: implement special ability in subclasses - think of way to add more attacks
-    protected void gainExperience(int experience){
+
+    protected void gainExperience(int experience) {
         this.setCurrEXP(experience);
     }
-    public char onGameTick(Position playerPosition, Vector<Unit> units){
-        return 'd';
+
+    public char onGameTick(Unit playerPosition, Vector<Unit> units) {
+        return ' ';
     }
 
-    protected String attack(Enemy enemy){
+    protected String attack(Enemy enemy) {
         int damage = Random.nextInt(0, this.attackPoints);
         damage = Math.max(damage - enemy.defensePoints, 0);
         enemy.setHealthAmount(enemy.getHealthCurrent() - damage);
-        System.out.println(this.name + " attacked " + enemy.name + " for " + damage + " damage!, " + enemy.name + " health is now " + enemy.getHealthCurrent() + "!" );
-        if (enemy.getHealthCurrent() == 0){
+        System.out.println(this.name + " attacked " + enemy.name + " for " + damage + " damage!, " + enemy.name + " health is now " + enemy.getHealthCurrent() + "!");
+        if (enemy.getHealthCurrent() == 0) {
             unitMessageController.deathMessage(enemy);
             this.kill(enemy);
         }
         return unitMessageController.attackUpdate(this, enemy, damage);
     }
 
-    protected void kill(Enemy e){
+    protected void kill(Enemy e) {
         gainExperience(e.giveExperience());
         this.swapPosition(e);
-        if (this.checkLevelUp()){
+        if (this.checkLevelUp()) {
             this.levelUp();
         }
     }
 
     //###################### Getters ######################
 
-    protected boolean checkLevelUp(){
+    protected boolean checkLevelUp() {
         return this.experience.checkLevelUp();
     }
 
-    protected int getMaxEXP(){
+    protected int getMaxEXP() {
         return this.experience.getMax();
     }
 
-    protected int getLevel(){
+    protected int getLevel() {
         return this.level;
     }
 
     //###################### Setters ######################
-    private void setMaxEXP(int maxEXP){
+    private void setMaxEXP(int maxEXP) {
         this.experience.setMax(maxEXP);
     }
-    private void setCurrEXP(int currEXP){
+
+    private void setCurrEXP(int currEXP) {
         this.experience.add(currEXP);
     }
-
 
 
     //######################### Visitors ##########################
@@ -123,5 +125,6 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
 
 
 
-
 }
+
+

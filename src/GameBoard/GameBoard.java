@@ -47,92 +47,7 @@ public class GameBoard {
     }
 
 
-//    public Tile[][] loadCurrentLevelBoard(int current_level) {
-//        /**
-//         * This function loads the board from the file. Using the current_level variable, it loads the file of
-//         * the current level. It then counts the number of lines and columns in the file, and creates a 2D array
-//         * of chars with the size of the board. It then loads the board from the file into the 2D array.
-//         * @return 2D array of chars representing the board.
-//         */
-//
-//        //TODO: load all levels as files, load all of the levels into a level class and then load the levels as indexes
-//        //TODO: this allows us to receive and not receive levels from the tester.
-//
-//        String levelFile = "/src/GameBoard/Levels/level" + (current_level + 1) + ".txt";
-//        //String levelFile = "\\src\\GameBoard\\Levels\\level" + (current_level + 1) + ".txt"; // for some reason this works on windows only, mac needs the /src/ instead of \\src\\ and windows still works with /src/.
-//        countLines = 0;
-//        countColumns = 0;
-//        String currentDir = System.getProperty("user.dir");
-//        System.out.println("Current working directory: " + currentDir + levelFile);
-//        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
-//            // TODO: Look For the longest line in the file and set the countColumns to that number
-//            while (br.readLine() != null) {
-//                countLines++;
-//            }
-//        } catch (IOException e) {
-//            System.err.format("IOException: %s%n", e);
-//        }
-//
-//        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
-//            String line;
-//            if ((line = br.readLine()) != null) {
-//                countColumns = line.length();
-//            }
-//        } catch (IOException e) {
-//            System.err.format("IOException: %s%n", e);
-//        }
-//
-//        Unit[][] tiles = new Unit[countLines][countColumns];
-//        tileFactory = new TileFactory(1);
-//        try (BufferedReader br = new BufferedReader(new
-//                FileReader(currentDir + levelFile))) {
-//            String line;
-//            int i = 0;
-//            while ((line = br.readLine()) != null) {
-//                for (int j = 0; j < countColumns; j++) {
-//                    char Char = line.charAt(j);
-//                    if(Char == '.'){
-//                        tiles[i][j] = tileFactory.produceEmpty(new Position(i, j));
-//                    } else if(Char == '#'){
-//                        tiles[i][j] = tileFactory.produceWall(new Position(i, j));
-//                    } else if (Char == '@'){
-//                        tiles[i][j] = tileFactory.producePlayer(playerChoice.remove(0), new Position(i, j));  // TODO: change to playerSelected
-//                        turnSequence.insertElementAt(tiles[i][j], 0); // add player to the beginning of the turn sequence
-//                    } else if (tileFactory.getEnemiesMap().containsKey(Char)){
-//                        tiles[i][j] = tileFactory.produceEnemy(Char, new Position(i, j));
-//                        turnSequence.add(tiles[i][j]);
-//                    } else {
-//                        tiles[i][j] = tileFactory.produceEmpty(new Position(i, j)); // nothing found to create, so create an empty tile. - this should never happen - this is for damage control.
-//                    }
-//
-//                }
-//                i++;
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//        current_level++;
-//        System.out.println(turnSequence);
-//        System.out.println("Level " + current_level + " loaded successfully!");
-//        this.board = tiles;
-////        printBoard();
-//        return tiles;
-//    }
 
-//    public void printBoard() {
-//        /**
-//         * This function prints the board to the console. It iterates through the 2D array of chars representing
-//         * the board, and prints each char to the console.
-//         */
-//        //TODO: change to fit tiles and not print the board
-//        for (Tile[] row : board) {
-//            for (Tile c : row) {
-//                System.out.print(c);
-//            }
-//            System.out.println();
-//        }
-//    }
 
     public String getBoardString() {
         /**
@@ -149,37 +64,7 @@ public class GameBoard {
         return boardString.toString();
     }
 
-    public Tile getTile(Position position) {
-        /**
-         * This function returns the tile in the given position.
-         * @param position Position of the tile to return.
-         * @return Tile in the given position.
-         */
-        return board[position.getX()][position.getY()];
-    }
 
-
-    //        private Vector<Unit> scanForUnitsBoard() {
-/*TODO: This is used to scan for the player by the enemies and helps the player select the enemy to attack with the special ability.
-//            /**DungeonsnDragons_ProjectOOP\src\GameBoard\GameBoard.java
-//             * This function scans the board for units. It creates a 2D array of Units with the same size as the board.
-//             * It then scans the board for units, and creates a new unit for each unit found. It then returns the 2D array
-//             * of units.
-//             * @return 2D array of Units representing the units on the board.
-//             */
-//            //Vector so we can know which enemies are close to the player and are accessible for attack using special ability
-//            ArrayList<Unit> units = new ArrayList<Unit>();
-//            for (int i = 0; i < board.length; i++){
-//                for (int j = 0; j < board.length; j++) {
-//                    Tile current = new Tile(board[i][j], new Position(i, j));
-//                    if (current.getChar() != '.' || current.getChar() != '#') {
-////                        Unit unit = UnitVisitor.visit(current);
-////                        units.add(unit);
-//                    }
-//                }
-//            }
-////            return units;
-//        }
     public boolean playerIsDead(){
         return turnSequence.get(0).getHealthPool() <= 0;
     }
@@ -188,59 +73,7 @@ public class GameBoard {
         return turnSequence.size() == 1 && turnSequence.get(0).getChar() == '@';
     }
 
-//    public void gameTick(char playerInput){
-//        System.out.println("Game tick " + gameTickCounter++ + " started!");
-//        char temp;
-//        Position posBeforeAction;
-//        for (Unit unit : turnSequence) {
-//            if (unit.getChar() == '@') {
-//                temp = playerInput;
-//            } else {
-//                temp = unit.onGameTick(turnSequence.get(0).getPosition(), getBoardArray());
-//            }
-//            posBeforeAction = unit.getPosition();
-//            switch (temp) {
-//                case 'w':
-//                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving up"); // debugging use
-//                    unit.accept(board[unit.getPosition().getY() - 1][unit.getPosition().getX()]);
-//                    break;
-//                case 'a':
-//                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving left");
-//                    unit.accept(board[unit.getPosition().getY()][unit.getPosition().getX() - 1]);
-//                    break;
-//                case 's':
-//                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving down");
-//                    unit.accept(board[unit.getPosition().getY() + 1][unit.getPosition().getX()]);
-//                    break;
-//                case 'd':
-//                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving right");
-//                    unit.accept(board[unit.getPosition().getY()][unit.getPosition().getX() + 1]);
-//                    break;
-//                case 'e':
-//                    continue;
-//                case 'q':
-//                    continue;
-//                case 'v':
-//                    System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is doing whatever a trap does");
-//                case '\u0000':
-//                    continue;
-//            }
-//            try{
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            updateBoard(new Position(unit.getPosition().getY(),unit.getPosition().getX()), posBeforeAction);
-//            checkForDeathsInTurnSequence();
-//        }
-//        setDeadUnitsFromTurnSequenceAsEmpty();
-//    }
-//
-//
-//
-//
-//
-//
+
     public void vectorGameTick(char playerInput){
         System.out.println("Game tick " + gameTickCounter++ + " started!");  // debugging use
         char currUnitAction;
@@ -250,7 +83,7 @@ public class GameBoard {
                 currUnitAction = playerInput;
                 System.out.println("Player health: " + unit.getHealthCurrent()); // debugging use
             } else {
-                currUnitAction = unit.onGameTick(turnSequence.get(0).getPosition(), getBoard());
+                currUnitAction = unit.onGameTick(turnSequence.get(0), getBoard());
             }
             posBeforeAction = unit.getPosition();
             switch (currUnitAction) {
@@ -323,15 +156,7 @@ public class GameBoard {
             System.err.format("IOException: %s%n", e);
         }
 
-//        try (BufferedReader br = new BufferedReader(new FileReader(currentDir + levelFile))) {
-//            String line;
-//            if ((line = br.readLine()) != null) {
-//                countColumns = line.length();
-//            }
-//        } catch (IOException e) {
-//            System.err.format("IOException: %s%n", e);
-//        }
-        tileFactory = new TileFactory(1);
+        tileFactory = new TileFactory(playerChoice.get(0));
         tilesOfBoard = new Vector<Unit>();
         BufferedReader br;
         try {
@@ -344,7 +169,11 @@ public class GameBoard {
         try {
             while ((sentence = br.readLine()) != null) {
                 for (int i = 0; i < countColumns; i++) {
-                    tilesOfBoard.add(tileFactory.produceTile(sentence.charAt(i), new Position(i, lineCounter)));
+                    if (sentence.charAt(i) == '@') {
+                        tilesOfBoard.add(tileFactory.producePlayer(playerChoice.get(0), new Position(i, lineCounter)));
+                    } else {
+                        tilesOfBoard.add(tileFactory.produceTile(sentence.charAt(i), new Position(i, lineCounter)));
+                    }
                     char Char = sentence.charAt(i);
                     if (Char == '@') {
                         turnSequence.add(0, tilesOfBoard.get(tilesOfBoard.size() - 1));
@@ -375,25 +204,16 @@ public class GameBoard {
     private Unit getTileByPosition(Position position) {
         return board[position.getY()][position.getX()];
     }
-//    private void updateBoard(Position posAfterAction, Position posBeforeAction) {
-//        if (posAfterAction.getX() != posBeforeAction.getX() || posAfterAction.getY() != posBeforeAction.getY()) {
-//            Unit temp = getTileByPosition(posAfterAction);
-//            board[posAfterAction.getY()][posAfterAction.getX()] = getTileByPosition(posBeforeAction);
-//            board[posBeforeAction.getY()][posBeforeAction.getX()] = temp;
-//        }
-//    }
-
-//    private void checkForDeathsInTurnSequence() {
-//        for (Unit unit : this.turnSequence)
-//            if (unit.getHealthAmount() <= 0) {
-//                board[unit.getPosition().getY()][unit.getPosition().getX()] = tileFactory.produceEmpty(unit.getPosition()); //TODO: change to tilesOfBoard
 //
-//            }
-//    }
 
     private void setDeadUnitsFromTurnSequenceAsEmpty() {
         for (int i = 0; i < turnSequence.size(); i++) {
             if (turnSequence.get(i).getHealthCurrent() <= 0) {
+                if (turnSequence.get(i).getChar() == 'X') {
+                    System.out.println("You died, game over");
+                    turnSequence.setElementAt(tileFactory.produceEmpty(turnSequence.get(i).getPosition()), i);
+                    break;
+                }
                 Position pos = turnSequence.get(i).getPosition();
                 int x = pos.getX();
                 int y = pos.getY();

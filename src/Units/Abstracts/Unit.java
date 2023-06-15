@@ -31,7 +31,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
 
     //###################### Actions related ######################
 
-    abstract public char onGameTick(Position playerPosition, Vector<Unit> units);
+    abstract public char onGameTick(Unit player, Vector<Unit> units);
 
     public String getName() {
         return name;

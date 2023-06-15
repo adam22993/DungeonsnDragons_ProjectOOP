@@ -1,10 +1,7 @@
 package Units.EnemyTypes;
 
 import Controller.Messages.UnitMessageController;
-import Units.ADDITIONAL.Position;
-import Units.Abstracts.Enemy;
-import Units.Abstracts.Tile;
-import Units.Abstracts.Unit;
+import Units.Abstracts.*;
 
 import java.util.Vector;
 
@@ -25,7 +22,7 @@ public class Trap extends Enemy {
     }
 
     @Override
-    public char onGameTick(Position playerPosition, Vector<Unit> units) {
+    public char onGameTick(Unit player, Vector<Unit> units) {
         this.ticksCount++;
         if (this.ticksCount % (this.visibilityTime + this.invisibilityTime) == 0 ){ // TODO: check if this is the correct way to do it
             this.ticksCount = 0;
@@ -41,10 +38,6 @@ public class Trap extends Enemy {
 //            setTrapChar('.');
         }
         return 'v';
-    }
-
-    private void setTrapChar(char Character){
-        setChar(Character);
     }
 
 
