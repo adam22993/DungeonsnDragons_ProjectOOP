@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 public class Level {
-    private static int countLevels = 0;
+    private static int countLevels = 0; // a counter for the number of levels created - also sets the level number
 
     private final String name;
     private Vector<Unit> tilesOfBoard;
@@ -21,9 +21,10 @@ public class Level {
 
     private int countColumns;
 
-    private TileFactory tileFactory;
+    private String[] levelText;
 
-    public Level(String name, Vector<Unit> tiles) {
+    public Level(String name, Vector<Unit> tiles) { // a constructor that could be useful for testing,
+                                                    // but not used currently
         if (name == null || tiles == null) {
             throw new IllegalArgumentException("Level name and tiles cannot be null.");
         }
@@ -38,7 +39,7 @@ public class Level {
         }
         this.name = name;
         this.levelNumber = ++countLevels;
-        this.tilesOfBoard = loadLevel(directory);
+        loadLevel(directory); // loading the level from the file as an array of strings
     }
 
     public static int getCountLevels() {
@@ -53,14 +54,14 @@ public class Level {
         return this.name;
     }
 
-    private Vector<Unit> loadLevel(String directory) {  // the correct version that loads a vector of units to the tilesOfBoard vector
+    private void loadLevel(String directory) {  // the correct version that loads a vector of units to the tilesOfBoard vector
         countLines = 0;
         countColumns = 0;
         String currentDir = System.getProperty("user.dir");
         System.out.println("Current file location: " + directory); // debugging use
         try (BufferedReader br = new BufferedReader(new FileReader(directory))) {
             String line = br.readLine();
-            // TODO: Look For the longets line in the file and set the countColumns to that number
+            // TODO: Look For the longest line in the file and set the countColumns to that number
             while (line != null) {
                 if (countLines == 0) {
                     countColumns = line.length();
@@ -72,8 +73,7 @@ public class Level {
             System.err.format("IOException: %s%n", e);
         }
 
-        tileFactory = new TileFactory(0);
-        tilesOfBoard = new Vector<Unit>();
+        levelText = new String[countLines];
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(directory));
@@ -84,25 +84,22 @@ public class Level {
         int lineCounter = 0;
         try {
             while ((sentence = br.readLine()) != null) {
-
-                for (int i = 0; i < countColumns; i++) {
-                    Unit unit = tileFactory.produceTile(sentence.charAt(i), new Position(i, lineCounter));
-                    tilesOfBoard.add(unit);
-                }
+                levelText[lineCounter] = sentence;
                 lineCounter++;
             }
             br.close(); // practice of good manners and hygiene while coding - close the file after you're done with it.
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
         }
+        // debugging use - printing the level
         System.out.println("The level is " + countColumns + " columns wide and " + countLines + " lines long, level " + countLevels + " loaded successfully.");
-        for (int i = 0; i < tilesOfBoard.size(); i++) {
-            System.out.print(tilesOfBoard.get(i));
-            if ((i + 1) % countColumns == 0) {
-                System.out.println();
-            }
+        for (String s : levelText) {
+            System.out.println(s);
         }
         System.out.println();
-        return tilesOfBoard;
+    }
+
+    public String[] getLevelText() {
+        return levelText;
     }
 }

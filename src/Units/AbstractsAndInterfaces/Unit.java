@@ -67,6 +67,10 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     protected void setDefensePoints(int defensePoints) {
         this.defensePoints = defensePoints;
     }
+
+    public boolean isDead(){
+        return this.getHealthCurrent() <= 0;
+    }
     public String toString(){
         return String.format("%s", this.getChar());
     }

@@ -5,11 +5,8 @@ import GameBoard.Levels.LevelLoader;
 
 public class Main {
     public static void main(String[] args) {
-//        GameBoard gameBoard = new GameBoard();
-//        if (args.length == 1){
-//            gameBoard.loadAdditions(args[0]);
-//        }
-        ControlLayer controlLayer = new ControlLayer(new GameBoard());
+
+        ControlLayer controlLayer = new ControlLayer(new GameBoard(new LevelLoader("src\\GameBoard\\Levels")));
 //        LevelLoader levelLoader = new LevelLoader("src\\GameBoard\\Levels");
     }
 }

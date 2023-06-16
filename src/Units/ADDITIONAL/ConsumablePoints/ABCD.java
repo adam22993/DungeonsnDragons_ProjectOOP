@@ -3,7 +3,7 @@ package Units.ADDITIONAL.ConsumablePoints;
 public class ABCD extends ConsumablePoints{
     public ABCD(int max) {
         super(max);
-        current = 0; // initial cd for all abilities is 0 - allowing players to use them immediately.
+        current = 0; // the initial cd for all abilities is 0 - allowing players to use them immediately.
     } // AbilityCD
 
     public boolean use() {

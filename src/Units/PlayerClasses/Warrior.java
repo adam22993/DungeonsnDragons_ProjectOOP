@@ -29,7 +29,7 @@ public class Warrior extends Player implements HeroicUnit {
             return;
         }
         this.unitMessageController.update("Warrior " + this.getName() + " casted Avenger's Shield!");
-        int dmg = this.getHealthPool() / 10 - opponent.getDefensePoints();
+        int dmg = this.getHealthPool() / 10 - opponent.getDefensePoints(); // should the defender defend against the ability?
         opponent.setHealthAmount(opponent.getHealthCurrent() - dmg);
         this.unitMessageController.update("Warrior " + this.getName() + " dealt " + dmg + " damage to " + opponent.getName() + "!");
         this.setHealthAmount(this.getHealthCurrent() + this.getDefensePoints() * 10);
@@ -79,8 +79,6 @@ public class Warrior extends Player implements HeroicUnit {
     public void visitSA(Player player, Vector<Unit> units) {
         Vector<Unit> closest = new Vector<Unit>();
         Unit chosenTarget;
-//        units.sort((s,t) -> s.getPosition().compareTo(t.getPosition()));
-        int i = 0;
         for (Unit unit : units){
             if (this.getPosition().Range(unit.getPosition()) < 3) {
                 if (closest.isEmpty() && unit.getChar() != '@') {
@@ -94,7 +92,6 @@ public class Warrior extends Player implements HeroicUnit {
                     closest.add(unit);
                 }
             }
-            i++;
         }
         if (closest.isEmpty()){
             unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed!");
@@ -108,6 +105,6 @@ public class Warrior extends Player implements HeroicUnit {
 
     @Override
     public void visitSA(Enemy enemy, Vector<Unit> units) {
-
+        return; // the player is not an enemy - do nothing
     }
 }

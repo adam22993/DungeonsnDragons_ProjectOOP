@@ -23,45 +23,20 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     private JFrame window;
     private final GameBoard gameBoard;
     private final GameUI gameUI;
-
     private JButton choice1, choice2, choice3, choice4, choice5, choice6, choice7, choice8, qButton, wButton, eButton, aButton, sButton, dButton;
 
-    public ControlLayer(GameBoard gameboard) {  // TODO: Think of a way to bypass game loading moves while player still pressing buttons.
+    public ControlLayer(GameBoard gameboard) {
         // Check the interface changes in the UI package.
         window = createWindow();
         gameUI = new GameUI(window);
-        gameBoard = new GameBoard(); // TODO: Change this to a singleton.
+        gameBoard = gameboard; // TODO: Change this to a singleton.
         window.addKeyListener(this);
         window.addMouseListener(this);
         window.addMouseMotionListener(this);
         window.setFocusable(true);
         window.setFocusTraversalKeysEnabled(false); // this does not allow the TAB key to be used for focus traversal
-//        window.add(welcomeScreenControls());
-//        window.revalidate();
         gameUI.openWelcomeScreen(welcomeScreenControls());
-
     }
-
-//    public JPanel musicControlPanel(){
-//        JPanel musicControlPanel = new JPanel();
-//        musicControlPanel.setBounds(0, 0, 1200, 50);
-//        musicControlPanel.setBackground(Color.black);
-//        JButton musicButton = new JButton("MUSIC");
-//        musicButton.setFont(normalFont);
-//        musicButton.setBackground(Color.white);
-//        musicButton.addActionListener(e -> {
-//            if (gameUI.getMusicStatus()) {
-//                gameUI.setMusicStatus(false);
-//                gameUI.stopMusic();
-//                musicButton.setText("MUSIC OFF");
-//            } else {
-//                gameUI.setMusicStatus(true);
-//                gameUI.playMusic();
-//                musicButton.setText("MUSIC ON");
-//            }
-//        });
-//
-//    }
 
     public JFrame createWindow(){
         window = new JFrame();
@@ -72,18 +47,17 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
         window.getContentPane().setBackground(Color.black);
-
         window.setResizable(false);
         return window;
     }
 
 
     public JPanel welcomeScreenControls(){
-
         JPanel startButtonPanel = new JPanel();
         startButtonPanel.setBounds(500, 560, 200, 100);
         startButtonPanel.setBackground(Color.black);
         startButtonPanel.setLayout(new BorderLayout());
+
         JButton startButton = new JButton("START");
         startButton.setFont(normalFont);
         startButton.setBackground(Color.white);
@@ -91,6 +65,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         startButton.addActionListener(e -> {
             gameUI.characterCreationScreen(characterChoice());
         });
+
         JButton quitButton = new JButton("QUIT");
         quitButton.setFont(normalFont);
         quitButton.setBackground(Color.white);
@@ -100,6 +75,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             System.exit(0);
         });
         quitButton.addKeyListener(this);
+
         startButtonPanel.add(startButton, BorderLayout.NORTH);
         startButtonPanel.add(quitButton, BorderLayout.SOUTH);
         startButtonPanel.add(createDebugStart(), BorderLayout.EAST);
@@ -136,7 +112,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
                 break;
             }
         }
-        gameBoard.setPlayerName(playerName);
+
         gameBoard.incrementGameLoadingStage();
 
         JPanel characterSelectOptions = new JPanel();
