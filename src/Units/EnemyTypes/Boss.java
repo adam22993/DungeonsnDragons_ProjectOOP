@@ -19,9 +19,12 @@ public class Boss extends Monster implements HeroicUnit {
     }
 
 
-    private void castAbility(Unit opponent, Vector<Unit> units) {
-
-    }
+//    private void castAbility(Unit opponent, Vector<Unit> units) {
+//        if (this.combatTicks % this.abilityFrequency == 0) {
+//            opponent.setHealthAmount(opponent.getHealthCurrent() - opponent.getHealthPool() / 10);
+//            this.unitMessageController.castAbility(this, opponent);
+//        }
+//    }
 
     @Override
     public void acceptSA(Unit visitor, Vector<Unit> units) {

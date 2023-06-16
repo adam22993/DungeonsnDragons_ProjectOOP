@@ -1,6 +1,7 @@
 package Units.PlayerClasses;
 import Controller.Messages.UnitMessageController;
 import Units.ADDITIONAL.ConsumablePoints.ABCD;
+import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
 import Units.AbstractsAndInterfaces.*;
 
 import java.util.Random;
@@ -60,6 +61,18 @@ public class Warrior extends Player implements HeroicUnit {
         return this.abilityCD.use();
     }
 
+    public ConsumablePoints getConsumablePoints(){
+        return this.abilityCD;
+    }
+
+    public int getCurrCD(){
+        return this.abilityCD.getCD();
+    }
+
+    public int getMaxCD(){
+        return this.abilityCD.getMax();
+    }
+
     //################### Accepts Visitor ###################
 
     @Override
@@ -93,7 +106,7 @@ public class Warrior extends Player implements HeroicUnit {
                 }
             }
         }
-        if (closest.isEmpty()){
+        if (closest.isEmpty() && !canCastAbility()) {
             unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed!");
             unitMessageController.update("Warrior " + this.getName() + " has no targets in range!");
             return; // no targets in range to cast ability on - do nothing and be sad

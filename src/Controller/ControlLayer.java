@@ -40,6 +40,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     public JFrame createWindow(){
         window = new JFrame();
+
         window.setTitle("Dungeons & Dragons OOP Project");
         window.setVisible(true);
         window.setIconImage(new ImageIcon(System.getProperty("user.dir") + "/src/UI/Assets/Images/DNDICON.png").getImage());
@@ -54,9 +55,9 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     public JPanel welcomeScreenControls(){
         JPanel startButtonPanel = new JPanel();
-        startButtonPanel.setBounds(500, 560, 200, 100);
+        startButtonPanel.setBounds(500, 546, 200, 150);
         startButtonPanel.setBackground(Color.black);
-        startButtonPanel.setLayout(new BorderLayout());
+        startButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         JButton startButton = new JButton("START");
         startButton.setFont(normalFont);
@@ -76,9 +77,9 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         });
         quitButton.addKeyListener(this);
 
-        startButtonPanel.add(startButton, BorderLayout.NORTH);
-        startButtonPanel.add(quitButton, BorderLayout.SOUTH);
-        startButtonPanel.add(createDebugStart(), BorderLayout.EAST);
+        startButtonPanel.add(startButton);
+        startButtonPanel.add(quitButton);
+        startButtonPanel.add(createDebugStart());
         startButtonPanel.setBackground(new Color(0, 0, 0, 0));
         startButtonPanel.setOpaque(false);
         startButtonPanel.setVisible(true);
@@ -94,13 +95,11 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         debugAccessGameButton.setFocusable(false);
         debugAccessGameButton.setVisible(true);
         debugAccessGameButton.addActionListener(e -> {
-            gameBoard.setPlayerChoice(0);
-            gameUI.debugStart(gameBoard.getBoardString());
+            handleDebugStart(0);
         });
         return debugAccessGameButton;
     }
     public JPanel characterChoice(){
-
         String playerName = JOptionPane.showInputDialog("Enter your name: ");
         int counter = 0;
         while (playerName == null || !playerName.matches("[a-zA-Z0-9]+") && !playerName.matches("[a-zA-Z]+")) {
@@ -114,7 +113,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         }
 
         gameBoard.incrementGameLoadingStage();
-
         JPanel characterSelectOptions = new JPanel();
         characterSelectOptions.setBounds(300, 380, 600, 250);
         characterSelectOptions.setBackground(Color.black);
@@ -225,10 +223,11 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         qButton.setBackground(Color.black);
         qButton.setForeground(Color.white);
         qButton.addActionListener(this);
-//        qButton.addActionListener(e -> {
-//            playerGamePlayInput = true;
-//            playerGamePlayInputVal = 'q';
-//        });
+        qButton.addActionListener(e -> {
+            playerGamePlayInputVal = 'q';
+            handlePlayerChoice();
+            playerGamePlayInputVal = ' ';
+        });
         qButton.setFocusable(false);
 
         wButton = new JButton("W");
@@ -236,10 +235,11 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         wButton.setBackground(Color.black);
         wButton.setForeground(Color.white);
         wButton.addActionListener(this);
-//        wButton.addActionListener(e -> {
-//            playerGamePlayInput = true;
-//            playerGamePlayInputVal = 'w';
-//        });
+        wButton.addActionListener(e -> {
+            playerGamePlayInputVal = 'w';
+            handlePlayerChoice();
+            playerGamePlayInputVal = ' ';
+        });
         wButton.setFocusable(false);
 
         eButton = new JButton("E");
@@ -247,10 +247,11 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         eButton.setBackground(Color.black);
         eButton.setForeground(Color.white);
         eButton.addActionListener(this);
-//        eButton.addActionListener(e -> {
-//            playerGamePlayInput = true;
-//            playerGamePlayInputVal = 'e';
-//        });
+        eButton.addActionListener(e -> {
+            playerGamePlayInputVal = 'e';
+            handlePlayerChoice();
+            playerGamePlayInputVal = ' ';
+        });
         eButton.setFocusable(false);
 
         aButton = new JButton("A");
@@ -258,10 +259,11 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         aButton.setBackground(Color.black);
         aButton.setForeground(Color.white);
         aButton.addActionListener(this);
-//        aButton.addActionListener(e -> {
-//            playerGamePlayInput = true;
-//            playerGamePlayInputVal = 'a';
-//        });
+        aButton.addActionListener(e -> {
+            playerGamePlayInputVal = 'a';
+            handlePlayerChoice();
+            playerGamePlayInputVal = ' ';
+        });
 
         aButton.setFocusable(false);
         sButton = new JButton("S");
@@ -269,21 +271,22 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         sButton.setBackground(Color.black);
         sButton.setForeground(Color.white);
         sButton.addActionListener(this);
-//        sButton.addActionListener(e -> {
-//            playerGamePlayInput = true;
-//            playerGamePlayInputVal = 's';
-//        });
+        sButton.addActionListener(e -> {
+            playerGamePlayInputVal = 's';
+            handlePlayerChoice();
+            playerGamePlayInputVal = ' ';
+        });
 
         sButton.setFocusable(false);
         dButton = new JButton("D");
         dButton.setFont(normalFont);
         dButton.setBackground(Color.black);
         dButton.setForeground(Color.white);
-        dButton.addActionListener(this);
-//        dButton.addActionListener(e -> {
-//            playerGamePlayInput = true;
-//            playerGamePlayInputVal = 'd';
-//        });
+        dButton.addActionListener(e -> {
+            playerGamePlayInputVal = 'd';
+            handlePlayerChoice();
+            playerGamePlayInputVal = ' ';
+        });
 
         dButton.setFocusable(false);
 
@@ -296,7 +299,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         playerChoicesPanel.add(dButton);
         playerChoicesPanel.setVisible(true);
 //        con.add(playerChoicesPanel);
-        playerChoicesPanel.addKeyListener(this);
         playerChoicesPanel.addMouseListener(this);
         playerChoicesPanel.setFocusable(true);
 //        playerChoicesPanel.requestFocusInWindow();
@@ -316,25 +318,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     @Override
     public void keyPressed(KeyEvent e) { //TODO: after fixing game window not showing the board - handle this
-        // This method is invoked when a key is released
-//        if (!keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
-//            switch (e.getKeyCode()) {
-//                case KeyEvent.VK_W:
-//                    playerGamePlayInputVal = 'W';
-//                    break;
-//                case KeyEvent.VK_S:
-//                    playerGamePlayInputVal = 'S';
-//                    break;
-//                case KeyEvent.VK_A:
-//                    playerGamePlayInputVal = 'A';
-//                    break;
-//                case KeyEvent.VK_D:
-//                    playerGamePlayInputVal = 'D';
-//                    break;
-//            }
-//            keyboardPressed = true;
-//            playerGamePlayInput = true;
-//        }
         if (e.getKeyCode() == KeyEvent.VK_W && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("W Pressed");
             keyboardPressed = true;
@@ -343,7 +326,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             keysPressedWSADEQ12345678[0] = true;
             wButton.getModel().setPressed(true);
             wButton.getModel().setArmed(true);
-            handlePlayerChoice();
         }
         if (e.getKeyCode() == KeyEvent.VK_S && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("S Pressed");
@@ -353,7 +335,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             keysPressedWSADEQ12345678[1] = true;
             sButton.getModel().setPressed(true);
             sButton.getModel().setArmed(true);
-            handlePlayerChoice();
         }
         if (e.getKeyCode() == KeyEvent.VK_A && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("A Pressed");
@@ -363,7 +344,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             keysPressedWSADEQ12345678[2] = true;
             aButton.getModel().setPressed(true);
             aButton.getModel().setArmed(true);
-            handlePlayerChoice();
         }
         if (e.getKeyCode() == KeyEvent.VK_D && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("D Pressed");
@@ -373,7 +353,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             keysPressedWSADEQ12345678[3] = true;
             dButton.getModel().setPressed(true);
             dButton.getModel().setArmed(true);
-            handlePlayerChoice();
         }
         if (e.getKeyCode() == KeyEvent.VK_E && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("E Pressed");
@@ -383,7 +362,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             keysPressedWSADEQ12345678[4] = true;
             eButton.getModel().setPressed(true);
             eButton.getModel().setArmed(true);
-            handlePlayerChoice();
         }
         if (e.getKeyCode() == KeyEvent.VK_Q && !keyboardPressed && gameBoard.getGameLoadingStage() >= 2) {
             System.out.println("Q Pressed");
@@ -393,7 +371,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             keysPressedWSADEQ12345678[5] = true;
             qButton.getModel().setPressed(true);
             qButton.getModel().setArmed(true);
-            handlePlayerChoice();
         }
         if (e.getKeyCode() == KeyEvent.VK_1 && !keyboardPressed && gameBoard.getGameLoadingStage() == 1) {
             System.out.println("1 Pressed");
@@ -575,75 +552,23 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         }
     }
 
-    private void handlePlayerChoice(){
+    private void handlePlayerChoice(){ // any other loading of the game
         gameBoard.vectorGameTick(playerGamePlayInputVal);
-        gameUI.updateBoard(gameBoard.getBoardString());
+        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
     }
 
-    private void handleGameStart(int choice){
+    private void handleGameStart(int choice){ // first loading of the game
         gameBoard.setPlayerChoice(choice);
-        gameBoard.incrementLevel();
+        gameBoard.loadNextLevel();
         gameUI.createGameScreen(gameBoard.getBoardString(), gameBoard.getPlayers().get(0), playerControls());
-        gameUI.updateBoard(gameBoard.getBoardString());
+        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
     }
 
-//    public void startNewGame() {
-////        int counterForDebug = 0;
-//        gameBoard.incrementLevel();
-//        while (!gameBoard.playerIsDead()) { // counterForDebug == 0 ||
-//            if (gameBoard.getTurnSequence().size() == 1 && gameBoard.getTurnSequence().get(0).getChar() == '@') {
-//                gameBoard.incrementLevel();
-//            }
-//            gameBoard.incrementGameLoadingStage();
-//            gameUI.updateBoard(gameBoard.getBoardString());
-//            if (!gameBoard.playerIsAloneInTurnSequence() && !isKeyboardPressed()) {
-//                waitOnPlayerInput(playerControls());
-//                gameBoard.vectorGameTick(playerGamePlayInputVal);
-//            }
-////            counterForDebug++;
-//            }
-//        }
-
-    public void startNewGame() {
-
-    }
-
-
-
-    private void waitOnPlayerInput(JPanel playerControls){
-//        JPanel PlayerControls = playerControls;
-//        PlayerControls.addKeyListener(this);
-//        PlayerControls.setBounds(0, 0, 10000, 10000);
-//        PlayerControls.requestFocus();
-//        PlayerControls.requestFocusInWindow();
-//        PlayerControls.setRequestFocusEnabled(true);
-//        PlayerControls.setFocusable(true);
-//        window.add(PlayerControls);
-//        window.revalidate();
-        while (!playerGamePlayInput) {
-            try {
-                if(didPlayerEnterInput())
-                    break;
-                Thread.sleep(500);
-                System.out.println("Waiting for player input");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-        playerGamePlayInput = false;
-
-    }
-
-    private boolean didPlayerEnterInput(){
-        try{
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-
-        }
-        System.out.println("check if window is the same hashcode: " + window.hashCode());
-        return playerGamePlayInput;
+    private void handleDebugStart(int choice){ // first loading of the game
+        gameBoard.setPlayerChoice(choice);
+        gameBoard.loadNextLevel();
+        gameUI.debugStart(gameBoard.getBoardString(), gameBoard.getPlayers().get(0), playerControls());
+        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
     }
 
     @Override
@@ -695,9 +620,5 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 //            System.out.println("Mouse moved" + counter + " (x: " + e.getX() + ", y: " + e.getY() + ")");
 //        counter++;
         window.requestFocus();
-    }
-
-    public boolean isKeyboardPressed() {
-        return keyboardPressed;
     }
 }

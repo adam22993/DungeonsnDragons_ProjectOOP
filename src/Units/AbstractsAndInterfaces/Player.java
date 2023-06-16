@@ -4,12 +4,14 @@ package Units.AbstractsAndInterfaces;
 import Controller.Messages.UnitMessageController;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
+import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
 import Units.ADDITIONAL.ConsumablePoints.EXP;
 import Units.ADDITIONAL.*;
 import java.util.Vector;
 
-public abstract class Player extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
+public abstract class Player extends Unit implements UnitInteractionVisited, UnitInteractionVisitor, HeroicUnit {
     //###################### Class related ######################
+
     protected EXP experience;
     protected Integer level;
 
@@ -37,6 +39,7 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     private void incrementLevel() {
         this.level++;
     }
+    public abstract ConsumablePoints getConsumablePoints();
 
     protected abstract void castAbility(Unit opponent); // TODO: implement special ability in subclasses - think of way to add more attacks
 
@@ -73,11 +76,15 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
         return this.experience.checkLevelUp();
     }
 
-    protected int getMaxEXP() {
+    public int getMaxEXP() {
         return this.experience.getMax();
     }
 
-    protected int getLevel() {
+    public int getCurrEXP() {
+        return this.experience.getCurrent();
+    }
+
+    public int getLevel() {
         return this.level;
     }
 
@@ -88,6 +95,13 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
 
     private void setCurrEXP(int currEXP) {
         this.experience.add(currEXP);
+    }
+
+    public String toString(){
+        if (this.isDead()){
+            return "X";
+        }
+        return String.format("%c", this.getChar());
     }
 
 

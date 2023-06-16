@@ -71,6 +71,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     public boolean isDead(){
         return this.getHealthCurrent() <= 0;
     }
+
     public String toString(){
         return String.format("%s", this.getChar());
     }

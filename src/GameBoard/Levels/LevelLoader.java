@@ -40,7 +40,7 @@ public class LevelLoader {
     }
 
     public Level getLevel() {
-        return levels.remove(new Random().nextInt(levels.size()));
+        return levels.remove(0);
     }
 
     public int getLevelsCount() {
