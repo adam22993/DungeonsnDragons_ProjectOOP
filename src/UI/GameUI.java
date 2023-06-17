@@ -221,6 +221,15 @@ public class GameUI {
         playerInfoPanel.setOpaque(true);
         window.add(playerInfoPanel);
 
+        JLabel controlLabelInfo = new JLabel("<HTML> Movement: W, A, S, D <br> Attack: Use movement to ram other units <br> Use Ability: E <br> Pass your turn: Q <br> Exit Game: ESC </HTML>");
+        controlLabelInfo.setFont(smallFont);
+        controlLabelInfo.setForeground(Color.white);
+        controlLabelInfo.setBackground(Color.black);
+        controlLabelInfo.setOpaque(false);
+        controlLabelInfo.setVisible(true);
+        controlLabelInfo.setBounds(980, 520, 200, 150);
+        window.add(controlLabelInfo);
+
         gameScreenPanel.add(boardTextArea, gbc);
         window.add(gameScreenPanel, gbc);
         JPanel playerControls = playerControlsPanel;
@@ -301,27 +310,28 @@ public class GameUI {
         if (player.getConsumablePoints() instanceof ABCD) {
             this.playerInfoUpdate((Warrior) player);
         }
-//        else if (player.getConsumablePoints() instanceof MP) {
-//            this.playerInfoUpdate((Mage) player);
-//        } else if (player.getConsumablePoints() instanceof ENERGY) {
+        else if (player.getConsumablePoints() instanceof MP) {
+            this.playerInfoUpdate((Mage) player);
+        }
+//        else if (player.getConsumablePoints() instanceof ENERGY) {
 //            this.playerInfoUpdate((Rogue) player);
 //        }
 
     }
 
     private void playerInfoUpdate(Warrior player) {
+        hpBar.setMaximum(player.getHealthPool());
         hpBar.setValue(player.getHealthCurrent());
         hpBar.setString("HP: " + player.getHealthCurrent() + "/" + player.getHealthPool());
         expBar.setValue(player.getCurrEXP());
         expBar.setMaximum(player.getMaxEXP());
         expBar.setString("XP: " + player.getCurrEXP() + "/" + player.getMaxEXP());
-        resourceBar.setString(player.getCurrCD() + "/" + player.getMaxCD());
         if (player.getCurrCD() == 0) {
             resourceBar.setBackground(new Color(33, 217, 33)); // green
             resourceBar.setString("Ready");
         } else {
             resourceBar.setBackground(new Color(32,32,32)); // gray is rg
-            resourceBar.setString("CD: " + player.getCurrCD() + "/" + player.getMaxCD());
+            resourceBar.setString("Available in: " + player.getCurrCD() + " turns");
         }
         playerLevel.setText("Level: " + player.getLevel());
         playerAttackLabel.setText("Attack: " + player.getAttackPoints());
@@ -329,28 +339,29 @@ public class GameUI {
         playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Avenger's Shield \ndmg: %d heal: %d<HTML>", player.getHealthPool()/10, player.getDefensePoints() * 10));
     }
 
-//    private void playerInfoUpdate(Mage player) {
-//        hpBar.setValue(player.getHealthCurrent());
-//        hpBar.setString("HP: " + player.getHealthCurrent() + "/" + player.getHealthPool());
-//        expBar.setValue(player.getCurrEXP());
-//        expBar.setMaximum(player.getMaxEXP());
-//        expBar.setString("XP: " + player.getCurrEXP() + "/" + player.getMaxEXP());
-//        resourceBar.setString(player.getCurrCD() + "/" + player.getMaxCD());
-//        if (player.getCurrCD() == 0) {
-//            resourceBar.setBackground(new Color(33, 217, 33)); // green
-//            resourceBar.setString("Ready");
-//        } else {
-//            resourceBar.setBackground(new Color(32, 32, 32)); // gray is rg
-//            resourceBar.setString("CD: " + player.getCurrCD() + "/" + player.getMaxCD());
-//        }
-//        playerLevel.setText("Level: " + player.getLevel());
-//        playerAttackLabel.setText("Attack: " + player.getAttackPoints());
-//        playerDefenseLabel.setText("Defense: " + player.getDefensePoints());
-//        playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Avenger's Shield \ndmg: %d heal: %d<HTML>", player.getHealthPool() / 10, player.getDefensePoints() * 10));
-//    }
+    private void playerInfoUpdate(Mage player) {
+        hpBar.setValue(player.getHealthCurrent());
+        hpBar.setMaximum(player.getHealthPool());
+        hpBar.setString("HP: " + player.getHealthCurrent() + "/" + player.getHealthPool());
+        expBar.setValue(player.getCurrEXP());
+        expBar.setMaximum(player.getMaxEXP());
+        expBar.setString("XP: " + player.getCurrEXP() + "/" + player.getMaxEXP());
+        if (player.getCurrMana() >= 30) {
+            resourceBar.setBackground(new Color(33, 217, 33)); // green
+            resourceBar.setString("CD: " + player.getCurrMana() + "/" + player.getMaxMana());
+        } else {
+            resourceBar.setBackground(new Color(32, 32, 32)); // gray is rg
+            resourceBar.setString("CD: " + player.getCurrMana() + "/" + player.getMaxMana());
+        }
+        playerLevel.setText("Level: " + player.getLevel());
+        playerAttackLabel.setText("Attack: " + player.getAttackPoints());
+        playerDefenseLabel.setText("Defense: " + player.getDefensePoints());
+        playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Blizzard \ndmg: %d heal: %d<HTML>", player.getHealthPool() / 10, player.getDefensePoints() * 10));
+    }
 
 //    private void playerInfoUpdate(Rogue player) {
 //            hpBar.setValue(player.getHealthCurrent());
+//            hpBar.setMaximum(player.getHealthPool());
 //            hpBar.setString("HP: " + player.getHealthCurrent() + "/" + player.getHealthPool());
 //            expBar.setValue(player.getCurrEXP());
 //            expBar.setMaximum(player.getMaxEXP());

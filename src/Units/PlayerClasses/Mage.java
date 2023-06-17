@@ -66,6 +66,7 @@ public class Mage extends Player implements HeroicUnit {
     }
 
 
-
-
+    public int getMaxMana() {
+        return mana.getMax();
+    }
 }

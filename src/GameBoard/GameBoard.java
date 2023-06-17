@@ -74,8 +74,8 @@ public class GameBoard {
         for (Player player : players) {
             if (!player.isDead()) {
                 currUnitAction = playerInput;
-                player.onGameTick(players.get(0), getBoard());
                 System.out.println("Player health: " + player.getHealthCurrent());
+                player.onGameTick(players.get(0), getBoard());
                 unitActionPerformed(currUnitAction, player);
             }
             tilesOfBoard.sort((s,t) -> s.getPosition().compareTo(t.getPosition()));

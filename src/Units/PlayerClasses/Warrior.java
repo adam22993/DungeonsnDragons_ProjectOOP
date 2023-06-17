@@ -24,11 +24,11 @@ public class Warrior extends Player implements HeroicUnit {
     }
     @Override
     public void castAbility(Unit opponent){
-        if (!this.canCastAbility()){
-            this.unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed!");
-            this.unitMessageController.update("Warrior " + this.getName() + " has " + this.abilityCD.getCD() + " turns left until he can cast ability again!");
-            return;
-        }
+//        if (!this.canCastAbility()){
+//            this.unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed!");
+//            this.unitMessageController.update("Warrior " + this.getName() + " has " + this.abilityCD.getCD() + " turns left until he can cast ability again!");
+//            return;
+//        }
         this.unitMessageController.update("Warrior " + this.getName() + " casted Avenger's Shield!");
         int dmg = this.getHealthPool() / 10 - opponent.getDefensePoints(); // should the defender defend against the ability?
         opponent.setHealthAmount(opponent.getHealthCurrent() - dmg);
@@ -106,10 +106,14 @@ public class Warrior extends Player implements HeroicUnit {
                 }
             }
         }
-        if (closest.isEmpty() && !canCastAbility()) {
+        if (closest.isEmpty() && canCastAbility()) {
             unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed!");
             unitMessageController.update("Warrior " + this.getName() + " has no targets in range!");
             return; // no targets in range to cast ability on - do nothing and be sad
+        } else if (!this.canCastAbility()){
+            this.unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed!");
+            this.unitMessageController.update("Warrior " + this.getName() + " has " + this.abilityCD.getCD() + " turns left until he can cast ability again!");
+            return;
         }
         chosenTarget = closest.get(Random.nextInt(closest.size()));
         this.castAbility(chosenTarget);
