@@ -19,15 +19,15 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
         return experienceValue;
     }
 
-    public String attack(Unit player){
-        int damage = this.roleAD();
-        damage = Math.max(damage - player.defensePoints, 0);
+    public void attack(Unit player){
+        int attPoints = this.roleAD();
+        int defPoints = player.roldDEF();
+        int damage = Math.max(attPoints - defPoints, 0);
         player.setHealthAmount(player.getHealthCurrent() - damage);
-        System.out.println(this.name + " attacked " + player.name + " for " + damage + " damage!, " + player.name + " health is now " + player.getHealthCurrent() + "!" );
+        unitMessageController.attackUpdate(this, player, attPoints, defPoints, damage);
         if (player.getHealthCurrent() == 0){
             unitMessageController.deathMessage(player);
         }
-        return unitMessageController.attackUpdate(this, player, damage);
     }
 
     @Override
@@ -50,8 +50,4 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
         return;
     }
 
-    public void visitSA(Player player, Vector<Unit> units) {}
-
-    @Override
-    public void visitSA(Enemy enemy, Vector<Unit> units) {}
 }

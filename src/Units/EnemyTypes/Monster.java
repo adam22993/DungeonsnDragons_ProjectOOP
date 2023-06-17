@@ -3,6 +3,7 @@ package Units.EnemyTypes;
 import Controller.Messages.UnitMessageController;
 import Units.ADDITIONAL.Position;
 import Units.AbstractsAndInterfaces.Enemy;
+import Units.AbstractsAndInterfaces.Player;
 import Units.AbstractsAndInterfaces.Tile;
 import Units.AbstractsAndInterfaces.Unit;
 
@@ -173,4 +174,6 @@ public class Monster extends Enemy  {
     public void accept(Unit visitor) {
         visitor.visit(this);
     }
+
+
 }

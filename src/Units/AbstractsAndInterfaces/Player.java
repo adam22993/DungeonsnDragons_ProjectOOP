@@ -39,9 +39,6 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     private void incrementLevel() {
         this.level++;
     }
-    public abstract ConsumablePoints getConsumablePoints();
-
-    protected abstract void castAbility(Unit opponent); // TODO: implement special ability in subclasses - think of way to add more attacks
 
     protected void gainExperience(int experience) {
         this.setCurrEXP(experience);
@@ -49,17 +46,16 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
 
     abstract public char onGameTick(Unit playerPosition, Vector<Unit> units) ;
 
-    protected String attack(Enemy enemy) {
-//        Clip clip = soundController.getClip("attack");  // an idea for sound effects - will be implemented later
-        int damage = this.roleAD();
-        damage = Math.max(damage - enemy.defensePoints, 0);
+    protected void attack(Enemy enemy) {
+        int attPoints = this.roleAD();
+        int defPoints = enemy.roleAD();
+        int damage = Math.max(attPoints - defPoints, 0);
         enemy.setHealthAmount(enemy.getHealthCurrent() - damage);
-        System.out.println(this.name + " attacked " + enemy.name + " for " + damage + " damage!, " + enemy.name + " health is now " + enemy.getHealthCurrent() + "!");
+        unitMessageController.attackUpdate(this, enemy, attPoints, defPoints, damage);
         if (enemy.getHealthCurrent() == 0) {
             unitMessageController.deathMessage(enemy);
             this.kill(enemy);
         }
-        return unitMessageController.attackUpdate(this, enemy, damage);
     }
 
     protected void kill(Enemy e) {
@@ -69,6 +65,7 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
             this.levelUp();
         }
     }
+    public abstract ConsumablePoints getConsumablePoints();
 
     //###################### Getters ######################
 

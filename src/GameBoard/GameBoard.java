@@ -130,7 +130,7 @@ public class GameBoard {
                 break;
             case 'e':
                 System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is attacking");
-                unit.acceptSA(tilesOfBoard.get(getBoard().indexOf(unit)), turnSequence);
+                unit.castHeroicAbility(turnSequence);
                 System.out.println("Unit " + unit.getChar() + " is on position " + unit.getPosition() + " after attacking");
                 break;
             case 'q': // skip basically...

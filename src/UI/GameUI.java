@@ -3,13 +3,11 @@ package UI;
 
 import Controller.Messages.MessageCallback;
 import Units.ADDITIONAL.ConsumablePoints.*;
-import Units.AbstractsAndInterfaces.HeroicUnit;
 import Units.AbstractsAndInterfaces.Player;
 import Units.PlayerClasses.*;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicProgressBarUI;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -171,18 +169,7 @@ public class GameUI {
         FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
         CCSBGPanel.setVisible(false);
-//        CCSBGPanel = new JLayeredPane();
-//
-//
-//        ImageIcon backgroundImage = new ImageIcon(currentDir + "/src/UI/Assets/Images/WelcomeScreenImage.jpg");
-//        Image bgImage = backgroundImage.getImage();
-//        bgImage = bgImage.getScaledInstance(window.getWidth(), window.getHeight(), Image.SCALE_DEFAULT);
-//        backgroundImage = new ImageIcon(bgImage);
-//        backgroundLabel = new JLabel(backgroundImage);
-//        backgroundLabel.setBounds(0, 0, window.getWidth(), window.getHeight());
-//        backgroundLabel.setVisible(true);
-//        backgroundLabel.setOpaque(false);
-//        window.add(backgroundLabel, 0);
+
 
         characterSelectOptions.setVisible(false);
         headerLabelCS.setVisible(false);
@@ -214,12 +201,32 @@ public class GameUI {
         boardTextArea.setLineWrap(true);
         boardTextArea.setWrapStyleWord(true);
         boardTextArea.setEditable(false);
-
-        JPanel playerInfoPanel = warriorInfo((Warrior) player1);
-        playerInfoPanel.setBackground(Color.black);
-        playerInfoPanel.setForeground(Color.white);
-        playerInfoPanel.setOpaque(true);
-        window.add(playerInfoPanel);
+        if (player1 instanceof Warrior) {
+            JPanel playerInfoPanel = playerInfo((Warrior) player1);
+            playerInfoPanel.setBackground(Color.black);
+            playerInfoPanel.setForeground(Color.white);
+            playerInfoPanel.setOpaque(true);
+            window.add(playerInfoPanel);
+        } else if (player1 instanceof Mage) {
+            JPanel playerInfoPanel = playerInfo((Mage) player1);
+            playerInfoPanel.setBackground(Color.black);
+            playerInfoPanel.setForeground(Color.white);
+            playerInfoPanel.setOpaque(true);
+            window.add(playerInfoPanel);
+        } else if (player1 instanceof Rogue) {
+            JPanel playerInfoPanel = playerInfo((Rogue) player1);
+            playerInfoPanel.setBackground(Color.black);
+            playerInfoPanel.setForeground(Color.white);
+            playerInfoPanel.setOpaque(true);
+            window.add(playerInfoPanel);
+        }
+//        else if (player1 instanceof Hunter) {
+//            JPanel playerInfoPanel = hunterInfo((Hunter) player1);
+//            playerInfoPanel.setBackground(Color.black);
+//            playerInfoPanel.setForeground(Color.white);
+//            playerInfoPanel.setOpaque(true);
+//            window.add(playerInfoPanel);
+//        }
 
         JLabel controlLabelInfo = new JLabel("<HTML> Movement: W, A, S, D <br> Attack: Use movement to ram other units <br> Use Ability: E <br> Pass your turn: Q <br> Exit Game: ESC </HTML>");
         controlLabelInfo.setFont(smallFont);
@@ -281,7 +288,7 @@ public class GameUI {
         boardTextArea.setLineWrap(true);
         boardTextArea.setWrapStyleWord(true);
 
-        JPanel playerInfoPanel = warriorInfo((Warrior) player1);
+        JPanel playerInfoPanel = playerInfo((Warrior) player1);
         playerInfoPanel.setBackground(Color.black);
         playerInfoPanel.setForeground(Color.white);
         playerInfoPanel.setOpaque(true);
@@ -346,43 +353,23 @@ public class GameUI {
         expBar.setValue(player.getCurrEXP());
         expBar.setMaximum(player.getMaxEXP());
         expBar.setString("XP: " + player.getCurrEXP() + "/" + player.getMaxEXP());
+        resourceBar.setMaximum(player.getMaxMana());
+        resourceBar.setValue(player.getCurrMana());
         if (player.getCurrMana() >= 30) {
-            resourceBar.setBackground(new Color(33, 217, 33)); // green
+            resourceBar.setForeground(new Color(16, 90, 250)); // blue
             resourceBar.setString("CD: " + player.getCurrMana() + "/" + player.getMaxMana());
         } else {
-            resourceBar.setBackground(new Color(32, 32, 32)); // gray is rg
+            resourceBar.setForeground(new Color(32, 32, 32)); // gray is rg
             resourceBar.setString("CD: " + player.getCurrMana() + "/" + player.getMaxMana());
         }
         playerLevel.setText("Level: " + player.getLevel());
         playerAttackLabel.setText("Attack: " + player.getAttackPoints());
         playerDefenseLabel.setText("Defense: " + player.getDefensePoints());
-        playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Blizzard \ndmg: %d heal: %d<HTML>", player.getHealthPool() / 10, player.getDefensePoints() * 10));
+        playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Blizzard <br>dmg: %d range: %d<HTML>", player.getSpellPower(), player.getAbilityRange()));
     }
 
-//    private void playerInfoUpdate(Rogue player) {
-//            hpBar.setValue(player.getHealthCurrent());
-//            hpBar.setMaximum(player.getHealthPool());
-//            hpBar.setString("HP: " + player.getHealthCurrent() + "/" + player.getHealthPool());
-//            expBar.setValue(player.getCurrEXP());
-//            expBar.setMaximum(player.getMaxEXP());
-//            expBar.setString("XP: " + player.getCurrEXP() + "/" + player.getMaxEXP());
-//            resourceBar.setString(player.getCurrCD() + "/" + player.getMaxCD());
-//            if (player.getCurrCD() == 0) {
-//                resourceBar.setBackground(new Color(33, 217, 33)); // green
-//                resourceBar.setString("Ready");
-//            } else {
-//                resourceBar.setBackground(new Color(32,32,32)); // gray is rg
-//                resourceBar.setString("CD: " + player.getCurrCD() + "/" + player.getMaxCD());
-//            }
-//            playerLevel.setText("Level: " + player.getLevel());
-//            playerAttackLabel.setText("Attack: " + player.getAttackPoints());
-//            playerDefenseLabel.setText("Defense: " + player.getDefensePoints());
-//            playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Avenger's Shield \ndmg: %d heal: %d<HTML>", player.getHealthPool()/10, player.getDefensePoints() * 10));
-//    }
 
-
-
-    public JPanel warriorInfo(Warrior player) {
+    public JPanel playerInfo(Player player) {
         JPanel playerInfoPanel = new JPanel();
         playerInfoPanel.setLayout(new GridLayout(7, 2));
         playerInfoPanel.setBounds(770, 30, 400, 400);
@@ -405,20 +392,54 @@ public class GameUI {
         playerInfoPanel.add(hpBar);
 
         // player cd and ability label
-        playerSpecialAbilityLabel = new JLabel(String.format("<HTML>Ability: Avenger's Shield \ndmg: %d heal: %d<HTML>", player.getHealthPool()/10, player.getDefensePoints() * 10));
-        playerSpecialAbilityLabel.setFont(smallFont);
-        playerSpecialAbilityLabel.setForeground(Color.white);
+        if (player instanceof Warrior) {
+            Warrior warrior = (Warrior) player;
+            playerSpecialAbilityLabel = new JLabel(String.format("<HTML>Ability: Avenger's Shield \ndmg: %d heal: %d<HTML>", player.getHealthPool() / 10, player.getDefensePoints() * 10));
+            playerSpecialAbilityLabel.setFont(smallFont);
+            playerSpecialAbilityLabel.setForeground(Color.white);
 
-        playerInfoPanel.add(playerSpecialAbilityLabel);
-        resourceBar = new JProgressBar(0, player.getMaxCD());
-        resourceBar.setStringPainted(true);
-        resourceBar.setValue(player.getCurrCD());
-        resourceBar.setString("CD: " + player.getCurrCD() + "/" + player.getMaxCD());
-        resourceBar.setFont(smallFont);
-        resourceBar.setBackground(Color.white);
-        resourceBar.setForeground(new Color(128, 128, 128));
-        playerInfoPanel.add(resourceBar);
+            playerInfoPanel.add(playerSpecialAbilityLabel);
+            resourceBar = new JProgressBar(0, warrior.getMaxCD());
+            resourceBar.setStringPainted(true);
+            resourceBar.setValue(warrior.getCurrCD());
+            resourceBar.setString("CD: " + warrior.getCurrCD() + "/" + warrior.getMaxCD());
+            resourceBar.setFont(smallFont);
+            resourceBar.setBackground(Color.white);
+            resourceBar.setForeground(new Color(128, 128, 128));
+            playerInfoPanel.add(resourceBar);
 
+        } else if (player instanceof Mage){
+            Mage mage = (Mage) player;
+            playerSpecialAbilityLabel = new JLabel(String.format("<HTML>Ability: Blizzard \ndmg: %d heal: %d<HTML>", player.getHealthPool() / 10, player.getDefensePoints() * 10));
+            playerSpecialAbilityLabel.setFont(smallFont);
+            playerSpecialAbilityLabel.setForeground(Color.white);
+
+            playerInfoPanel.add(playerSpecialAbilityLabel);
+            resourceBar = new JProgressBar(0, mage.getMaxMana());
+            resourceBar.setStringPainted(true);
+            resourceBar.setValue(mage.getCurrMana());
+            resourceBar.setString("Mana: " + mage.getCurrMana() + "/" + mage.getMaxMana());
+            resourceBar.setFont(smallFont);
+            resourceBar.setBackground(Color.black);
+            resourceBar.setForeground(new Color(16, 90, 250)); // blue
+            playerInfoPanel.add(resourceBar);
+
+        } else if (player instanceof Rogue){
+            Rogue rogue = (Rogue) player;
+            playerSpecialAbilityLabel = new JLabel(String.format("<HTML>Ability: Ambush \ndmg: %d heal: %d<HTML>", player.getHealthPool() / 10, player.getDefensePoints() * 10));
+            playerSpecialAbilityLabel.setFont(smallFont);
+            playerSpecialAbilityLabel.setForeground(Color.white);
+
+            playerInfoPanel.add(playerSpecialAbilityLabel);
+            resourceBar = new JProgressBar(0, rogue.getMaxEnergy());
+            resourceBar.setStringPainted(true);
+            resourceBar.setValue(rogue.getCurrEnergy());
+            resourceBar.setString("Energy: " + rogue.getCurrEnergy() + "/" + rogue.getMaxEnergy());
+            resourceBar.setFont(smallFont);
+            resourceBar.setBackground(Color.white);
+            resourceBar.setForeground(new Color(128, 128, 128));
+            playerInfoPanel.add(resourceBar);
+        }
         // player level label and exp bar
         playerLevel = new JLabel("Level: " + player.getLevel());
         playerLevel.setFont(smallFont);

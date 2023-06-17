@@ -34,36 +34,32 @@ public class Rogue extends Player implements HeroicUnit {
         return energy.getCurrent();
     }
 
+    public int getMaxEnergy() {
+        return energy.getMax();
+    }
+
 
     @Override
     protected void levelUp(){
         super.levelUp();
     }
 
+
     @Override
     public ConsumablePoints getConsumablePoints() {
         return this.energy;
     }
 
-    @Override
-    public void castAbility(Unit opponent) {
 
-    }
-
-
-    @Override
-    public void acceptSA(Unit visitor, Vector<Unit> units) {
-
-    }
-
-    @Override
-    public void visitSA(Player player, Vector<Unit> units) {
-
-    }
-
-    @Override
-    public void visitSA(Enemy enemy, Vector<Unit> units) {
-
+    public void castAbility(Enemy opponent, Vector<Enemy> units) {
+//        if (canCastAbility()) { // this uses mana if able to cast
+//            opponent.setHealthAmount(opponent.getHealthCurrent() - (this.getAttackPoints() + this.castCost));
+//            this.unitMessageController.castAbility(this, opponent, this.getAttackPoints() + this.castCost);
+//            if (opponent.isDead()){
+//                this.unitMessageController.deathMessage(opponent);
+//                this.gainExperience(opponent.giveExperience());
+//            }
+//        }
     }
 
 

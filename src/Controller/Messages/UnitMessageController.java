@@ -1,6 +1,7 @@
 package Controller.Messages;
 
 import GameBoard.MessagesController;
+import Units.AbstractsAndInterfaces.Player;
 import Units.AbstractsAndInterfaces.Unit;
 
 public class UnitMessageController implements MessagesController {
@@ -11,12 +12,26 @@ public class UnitMessageController implements MessagesController {
     }
 
     @Override
-    public String attackUpdate(Unit unitAttacking, Unit unitDefending, int damageDealt) {
-        return String.format("%s attacked %s for %d damage", unitAttacking.getName(), unitDefending.getName(), damageDealt);
+    public String attackUpdate(Unit unitAttacking, Unit unitDefending, int attackerDamage, int defenderDefense, int damageDealt) {
+        System.out.printf("%s attacked %s for %d damage (%s rolled %d attack points, %s rolled %d defense points), setting %s health to %d%n", unitAttacking.getName(), unitDefending.getName(), damageDealt, unitAttacking.getName(), attackerDamage, unitDefending.getName(), defenderDefense, unitDefending.getName(), unitDefending.getHealthCurrent());
+        return String.format("%s attacked %s for %d damage (%s rolled %d attack points, %s rolled %d defense points), setting %s health to %d", unitAttacking.getName(), unitDefending.getName(), damageDealt, unitAttacking.getName(), attackerDamage, unitDefending.getName(), defenderDefense, unitDefending.getName(), unitDefending.getHealthCurrent());
     }
+
+    @Override
+    public String castAbility(Unit caster, Unit opponent, int damageDealt) {
+        System.out.printf("%s casted ability on %s hitting for %d, setting %s health to %d%n", caster.getName(), opponent.getName(), damageDealt, opponent.getName(), opponent.getHealthCurrent());
+        return String.format("%s casted ability on %s hitting for %d, setting %s health to %d", caster.getName(), opponent.getName(), damageDealt, opponent.getName(), opponent.getHealthCurrent());
+    }
+
 
     public String deathMessage(Unit unit) {
         System.out.printf("%s has been slain!%n", unit.getName());
         return String.format("%s has been slain!", unit.getName());
+    }
+
+    @Override
+    public String levelUpMessage(Player player) {
+        System.out.printf("%s leveled up to level %d!%n", player.getName(), player.getLevel());
+        return String.format("%s leveled up to level %d!", player.getName(), player.getLevel());
     }
 }

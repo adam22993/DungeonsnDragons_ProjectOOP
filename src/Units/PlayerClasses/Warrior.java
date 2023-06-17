@@ -22,19 +22,12 @@ public class Warrior extends Player implements HeroicUnit {
         this.tickCD();
         return 0;
     }
-    @Override
+
     public void castAbility(Unit opponent){
-//        if (!this.canCastAbility()){
-//            this.unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed!");
-//            this.unitMessageController.update("Warrior " + this.getName() + " has " + this.abilityCD.getCD() + " turns left until he can cast ability again!");
-//            return;
-//        }
-        this.unitMessageController.update("Warrior " + this.getName() + " casted Avenger's Shield!");
         int dmg = this.getHealthPool() / 10 - opponent.getDefensePoints(); // should the defender defend against the ability?
         opponent.setHealthAmount(opponent.getHealthCurrent() - dmg);
-        this.unitMessageController.update("Warrior " + this.getName() + " dealt " + dmg + " damage to " + opponent.getName() + "!");
         this.setHealthAmount(this.getHealthCurrent() + this.getDefensePoints() * 10);
-        this.unitMessageController.update("Warrior " + this.getName() + " healed himself for " + this.getDefensePoints() * 10 + "!");
+        this.unitMessageController.castAbility(this, opponent, dmg);
     }
 
 
@@ -50,7 +43,7 @@ public class Warrior extends Player implements HeroicUnit {
         this.setHealthAmount(this.getHealthPool());
         this.setAttackPoints(this.getAttackPoints() + 2 * this.getLevel());
         this.setDefensePoints(this.getDefensePoints() + this.getLevel());
-        this.unitMessageController.update("Warrior " + this.getName() + " leveled up to level " + this.getLevel() + "!");
+        this.unitMessageController.update(String.format("Warrior %s reached level %d: +%d Health, +%d Attack, +%d Defense", this.getName(), this.getLevel(), 15 * this.getLevel(), 7 * this.getLevel(), 3 * this.getLevel()));
         if (!this.experience.checkLevelUp()){
             return;
         }
@@ -83,13 +76,8 @@ public class Warrior extends Player implements HeroicUnit {
     private void resetCD(){
         this.abilityCD.reset();
     }
-    @Override
-    public void acceptSA(Unit visitor, Vector<Unit> units) {
-        visitor.visitSA(this, units);
-    }
 
-    @Override
-    public void visitSA(Player player, Vector<Unit> units) {
+    public void castHeroicAbility(Vector<Unit> units) {
         Vector<Unit> closest = new Vector<Unit>();
         Unit chosenTarget;
         for (Unit unit : units){
@@ -107,21 +95,14 @@ public class Warrior extends Player implements HeroicUnit {
             }
         }
         if (closest.isEmpty() && canCastAbility()) {
-            unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed!");
-            unitMessageController.update("Warrior " + this.getName() + " has no targets in range!");
+            unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed! (no targets in range!)");
             return; // no targets in range to cast ability on - do nothing and be sad
         } else if (!this.canCastAbility()){
-            this.unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed!");
-            this.unitMessageController.update("Warrior " + this.getName() + " has " + this.abilityCD.getCD() + " turns left until he can cast ability again!");
+            this.unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed! " + this.abilityCD.getCD() + " turns left until he can cast ability again!");
             return;
         }
         chosenTarget = closest.get(Random.nextInt(closest.size()));
         this.castAbility(chosenTarget);
-
     }
 
-    @Override
-    public void visitSA(Enemy enemy, Vector<Unit> units) {
-        return; // the player is not an enemy - do nothing
-    }
 }

@@ -36,7 +36,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
         return Random.nextInt(0, this.attackPoints);
     }
 
-    protected int roleDEF(){
+    protected int roldDEF(){
         return Random.nextInt(0, this.defensePoints);
     }
 
@@ -72,9 +72,11 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
         return this.getHealthCurrent() <= 0;
     }
 
+
     public String toString(){
         return String.format("%s", this.getChar());
     }
+
 
 
 
@@ -84,8 +86,6 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     abstract public void visit(Empty empty);
     abstract public void visit(Wall wall);
 
-    public void acceptSA(Unit visitor, Vector<Unit> units){}
-    public void visitSA(Player player, Vector<Unit> units){}
-    public void visitSA(Enemy enemy, Vector<Unit> units){}
+    public void castHeroicAbility(Vector<Unit> units){}
 
 }

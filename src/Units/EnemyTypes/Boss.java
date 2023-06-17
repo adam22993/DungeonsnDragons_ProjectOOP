@@ -8,7 +8,7 @@ import Units.AbstractsAndInterfaces.Unit;
 
 import java.util.Vector;
 
-public class Boss extends Monster implements HeroicUnit {
+public class Boss extends Monster {
 
     private int abilityFrequency;
     private int combatTicks;
@@ -19,25 +19,4 @@ public class Boss extends Monster implements HeroicUnit {
     }
 
 
-//    private void castAbility(Unit opponent, Vector<Unit> units) {
-//        if (this.combatTicks % this.abilityFrequency == 0) {
-//            opponent.setHealthAmount(opponent.getHealthCurrent() - opponent.getHealthPool() / 10);
-//            this.unitMessageController.castAbility(this, opponent);
-//        }
-//    }
-
-    @Override
-    public void acceptSA(Unit visitor, Vector<Unit> units) {
-        visitor.visitSA(this, units);
-    }
-
-    @Override
-    public void visitSA(Player player, Vector<Unit> units) {
-
-    }
-
-    @Override
-    public void visitSA(Enemy enemy, Vector<Unit> units) {
-
-    }
 }
