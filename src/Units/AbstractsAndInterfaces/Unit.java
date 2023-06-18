@@ -1,6 +1,6 @@
 package Units.AbstractsAndInterfaces;
 
-import Controller.Messages.UnitMessageController;
+import GameBoard.MessagesController;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.ConsumablePoints.HP;
@@ -16,16 +16,17 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     protected int attackPoints;
     protected int defensePoints;
     Random Random = new Random();
-    UnitMessageController unitMessageController = new UnitMessageController();
 
-    public Unit(String name, int healthPool, Integer attackPoints, Integer defensePoints, char Char) {
+    protected MessagesController m;
+
+    public Unit(String name, int healthPool, Integer attackPoints, Integer defensePoints, char Char, MessagesController m) {
         super(Char);
         this.name = name;
         this.health = new HP(healthPool);
         this.attackPoints = attackPoints;
         this.defensePoints = defensePoints;
         this.setChar(Char);
-
+        this.m = m;
     }
 
     //###################### Actions related ######################

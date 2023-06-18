@@ -1,6 +1,6 @@
 package Units.ADDITIONAL.ConsumablePoints;
 
-public class ABCD extends ConsumablePoints{
+public class ABCD extends ConsumablePoints{ // ABCD means Ability Cooldown - very creative, I know.
     public ABCD(int max) {
         super(max);
         current = 0; // the initial cd for all abilities is 0 - allowing players to use them immediately.

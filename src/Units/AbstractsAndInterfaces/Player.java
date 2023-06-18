@@ -1,7 +1,7 @@
 package Units.AbstractsAndInterfaces;
 
 
-import Controller.Messages.UnitMessageController;
+import GameBoard.MessagesController;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
@@ -9,20 +9,17 @@ import Units.ADDITIONAL.ConsumablePoints.EXP;
 import Units.ADDITIONAL.*;
 import java.util.Vector;
 
-public abstract class Player extends Unit implements UnitInteractionVisited, UnitInteractionVisitor, HeroicUnit {
+public abstract class Player extends Unit implements UnitInteractionVisited, UnitInteractionVisitor, MessagesController {
     //###################### Class related ######################
 
     protected EXP experience;
     protected Integer level;
 
-    protected UnitMessageController unitMessageController;
-
-    public Player(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, UnitMessageController UMC) {
+    public Player(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points) {
         // TODO Random choose stats constructor stub
-        super(name, Health_pool, Attack_points, Defense_points, '@');
+        super(name, Health_pool, Attack_points, Defense_points, '@', message -> {});
         this.experience = new EXP(50);
         this.level = 1;
-        this.unitMessageController = UMC;
     }
 
 
@@ -30,8 +27,8 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
         this.experience.subtract(this.getMaxEXP());
         this.incrementLevel();
         this.setMaxEXP(50 * this.getLevel());
-        this.attackPoints += 5 * this.getLevel();
-        this.defensePoints += 2 * this.getLevel();
+        this.attackPoints += 4 * this.getLevel();
+        this.defensePoints += this.getLevel();
         this.setHealthPool(health.getMax() + 10 * this.getLevel());
         this.health.setCurrentInBounds(getHealthPool());
     }
@@ -51,9 +48,9 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
         int defPoints = enemy.roleAD();
         int damage = Math.max(attPoints - defPoints, 0);
         enemy.setHealthAmount(enemy.getHealthCurrent() - damage);
-        unitMessageController.attackUpdate(this, enemy, attPoints, defPoints, damage);
+        m.update(String.format("%s attacked %s for %d damage (%s rolled %d attack points, %s rolled %d defense points), setting %s health to %d", this.getName(), enemy.getName(), damage, this.getName(), attPoints, enemy.getName(), defPoints, enemy.getName(), enemy.getHealthCurrent()));
         if (enemy.getHealthCurrent() == 0) {
-            unitMessageController.deathMessage(enemy);
+            m.update(String.format("%s has slain %s", this.getName(), enemy.getName()));
             this.kill(enemy);
         }
     }

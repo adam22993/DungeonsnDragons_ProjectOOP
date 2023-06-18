@@ -6,6 +6,7 @@ import UI.GameUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Vector;
 
 public class ControlLayer implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
 
@@ -45,11 +46,12 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         window.setIconImage(new ImageIcon(System.getProperty("user.dir") + "/src/UI/Assets/Images/DNDICON.png").getImage());
         window.setSize(1200, 720);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        try{
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+
+//        try{
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
         window.setLayout(null);
         window.getContentPane().setBackground(Color.black);
         window.setResizable(false);
@@ -559,22 +561,30 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     }
 
     private void handlePlayerChoice(){ // any other loading of the game
+        gameBoard.resetUnitsCallbacks();
         gameBoard.vectorGameTick(playerGamePlayInputVal);
-        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
+        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers(), new Vector<>());
+        Vector<String> unitsCallbacks = gameBoard.getUnitsCallbacks();
+        if (!unitsCallbacks.isEmpty()){
+            gameUI.updateCallback(unitsCallbacks);
+        }
+        Vector<String> Yo = new Vector<String>();
+        Yo.add("Yo");
+        gameUI.updateCallback(Yo);
     }
 
     private void handleGameStart(int choice){ // first loading of the game
         gameBoard.setPlayerChoice(choice);
         gameBoard.loadNextLevel();
         gameUI.createGameScreen(gameBoard.getBoardString(), gameBoard.getPlayers().get(0), playerControls());
-        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
+        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers(), new Vector<>());
     }
 
     private void handleDebugStart(int choice){ // first loading of the game
         gameBoard.setPlayerChoice(choice);
         gameBoard.loadNextLevel();
         gameUI.debugStart(gameBoard.getBoardString(), gameBoard.getPlayers().get(0), playerControls());
-        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
+        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers(), new Vector<>());
     }
 
     @Override

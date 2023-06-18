@@ -1,6 +1,6 @@
 package Patterns.Factory;
 
-import Controller.Messages.UnitMessageController;
+import GameBoard.MessagesController;
 import Units.ADDITIONAL.*;
 import Units.AbstractsAndInterfaces.*;
 import Units.EnemyTypes.*;
@@ -18,8 +18,14 @@ public class TileFactory {
     private final List<Supplier<Player>> playersList;
     private final Map<Character, Supplier<Enemy>> enemiesMap;
 
-    UnitMessageController UMC = new UnitMessageController(); //UnitMessageController
     private Player selected;
+
+    private MessagesController m = new MessagesController() {
+        @Override
+        public void update(String message) {
+
+        }
+    };
 
     public TileFactory(int playerChoice){
         this.playersList = initPlayers();
@@ -29,20 +35,19 @@ public class TileFactory {
 
     private Map<Character, Supplier<Enemy>> initEnemies() {
         List<Supplier<Enemy>> enemies = Arrays.asList(
-                () -> new Monster('s', "Lannister Solider", 80, 8, 3, 25, 15, UMC),
-                () -> new Monster('k', "Lannister Knight", 200, 14, 8, 50,   4, UMC),
-                () -> new Monster('q', "Queen's Guard", 400, 20, 15, 100,  5, UMC),
-                () -> new Boss('M', "The Mountain", 1000, 60, 25, 500, 6, 5, UMC),
-                () -> new Boss('C', "Queen Cersei", 100, 10, 10,1000, 1, 8, UMC),
-                () -> new Trap('B', "Bonus Trap", 1, 1, 1, 250,  1, 2, UMC),
-                () -> new Trap('Q', "Queen's Trap", 250, 50, 10, 100, 3, 10, UMC),
-
-                () -> new Monster('z', "Wright", 600, 30, 15,100, 3, UMC),
-                () -> new Monster('b', "Bear-Wright", 1000, 75, 30, 250,  4, UMC),
-                () -> new Monster('g', "Giant-Wright",1500, 100, 40,500,   5, UMC),
-                () -> new Monster('w', "White Walker", 2000, 150, 50, 1000, 6, UMC),
-                () -> new Boss('K', "Night's King", 5000, 300, 150, 5000, 8, 3, UMC),
-                () -> new Trap('D', "Death Trap", 500, 100, 20, 250, 1, 10, UMC)
+                () -> new Monster('s', "Lannister Solider", 80, 8, 3, 25, 15),
+                () -> new Monster('k', "Lannister Knight", 200, 14, 8, 50,   4),
+                () -> new Monster('q', "Queen's Guard", 400, 20, 15, 100,  5),
+                () -> new Boss('M', "The Mountain", 1000, 60, 25, 500, 6, 5),
+                () -> new Boss('C', "Queen Cersei", 100, 10, 10,1000, 1, 8),
+                () -> new Trap('B', "Bonus Trap", 1, 1, 1, 250,  1, 2),
+                () -> new Trap('Q', "Queen's Trap", 250, 50, 10, 100, 3, 10),
+                () -> new Monster('z', "Wright", 600, 30, 15,100, 3),
+                () -> new Monster('b', "Bear-Wright", 1000, 75, 30, 250,  4),
+                () -> new Monster('g', "Giant-Wright",1500, 100, 40,500,   5),
+                () -> new Monster('w', "White Walker", 2000, 150, 50, 1000, 6),
+                () -> new Boss('K', "Night's King", 5000, 300, 150, 5000, 8, 3),
+                () -> new Trap('D', "Death Trap", 500, 100, 20, 250, 1, 10)
         );
 
         return enemies.stream().collect(Collectors.toMap(s -> s.get().getChar(), Function.identity()));
@@ -50,12 +55,12 @@ public class TileFactory {
 
     private List<Supplier<Player>> initPlayers() {
         return Arrays.asList(
-                () -> new Warrior("Jon Snow", 300, 30, 4, 3, UMC),
-                () -> new Warrior("The Hound", 400, 20, 6, 5, UMC),
-                () -> new Mage("Melisandre", 100, 5, 1, 300, 30, 15, 5, 6, UMC),
-                () -> new Mage("Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4, UMC),
-                () -> new Rogue("Arya Stark", 150, 40, 2, 20, UMC),
-                () -> new Rogue("Bronn", 250, 35, 3, 50, UMC)
+                () -> new Warrior("Jon Snow", 300, 30, 4, 3),
+                () -> new Warrior("The Hound", 400, 20, 6, 5),
+                () -> new Mage("Melisandre", 100, 5, 1, 300, 30, 150, 5, 6),
+                () -> new Mage("Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4),
+                () -> new Rogue("Arya Stark", 150, 40, 2, 20),
+                () -> new Rogue("Bronn", 250, 35, 3, 50)
 //                () -> new Hunter("Ygritte", 220, 30, 2, 6) // TODO: Implement for bonus
         );
     }

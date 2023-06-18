@@ -22,7 +22,7 @@ public class LevelLoader {
             for (File file : files) {
                 if (file.getName().endsWith(".txt")) {
                     fileNames.add(file.getName());
-                    levels.add(new Level(file.getName(), directory + "\\" + file.getName()));
+                    levels.add(new Level(file.getName(), directory + "/" + file.getName()));
                 }
             }
 

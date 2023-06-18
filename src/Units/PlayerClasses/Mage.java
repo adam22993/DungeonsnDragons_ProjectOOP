@@ -1,6 +1,5 @@
 package Units.PlayerClasses;
 
-import Controller.Messages.UnitMessageController;
 import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
 import Units.ADDITIONAL.ConsumablePoints.MP;
 import Units.AbstractsAndInterfaces.*;
@@ -15,17 +14,15 @@ public class Mage extends Player {
     private int hitCount;
     private int spellPower;
     private MP mana;
-    UnitMessageController unitMessageController;
 
     public Mage(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int manaPool,
-                int manaCost, int spellPower, int hitCount, int abilityRange, UnitMessageController UMC) {
-        super(name, Health_pool, Attack_points, Defense_points, UMC);
+                int manaCost, int spellPower, int hitCount, int abilityRange) {
+        super(name, Health_pool, Attack_points, Defense_points);
         this.mana = new MP(manaPool);
         this.manaCost = manaCost;
         this.spellPower = spellPower;
         this.hitCount = hitCount;
         this.abilityRange = abilityRange;
-        this.unitMessageController = UMC;
         this.abilityName = "Blizzard";
     }
 
@@ -49,7 +46,7 @@ public class Mage extends Player {
         Random Random = new Random();
         if (canCastAbility()) { // this uses mana if able to cast
             if (enemiesInRange.size() == 0) { // if there are no enemies in range, waste cast
-                this.unitMessageController.update(String.format("%s tried to cast ability, but there were no enemies in range", this.getName()));
+                this.m.update(String.format("%s tried to cast ability, but there were no enemies in range", this.getName()));
                 return;
             }
             for (int currHitCount = 0; currHitCount < this.hitCount; currHitCount++) {
@@ -61,9 +58,9 @@ public class Mage extends Player {
                 int def = curr.roleDEF();
                 int dmg = this.spellPower - def;
                 curr.setHealthAmount(curr.getHealthCurrent() - (dmg));
-                this.unitMessageController.castAbility(this, curr, this.spellPower, def, dmg);
+                this.m.update(String.format("%s casted %s on %s for %d damage (%s attacked for %d attack points, %s rolled %d defense points), setting %s health to %d%n", this.getName(), this.getAbilityName(), curr.getName(), dmg, this.getName(), this.spellPower, curr.getName(), def, curr.getName(), curr.getHealthCurrent()));
                 if (curr.isDead()) {
-                    this.unitMessageController.deathMessage(curr);
+                    this.m.update(String.format("%s has slain %s", this.getName(), curr.getName()));
                     this.gainExperience(curr.giveExperience());
                     if (this.checkLevelUp()) {
                         this.levelUp();
@@ -72,7 +69,7 @@ public class Mage extends Player {
                 enemiesInRange.remove(randomIndex);
             }
         } else {
-            this.unitMessageController.update(String.format("%s tried to cast ability, but didn't have enough mana", this.getName()));
+            this.m.update(String.format("%s tried to cast ability, but didn't have enough mana", this.getName()));
         }
 
 
@@ -82,8 +79,8 @@ public class Mage extends Player {
         super.levelUp();
         this.levelUpManaGain();
         this.spellPower += 10 * this.getLevel();
-        this.unitMessageController.update(String.format("Mage %s reached level %d: +%d Health, +%d Attack, +%d Defense, +%d Spell Power, +%d Mana Pool",
-                this.getName(), this.getLevel(), 10 * this.getLevel(), 5 * this.getLevel(), 2 * this.getLevel(), 10 * this.getLevel(), this.getLevel() * 25));
+        this.m.update(String.format("Mage %s reached level %d: +%d Health, +%d Attack, +%d Defense, +%d Spell Power, +%d Mana Pool",
+                this.getName(), this.getLevel(), 10 * this.getLevel(), 4 * this.getLevel(), this.getLevel(), 10 * this.getLevel(), this.getLevel() * 25));
         if (!this.experience.checkLevelUp()) {
             return;
         }
@@ -126,4 +123,8 @@ public class Mage extends Player {
         return mana.getMax();
     }
 
+    @Override
+    public void update(String message) {
+        this.m.update(message);
+    }
 }

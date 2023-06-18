@@ -1,7 +1,6 @@
 
 package UI;
 
-import Controller.Messages.MessageCallback;
 import Units.ADDITIONAL.ConsumablePoints.*;
 import Units.AbstractsAndInterfaces.Player;
 import Units.PlayerClasses.*;
@@ -17,8 +16,8 @@ import java.util.Vector;
 
 public class GameUI {
 
+
     private JFrame window;
-    private Container con;
     private JPanel labelsPanel, startButtonPanel, mainTextPanel, characterSelectOptions, headerLabelCS, boardPanel, playerControlPanel, WSImagesPanel;
     private JLabel backgroundLabel, chooseACharacter, playerAttackLabel, playerDefenseLabel, playerSpecialAbilityLabel, playerLevel;
     private JTextArea boardTextArea;
@@ -37,13 +36,11 @@ public class GameUI {
     private boolean musicPlaying = false;
     private Player player;
 
-    private MessageCallback m;
 
 
     public GameUI(JFrame controlLayerWindow) {
         loadMusicFolderToVector(currentDir + "/src/UI/Assets/Audio/");
         window = controlLayerWindow;
-        m = (m) -> displayMessage(m);
     }
 
     private void displayMessage(String m) {
@@ -60,8 +57,6 @@ public class GameUI {
     }
 
     public void openWelcomeScreen(JPanel startButtonsPanel) {
-//        window = controlLayerWindow;
-//        con = window.getContentPane();
 
         clip = clips.get(0);  // mac for some reason loads differently than windows, sequence is different
         if (clip != null) {
@@ -364,11 +359,11 @@ public class GameUI {
         window.repaint();
     }
 
-    public void updateBoard(String board, Vector<Player> players/*, String[] newMessages*/) {
+    public void updateBoard(String board, Vector<Player> players, Vector<String> newMessages) {
         System.out.println(board);
         boardTextArea.setText(board);
         accept(players.get(0));
-//        updateLabelsPanel(newMessages);
+        updateCallback(newMessages);
 
     }
 
@@ -643,5 +638,19 @@ public class GameUI {
         } catch (Exception e) {
             clips.stream().iterator().next().start();
         }
+    }
+
+    public void updateCallback(Vector<String> callback) {
+        for (String s : callback) {
+            addLabelToGameTickInfoPanel(s);
+        }
+    }
+
+    private void addLabelToGameTickInfoPanel(String s) {
+        JLabel label = new JLabel(s);
+        label.setFont(smallFont);
+        label.setForeground(Color.BLACK);
+        label.setVisible(true);
+        labelsPanel.add(label);
     }
 }

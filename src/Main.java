@@ -6,7 +6,7 @@ import GameBoard.Levels.LevelLoader;
 public class Main {
     public static void main(String[] args) {
 
-        ControlLayer controlLayer = new ControlLayer(new GameBoard(new LevelLoader("src\\GameBoard\\Levels")));
+        ControlLayer controlLayer = new ControlLayer(new GameBoard(new LevelLoader("src/GameBoard/Levels")));
 //        LevelLoader levelLoader = new LevelLoader("src\\GameBoard\\Levels");
     }
 }

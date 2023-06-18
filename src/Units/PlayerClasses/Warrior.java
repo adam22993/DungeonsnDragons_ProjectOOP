@@ -1,5 +1,4 @@
 package Units.PlayerClasses;
-import Controller.Messages.UnitMessageController;
 import Units.ADDITIONAL.ConsumablePoints.ABCD;
 import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
 import Units.AbstractsAndInterfaces.*;
@@ -7,16 +6,14 @@ import Units.AbstractsAndInterfaces.*;
 import java.util.Random;
 import java.util.Vector;
 
-public class Warrior extends Player implements HeroicUnit {
+public class Warrior extends Player {
 
     private final String abilityName;
     protected ABCD abilityCD; // Ability Cooldown
-    UnitMessageController unitMessageController;
     Random Random = new Random();
-    public Warrior(String name, int healthPool, int attackPoints, int defensePoints, int abilityCD, UnitMessageController UMC) {
-        super(name, healthPool, attackPoints, defensePoints, UMC);
+    public Warrior(String name, int healthPool, int attackPoints, int defensePoints, int abilityCD) {
+        super(name, healthPool, attackPoints, defensePoints);
         this.abilityCD = new ABCD(abilityCD);
-        this.unitMessageController = UMC;
         this.abilityName = "Avenger's Shield";
     }
 
@@ -43,7 +40,7 @@ public class Warrior extends Player implements HeroicUnit {
         this.setHealthAmount(this.getHealthPool());
         this.setAttackPoints(this.getAttackPoints() + 2 * this.getLevel());
         this.setDefensePoints(this.getDefensePoints() + this.getLevel());
-        this.unitMessageController.update(String.format("Warrior %s reached level %d: +%d Health, +%d Attack, +%d Defense", this.getName(), this.getLevel(), 15 * this.getLevel(), 7 * this.getLevel(), 3 * this.getLevel()));
+        this.m.update(String.format("Warrior %s reached level %d: +%d Health, +%d Attack, +%d Defense", this.getName(), this.getLevel(), 15 * this.getLevel(), 6 * this.getLevel(), 2 * this.getLevel()));
         if (!this.experience.checkLevelUp()){
             return;
         }
@@ -95,10 +92,10 @@ public class Warrior extends Player implements HeroicUnit {
             }
         }
         if (closest.isEmpty() && canCastAbility()) {
-            unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed! (no targets in range!)");
+            m.update("Warrior " + this.getName() + " tried to cast ability, but failed! (no targets in range!)");
             return; // no targets in range to cast ability on - do nothing and be sad
         } else if (!this.canCastAbility()){
-            this.unitMessageController.update("Warrior " + this.getName() + " tried to cast ability, but failed! " + this.abilityCD.getCD() + " turns left until he can cast ability again!");
+            this.m.update("Warrior " + this.getName() + " tried to cast ability, but failed! " + this.abilityCD.getCD() + " turns left until he can cast ability again!");
             return;
         }
         chosenTarget = closest.get(Random.nextInt(closest.size()));
@@ -108,9 +105,9 @@ public class Warrior extends Player implements HeroicUnit {
         // not written in the instructions but the game does it
         chosenTarget.setHealthAmount(chosenTarget.getHealthCurrent() - dmg);
         this.setHealthAmount(this.getHealthCurrent() + this.getDefensePoints() * 10);
-        this.unitMessageController.castAbility(this, chosenTarget, hit, def, dmg);
+        this.m.update(String.format("%s casted %s on %s for %d damage (%s attacked for %d attack points, %s rolled %d defense points), setting %s health to %d", this.getName(), this.getAbilityName(), chosenTarget.getName(), dmg, this.getName(), hit, chosenTarget.getName(), def, chosenTarget.getName(), chosenTarget.getHealthCurrent()));
         if (chosenTarget.isDead()){
-            this.unitMessageController.update("Warrior " + this.getName() + " killed " + chosenTarget.getName() + "!");
+            this.m.update("Warrior " + this.getName() + " killed " + chosenTarget.getName() + "!");
             this.gainExperience(chosenTarget.giveExperience());
             if (this.checkLevelUp()){
                 this.levelUp();
@@ -119,5 +116,8 @@ public class Warrior extends Player implements HeroicUnit {
     }
 
 
-
+    @Override
+    public void update(String message) {
+        this.m.update(message);
+    }
 }

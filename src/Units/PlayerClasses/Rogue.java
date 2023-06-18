@@ -1,6 +1,5 @@
 package Units.PlayerClasses;
 
-import Controller.Messages.UnitMessageController;
 import Units.ADDITIONAL.ConsumablePoints.*;
 import Units.AbstractsAndInterfaces.Enemy;
 import Units.AbstractsAndInterfaces.HeroicUnit;
@@ -9,18 +8,16 @@ import Units.AbstractsAndInterfaces.Unit;
 
 import java.util.Vector;
 
-public class Rogue extends Player implements HeroicUnit {
+public class Rogue extends Player {
 
     private final String abilityName;
     protected int castCost;
     private ENERGY energy;
-    UnitMessageController unitMessageController;
 
-    public Rogue(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int castCost, UnitMessageController UMC) {
-        super(name, Health_pool, Attack_points, Defense_points, UMC);
+    public Rogue(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int castCost) {
+        super(name, Health_pool, Attack_points, Defense_points);
         this.energy = new ENERGY(100);
         this.castCost = castCost;
-        this.unitMessageController = UMC;
         this.abilityName = "Fan of Blades";
     }
     @Override
@@ -67,6 +64,11 @@ public class Rogue extends Player implements HeroicUnit {
 //                this.gainExperience(opponent.giveExperience());
 //            }
 //        }
+    }
+
+    @Override
+    public void update(String message) {
+        this.m.update(message);
     }
 
 

@@ -1,5 +1,5 @@
 package GameBoard;
-import Controller.Messages.UnitMessageController;
+import Controller.Messages.MessageCallback;
 import GameBoard.Levels.Level;
 import GameBoard.Levels.LevelLoader;
 import Patterns.Factory.TileFactory;
@@ -9,7 +9,7 @@ import Units.AbstractsAndInterfaces.*;
 import java.util.List;
 import java.util.Vector;
 
-public class GameBoard {
+public class GameBoard implements MessagesController{
     /**
      * This class represents the game board. It holds the board itself, and the turn sequence.
      * It also holds the current level.
@@ -29,19 +29,34 @@ public class GameBoard {
 
     private int gameTickCounter = 1;
 
-    public UnitMessageController UMC;
+    public MessagesController m;
 
     private LevelLoader levelLoader;
+
+    private Vector<String> unitsCallbacks = new Vector<String>();
 
 
     public GameBoard(LevelLoader loader) {
         this.levelLoader = loader;
-        this.UMC = new UnitMessageController();
+        this.m = this::addUnitCallback;
         this.tilesOfBoard = new Vector<Unit>();
         this.turnSequence = new Vector<Enemy>();
         this.levels = new Vector<Level>();
         this.players = new Vector<Player>();
         this.playerChoice = new Vector<Integer>();
+    }
+
+    public void resetUnitsCallbacks(){
+        this.unitsCallbacks.clear();
+    }
+
+    public void addUnitCallback(String callback){
+        this.unitsCallbacks.add(callback);
+    }
+
+    @Override
+    public void update(String message) {
+        addUnitCallback(message);
     }
 
     public void setPlayerChoice(int playerChoice){
@@ -213,6 +228,16 @@ public class GameBoard {
     public List<Enemy> getTurnSequence() {
         return turnSequence;
     }
+
+
+    public Vector<String> getUnitsCallbacks() {
+        return unitsCallbacks;
+    }
+
+//    public void setUnitsCallbacks(Vector<String> unitsCallbacks) {
+//        this.unitsCallbacks = unitsCallbacks;
+//    }
+
 
 
 }

@@ -1,6 +1,5 @@
 package Units.EnemyTypes;
 
-import Controller.Messages.UnitMessageController;
 import Units.ADDITIONAL.Position;
 import Units.AbstractsAndInterfaces.Enemy;
 import Units.AbstractsAndInterfaces.Player;
@@ -12,11 +11,9 @@ import java.util.Vector;
 
 public class Monster extends Enemy  {
     int experienceValue;
-    UnitMessageController unitMessageController;
-    public Monster(char Char, String name, Integer healthPool, Integer attackPoints, Integer defensePoints, int experienceValue, int visionRange, UnitMessageController UMC) {
+    public Monster(char Char, String name, Integer healthPool, Integer attackPoints, Integer defensePoints, int experienceValue, int visionRange) {
         super(Char, name, healthPool, attackPoints, defensePoints ,visionRange , experienceValue);
         this.experienceValue = experienceValue;
-        this.unitMessageController = UMC;
     }
 
     @Override
@@ -71,7 +68,7 @@ public class Monster extends Enemy  {
         return 'o';   //findBestWay(playerPosition, Surroundings);
     }
 
-    private char findBestWay(Position playerPosition, Tile[][] Surroundings){
+    private char findBestWay(Position playerPosition, Tile[][] Surroundings){ // TODO: BFS
         int x = this.getPosition().getX();
         int y = this.getPosition().getY();
         int playerX = playerPosition.getX();
