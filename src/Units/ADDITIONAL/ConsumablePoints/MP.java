@@ -14,6 +14,11 @@ public class MP extends ConsumablePoints {
         return false;
     }
 
+    public void levelUpManaGain(int Level) {
+        max += 25 * Level;
+        current = Math.min(current + getMax()/4, max);
+    }
+
     public void tick(int level) {
         current = Math.min(current + level, max);
     }

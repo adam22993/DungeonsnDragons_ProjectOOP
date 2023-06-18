@@ -32,13 +32,15 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
 
     abstract public char onGameTick(Unit player, Vector<Unit> units);
 
-    protected int roleAD(){
+    public int roleAD(){
         return Random.nextInt(0, this.attackPoints);
     }
 
-    protected int roldDEF(){
+    public int roleDEF(){
         return Random.nextInt(0, this.defensePoints);
     }
+
+    public abstract String getAbilityName();
 
     public String getName() {
         return name;
@@ -72,6 +74,8 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
         return this.getHealthCurrent() <= 0;
     }
 
+    public void castAbility(Vector<Enemy> enemies){}
+
 
     public String toString(){
         return String.format("%s", this.getChar());
@@ -85,7 +89,5 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     abstract public void visit(Player player);
     abstract public void visit(Empty empty);
     abstract public void visit(Wall wall);
-
-    public void castHeroicAbility(Vector<Unit> units){}
 
 }

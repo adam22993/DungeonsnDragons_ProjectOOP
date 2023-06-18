@@ -40,12 +40,16 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
     public JFrame createWindow(){
         window = new JFrame();
-
         window.setTitle("Dungeons & Dragons OOP Project");
         window.setVisible(true);
         window.setIconImage(new ImageIcon(System.getProperty("user.dir") + "/src/UI/Assets/Images/DNDICON.png").getImage());
         window.setSize(1200, 720);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        try{
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         window.setLayout(null);
         window.getContentPane().setBackground(Color.black);
         window.setResizable(false);
@@ -62,6 +66,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         JButton startButton = new JButton("START");
         startButton.setFont(normalFont);
         startButton.setBackground(Color.white);
+        startButton.setOpaque(false);
         startButton.setFocusable(false);
         startButton.addActionListener(e -> {
             gameUI.characterCreationScreen(characterChoice());
@@ -71,6 +76,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         quitButton.setFont(normalFont);
         quitButton.setBackground(Color.white);
         quitButton.setFocusable(false);
+        quitButton.setOpaque(false);
         quitButton.addActionListener(e -> {
             window.dispose();
             System.exit(0);
@@ -91,9 +97,10 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         debugAccessGameButton.setBounds(500, 560, 400, 100);
         debugAccessGameButton.setFont(normalFont);
         debugAccessGameButton.setBackground(Color.black);
-        debugAccessGameButton.setForeground(Color.white);
+        debugAccessGameButton.setForeground(Color.black);
         debugAccessGameButton.setFocusable(false);
         debugAccessGameButton.setVisible(true);
+        debugAccessGameButton.setOpaque(false);
         debugAccessGameButton.addActionListener(e -> {
             handleDebugStart(0);
         });
@@ -215,13 +222,14 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         playerChoicesPanel.setForeground(Color.white);
         playerChoicesPanel.addKeyListener(this);
         playerChoicesPanel.requestFocus();
+        playerChoicesPanel.setOpaque(false);
 
 
         // create player control buttons
         qButton = new JButton("Q");
         qButton.setFont(normalFont);
         qButton.setBackground(Color.black);
-        qButton.setForeground(Color.white);
+        qButton.setForeground(Color.black);
         qButton.addActionListener(this);
         qButton.addActionListener(e -> {
             playerGamePlayInputVal = 'q';
@@ -233,7 +241,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         wButton = new JButton("W");
         wButton.setFont(normalFont);
         wButton.setBackground(Color.black);
-        wButton.setForeground(Color.white);
+        wButton.setForeground(Color.black);
         wButton.addActionListener(this);
         wButton.addActionListener(e -> {
             playerGamePlayInputVal = 'w';
@@ -245,7 +253,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         eButton = new JButton("E");
         eButton.setFont(normalFont);
         eButton.setBackground(Color.black);
-        eButton.setForeground(Color.white);
+        eButton.setForeground(Color.black);
         eButton.addActionListener(this);
         eButton.addActionListener(e -> {
             playerGamePlayInputVal = 'e';
@@ -257,7 +265,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         aButton = new JButton("A");
         aButton.setFont(normalFont);
         aButton.setBackground(Color.black);
-        aButton.setForeground(Color.white);
+        aButton.setForeground(Color.black);
         aButton.addActionListener(this);
         aButton.addActionListener(e -> {
             playerGamePlayInputVal = 'a';
@@ -269,7 +277,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         sButton = new JButton("S");
         sButton.setFont(normalFont);
         sButton.setBackground(Color.black);
-        sButton.setForeground(Color.white);
+        sButton.setForeground(Color.black);
         sButton.addActionListener(this);
         sButton.addActionListener(e -> {
             playerGamePlayInputVal = 's';
@@ -281,7 +289,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         dButton = new JButton("D");
         dButton.setFont(normalFont);
         dButton.setBackground(Color.black);
-        dButton.setForeground(Color.white);
+        dButton.setForeground(Color.black);
         dButton.addActionListener(e -> {
             playerGamePlayInputVal = 'd';
             handlePlayerChoice();
@@ -298,10 +306,8 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         playerChoicesPanel.add(sButton);
         playerChoicesPanel.add(dButton);
         playerChoicesPanel.setVisible(true);
-//        con.add(playerChoicesPanel);
         playerChoicesPanel.addMouseListener(this);
         playerChoicesPanel.setFocusable(true);
-//        playerChoicesPanel.requestFocusInWindow();
         return playerChoicesPanel;
     }
 

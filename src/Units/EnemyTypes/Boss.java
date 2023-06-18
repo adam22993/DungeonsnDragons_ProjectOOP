@@ -16,7 +16,9 @@ public class Boss extends Monster {
         super(Char, name, healthPool, attackPoints, defensePoints, experienceValue, visionRange, UMC);
         this.abilityFrequency = abilityFrequency;
         this.combatTicks = 0;
+        // not going to make it because of time constraints
     }
+
 
 
 }

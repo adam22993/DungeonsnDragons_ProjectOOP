@@ -4,8 +4,6 @@ import Patterns.Visitor.*;
 import Units.ADDITIONAL.Empty;
 import Units.ADDITIONAL.Wall;
 
-import java.util.Vector;
-
 public abstract class Enemy extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     protected int experienceValue, visionRange;
 
@@ -21,7 +19,7 @@ public abstract class Enemy extends Unit implements UnitInteractionVisited, Unit
 
     public void attack(Unit player){
         int attPoints = this.roleAD();
-        int defPoints = player.roldDEF();
+        int defPoints = player.roleDEF();
         int damage = Math.max(attPoints - defPoints, 0);
         player.setHealthAmount(player.getHealthCurrent() - damage);
         unitMessageController.attackUpdate(this, player, attPoints, defPoints, damage);

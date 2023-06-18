@@ -19,11 +19,13 @@ public class GameUI {
 
     private JFrame window;
     private Container con;
-    private JPanel startButtonPanel, mainTextPanel, characterSelectOptions, headerLabelCS, boardPanel, playerControlPanel, WSImagesPanel;
+    private JPanel labelsPanel, startButtonPanel, mainTextPanel, characterSelectOptions, headerLabelCS, boardPanel, playerControlPanel, WSImagesPanel;
     private JLabel backgroundLabel, chooseACharacter, playerAttackLabel, playerDefenseLabel, playerSpecialAbilityLabel, playerLevel;
     private JTextArea boardTextArea;
     private JProgressBar hpBar, expBar, resourceBar;
     private JLayeredPane gameScreenPanel, CCSBGPanel;
+
+    private JScrollPane scrollPane;
     private final Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
     private final Font smallFont = new Font("Times New Roman", Font.PLAIN, 18);
@@ -237,6 +239,48 @@ public class GameUI {
         controlLabelInfo.setBounds(980, 520, 200, 150);
         window.add(controlLabelInfo);
 
+
+        // Create the scroll pane and add the labels panel to it
+        labelsPanel = new JPanel();
+        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
+        labelsPanel.setBackground(Color.black);
+        labelsPanel.setForeground(Color.white);
+        labelsPanel.setOpaque(false);
+        labelsPanel.setVisible(true);
+        labelsPanel.setBounds(760, 250, 400, 250);
+//        labelsPanel.add(Box.createVerticalGlue());
+//        labelsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        labelsPanel.add(new JLabel("Player 1: " + player1.getName()));
+        labelsPanel.add(new JLabel("Class: " + player1.getClass().getSimpleName()));
+        labelsPanel.add(new JLabel("Health: " + player1.getHealthPool()));
+        labelsPanel.add(new JLabel("Attack: " + player1.getAttackPoints()));
+        labelsPanel.add(new JLabel("Defense: " + player1.getDefensePoints()));
+        labelsPanel.add(new JLabel("Level: " + player1.getLevel()));
+        labelsPanel.add(new JLabel("Experience: " + player1.getCurrEXP()));
+        labelsPanel.add(new JLabel("Experience to next level: " + player1.getMaxEXP()));
+        labelsPanel.add(new JLabel(("Test")));
+        labelsPanel.add(new JLabel(("Test")));
+        labelsPanel.add(new JLabel(("Test")));
+        labelsPanel.add(new JLabel(("Test")));
+        labelsPanel.add(new JLabel(("Test")));
+        labelsPanel.add(new JLabel(("Test")));
+        labelsPanel.add(new JLabel(("Test")));
+        labelsPanel.add(new JLabel(("Test")));
+        labelsPanel.add(new JLabel(("TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest")));
+
+
+        scrollPane = new JScrollPane(labelsPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBounds(760, 250, 400, 250);
+        scrollPane.setBackground(Color.black);
+        scrollPane.setForeground(Color.white);
+        scrollPane.setOpaque(false);
+        scrollPane.setVisible(true);
+        window.add(scrollPane, BorderLayout.CENTER);
+
+
+
+
         gameScreenPanel.add(boardTextArea, gbc);
         window.add(gameScreenPanel, gbc);
         JPanel playerControls = playerControlsPanel;
@@ -245,9 +289,27 @@ public class GameUI {
         playerControls.setForeground(Color.white);
         playerControls.setOpaque(false);
         window.add(playerControls);
+
+
         window.revalidate();
         window.repaint();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void debugStart(String board, Player player1, JPanel playerControlsPanel) {
 
@@ -256,11 +318,7 @@ public class GameUI {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
-//        CCSBGPanel.setVisible(false);
 
-//        characterSelectOptions.setVisible(false);
-//        headerLabelCS.setVisible(false);
-//        mainTextPanel.setVisible(false);
         WSImagesPanel.setVisible(false);
         startButtonPanel.setVisible(false);
         gameScreenPanel = new JLayeredPane();
@@ -306,10 +364,11 @@ public class GameUI {
         window.repaint();
     }
 
-    public void updateBoard(String board, Vector<Player> players) {
+    public void updateBoard(String board, Vector<Player> players/*, String[] newMessages*/) {
         System.out.println(board);
         boardTextArea.setText(board);
         accept(players.get(0));
+//        updateLabelsPanel(newMessages);
 
     }
 
@@ -357,10 +416,10 @@ public class GameUI {
         resourceBar.setValue(player.getCurrMana());
         if (player.getCurrMana() >= 30) {
             resourceBar.setForeground(new Color(16, 90, 250)); // blue
-            resourceBar.setString("CD: " + player.getCurrMana() + "/" + player.getMaxMana());
+            resourceBar.setString("Mana: " + player.getCurrMana() + "/" + player.getMaxMana());
         } else {
             resourceBar.setForeground(new Color(32, 32, 32)); // gray is rg
-            resourceBar.setString("CD: " + player.getCurrMana() + "/" + player.getMaxMana());
+            resourceBar.setString("Mana: " + player.getCurrMana() + "/" + player.getMaxMana());
         }
         playerLevel.setText("Level: " + player.getLevel());
         playerAttackLabel.setText("Attack: " + player.getAttackPoints());
@@ -371,8 +430,9 @@ public class GameUI {
 
     public JPanel playerInfo(Player player) {
         JPanel playerInfoPanel = new JPanel();
-        playerInfoPanel.setLayout(new GridLayout(7, 2));
-        playerInfoPanel.setBounds(770, 30, 400, 400);
+        playerInfoPanel.setLayout(new GridLayout(4, 2));
+        playerInfoPanel.setBounds(770, 30, 400, 200);
+
 
         // create player info labels
         JLabel playerInfoLabel = new JLabel(player.getName() + " Info");
@@ -408,6 +468,8 @@ public class GameUI {
             resourceBar.setForeground(new Color(128, 128, 128));
             playerInfoPanel.add(resourceBar);
 
+
+            // i couldnt find a better way to implement the different player classes info panels except for casting
         } else if (player instanceof Mage){
             Mage mage = (Mage) player;
             playerSpecialAbilityLabel = new JLabel(String.format("<HTML>Ability: Blizzard \ndmg: %d heal: %d<HTML>", player.getHealthPool() / 10, player.getDefensePoints() * 10));
@@ -440,6 +502,7 @@ public class GameUI {
             resourceBar.setForeground(new Color(128, 128, 128));
             playerInfoPanel.add(resourceBar);
         }
+
         // player level label and exp bar
         playerLevel = new JLabel("Level: " + player.getLevel());
         playerLevel.setFont(smallFont);

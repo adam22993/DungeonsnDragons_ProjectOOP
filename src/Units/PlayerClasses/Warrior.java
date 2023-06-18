@@ -8,6 +8,8 @@ import java.util.Random;
 import java.util.Vector;
 
 public class Warrior extends Player implements HeroicUnit {
+
+    private final String abilityName;
     protected ABCD abilityCD; // Ability Cooldown
     UnitMessageController unitMessageController;
     Random Random = new Random();
@@ -15,6 +17,7 @@ public class Warrior extends Player implements HeroicUnit {
         super(name, healthPool, attackPoints, defensePoints, UMC);
         this.abilityCD = new ABCD(abilityCD);
         this.unitMessageController = UMC;
+        this.abilityName = "Avenger's Shield";
     }
 
     @Override
@@ -23,11 +26,8 @@ public class Warrior extends Player implements HeroicUnit {
         return 0;
     }
 
-    public void castAbility(Unit opponent){
-        int dmg = this.getHealthPool() / 10 - opponent.getDefensePoints(); // should the defender defend against the ability?
-        opponent.setHealthAmount(opponent.getHealthCurrent() - dmg);
-        this.setHealthAmount(this.getHealthCurrent() + this.getDefensePoints() * 10);
-        this.unitMessageController.castAbility(this, opponent, dmg);
+    public String getAbilityName(){
+        return this.abilityName;
     }
 
 
@@ -77,10 +77,10 @@ public class Warrior extends Player implements HeroicUnit {
         this.abilityCD.reset();
     }
 
-    public void castHeroicAbility(Vector<Unit> units) {
-        Vector<Unit> closest = new Vector<Unit>();
-        Unit chosenTarget;
-        for (Unit unit : units){
+    public void castAbility(Vector<Enemy> enemies) {
+        Vector<Enemy> closest = new Vector<Enemy>();
+        Enemy chosenTarget;
+        for (Enemy unit : enemies){
             if (this.getPosition().Range(unit.getPosition()) < 3) {
                 if (closest.isEmpty() && unit.getChar() != '@') {
                     closest.add(unit);
@@ -102,7 +102,22 @@ public class Warrior extends Player implements HeroicUnit {
             return;
         }
         chosenTarget = closest.get(Random.nextInt(closest.size()));
-        this.castAbility(chosenTarget);
+        int def = chosenTarget.roleDEF();
+        int hit = this.getHealthPool() / 10;
+        int dmg = hit - def ; // should the defender defend against the ability? -
+        // not written in the instructions but the game does it
+        chosenTarget.setHealthAmount(chosenTarget.getHealthCurrent() - dmg);
+        this.setHealthAmount(this.getHealthCurrent() + this.getDefensePoints() * 10);
+        this.unitMessageController.castAbility(this, chosenTarget, hit, def, dmg);
+        if (chosenTarget.isDead()){
+            this.unitMessageController.update("Warrior " + this.getName() + " killed " + chosenTarget.getName() + "!");
+            this.gainExperience(chosenTarget.giveExperience());
+            if (this.checkLevelUp()){
+                this.levelUp();
+            }
+        }
     }
+
+
 
 }

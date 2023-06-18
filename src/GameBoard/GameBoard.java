@@ -14,7 +14,7 @@ public class GameBoard {
      * This class represents the game board. It holds the board itself, and the turn sequence.
      * It also holds the current level.
      */
-    private Vector<Unit> turnSequence = new Vector<Unit>();
+    private Vector<Enemy> turnSequence = new Vector<Enemy>();
     private Vector<Unit> tilesOfBoard;
     private TileFactory tileFactory = new TileFactory(0);
     private int currentLevel = 0;
@@ -38,7 +38,7 @@ public class GameBoard {
         this.levelLoader = loader;
         this.UMC = new UnitMessageController();
         this.tilesOfBoard = new Vector<Unit>();
-        this.turnSequence = new Vector<Unit>();
+        this.turnSequence = new Vector<Enemy>();
         this.levels = new Vector<Level>();
         this.players = new Vector<Player>();
         this.playerChoice = new Vector<Integer>();
@@ -130,7 +130,7 @@ public class GameBoard {
                 break;
             case 'e':
                 System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is attacking");
-                unit.castHeroicAbility(turnSequence);
+                unit.castAbility(turnSequence);
                 System.out.println("Unit " + unit.getChar() + " is on position " + unit.getPosition() + " after attacking");
                 break;
             case 'q': // skip basically...
@@ -164,25 +164,23 @@ public class GameBoard {
             players.add(tileFactory.producePlayer(playerChoice.get(0), new Position(0, 0)));
         }
         // to add more players, make a variable that increments with each player that needs to be added
+        turnSequence.clear();
         for (int y = 0; y < levelText.length; y++) { // the number of lines
             for (int x = 0; x < levelText[y].length(); x++) { // the number of columns
                 if (levelText[y].charAt(x) == '@') {
                     players.get(0).setPosition(new Position(x, y));
                     tilesOfBoard.add(players.get(0));
-                } else {
+                } else if (levelText[y].charAt(x) != '#' && levelText[y].charAt(x) != '.') {
+                    Enemy enemy = tileFactory.produceEnemy(levelText[y].charAt(x), new Position(x, y));
+                    tilesOfBoard.add(enemy);
+                    turnSequence.add(enemy);
+                } else
                 tilesOfBoard.add(tileFactory.produceTile(levelText[y].charAt(x), new Position(x, y)));
                 }
             }
         }
 
-        // recreate the turn sequence with the new units and the same player
-        turnSequence.clear();
-        for (Unit unit : tilesOfBoard) {
-            if (unit.getChar() != '.' && unit.getChar() != '#' && unit.getChar() != '@') {
-                turnSequence.add(unit);
-            }
-        }
-    }
+
 
     public Vector<Unit> getBoard() {
         return tilesOfBoard;
@@ -212,7 +210,7 @@ public class GameBoard {
     }
 
 
-    public List<Unit> getTurnSequence() {
+    public List<Enemy> getTurnSequence() {
         return turnSequence;
     }
 

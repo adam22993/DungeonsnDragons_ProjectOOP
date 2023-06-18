@@ -15,6 +15,11 @@ public class Wall extends NonIntractable {
         return 0;
     }
 
+    @Override
+    public String getAbilityName() {
+        return null;
+    }
+
 
     @Override
     public void accept(Unit visitor) {

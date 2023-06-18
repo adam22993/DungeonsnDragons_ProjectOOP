@@ -8,8 +8,7 @@ public interface MessagesController { // suppose to be observer of some kind
 
     String attackUpdate(Unit attacker, Unit defender, int attackerDamage, int defenderDefense, int damageDealt);
 
-    String castAbility(Unit caster, Unit opponent, int damageDealt);
-
+    String castAbility(Unit caster, Unit opponent,int attackerDamage, int defenderDefense, int damageDealt);
     String deathMessage(Unit unit);
 
     String levelUpMessage(Player player);

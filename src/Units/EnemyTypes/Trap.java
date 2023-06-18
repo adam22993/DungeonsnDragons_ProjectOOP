@@ -39,6 +39,11 @@ public class Trap extends Enemy {
         return 'v';
     }
 
+    @Override
+    public String getAbilityName() {
+        return "Surprise!";
+    }
+
 
     @Override
     public void accept(Unit visitor) {

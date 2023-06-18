@@ -10,6 +10,8 @@ import Units.AbstractsAndInterfaces.Unit;
 import java.util.Vector;
 
 public class Rogue extends Player implements HeroicUnit {
+
+    private final String abilityName;
     protected int castCost;
     private ENERGY energy;
     UnitMessageController unitMessageController;
@@ -19,11 +21,16 @@ public class Rogue extends Player implements HeroicUnit {
         this.energy = new ENERGY(100);
         this.castCost = castCost;
         this.unitMessageController = UMC;
+        this.abilityName = "Fan of Blades";
     }
     @Override
     public char onGameTick(Unit playerPosition, Vector<Unit> units) {
         // gain things rogues have... maybe... you know... like... energy and stuff.............
         return 0;
+    }
+
+    public String getAbilityName() {
+        return abilityName;
     }
 
     public int getCastCost() {

@@ -18,9 +18,9 @@ public class UnitMessageController implements MessagesController {
     }
 
     @Override
-    public String castAbility(Unit caster, Unit opponent, int damageDealt) {
-        System.out.printf("%s casted ability on %s hitting for %d, setting %s health to %d%n", caster.getName(), opponent.getName(), damageDealt, opponent.getName(), opponent.getHealthCurrent());
-        return String.format("%s casted ability on %s hitting for %d, setting %s health to %d", caster.getName(), opponent.getName(), damageDealt, opponent.getName(), opponent.getHealthCurrent());
+    public String castAbility(Unit caster, Unit opponent, int attackerDamage, int defenderDefense, int damageDealt) {
+        System.out.printf("%s casted %s on %s for %d damage (%s attacked for %d attack points, %s rolled %d defense points), setting %s health to %d%n", caster.getName(), caster.getAbilityName(), opponent.getName(), damageDealt, caster.getName(), attackerDamage, opponent.getName(), defenderDefense, opponent.getName(), opponent.getHealthCurrent());
+        return String.format("%s casted %s on %s for %d damage (%s attacked for %d attack points, %s rolled %d defense points), setting %s health to %d%n", caster.getName(), caster.getAbilityName(), opponent.getName(), damageDealt, caster.getName(), attackerDamage, opponent.getName(), defenderDefense, opponent.getName(), opponent.getHealthCurrent());
     }
 
 

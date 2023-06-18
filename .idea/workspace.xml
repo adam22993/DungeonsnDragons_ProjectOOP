@@ -6,17 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ControlLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ControlLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Messages/UnitMessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Messages/UnitMessageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/MessagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/MessagesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/MP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/MP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Empty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Wall.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/HeroicUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/HeroicUnit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Unit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Boss.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Hunter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Hunter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" afterDir="false" />

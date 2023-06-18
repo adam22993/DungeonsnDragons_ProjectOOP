@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.Vector;
 
 public class Mage extends Player {
+    private final String abilityName;
     private final int manaCost;
     private int abilityRange;
     private int hitCount;
@@ -25,6 +26,7 @@ public class Mage extends Player {
         this.hitCount = hitCount;
         this.abilityRange = abilityRange;
         this.unitMessageController = UMC;
+        this.abilityName = "Blizzard";
     }
 
     @Override
@@ -32,10 +34,14 @@ public class Mage extends Player {
         return this.mana;
     }
 
+    public String getAbilityName() {
+        return abilityName;
+    }
 
-    public void castHeroicAbility(Vector<Unit> units) {
-        Vector<Unit> enemiesInRange = new Vector<>();
-        for (Unit unit : units) {
+
+    public void castAbility(Vector<Enemy> enemies) {
+        Vector<Enemy> enemiesInRange = new Vector<>();
+        for (Enemy unit : enemies) {
             if (unit.getPosition().Range(this.getPosition()) <= abilityRange) {
                 enemiesInRange.add(unit);
             }
@@ -51,13 +57,18 @@ public class Mage extends Player {
                     break;
                 }
                 int randomIndex = Random.nextInt(enemiesInRange.size());
-                Unit curr = enemiesInRange.get(randomIndex);
-                curr.setHealthAmount(curr.getHealthCurrent() - (this.spellPower));
-                this.unitMessageController.castAbility(this, curr, this.spellPower);
-//                if (curr.isDead()){
-//                    this.unitMessageController.deathMessage(curr);
-//                    this.gainExperience(curr.giveExperience());
-//                }
+                Enemy curr = enemiesInRange.get(randomIndex);
+                int def = curr.roleDEF();
+                int dmg = this.spellPower - def;
+                curr.setHealthAmount(curr.getHealthCurrent() - (dmg));
+                this.unitMessageController.castAbility(this, curr, this.spellPower, def, dmg);
+                if (curr.isDead()) {
+                    this.unitMessageController.deathMessage(curr);
+                    this.gainExperience(curr.giveExperience());
+                    if (this.checkLevelUp()) {
+                        this.levelUp();
+                    }
+                }
                 enemiesInRange.remove(randomIndex);
             }
         } else {
@@ -65,6 +76,22 @@ public class Mage extends Player {
         }
 
 
+    }
+
+    protected void levelUp() {
+        super.levelUp();
+        this.levelUpManaGain();
+        this.spellPower += 10 * this.getLevel();
+        this.unitMessageController.update(String.format("Mage %s reached level %d: +%d Health, +%d Attack, +%d Defense, +%d Spell Power, +%d Mana Pool",
+                this.getName(), this.getLevel(), 10 * this.getLevel(), 5 * this.getLevel(), 2 * this.getLevel(), 10 * this.getLevel(), this.getLevel() * 25));
+        if (!this.experience.checkLevelUp()) {
+            return;
+        }
+        this.levelUp();
+    }
+
+    private void levelUpManaGain() {
+        this.mana.levelUpManaGain(getLevel());
     }
 
     public boolean canCastAbility() {
@@ -95,9 +122,8 @@ public class Mage extends Player {
     }
 
 
-
-
     public int getMaxMana() {
         return mana.getMax();
     }
+
 }

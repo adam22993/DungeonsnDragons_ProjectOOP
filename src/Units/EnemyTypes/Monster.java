@@ -36,6 +36,12 @@ public class Monster extends Enemy  {
         }
         return 's';
     }
+
+    @Override
+    public String getAbilityName() {
+        return "Hard Hit";
+    }
+
     public char moveTowardsPlayer(Position playerPosition, Vector<Unit> units) {
         int countCols = 0;
         for (Unit unit : units) {

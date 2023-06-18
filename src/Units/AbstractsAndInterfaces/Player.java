@@ -69,7 +69,8 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
 
     //###################### Getters ######################
 
-    protected boolean checkLevelUp() {
+
+    public boolean checkLevelUp() {
         return this.experience.checkLevelUp();
     }
 
