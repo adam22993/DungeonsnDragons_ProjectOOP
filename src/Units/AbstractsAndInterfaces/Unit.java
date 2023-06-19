@@ -1,11 +1,9 @@
 package Units.AbstractsAndInterfaces;
 
-import GameBoard.MessagesController;
-import Patterns.Visitor.UnitInteractionVisited;
-import Patterns.Visitor.UnitInteractionVisitor;
+import Controller.MessageCallback;
+import Patterns.Visitor.*;
 import Units.ADDITIONAL.ConsumablePoints.HP;
-import Units.ADDITIONAL.Empty;
-import Units.ADDITIONAL.Wall;
+import Units.ADDITIONAL.*;
 
 import java.util.Random;
 import java.util.Vector;
@@ -15,11 +13,11 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     protected HP health;
     protected int attackPoints;
     protected int defensePoints;
-    Random Random = new Random();
+    protected Random Random = new Random();
 
-    protected MessagesController m;
+    protected MessageCallback m;
 
-    public Unit(String name, int healthPool, Integer attackPoints, Integer defensePoints, char Char, MessagesController m) {
+    public Unit(String name, int healthPool, Integer attackPoints, Integer defensePoints, char Char, MessageCallback m) {
         super(Char);
         this.name = name;
         this.health = new HP(healthPool);
@@ -75,7 +73,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
         return this.getHealthCurrent() <= 0;
     }
 
-    public void castAbility(Vector<Enemy> enemies){}
+    public void castAbility(Vector<Enemy> enemies){} // TODO: PLACE THIS IN PLAYER WTF DOES IT DO HERE
 
 
     public String toString(){

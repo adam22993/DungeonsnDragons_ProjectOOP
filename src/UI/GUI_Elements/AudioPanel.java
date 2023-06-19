@@ -1,7 +1,7 @@
 package UI.GUI_Elements;
 
 import Controller.Messages.SystemMessagesController;
-import GameBoard.MessagesController;
+import Controller.MessageCallback;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -17,7 +17,7 @@ public class AudioPanel {
 
     SystemMessagesController messagesController;
 
-    public AudioPanel(MessagesController messagesController) {
+    public AudioPanel(MessageCallback messagesController) {
         audioPanel = new Panel();
         audioPanel.setLayout(new BoxLayout(audioPanel, BoxLayout.Y_AXIS));
         audioPanel.add(new Label("Audio"));

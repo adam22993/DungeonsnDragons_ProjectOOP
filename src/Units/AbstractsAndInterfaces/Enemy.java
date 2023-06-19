@@ -1,5 +1,6 @@
 package Units.AbstractsAndInterfaces;
 
+import Controller.MessageCallback;
 import Patterns.Visitor.*;
 import Units.ADDITIONAL.Empty;
 import Units.ADDITIONAL.Wall;
@@ -7,8 +8,8 @@ import Units.ADDITIONAL.Wall;
 public abstract class Enemy extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     protected int experienceValue, visionRange;
 
-    public Enemy(char Char, String name, Integer Health_pool, Integer Attack_points, Integer Defense_points,int visionRange, int experienceValue) {
-        super(name, Health_pool, Attack_points, Defense_points, Char, message -> {});
+    public Enemy(char Char, String name, Integer Health_pool, Integer Attack_points, Integer Defense_points,int visionRange, int experienceValue, MessageCallback m) {
+        super(name, Health_pool, Attack_points, Defense_points, Char, m);
         this.experienceValue = experienceValue;
         this.visionRange = visionRange;
     }

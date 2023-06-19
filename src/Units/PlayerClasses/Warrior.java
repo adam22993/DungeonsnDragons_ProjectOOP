@@ -1,4 +1,5 @@
 package Units.PlayerClasses;
+import Controller.MessageCallback;
 import Units.ADDITIONAL.ConsumablePoints.ABCD;
 import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
 import Units.AbstractsAndInterfaces.*;
@@ -11,8 +12,8 @@ public class Warrior extends Player {
     private final String abilityName;
     protected ABCD abilityCD; // Ability Cooldown
     Random Random = new Random();
-    public Warrior(String name, int healthPool, int attackPoints, int defensePoints, int abilityCD) {
-        super(name, healthPool, attackPoints, defensePoints);
+    public Warrior(String name, int healthPool, int attackPoints, int defensePoints, int abilityCD, MessageCallback m) {
+        super(name, healthPool, attackPoints, defensePoints, m);
         this.abilityCD = new ABCD(abilityCD);
         this.abilityName = "Avenger's Shield";
     }
@@ -115,9 +116,4 @@ public class Warrior extends Player {
         }
     }
 
-
-    @Override
-    public void update(String message) {
-        this.m.update(message);
-    }
 }

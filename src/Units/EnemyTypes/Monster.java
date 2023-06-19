@@ -1,5 +1,6 @@
 package Units.EnemyTypes;
 
+import Controller.MessageCallback;
 import Units.ADDITIONAL.Position;
 import Units.AbstractsAndInterfaces.Enemy;
 import Units.AbstractsAndInterfaces.Player;
@@ -11,14 +12,14 @@ import java.util.Vector;
 
 public class Monster extends Enemy  {
     int experienceValue;
-    public Monster(char Char, String name, Integer healthPool, Integer attackPoints, Integer defensePoints, int experienceValue, int visionRange) {
-        super(Char, name, healthPool, attackPoints, defensePoints ,visionRange , experienceValue);
+    public Monster(char Char, String name, Integer healthPool, Integer attackPoints, Integer defensePoints, int experienceValue, int visionRange, MessageCallback m) {
+        super(Char, name, healthPool, attackPoints, defensePoints ,visionRange , experienceValue, m);
         this.experienceValue = experienceValue;
     }
 
     @Override
     public char onGameTick(Unit player, Vector<Unit> units) {
-        if (this.getPosition().Range(player.getPosition()) <= this.visionRange && player.getChar() == '@') {
+        if (this.getPosition().Range(player.getPosition()) <= this.visionRange && player.toString().equals("@")) {
             return this.moveTowardsPlayer(player.getPosition(), units);
         }
         switch (new Random().nextInt(4)) {

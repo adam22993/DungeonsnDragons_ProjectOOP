@@ -1,7 +1,7 @@
 package Units.AbstractsAndInterfaces;
 
 
-import GameBoard.MessagesController;
+import Controller.MessageCallback;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
@@ -9,15 +9,15 @@ import Units.ADDITIONAL.ConsumablePoints.EXP;
 import Units.ADDITIONAL.*;
 import java.util.Vector;
 
-public abstract class Player extends Unit implements UnitInteractionVisited, UnitInteractionVisitor, MessagesController {
+public abstract class Player extends Unit implements UnitInteractionVisited, UnitInteractionVisitor {
     //###################### Class related ######################
 
     protected EXP experience;
     protected Integer level;
 
-    public Player(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points) {
+    public Player(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, MessageCallback m) {
         // TODO Random choose stats constructor stub
-        super(name, Health_pool, Attack_points, Defense_points, '@', message -> {});
+        super(name, Health_pool, Attack_points, Defense_points, '@', m);
         this.experience = new EXP(50);
         this.level = 1;
     }

@@ -1,5 +1,4 @@
 package GameBoard;
-import Controller.Messages.MessageCallback;
 import GameBoard.Levels.Level;
 import GameBoard.Levels.LevelLoader;
 import Patterns.Factory.TileFactory;
@@ -9,14 +8,14 @@ import Units.AbstractsAndInterfaces.*;
 import java.util.List;
 import java.util.Vector;
 
-public class GameBoard implements MessagesController{
+public class GameBoard {
     /**
      * This class represents the game board. It holds the board itself, and the turn sequence.
      * It also holds the current level.
      */
     private Vector<Enemy> turnSequence = new Vector<Enemy>();
     private Vector<Unit> tilesOfBoard;
-    private TileFactory tileFactory = new TileFactory(0);
+    private TileFactory tileFactory;
     private int currentLevel = 0;
     private int countLines;
     private int countColumns;
@@ -29,17 +28,13 @@ public class GameBoard implements MessagesController{
 
     private int gameTickCounter = 1;
 
-    public MessagesController m;
-
     private LevelLoader levelLoader;
 
     private Vector<String> unitsCallbacks = new Vector<String>();
-    private MessageCallback messageCallback;
-
 
     public GameBoard(LevelLoader loader) {
         this.levelLoader = loader;
-        this.m = this::addUnitCallback;
+        this.tileFactory = tileFactory;
         this.tilesOfBoard = new Vector<Unit>();
         this.turnSequence = new Vector<Enemy>();
         this.levels = new Vector<Level>();
@@ -47,17 +42,12 @@ public class GameBoard implements MessagesController{
         this.playerChoice = new Vector<Integer>();
     }
 
+    public void setTileFactory(TileFactory tileFactory){
+        this.tileFactory = tileFactory;
+    }
+
     public void resetUnitsCallbacks(){
         this.unitsCallbacks.clear();
-    }
-
-    public void addUnitCallback(String callback){
-        this.unitsCallbacks.add(callback);
-    }
-
-    @Override
-    public void update(String message) {
-        addUnitCallback(message);
     }
 
     public void setPlayerChoice(int playerChoice){
@@ -91,8 +81,8 @@ public class GameBoard implements MessagesController{
             if (!player.isDead()) {
                 currUnitAction = playerInput;
                 System.out.println("Player health: " + player.getHealthCurrent());
-                player.onGameTick(players.get(0), getBoard());
                 unitActionPerformed(currUnitAction, player);
+                player.onGameTick(players.get(0), getBoard());
             }
             tilesOfBoard.sort((s,t) -> s.getPosition().compareTo(t.getPosition()));
         }
@@ -105,12 +95,12 @@ public class GameBoard implements MessagesController{
                 unitActionPerformed(currUnitAction, unit);
             }
             tilesOfBoard.sort((s,t) -> s.getPosition().compareTo(t.getPosition()));
-            tilesOfBoard.replaceAll(unitToCheck -> unitToCheck.isDead() ? tileFactory.produceEmpty(unitToCheck.getPosition()) : unitToCheck); // replace dead units with empty tiles on board
+            tilesOfBoard.replaceAll(unitToCheck -> unitToCheck.isDead() && unitToCheck.getChar() != '@' ? tileFactory.produceEmpty(unitToCheck.getPosition()) : unitToCheck); // replace dead units with empty tiles on board
         }
         System.out.println("Game tick " + gameTickCounter++ + " ended!"); // debugging use
         if (players.get(0).isDead()){
             System.out.println("You died!");
-            System.exit(0);
+//            System.exit(0);
         }
         removeDeadUnitsFromTurnSequence();
         if (turnSequence.isEmpty() && levelLoader.isEmpty()) {
@@ -233,10 +223,6 @@ public class GameBoard implements MessagesController{
 
     public Vector<String> getUnitsCallbacks() {
         return unitsCallbacks;
-    }
-
-    public void setCallback(MessageCallback messageCallback) {
-        this.messageCallback = messageCallback;
     }
 
 //    public void setUnitsCallbacks(Vector<String> unitsCallbacks) {

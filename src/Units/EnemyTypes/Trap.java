@@ -1,5 +1,6 @@
 package Units.EnemyTypes;
 
+import Controller.MessageCallback;
 import Units.AbstractsAndInterfaces.*;
 
 import java.util.Vector;
@@ -10,8 +11,8 @@ public class Trap extends Enemy {
     private int ticksCount;
     private boolean visible;
 
-    public Trap(char Char, String name, Integer healthPool, Integer attackPoints, Integer defensePoints, int experienceValue, int visibilityTime, int invisibilityTime) {
-        super(Char, name, healthPool, attackPoints, defensePoints, 0, experienceValue);
+    public Trap(char Char, String name, Integer healthPool, Integer attackPoints, Integer defensePoints, int experienceValue, int visibilityTime, int invisibilityTime, MessageCallback m) {
+        super(Char, name, healthPool, attackPoints, defensePoints, 0, experienceValue, m);
         this.visibilityTime = visibilityTime;
         this.invisibilityTime = invisibilityTime;
         this.ticksCount = 0;

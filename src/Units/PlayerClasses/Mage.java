@@ -1,5 +1,6 @@
 package Units.PlayerClasses;
 
+import Controller.MessageCallback;
 import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
 import Units.ADDITIONAL.ConsumablePoints.MP;
 import Units.AbstractsAndInterfaces.*;
@@ -16,8 +17,8 @@ public class Mage extends Player {
     private MP mana;
 
     public Mage(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, int manaPool,
-                int manaCost, int spellPower, int hitCount, int abilityRange) {
-        super(name, Health_pool, Attack_points, Defense_points);
+                int manaCost, int spellPower, int hitCount, int abilityRange, MessageCallback m) {
+        super(name, Health_pool, Attack_points, Defense_points, m);
         this.mana = new MP(manaPool);
         this.manaCost = manaCost;
         this.spellPower = spellPower;
@@ -50,9 +51,6 @@ public class Mage extends Player {
                 return;
             }
             for (int currHitCount = 0; currHitCount < this.hitCount; currHitCount++) {
-                if (enemiesInRange.size() == 0) {
-                    break;
-                }
                 int randomIndex = Random.nextInt(enemiesInRange.size());
                 Enemy curr = enemiesInRange.get(randomIndex);
                 int def = curr.roleDEF();
@@ -123,8 +121,4 @@ public class Mage extends Player {
         return mana.getMax();
     }
 
-    @Override
-    public void update(String message) {
-        this.m.update(message);
-    }
 }
