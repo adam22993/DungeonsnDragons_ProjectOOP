@@ -68,7 +68,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         JButton startButton = new JButton("START");
         startButton.setFont(normalFont);
         startButton.setBackground(Color.white);
-        startButton.setOpaque(false);
+        startButton.setOpaque(true);
         startButton.setFocusable(false);
         startButton.addActionListener(e -> {
             gameUI.characterCreationScreen(characterChoice());
@@ -78,7 +78,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         quitButton.setFont(normalFont);
         quitButton.setBackground(Color.white);
         quitButton.setFocusable(false);
-        quitButton.setOpaque(false);
+        quitButton.setOpaque(true);
         quitButton.addActionListener(e -> {
             window.dispose();
             System.exit(0);
@@ -99,28 +99,28 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         debugAccessGameButton.setBounds(500, 560, 400, 100);
         debugAccessGameButton.setFont(normalFont);
         debugAccessGameButton.setBackground(Color.black);
-        debugAccessGameButton.setForeground(Color.black);
+        debugAccessGameButton.setForeground(Color.white);
         debugAccessGameButton.setFocusable(false);
         debugAccessGameButton.setVisible(true);
-        debugAccessGameButton.setOpaque(false);
+        debugAccessGameButton.setOpaque(true);
         debugAccessGameButton.addActionListener(e -> {
             handleDebugStart(0);
         });
         return debugAccessGameButton;
     }
     public JPanel characterChoice(){
-        String playerName = JOptionPane.showInputDialog("Enter your name: ");
-        int counter = 0;
-        while (playerName == null || !playerName.matches("[a-zA-Z0-9]+") && !playerName.matches("[a-zA-Z]+")) {
-            playerName = JOptionPane.showInputDialog("Enter alphanumeric name! ");
-            counter++;
-            if (counter == 2){
-                JOptionPane.showMessageDialog(null, "You have failed to enter a valid name 3 times. You will be named 'Player' by default.");
-                playerName = "Player";
-                break;
-            }
-        }
-
+//        String playerName = JOptionPane.showInputDialog("Enter your name: ");
+//        int counter = 0;
+//        while (playerName == null || !playerName.matches("[a-zA-Z0-9]+") && !playerName.matches("[a-zA-Z]+")) {
+//            playerName = JOptionPane.showInputDialog("Enter alphanumeric name! ");
+//            counter++;
+//            if (counter == 2){
+//                JOptionPane.showMessageDialog(null, "You have failed to enter a valid name 3 times. You will be named 'Player' by default.");
+//                playerName = "Player";
+//                break;
+//            }
+//        }
+        String playerName = "Player";
         gameBoard.incrementGameLoadingStage();
         JPanel characterSelectOptions = new JPanel();
         characterSelectOptions.setBounds(300, 380, 600, 250);
@@ -230,7 +230,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         // create player control buttons
         qButton = new JButton("Q");
         qButton.setFont(normalFont);
-        qButton.setBackground(Color.black);
+        qButton.setBackground(Color.white);
         qButton.setForeground(Color.black);
         qButton.addActionListener(this);
         qButton.addActionListener(e -> {
@@ -242,7 +242,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
         wButton = new JButton("W");
         wButton.setFont(normalFont);
-        wButton.setBackground(Color.black);
+        wButton.setBackground(Color.white);
         wButton.setForeground(Color.black);
         wButton.addActionListener(this);
         wButton.addActionListener(e -> {
@@ -254,7 +254,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
         eButton = new JButton("E");
         eButton.setFont(normalFont);
-        eButton.setBackground(Color.black);
+        eButton.setBackground(Color.white);
         eButton.setForeground(Color.black);
         eButton.addActionListener(this);
         eButton.addActionListener(e -> {
@@ -266,7 +266,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
 
         aButton = new JButton("A");
         aButton.setFont(normalFont);
-        aButton.setBackground(Color.black);
+        aButton.setBackground(Color.white);
         aButton.setForeground(Color.black);
         aButton.addActionListener(this);
         aButton.addActionListener(e -> {
@@ -278,7 +278,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         aButton.setFocusable(false);
         sButton = new JButton("S");
         sButton.setFont(normalFont);
-        sButton.setBackground(Color.black);
+        sButton.setBackground(Color.white);
         sButton.setForeground(Color.black);
         sButton.addActionListener(this);
         sButton.addActionListener(e -> {
@@ -290,7 +290,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         sButton.setFocusable(false);
         dButton = new JButton("D");
         dButton.setFont(normalFont);
-        dButton.setBackground(Color.black);
+        dButton.setBackground(Color.white);
         dButton.setForeground(Color.black);
         dButton.addActionListener(e -> {
             playerGamePlayInputVal = 'd';

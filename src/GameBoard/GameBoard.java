@@ -90,8 +90,8 @@ public class GameBoard implements MessagesController{
             if (!player.isDead()) {
                 currUnitAction = playerInput;
                 System.out.println("Player health: " + player.getHealthCurrent());
-                player.onGameTick(players.get(0), getBoard());
                 unitActionPerformed(currUnitAction, player);
+                player.onGameTick(players.get(0), getBoard());
             }
             tilesOfBoard.sort((s,t) -> s.getPosition().compareTo(t.getPosition()));
         }
