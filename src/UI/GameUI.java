@@ -1,6 +1,7 @@
 
 package UI;
 
+import Controller.Messages.MessageCallback;
 import Units.ADDITIONAL.ConsumablePoints.*;
 import Units.AbstractsAndInterfaces.Player;
 import Units.PlayerClasses.*;
@@ -41,6 +42,10 @@ public class GameUI {
     public GameUI(JFrame controlLayerWindow) {
         loadMusicFolderToVector(currentDir + "/src/UI/Assets/Audio/");
         window = controlLayerWindow;
+    }
+
+    public MessageCallback getMessageCallback() {
+        return this::displayMessage;
     }
 
     private void displayMessage(String m) {

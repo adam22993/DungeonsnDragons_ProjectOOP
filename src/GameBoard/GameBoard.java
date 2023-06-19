@@ -34,6 +34,7 @@ public class GameBoard implements MessagesController{
     private LevelLoader levelLoader;
 
     private Vector<String> unitsCallbacks = new Vector<String>();
+    private MessageCallback messageCallback;
 
 
     public GameBoard(LevelLoader loader) {
@@ -232,6 +233,10 @@ public class GameBoard implements MessagesController{
 
     public Vector<String> getUnitsCallbacks() {
         return unitsCallbacks;
+    }
+
+    public void setCallback(MessageCallback messageCallback) {
+        this.messageCallback = messageCallback;
     }
 
 //    public void setUnitsCallbacks(Vector<String> unitsCallbacks) {

@@ -30,7 +30,8 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         // Check the interface changes in the UI package.
         window = createWindow();
         gameUI = new GameUI(window);
-        gameBoard = gameboard; // TODO: Change this to a singleton.
+        gameBoard = gameboard;
+        gameBoard.setCallback(gameUI.getMessageCallback());
         window.addKeyListener(this);
         window.addMouseListener(this);
         window.addMouseMotionListener(this);

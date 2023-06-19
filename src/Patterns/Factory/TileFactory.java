@@ -20,12 +20,7 @@ public class TileFactory {
 
     private Player selected;
 
-    private MessagesController m = new MessagesController() {
-        @Override
-        public void update(String message) {
-
-        }
-    };
+    private MessagesController m;
 
     public TileFactory(int playerChoice){
         this.playersList = initPlayers();
