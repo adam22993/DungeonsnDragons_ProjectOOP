@@ -24,17 +24,25 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
 
 
     protected void levelUp() {
-        this.experience.subtract(this.getMaxEXP());
+        this.resetEXP();
         this.incrementLevel();
         this.setMaxEXP(50 * this.getLevel());
-        this.attackPoints += 4 * this.getLevel();
-        this.defensePoints += this.getLevel();
-        this.setHealthPool(health.getMax() + 10 * this.getLevel());
-        this.health.setCurrentInBounds(getHealthPool());
+        levelUpStats();
     }
 
     private void incrementLevel() {
         this.level++;
+    }
+
+    private void resetEXP() {
+        this.experience.subtract(this.getMaxEXP());
+    }
+
+    private void levelUpStats() {
+        this.attackPoints += 4 * this.getLevel();
+        this.defensePoints += this.getLevel();
+        this.setHealthPool(health.getMax() + 10 * this.getLevel());
+        this.health.setCurrentInBounds(getHealthPool());
     }
 
     protected void gainExperience(int experience) {

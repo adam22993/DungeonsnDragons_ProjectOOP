@@ -51,15 +51,9 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         window = new JFrame();
         window.setTitle("Dungeons & Dragons OOP Project");
         window.setVisible(true);
-        window.setIconImage(new ImageIcon(System.getProperty("user.dir") + "/src/UI/Assets/Images/DNDICON.png").getImage());
+        window.setIconImage(new ImageIcon("resources/Images/DNDICON.png").getImage());
         window.setSize(1200, 720);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-//        try{
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
         window.setLayout(null);
         window.getContentPane().setBackground(Color.black);
         window.setResizable(false);
@@ -571,10 +565,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         gameBoard.resetUnitsCallbacks();
         gameBoard.vectorGameTick(playerGamePlayInputVal);
         gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
-        Vector<String> unitsCallbacks = gameBoard.getUnitsCallbacks();
-        if (!unitsCallbacks.isEmpty()){
-            gameUI.updateCallback(unitsCallbacks);
-        }
+        gameUI.updateGameTick(gameBoard.getGameTickCounter());
     }
 
     private void handleGameStart(int choice){ // first loading of the game

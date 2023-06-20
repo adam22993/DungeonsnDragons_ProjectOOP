@@ -19,8 +19,8 @@ public class GameUI {
 
 
     private JFrame window;
-    private JPanel labelsPanel, startButtonPanel, mainTextPanel, characterSelectOptions, headerLabelCS, boardPanel, playerControlPanel, WSImagesPanel;
-    private JLabel backgroundLabel, chooseACharacter, playerAttackLabel, playerDefenseLabel, playerSpecialAbilityLabel, playerLevel;
+    private JPanel labelsPanel, startButtonPanel, mainTextPanel, characterSelectOptions, headerLabelCS, WSImagesPanel, gameTickPanel;
+    private JLabel backgroundLabel, chooseACharacter, playerAttackLabel, playerDefenseLabel, playerSpecialAbilityLabel, playerLevel, gameTickLabel;
     private JTextArea boardTextArea;
     private JProgressBar hpBar, expBar, resourceBar;
     private JLayeredPane gameScreenPanel, CCSBGPanel;
@@ -36,12 +36,8 @@ public class GameUI {
     private boolean musicPlaying = false;
     private Player player;
 
-//    private MessageCallback m;
-
-
-
     public GameUI(JFrame controlLayerWindow) {
-        loadMusicFolderToVector(currentDir + "/src/UI/Assets/Audio/");
+        loadMusicFolderToVector("resources/Sound/music");
         window = controlLayerWindow;
     }
 
@@ -63,6 +59,11 @@ public class GameUI {
         labelsPanel.add(message);
     }
 
+
+    // ################# GameUI stuff from here on #################
+
+
+
     public void openWelcomeScreen(JPanel startButtonsPanel) {
 
         clip = clips.get(0);  // mac for some reason loads differently than windows, sequence is different
@@ -75,11 +76,11 @@ public class GameUI {
         WSImagesPanel.setLayout(null);
         WSImagesPanel.setBounds(0, 0, window.getWidth(), window.getHeight());
         WSImagesPanel.add(startButtonsPanel);
-        ImageIcon titleImage = new ImageIcon(currentDir + "/src/UI/Assets/Images/titleName.png");
+        ImageIcon titleImage = new ImageIcon("resources/Images/titleName.png");
         JLabel titleImageLabel = new JLabel(titleImage);
         titleImageLabel.setBounds(340, 20, 500, 140);
 
-        ImageIcon backgroundImage = new ImageIcon(currentDir + "/src/UI/Assets/Images/WelcomeScreenImage.jpg");
+        ImageIcon backgroundImage = new ImageIcon("resources/Images/WelcomeScreenImage.jpg");
         Image bgImage = backgroundImage.getImage();
         bgImage = bgImage.getScaledInstance(window.getWidth(), window.getHeight(), Image.SCALE_DEFAULT);
         backgroundImage = new ImageIcon(bgImage);
@@ -108,7 +109,7 @@ public class GameUI {
         CCSBGPanel.setLayout(null);
         CCSBGPanel.setOpaque(false);
         CCSBGPanel.setBounds(0, 0, window.getWidth(), window.getHeight());
-        ImageIcon backgroundImage = new ImageIcon(currentDir + "/src/UI/Assets/Images/WelcomeScreenImage.jpg");
+        ImageIcon backgroundImage = new ImageIcon("resources/Images/WelcomeScreenImage.jpg");
         Image bgImage = backgroundImage.getImage();
         bgImage = bgImage.getScaledInstance(window.getWidth(), window.getHeight(), Image.SCALE_DEFAULT);
         backgroundImage = new ImageIcon(bgImage);
@@ -168,7 +169,8 @@ public class GameUI {
     public void createGameScreen(String board, Player player1, JPanel playerControlsPanel) {
 
         clip.stop();
-        clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
+        clip = loadMusic("resources/Sound/music/2xDeviruchi - And The Journey Begins (Loop).wav");
+        assert clip != null;
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
@@ -205,6 +207,8 @@ public class GameUI {
         boardTextArea.setLineWrap(true);
         boardTextArea.setWrapStyleWord(true);
         boardTextArea.setEditable(false);
+
+        // forgive me senpai, for I have sinned - I have cast the player to a specific class (BAD PRACTICE)
         if (player1 instanceof Warrior) {
             JPanel playerInfoPanel = playerInfo((Warrior) player1);
             playerInfoPanel.setBackground(Color.black);
@@ -224,13 +228,13 @@ public class GameUI {
             playerInfoPanel.setOpaque(true);
             window.add(playerInfoPanel);
         }
-//        else if (player1 instanceof Hunter) {
-//            JPanel playerInfoPanel = hunterInfo((Hunter) player1);
-//            playerInfoPanel.setBackground(Color.black);
-//            playerInfoPanel.setForeground(Color.white);
-//            playerInfoPanel.setOpaque(true);
-//            window.add(playerInfoPanel);
-//        }
+        else if (player1 instanceof Hunter) {
+            JPanel playerInfoPanel = playerInfo((Hunter) player1);
+            playerInfoPanel.setBackground(Color.black);
+            playerInfoPanel.setForeground(Color.white);
+            playerInfoPanel.setOpaque(true);
+            window.add(playerInfoPanel);
+        }
 
         JLabel controlLabelInfo = new JLabel("<HTML> Movement: W, A, S, D <br> Attack: Use movement to ram other units <br> Use Ability: E <br> Pass your turn: Q <br> Exit Game: ESC </HTML>");
         controlLabelInfo.setFont(smallFont);
@@ -258,10 +262,25 @@ public class GameUI {
         scrollPane.setForeground(Color.white);
         scrollPane.setOpaque(false);
         scrollPane.setVisible(true);
+
         window.add(scrollPane, BorderLayout.CENTER);
 
 
-
+        gameTickPanel = new JPanel();
+        gameTickPanel.setLayout(new BoxLayout(gameTickPanel, BoxLayout.Y_AXIS));
+        gameTickPanel.setBackground(Color.pink);
+        gameTickPanel.setForeground(Color.pink);
+        gameTickPanel.setOpaque(false);
+        gameTickPanel.setVisible(true);
+        gameTickPanel.setBounds(770, 10, 200, 50);
+        gameTickLabel = new JLabel("Game Ticks: 0" );
+        gameTickLabel.setFont(smallFont);
+        gameTickLabel.setForeground(Color.white);
+        gameTickLabel.setBackground(Color.black);
+        gameTickLabel.setOpaque(false);
+        gameTickLabel.setVisible(true);
+        gameTickPanel.add(gameTickLabel);
+        window.add(gameTickPanel);
 
         gameScreenPanel.add(boardTextArea, gbc);
         window.add(gameScreenPanel, gbc);
@@ -277,21 +296,7 @@ public class GameUI {
         window.repaint();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // a temporary method to test the game screen and the loading of the board without changing the main method
 
     public void debugStart(String board, Player player1, JPanel playerControlsPanel) {
 
@@ -346,10 +351,137 @@ public class GameUI {
         window.repaint();
     }
 
+
+
     public void updateBoard(String board, Vector<Player> players) {
         System.out.println(board);
         boardTextArea.setText(board);
         accept(players.get(0));
+    }
+
+    // huge chunk of player updating info that is implemented poorly but with a lot of love QQ (,:
+
+    public JPanel playerInfo(Player player) {
+        JPanel playerInfoPanel = new JPanel();
+        playerInfoPanel.setLayout(new GridLayout(4, 2));
+        playerInfoPanel.setBounds(770, 30, 400, 200);
+
+
+        // create player info labels
+        JLabel playerInfoLabel = new JLabel(player.getName() + " Info");
+        playerInfoLabel.setFont(smallFont);
+        playerInfoLabel.setForeground(Color.white);
+        playerInfoPanel.add(playerInfoLabel);
+
+        // hp progress bar
+        hpBar = new JProgressBar(0, player.getHealthPool());
+        hpBar.setValue(player.getHealthPool());
+        hpBar.setString("HP: " + player.getHealthCurrent() + "/" + player.getHealthPool());
+        hpBar.setStringPainted(true);
+        hpBar.setFont(smallFont);
+        hpBar.setBackground(Color.BLACK);
+        hpBar.setForeground(new Color(200, 0, 0));
+        hpBar.setBorderPainted(true);
+        playerInfoPanel.add(hpBar);
+        playerSpecialAbilityLabel = new JLabel();
+        // player cd and ability label
+        if (player instanceof Warrior) {
+            Warrior warrior = (Warrior) player;
+            playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Avenger's Shield <br>>dmg: %d heal: %d<HTML>", player.getHealthPool() / 10, player.getDefensePoints() * 10));
+            playerSpecialAbilityLabel.setFont(smallFont);
+            playerSpecialAbilityLabel.setForeground(Color.white);
+
+            playerInfoPanel.add(playerSpecialAbilityLabel);
+            resourceBar = new JProgressBar(0, warrior.getMaxCD());
+            resourceBar.setStringPainted(true);
+            resourceBar.setValue(warrior.getCurrCD());
+            resourceBar.setString("CD: " + warrior.getCurrCD() + "/" + warrior.getMaxCD());
+            resourceBar.setFont(smallFont);
+            resourceBar.setBackground(Color.white);
+            resourceBar.setForeground(new Color(128, 128, 128));
+            playerInfoPanel.add(resourceBar);
+
+
+            // i couldnt find a better way to implement the different player classes info panels except for casting
+        } else if (player instanceof Mage){
+            Mage mage = (Mage) player;
+            playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Blizzard <br>dmg: %d range: %d<HTML>", mage.getSpellPower(), mage.getAbilityRange()));
+            playerSpecialAbilityLabel.setFont(smallFont);
+            playerSpecialAbilityLabel.setForeground(Color.white);
+
+            playerInfoPanel.add(playerSpecialAbilityLabel);
+            resourceBar = new JProgressBar(0, mage.getMaxMana());
+            resourceBar.setStringPainted(true);
+            resourceBar.setValue(mage.getCurrMana());
+            resourceBar.setString("Mana: " + mage.getCurrMana() + "/" + mage.getMaxMana());
+            resourceBar.setFont(smallFont);
+            resourceBar.setBackground(Color.black);
+            resourceBar.setForeground(new Color(16, 90, 250)); // blue
+            playerInfoPanel.add(resourceBar);
+
+        } else if (player instanceof Rogue){
+            Rogue rogue = (Rogue) player;
+            playerSpecialAbilityLabel = new JLabel(String.format("<HTML>Ability: Fan of Knives <br>dmg: %d range: %d<HTML>", rogue.getAttackPoints(), 2));
+            playerSpecialAbilityLabel.setFont(smallFont);
+            playerSpecialAbilityLabel.setForeground(Color.white);
+
+            playerInfoPanel.add(playerSpecialAbilityLabel);
+            resourceBar = new JProgressBar(0, rogue.getMaxEnergy());
+            resourceBar.setStringPainted(true);
+            resourceBar.setValue(rogue.getCurrEnergy());
+            resourceBar.setString("Energy: " + rogue.getCurrEnergy() + "/" + rogue.getMaxEnergy());
+            resourceBar.setFont(smallFont);
+            resourceBar.setBackground(Color.white);
+            resourceBar.setForeground(new Color(128, 128, 128));
+            playerInfoPanel.add(resourceBar);
+        } else if (player instanceof Hunter) {
+            Hunter hunter = (Hunter) player;
+            playerSpecialAbilityLabel = new JLabel(String.format("<HTML>Ability: Shoot <br>dmg: %d range: %d<HTML>", hunter.getAttackPoints(), hunter.getRange()));
+            playerSpecialAbilityLabel.setFont(smallFont);
+            playerSpecialAbilityLabel.setForeground(Color.white);
+
+            playerInfoPanel.add(playerSpecialAbilityLabel);
+            resourceBar = new JProgressBar(0, hunter.getMaxArrows());
+            resourceBar.setStringPainted(true);
+            resourceBar.setValue(hunter.getArrows());
+            resourceBar.setString("Mana: " + hunter.getArrows() + "/" + hunter.getMaxArrows());
+            resourceBar.setFont(smallFont);
+            resourceBar.setBackground(Color.black);
+            resourceBar.setForeground(new Color(150, 64, 0)); // brown rgb 150, 64, 0
+            playerInfoPanel.add(resourceBar);
+        }
+
+        // player level label and exp bar
+        playerLevel = new JLabel("Level: " + player.getLevel());
+        playerLevel.setFont(smallFont);
+        playerLevel.setForeground(Color.white);
+        playerLevel.setVisible(true);
+        playerInfoPanel.add(playerLevel);
+        expBar = new JProgressBar(0, player.getMaxEXP());
+        expBar.setValue(player.getCurrEXP());
+        expBar.setStringPainted(true);
+        expBar.setString(player.getCurrEXP() + "/" + player.getMaxEXP());
+        expBar.setFont(smallFont);
+        expBar.setForeground(Color.yellow);
+        playerInfoPanel.add(expBar); //0058FB mana bar color
+
+        // player stats labels
+        playerAttackLabel = new JLabel("Attack: " + player.getAttackPoints());
+        playerAttackLabel.setFont(smallFont);
+        playerAttackLabel.setForeground(Color.white);
+        playerAttackLabel.setVisible(true);
+        playerInfoPanel.add(playerAttackLabel);
+
+        playerDefenseLabel = new JLabel("Defense: " + player.getDefensePoints());
+        playerDefenseLabel.setFont(smallFont);
+        playerDefenseLabel.setForeground(Color.white);
+        playerDefenseLabel.setVisible(true);
+        playerInfoPanel.add(playerDefenseLabel);
+
+        // add them to the panel
+        playerInfoPanel.setVisible(true);
+        window.add(playerInfoPanel);
+        return playerInfoPanel;
     }
 
     private void accept(Player player){
@@ -361,6 +493,9 @@ public class GameUI {
         }
         else if (player.getConsumablePoints() instanceof ENERGY) {
             this.playerInfoUpdate((Rogue) player);
+        }
+        else if (player.getConsumablePoints() instanceof Arrows) {
+            this.playerInfoUpdate((Hunter) player);
         }
 
     }
@@ -429,129 +564,30 @@ public class GameUI {
         playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Fan of Knives <br>dmg: %d range: %d<HTML>", player.getAttackPoints(), 2));
     }
 
-
-    public JPanel playerInfo(Player player) {
-        JPanel playerInfoPanel = new JPanel();
-        playerInfoPanel.setLayout(new GridLayout(4, 2));
-        playerInfoPanel.setBounds(770, 30, 400, 200);
-
-
-        // create player info labels
-        JLabel playerInfoLabel = new JLabel(player.getName() + " Info");
-        playerInfoLabel.setFont(smallFont);
-        playerInfoLabel.setForeground(Color.white);
-        playerInfoPanel.add(playerInfoLabel);
-
-        // hp progress bar
-        hpBar = new JProgressBar(0, player.getHealthPool());
-        hpBar.setValue(player.getHealthPool());
+    private void playerInfoUpdate(Hunter player) {
+        hpBar.setValue(player.getHealthCurrent());
+        hpBar.setMaximum(player.getHealthPool());
         hpBar.setString("HP: " + player.getHealthCurrent() + "/" + player.getHealthPool());
-        hpBar.setStringPainted(true);
-        hpBar.setFont(smallFont);
-        hpBar.setBackground(Color.BLACK);
-        hpBar.setForeground(new Color(200, 0, 0));
-        hpBar.setBorderPainted(true);
-        playerInfoPanel.add(hpBar);
-        playerSpecialAbilityLabel = new JLabel();
-        // player cd and ability label
-        if (player instanceof Warrior) {
-            Warrior warrior = (Warrior) player;
-            playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Avenger's Shield \ndmg: %d heal: %d<HTML>", player.getHealthPool() / 10, player.getDefensePoints() * 10));
-            playerSpecialAbilityLabel.setFont(smallFont);
-            playerSpecialAbilityLabel.setForeground(Color.white);
-
-            playerInfoPanel.add(playerSpecialAbilityLabel);
-            resourceBar = new JProgressBar(0, warrior.getMaxCD());
-            resourceBar.setStringPainted(true);
-            resourceBar.setValue(warrior.getCurrCD());
-            resourceBar.setString("CD: " + warrior.getCurrCD() + "/" + warrior.getMaxCD());
-            resourceBar.setFont(smallFont);
-            resourceBar.setBackground(Color.white);
-            resourceBar.setForeground(new Color(128, 128, 128));
-            playerInfoPanel.add(resourceBar);
-
-
-            // i couldnt find a better way to implement the different player classes info panels except for casting
-        } else if (player instanceof Mage){
-            Mage mage = (Mage) player;
-            playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Blizzard <br>dmg: %d range: %d<HTML>", mage.getSpellPower(), mage.getAbilityRange()));
-            playerSpecialAbilityLabel.setFont(smallFont);
-            playerSpecialAbilityLabel.setForeground(Color.white);
-
-            playerInfoPanel.add(playerSpecialAbilityLabel);
-            resourceBar = new JProgressBar(0, mage.getMaxMana());
-            resourceBar.setStringPainted(true);
-            resourceBar.setValue(mage.getCurrMana());
-            resourceBar.setString("Mana: " + mage.getCurrMana() + "/" + mage.getMaxMana());
-            resourceBar.setFont(smallFont);
-            resourceBar.setBackground(Color.black);
-            resourceBar.setForeground(new Color(16, 90, 250)); // blue
-            playerInfoPanel.add(resourceBar);
-
-        } else if (player instanceof Rogue){
-            Rogue rogue = (Rogue) player;
-            playerSpecialAbilityLabel = new JLabel(String.format("<HTML>Ability: Fan of Knives \ndmg: %d range: %d<HTML>", rogue.getAttackPoints(), 2));
-            playerSpecialAbilityLabel.setFont(smallFont);
-            playerSpecialAbilityLabel.setForeground(Color.white);
-
-            playerInfoPanel.add(playerSpecialAbilityLabel);
-            resourceBar = new JProgressBar(0, rogue.getMaxEnergy());
-            resourceBar.setStringPainted(true);
-            resourceBar.setValue(rogue.getCurrEnergy());
-            resourceBar.setString("Energy: " + rogue.getCurrEnergy() + "/" + rogue.getMaxEnergy());
-            resourceBar.setFont(smallFont);
-            resourceBar.setBackground(Color.white);
-            resourceBar.setForeground(new Color(128, 128, 128));
-            playerInfoPanel.add(resourceBar);
-        } else if (player instanceof Hunter) {
-            Hunter hunter = (Hunter) player;
-            playerSpecialAbilityLabel = new JLabel(String.format("<HTML>Ability: Shoot \ndmg: %d range: %d<HTML>", hunter.getAttackPoints(), hunter.getRange()));
-            playerSpecialAbilityLabel.setFont(smallFont);
-            playerSpecialAbilityLabel.setForeground(Color.white);
-
-            playerInfoPanel.add(playerSpecialAbilityLabel);
-            resourceBar = new JProgressBar(0, hunter.getMaxArrows());
-            resourceBar.setStringPainted(true);
-            resourceBar.setValue(hunter.getArrows());
-            resourceBar.setString("Mana: " + hunter.getArrows() + "/" + hunter.getMaxArrows());
-            resourceBar.setFont(smallFont);
-            resourceBar.setBackground(Color.black);
-            resourceBar.setForeground(new Color(150, 64, 0)); // brown rgb 150, 64, 0
-            playerInfoPanel.add(resourceBar);
-        }
-
-        // player level label and exp bar
-        playerLevel = new JLabel("Level: " + player.getLevel());
-        playerLevel.setFont(smallFont);
-        playerLevel.setForeground(Color.white);
-        playerLevel.setVisible(true);
-        playerInfoPanel.add(playerLevel);
-        expBar = new JProgressBar(0, player.getMaxEXP());
         expBar.setValue(player.getCurrEXP());
-        expBar.setStringPainted(true);
-        expBar.setString(player.getCurrEXP() + "/" + player.getMaxEXP());
-        expBar.setFont(smallFont);
-        expBar.setForeground(Color.yellow);
-        playerInfoPanel.add(expBar); //0058FB mana bar color
-
-        // player stats labels
-        playerAttackLabel = new JLabel("Attack: " + player.getAttackPoints());
-        playerAttackLabel.setFont(smallFont);
-        playerAttackLabel.setForeground(Color.white);
-        playerAttackLabel.setVisible(true);
-        playerInfoPanel.add(playerAttackLabel);
-
-        playerDefenseLabel = new JLabel("Defense: " + player.getDefensePoints());
-        playerDefenseLabel.setFont(smallFont);
-        playerDefenseLabel.setForeground(Color.white);
-        playerDefenseLabel.setVisible(true);
-        playerInfoPanel.add(playerDefenseLabel);
-
-        // add them to the panel
-        playerInfoPanel.setVisible(true);
-        window.add(playerInfoPanel);
-        return playerInfoPanel;
+        expBar.setMaximum(player.getMaxEXP());
+        expBar.setString("XP: " + player.getCurrEXP() + "/" + player.getMaxEXP());
+        resourceBar.setMaximum(player.getMaxArrows());
+        resourceBar.setValue(player.getArrows());
+        if (player.getArrows() >= 1) {
+            resourceBar.setForeground(new Color(196, 100, 64)); // yellow
+            resourceBar.setString("Arrows: " + player.getArrows() + "/" + player.getMaxArrows());
+        } else {
+            resourceBar.setForeground(new Color(32, 32, 32)); // gray is rg
+            resourceBar.setString("Arrows: " + player.getArrows() + "/" + player.getMaxArrows());
+        }
+        playerLevel.setText("Level: " + player.getLevel());
+        playerAttackLabel.setText("Attack: " + player.getAttackPoints());
+        playerDefenseLabel.setText("Defense: " + player.getDefensePoints());
+        playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Shoot <br>dmg: %d range: %d<HTML>", player.getAttackPoints(), 3));
     }
+
+
+
 
     private Clip loadMusic(String filePath) { // loads the music file
         try {
@@ -592,6 +628,9 @@ public class GameUI {
         }
         System.out.println("Finished loading music files from folder: " + folder.getName());
     }
+
+
+    // music related functions that are not used - because they are not working properly (mostly loop issues)
 
     public void playRandomClip() {
         while (true) {
@@ -662,17 +701,9 @@ public class GameUI {
         }
     }
 
-    public void updateCallback(Vector<String> callback) {
-        for (String s : callback) {
-            addLabelToGameTickInfoPanel(s);
-        }
-    }
 
-    private void addLabelToGameTickInfoPanel(String s) {
-        JLabel label = new JLabel(s);
-        label.setFont(smallFont);
-        label.setForeground(Color.BLACK);
-        label.setVisible(true);
-        labelsPanel.add(label);
+
+    public void updateGameTick(int gameTickCounter) {
+        gameTickLabel.setText("Game Ticks: " + gameTickCounter);
     }
 }

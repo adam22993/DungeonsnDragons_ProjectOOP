@@ -37,6 +37,9 @@ public class Hunter extends Player {
         if (ticksCount == 10) {
             ticksCount = 0;
             arrows.add(this.getLevel());
+            if (arrows.getCurrent() > arrows.getMax()) {
+                arrows.setCurrent(arrows.getMax());
+            }
         } else {
             ticksCount++;
         }
@@ -58,7 +61,7 @@ public class Hunter extends Player {
         Vector<Enemy> closest = new Vector<Enemy>();
         Enemy chosenTarget;
         for (Enemy unit : enemies) {
-            if (this.getPosition().Range(unit.getPosition()) < 3) {
+            if (this.getPosition().Range(unit.getPosition()) <= this.getRange()) {
                 if (closest.isEmpty() && unit.getChar() != '@') {
                     closest.add(unit);
                 }
@@ -75,7 +78,7 @@ public class Hunter extends Player {
             m.update("Warrior " + this.getName() + " tried to cast ability, but failed! (no targets in range!)");
             return; // no targets in range to cast ability on - do nothing and be sad
         } else if (!this.arrows.use()) {
-            this.m.update("Hunter " + this.getName() + " tried to cast ability, but failed! no arrows left!");
+            this.m.update("Hunter " + this.getName() + " tried to cast " + this.getAbilityName() + ", but failed! no arrows left!");
             return;
         }
         chosenTarget = closest.get(Random.nextInt(closest.size()));
@@ -84,6 +87,13 @@ public class Hunter extends Player {
         int dmg = Math.max(0, hit - def);
         chosenTarget.setHealthAmount(chosenTarget.getHealthCurrent() - dmg);
         this.m.update(String.format("%s casted %s on %s for %d damage (%s attacked for %d attack points, %s rolled %d defense points), setting %s health to %d", this.getName(), this.getAbilityName(), chosenTarget.getName(), dmg, this.getName(), hit, chosenTarget.getName(), def, chosenTarget.getName(), chosenTarget.getHealthCurrent()));
+        if (chosenTarget.isDead()){
+            this.gainExperience(chosenTarget.giveExperience());
+            this.m.update(String.format("%s has slain %s", this.getName(), chosenTarget.getName()));
+            if (checkLevelUp()){
+                this.levelUp();
+            }
+        }
     }
 }
 

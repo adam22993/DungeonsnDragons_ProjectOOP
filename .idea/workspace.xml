@@ -5,29 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/Arrows.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DungeonsnDragons_ProjectOOP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DungeonsnDragons_ProjectOOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ControlLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ControlLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Messages/MessageCallback.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Messages/UnitMessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Messages/UnitMessageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameBoard/MessagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MessageCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/Factory/TileFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Patterns/Factory/TileFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/GUI_Elements/AudioPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GUI_Elements/AudioPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/1xDeviruchi - Title Theme (Loop).wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/music/1xDeviruchi - Title Theme (Loop).wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/music/2xDeviruchi - And The Journey Begins (Loop).wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/3xDeviruchi - Exploring The Unknown (Loop).wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/music/3xDeviruchi - Exploring The Unknown (Loop).wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/4xDeviruchi - Prepare for Battle! (Loop).wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/music/4xDeviruchi - Prepare for Battle! (Loop).wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordhit1.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/Sword/swordhit1.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordhit2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/Sword/swordhit2.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordhit3.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/Sword/swordhit3.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordkill1.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/Sword/swordkill1.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordkill2.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/Sword/swordkill2.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/Sword/swordkill3.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/Sword/swordkill3.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/xDeviruchi - Decisive Battle (Loop).wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/music/xDeviruchi - Decisive Battle (Loop).wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/xDeviruchi - Minigame (Loop).wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/music/xDeviruchi - Minigame (Loop).wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/xDeviruchi - Take some rest and eat some food! (Loop).wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/music/xDeviruchi - Take some rest and eat some food! (Loop).wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Audio/xDeviruchi - The Icy Cave (Loop).wav" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sound/music/xDeviruchi - The Icy Cave (Loop).wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Images/DNDICON.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Images/DNDICON.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Images/DNDICON32x32.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Images/DNDICON32x32.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Images/WelcomeScreenImage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Images/WelcomeScreenImage.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/Assets/Images/titleName.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Images/titleName.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/ABCD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/ABCD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/ENERGY.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/ConsumablePoints/ENERGY.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Unit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Boss.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Monster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/EnemyTypes/Trap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Hunter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Hunter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Rogue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +65,8 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "openjdk-20",
     "last_opened_file_path": "C:/Users/AdamS/OneDrive/Desktop/Smart Stuff Folder/Year 1 - Sapir/Semester 2/JavaProjects/DungeonsnDragons_ProjectOOP",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -76,7 +81,6 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="Controller" />
       <recent name="Units.PlayerClasses" />
       <recent name="Units.ADDITIONAL" />
       <recent name="Controller.Messages" />
@@ -85,18 +89,21 @@
       <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\UI\Assets\Audio\Sword" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\GameBoard\Levels\MyLevels" />
-      <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\UI\Assets\Images" />
-      <recent name="$PROJECT_DIR$/src/UI/Assets/Images" />
-      <recent name="$PROJECT_DIR$/src/UI/Assets/Audio" />
+      <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\resources\Images" />
+      <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\resources\Sound" />
+      <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\resources\music" />
+      <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\resources\Sword" />
+      <recent name="C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="DungeonsnDragons_ProjectOOP" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;$PROJECT_DIR$/src/GameBoard/Levels&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\GameBoard\Levels&quot;" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -132,9 +139,9 @@
       <workItem from="1686856767562" duration="8629000" />
       <workItem from="1686997518803" duration="3721000" />
       <workItem from="1687028395332" duration="12219000" />
-      <workItem from="1687084411387" duration="13171000" />
       <workItem from="1687084411387" duration="12344000" />
-      <workItem from="1687153982843" duration="3509000" />
+      <workItem from="1687153982843" duration="4158000" />
+      <workItem from="1687204867595" duration="4279000" />
     </task>
     <servers />
   </component>
@@ -148,22 +155,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GameBoard/GameBoard.java</url>
-          <line>137</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Enemy.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/src/Units/PlayerClasses/Mage.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <pin-to-top-manager>
-      <pinned-members>
-        <PinnedItemInfo parentTag="UI.GameUI$$Lambda$149/0x00000008010c7db0" memberName="arg$1" />
-      </pinned-members>
-    </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DungeonsnDragons_ProjectOOP$Main.ic" NAME="Main Coverage Results" MODIFIED="1686434387333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

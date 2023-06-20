@@ -51,6 +51,9 @@ public class Mage extends Player {
                 return;
             }
             for (int currHitCount = 0; currHitCount < this.hitCount; currHitCount++) {
+                if (enemiesInRange.size() == 0) {
+                    break;
+                }
                 int randomIndex = Random.nextInt(enemiesInRange.size());
                 Enemy curr = enemiesInRange.get(randomIndex);
                 int def = curr.roleDEF();

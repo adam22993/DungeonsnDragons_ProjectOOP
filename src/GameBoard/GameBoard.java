@@ -26,7 +26,7 @@ public class GameBoard {
 
     private int gameLoadingStage = 0; // 0 - Welcome Screen, 1 - Character Creating , 2 - Game Started
 
-    private int gameTickCounter = 1;
+    private int gameTickCounter = 0;
 
     private LevelLoader levelLoader;
 
@@ -73,7 +73,7 @@ public class GameBoard {
 
 
     public void vectorGameTick(char playerInput){
-        System.out.println("Game tick " + gameTickCounter + " started!"); // debugging use
+        System.out.println("Game tick " + ++gameTickCounter + " started!"); // debugging use
         char currUnitAction;
 
         // loop for players
@@ -97,7 +97,7 @@ public class GameBoard {
             tilesOfBoard.sort((s,t) -> s.getPosition().compareTo(t.getPosition()));
             tilesOfBoard.replaceAll(unitToCheck -> unitToCheck.isDead() && unitToCheck.getChar() != '@' ? tileFactory.produceEmpty(unitToCheck.getPosition()) : unitToCheck); // replace dead units with empty tiles on board
         }
-        System.out.println("Game tick " + gameTickCounter++ + " ended!"); // debugging use
+        System.out.println("Game tick " + gameTickCounter + " ended!"); // debugging use
         if (players.get(0).isDead()){
             System.out.println("You died!");
 //            System.exit(0);
@@ -166,7 +166,7 @@ public class GameBoard {
         tilesOfBoard.clear(); // this makes sure that the board is empty before loading the next level
         countColumns = levelText[0].length();
         countLines = levelText.length;
-        if (gameTickCounter == 1) {
+        if (gameTickCounter == 0) {
             players.add(tileFactory.producePlayer(playerChoice.get(0), new Position(0, 0)));
         }
         // to add more players, make a variable that increments with each player that needs to be added
@@ -220,14 +220,9 @@ public class GameBoard {
         return turnSequence;
     }
 
-
-    public Vector<String> getUnitsCallbacks() {
-        return unitsCallbacks;
+    public int getGameTickCounter() {
+        return gameTickCounter;
     }
-
-//    public void setUnitsCallbacks(Vector<String> unitsCallbacks) {
-//        this.unitsCallbacks = unitsCallbacks;
-//    }
 
 
 
