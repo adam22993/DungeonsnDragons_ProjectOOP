@@ -58,4 +58,7 @@ public class LevelLoader {
         return null;
     }
 
+    public Vector<Level> getLevels() {
+        return levels;
+    }
 }

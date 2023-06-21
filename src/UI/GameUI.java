@@ -29,12 +29,16 @@ public class GameUI {
     private final Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
     private final Font smallFont = new Font("Times New Roman", Font.PLAIN, 18);
     private final Font boardFont = new Font(Font.MONOSPACED, Font.PLAIN, 18);
+    private final Font monospacedSmallFont = new Font(Font.MONOSPACED, Font.PLAIN, 14);
     private final String currentDir = System.getProperty("user.dir");
     private Clip clip;
     private final Vector<Clip> clips = new Vector<Clip>();
     private JPanel MusicPanel;
     private boolean musicPlaying = false;
     private Player player;
+    private int currentSongIndex = 0;
+
+    private int messageCount = 0;
 
     public GameUI(JFrame controlLayerWindow) {
         loadMusicFolderToVector("resources/Sound/music");
@@ -47,8 +51,9 @@ public class GameUI {
 
     private void displayMessage(String m) {
         // create an if statement to delete the oldest message if there are more than 5 messages
-        JLabel message = new JLabel(m);
-        message.setFont(smallFont);
+//        JLabel message = new JLabel(++messageCount + ". " + m);
+        JLabel message = new JLabel(String.format("<HTML><body style='width: %dpx'>%d.%s</body></HTML>", 300, ++messageCount, m));
+        message.setFont(monospacedSmallFont);
         message.setBounds(0, 0, 100, 40);
         message.setForeground(Color.WHITE);
         message.setBackground(Color.BLACK);
@@ -56,22 +61,32 @@ public class GameUI {
         message.setHorizontalAlignment(JLabel.CENTER);
         message.setVerticalAlignment(JLabel.CENTER);
         message.setVisible(true);
-        labelsPanel.add(message);
+        JLabel seperator = new JLabel("------------------------------------------");
+        seperator.setFont(monospacedSmallFont);
+        seperator.setBounds(0, 0, 100, 40);
+        seperator.setForeground(Color.WHITE);
+        seperator.setBackground(Color.BLACK);
+        seperator.setOpaque(true);
+        seperator.setHorizontalAlignment(JLabel.CENTER);
+        seperator.setVerticalAlignment(JLabel.CENTER);
+        seperator.setVisible(true);
+        labelsPanel.add(message, 0);
+        labelsPanel.add(seperator, 0);
     }
 
 
     // ################# GameUI stuff from here on #################
 
 
-
     public void openWelcomeScreen(JPanel startButtonsPanel) {
 
-        clip = clips.get(0);  // mac for some reason loads differently than windows, sequence is different
-        if (clip != null) {
-            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volumeControl.setValue(-30.0f);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        }
+//        clip = clips.get(0);  // mac for some reason loads differently than windows, sequence is different
+//        if (clip != null) {
+//            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+//            volumeControl.setValue(-30.0f);
+//            clip.loop(Clip.LOOP_CONTINUOUSLY);
+//        }
+        playNextMusic();
         WSImagesPanel = new JPanel();
         WSImagesPanel.setLayout(null);
         WSImagesPanel.setBounds(0, 0, window.getWidth(), window.getHeight());
@@ -100,7 +115,7 @@ public class GameUI {
         //TODO: check resizing of the window and how to fix the images being not in the right place.
     }
 
-    public void characterCreationScreen(JPanel characterSelectPanel){
+    public void characterCreationScreen(JPanel characterSelectPanel) {
 
         startButtonPanel.setVisible(false);
         WSImagesPanel.setVisible(false);
@@ -123,25 +138,25 @@ public class GameUI {
         characterSelectOptions.setFocusable(false);
         mainTextPanel = new JPanel();
         mainTextPanel.setBackground(Color.black);
-        mainTextPanel.setLayout(new GridLayout(9,1));
+        mainTextPanel.setLayout(new GridLayout(8, 1));
         mainTextPanel.setBounds(50, 75, 1100, 300);
         window.add(mainTextPanel);
         String infoText =
-                "      name        |       HP        |     ATT    |     DEF    |    CAST SOURCE   |    ADD STATS\n" +
-                        " 1. Jon Snow      | Health: 300/300 | Attack: 30 | Defense: 4 | Cooldown: 0/3    |\n" +
-                        " 2. The Hound     | Health: 400/400 | Attack: 20 | Defense: 6 | Cooldown: 0/5    |\n" +
-                        " 3. Melisandre    | Health: 100/100 | Attack: 5  | Defense: 1 | Mana: 75/300     | Spell Power: 15\n" +
-                        " 4. Thoros of Myr | Health: 250/250 | Attack: 25 | Defense: 4 | Mana: 37/150     | Spell Power: 20\n" +
-                        " 5. Arya Stark    | Health: 150/150 | Attack: 40 | Defense: 2 | Energy: 100/100  |\n" +
-                        " 6. Bronn         | Health: 250/250 | Attack: 35 | Defense: 3 | Energy: 100/100  |\n" +
-                        " 7. Ygritte       | Health: 220/220 | Attack: 30 | Defense: 2 | Arrows: 10       | Range: 6\n" +
-                        " 8. Custom character                  player creation screen TBI";
+
+                " 1. Jon Snow      | Health: 300/300 | Attack: 30 | Defense: 4 | Level: 1 | Experience: 0/50 | Cooldown: 0/3    |\n" +
+                        " 2. The Hound     | Health: 400/400 | Attack: 20 | Defense: 6 | Level: 1 | Experience: 0/50 | Cooldown: 0/5    |\n" +
+                        " 3. Melisandre    | Health: 100/100 | Attack: 5  | Defense: 1 | Level: 1 | Experience: 0/50 | Mana: 75/300     | Spell Power: 15\n" +
+                        " 4. Thoros of Myr | Health: 250/250 | Attack: 25 | Defense: 4 | Level: 1 | Experience: 0/50 | Mana: 37/150     | Spell Power: 20\n" +
+                        " 5. Arya Stark    | Health: 150/150 | Attack: 40 | Defense: 2 | Level: 1 | Experience: 0/50 | Energy: 100/100  |\n" +
+                        " 6. Bronn         | Health: 250/250 | Attack: 35 | Defense: 3 | Level: 1 | Experience: 0/50 | Energy: 100/100  |\n" +
+                        " 7. Ygritte       | Health: 220/220 | Attack: 30 | Defense: 2 | Level: 1 | Experience: 0/50 | Arrows: 10       | Range: 6\n" +
+                        " 8. Custom character                                 player creation screen TBI";
 
         String[] lines = infoText.split("\n");
 
         for (String line : lines) {
             JButton charButton = new JButton(line);
-            charButton.setFont(boardFont);
+            charButton.setFont(monospacedSmallFont);
             charButton.setBounds(0, 20, 1100, 500);
             charButton.setForeground(Color.black);
             charButton.setBackground(Color.white);
@@ -168,10 +183,11 @@ public class GameUI {
 
     public void createGameScreen(String board, Player player1, JPanel playerControlsPanel) {
 
-        clip.stop();
-        clip = loadMusic("resources/Sound/music/2xDeviruchi - And The Journey Begins (Loop).wav");
-        assert clip != null;
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+//        clip.stop();
+//        clip = loadMusic("resources/Sound/music/2xDeviruchi - And The Journey Begins (Loop).wav");
+//        assert clip != null;
+//        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        playNextMusic();
         FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
         CCSBGPanel.setVisible(false);
@@ -227,8 +243,7 @@ public class GameUI {
             playerInfoPanel.setForeground(Color.white);
             playerInfoPanel.setOpaque(true);
             window.add(playerInfoPanel);
-        }
-        else if (player1 instanceof Hunter) {
+        } else if (player1 instanceof Hunter) {
             JPanel playerInfoPanel = playerInfo((Hunter) player1);
             playerInfoPanel.setBackground(Color.black);
             playerInfoPanel.setForeground(Color.white);
@@ -250,16 +265,20 @@ public class GameUI {
         labelsPanel = new JPanel();
         labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
         labelsPanel.setBackground(Color.black);
-        labelsPanel.setForeground(Color.white);
+        labelsPanel.setForeground(Color.black);
         labelsPanel.setOpaque(false);
         labelsPanel.setVisible(true);
         labelsPanel.setBounds(760, 250, 400, 250);
 
         scrollPane = new JScrollPane(labelsPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBounds(760, 250, 400, 250);
-        scrollPane.setBackground(Color.black);
-        scrollPane.setForeground(Color.white);
+        scrollPane.setSize(400, 250);
+        scrollPane.getViewport().setBackground(Color.BLACK);
+        scrollPane.getViewport().setOpaque(true);
+        scrollPane.setBackground(Color.BLACK);
+        scrollPane.setForeground(Color.black);
         scrollPane.setOpaque(false);
         scrollPane.setVisible(true);
 
@@ -273,7 +292,7 @@ public class GameUI {
         gameTickPanel.setOpaque(false);
         gameTickPanel.setVisible(true);
         gameTickPanel.setBounds(770, 10, 200, 50);
-        gameTickLabel = new JLabel("Game Ticks: 0" );
+        gameTickLabel = new JLabel("Game Ticks: 0");
         gameTickLabel.setFont(smallFont);
         gameTickLabel.setForeground(Color.white);
         gameTickLabel.setBackground(Color.black);
@@ -300,11 +319,12 @@ public class GameUI {
 
     public void debugStart(String board, Player player1, JPanel playerControlsPanel) {
 
-        clip.stop();
-        clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
+//        clip.stop();
+//        clip = loadMusic(currentDir + "/src/UI/Assets/Audio/2xDeviruchi - And The Journey Begins (Loop).wav");
+//        clip.loop(Clip.LOOP_CONTINUOUSLY);
+//        FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+//        volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
+        playNextMusic();
 
         WSImagesPanel.setVisible(false);
         startButtonPanel.setVisible(false);
@@ -350,7 +370,6 @@ public class GameUI {
         window.revalidate();
         window.repaint();
     }
-
 
 
     public void updateBoard(String board, Vector<Player> players) {
@@ -403,7 +422,7 @@ public class GameUI {
 
 
             // i couldnt find a better way to implement the different player classes info panels except for casting
-        } else if (player instanceof Mage){
+        } else if (player instanceof Mage) {
             Mage mage = (Mage) player;
             playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Blizzard <br>dmg: %d range: %d<HTML>", mage.getSpellPower(), mage.getAbilityRange()));
             playerSpecialAbilityLabel.setFont(smallFont);
@@ -419,7 +438,7 @@ public class GameUI {
             resourceBar.setForeground(new Color(16, 90, 250)); // blue
             playerInfoPanel.add(resourceBar);
 
-        } else if (player instanceof Rogue){
+        } else if (player instanceof Rogue) {
             Rogue rogue = (Rogue) player;
             playerSpecialAbilityLabel = new JLabel(String.format("<HTML>Ability: Fan of Knives <br>dmg: %d range: %d<HTML>", rogue.getAttackPoints(), 2));
             playerSpecialAbilityLabel.setFont(smallFont);
@@ -484,17 +503,14 @@ public class GameUI {
         return playerInfoPanel;
     }
 
-    private void accept(Player player){
+    private void accept(Player player) {
         if (player.getConsumablePoints() instanceof ABCD) {
             this.playerInfoUpdate((Warrior) player);
-        }
-        else if (player.getConsumablePoints() instanceof MP) {
+        } else if (player.getConsumablePoints() instanceof MP) {
             this.playerInfoUpdate((Mage) player);
-        }
-        else if (player.getConsumablePoints() instanceof ENERGY) {
+        } else if (player.getConsumablePoints() instanceof ENERGY) {
             this.playerInfoUpdate((Rogue) player);
-        }
-        else if (player.getConsumablePoints() instanceof Arrows) {
+        } else if (player.getConsumablePoints() instanceof Arrows) {
             this.playerInfoUpdate((Hunter) player);
         }
 
@@ -511,18 +527,18 @@ public class GameUI {
             resourceBar.setBackground(new Color(33, 217, 33)); // green
             resourceBar.setString("Ready");
         } else {
-            resourceBar.setBackground(new Color(32,32,32)); // gray is rg
+            resourceBar.setBackground(new Color(32, 32, 32)); // gray is rg
             resourceBar.setString("Available in: " + player.getCurrCD() + " turns");
         }
         playerLevel.setText("Level: " + player.getLevel());
         playerAttackLabel.setText("Attack: " + player.getAttackPoints());
         playerDefenseLabel.setText("Defense: " + player.getDefensePoints());
-        playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Avenger's Shield \ndmg: %d heal: %d<HTML>", player.getHealthPool()/10, player.getDefensePoints() * 10));
+        playerSpecialAbilityLabel.setText(String.format("<HTML>Ability: Avenger's Shield \ndmg: %d heal: %d<HTML>", player.getHealthPool() / 10, player.getDefensePoints() * 10));
     }
 
     private void playerInfoUpdate(Mage player) {
-        hpBar.setValue(player.getHealthCurrent());
         hpBar.setMaximum(player.getHealthPool());
+        hpBar.setValue(player.getHealthCurrent());
         hpBar.setString("HP: " + player.getHealthCurrent() + "/" + player.getHealthPool());
         expBar.setValue(player.getCurrEXP());
         expBar.setMaximum(player.getMaxEXP());
@@ -543,8 +559,8 @@ public class GameUI {
     }
 
     private void playerInfoUpdate(Rogue player) {
-        hpBar.setValue(player.getHealthCurrent());
         hpBar.setMaximum(player.getHealthPool());
+        hpBar.setValue(player.getHealthCurrent());
         hpBar.setString("HP: " + player.getHealthCurrent() + "/" + player.getHealthPool());
         expBar.setValue(player.getCurrEXP());
         expBar.setMaximum(player.getMaxEXP());
@@ -565,8 +581,8 @@ public class GameUI {
     }
 
     private void playerInfoUpdate(Hunter player) {
-        hpBar.setValue(player.getHealthCurrent());
         hpBar.setMaximum(player.getHealthPool());
+        hpBar.setValue(player.getHealthCurrent());
         hpBar.setString("HP: " + player.getHealthCurrent() + "/" + player.getHealthPool());
         expBar.setValue(player.getCurrEXP());
         expBar.setMaximum(player.getMaxEXP());
@@ -587,8 +603,6 @@ public class GameUI {
     }
 
 
-
-
     private Clip loadMusic(String filePath) { // loads the music file
         try {
             File audioFile = new File(filePath);
@@ -601,6 +615,7 @@ public class GameUI {
         }
         return null;
     }
+
     private void loadMusicFolderToVector(String folderPath) { // loads the music folder to the vector
         File folder = new File(folderPath);
         try {
@@ -613,15 +628,14 @@ public class GameUI {
                     System.out.println("Loading music files from folder: " + folder.getName());
                     for (File file : files) {
                         // Process each file
-                        if (file.isFile()) {
+                        if (file.isFile() && (file.getName().endsWith(".wav") || file.getName().endsWith(".mp3"))) {
                             System.out.println("File: " + file.getName());
                             clips.add(loadMusic(file.getAbsolutePath()));
                         }
                     }
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error loading music files from folder: " + folder.getName());
             System.out.println(e.getMessage());
             return;
@@ -681,6 +695,7 @@ public class GameUI {
             }
         }
     }
+
     public boolean getMusicStatus() {
         return musicPlaying;
     }
@@ -690,20 +705,53 @@ public class GameUI {
     }
 
     public void stopMusic() {
-
+        clip.stop();
     }
 
-    public void playMusic() {
-        try{
-            clips.iterator().next().start();
+    public void playNextTrack() {
+        try {
+            Clip clip = clips.iterator().next();
+            clip.start();
         } catch (Exception e) {
             clips.stream().iterator().next().start();
         }
     }
 
+    public void playNextMusic() {
+        try {
+            clip.stop();
+            clip = clips.get(currentSongIndex++);
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception e) {
+            currentSongIndex = 0;
+            clip = clips.get(currentSongIndex++);
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+    }
 
 
     public void updateGameTick(int gameTickCounter) {
         gameTickLabel.setText("Game Ticks: " + gameTickCounter);
+    }
+
+    public void playVictorySong() {
+        try {
+            clip.stop();
+            File audioFile = new File("resources/Sound/music/VictorySong/6.8-bit RPG Music  Victory Theme.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+            clip = AudioSystem.getClip();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (UnsupportedAudioFileException e) {
+            throw new RuntimeException(e);
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

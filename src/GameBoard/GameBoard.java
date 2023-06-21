@@ -46,9 +46,6 @@ public class GameBoard {
         this.tileFactory = tileFactory;
     }
 
-    public void resetUnitsCallbacks(){
-        this.unitsCallbacks.clear();
-    }
 
     public void setPlayerChoice(int playerChoice){
         this.playerChoice.add(playerChoice);
@@ -98,18 +95,14 @@ public class GameBoard {
             tilesOfBoard.replaceAll(unitToCheck -> unitToCheck.isDead() && unitToCheck.getChar() != '@' ? tileFactory.produceEmpty(unitToCheck.getPosition()) : unitToCheck); // replace dead units with empty tiles on board
         }
         System.out.println("Game tick " + gameTickCounter + " ended!"); // debugging use
-        if (players.get(0).isDead()){
-            System.out.println("You died!");
-//            System.exit(0);
-        }
+
         removeDeadUnitsFromTurnSequence();
-        if (turnSequence.isEmpty() && levelLoader.isEmpty()) {
-            System.out.println("You won!");
-            System.exit(0);
-        } else if (turnSequence.isEmpty() && !levelLoader.isEmpty()) {
+
+        if (turnSequence.isEmpty() && !levelLoader.isEmpty()) {
             loadNextLevel();
         }
     }
+
 
     private void unitActionPerformed(char unitInput, Unit unit){
         Position posBeforeAction = unit.getPosition();
@@ -208,7 +201,7 @@ public class GameBoard {
     }
 
     public Vector<Level> getLevels() {
-        return levels;
+        return levelLoader.getLevels();
     }
 
     public Vector<Player> getPlayers() {

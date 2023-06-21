@@ -7,12 +7,11 @@ import UI.GameUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Vector;
 
 public class ControlLayer implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
 
     private boolean keysPressedWSADEQ12345678[] = new boolean[14];
-    private int counter = 1;
+    private int levelCounter;
     private boolean keyboardPressed = false;
     private boolean playerGamePlayInput = false;
     private char playerGamePlayInputVal = ' ';
@@ -39,6 +38,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         tileFactory = new TileFactory(m);
         gameboard.setTileFactory(tileFactory);
         gameBoard = gameboard;
+        this.levelCounter = gameboard.getLevels().size();
         window.addKeyListener(this);
         window.addMouseListener(this);
         window.addMouseMotionListener(this);
@@ -562,10 +562,28 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     }
 
     private void handlePlayerChoice(){ // any other loading of the game
-        gameBoard.resetUnitsCallbacks();
         gameBoard.vectorGameTick(playerGamePlayInputVal);
-        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
-        gameUI.updateGameTick(gameBoard.getGameTickCounter());
+        if (gameBoard.getLevels().size() + 1 < this.levelCounter){
+            --this.levelCounter;
+            gameUI.playNextMusic();
+        }
+            gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
+            gameUI.updateGameTick(gameBoard.getGameTickCounter());
+        if (!gameBoard.getPlayers().get(0).isDead() && gameBoard.getLevels().isEmpty() && gameBoard.getTurnSequence().isEmpty()) {
+            gameUI.playVictorySong();
+            window.dispose();
+            int pressed = JOptionPane.showConfirmDialog(null, "You have won the game!", "Congratulation", JOptionPane.DEFAULT_OPTION);
+            if (pressed == JOptionPane.OK_OPTION) {
+                System.exit(0);
+            }
+        } else if (gameBoard.getPlayers().get(0).isDead() && !gameBoard.getLevels().isEmpty()) {
+            gameUI.stopMusic();
+            window.dispose();
+            int pressed = JOptionPane.showConfirmDialog(null, "You have lost the game!", "Game Over", JOptionPane.DEFAULT_OPTION);
+            if (pressed == JOptionPane.OK_OPTION) {
+                System.exit(0);
+            }
+        }
     }
 
     private void handleGameStart(int choice){ // first loading of the game
