@@ -57,10 +57,16 @@ public class GameBoard {
          * This function prints the board to the console. It iterates through the 2D array of chars representing
          * the board, and prints each char to the console.
          */
+        Player player = players.get(0);
         StringBuilder boardString = new StringBuilder();
         for (int i = 0; i < countLines; i++) {
             for (int j = 0; j < countColumns; j++) {
-                boardString.append(tilesOfBoard.get(i * countColumns + j));
+                Unit unit = tilesOfBoard.get(i * countColumns + j);
+                if (unit.getPosition().Range(player.getPosition()) > 7 ) {
+                    boardString.append("*");
+                } else {
+                    boardString.append(unit);
+                }
             }
             boardString.append("\n");
         }
@@ -103,8 +109,7 @@ public class GameBoard {
         }
     }
 
-
-    private void unitActionPerformed(char unitInput, Unit unit){
+    private void unitActionPerformed(char unitInput, Player unit){
         Position posBeforeAction = unit.getPosition();
         switch (unitInput) {
             case 'w':
@@ -131,6 +136,37 @@ public class GameBoard {
                 System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is attacking");
                 unit.castAbility(turnSequence);
                 System.out.println("Unit " + unit.getChar() + " is on position " + unit.getPosition() + " after attacking");
+                break;
+            case 'q': // skip basically...
+            case 'v':
+                System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is doing whatever a trap does");
+            default:
+                System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is doing nothing because the input was " + unitInput);
+        }
+    }
+
+    private void unitActionPerformed(char unitInput, Unit unit){
+        Position posBeforeAction = unit.getPosition();
+        switch (unitInput) {
+            case 'w':
+                System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving up"); // debugging use
+                unit.accept(tilesOfBoard.get(getBoard().indexOf(unit) - countColumns));
+                System.out.println("Unit " + unit.getChar() + " is on position " + unit.getPosition() + " after moving up");
+                break;
+            case 'a':
+                System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving left");
+                unit.accept(tilesOfBoard.get(getBoard().indexOf(unit) - 1));
+                System.out.println("Unit " + unit.getChar() + " is on position " + unit.getPosition() + " after moving left");
+                break;
+            case 's':
+                System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving down");
+                unit.accept(tilesOfBoard.get(getBoard().indexOf(unit) + countColumns));
+                System.out.println("Unit " + unit.getChar() + " is on position " + unit.getPosition() + " after moving down");
+                break;
+            case 'd':
+                System.out.println("Unit " + unit.getChar() + " is on position " + posBeforeAction + " and is moving right");
+                unit.accept(tilesOfBoard.get(getBoard().indexOf(unit) + 1));
+                System.out.println("Unit " + unit.getChar() + " is on position " + unit.getPosition() + " after moving right");
                 break;
             case 'q': // skip basically...
             case 'v':

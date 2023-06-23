@@ -571,15 +571,15 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
             gameUI.updateGameTick(gameBoard.getGameTickCounter());
         if (!gameBoard.getPlayers().get(0).isDead() && gameBoard.getLevels().isEmpty() && gameBoard.getTurnSequence().isEmpty()) {
             gameUI.playVictorySong();
-            window.dispose();
             int pressed = JOptionPane.showConfirmDialog(null, "You have won the game!", "Congratulation", JOptionPane.DEFAULT_OPTION);
+            window.dispose();
             if (pressed == JOptionPane.OK_OPTION) {
                 System.exit(0);
             }
         } else if (gameBoard.getPlayers().get(0).isDead() && !gameBoard.getLevels().isEmpty()) {
             gameUI.stopMusic();
-            window.dispose();
             int pressed = JOptionPane.showConfirmDialog(null, "You have lost the game!", "Game Over", JOptionPane.DEFAULT_OPTION);
+            window.dispose();
             if (pressed == JOptionPane.OK_OPTION) {
                 System.exit(0);
             }

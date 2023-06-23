@@ -47,6 +47,10 @@ public class Position {
     public double Range(Position other){
         return Math.floor(Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2)));
     }
+
+    public static double Range(int first, int other) {
+        	return Math.floor(Math.sqrt(Math.pow(first - other, 2)));
+    }
     // create a compare function for sorting
     public int compareTo(Position other){
         if (this.x == other.x && this.y == other.y)

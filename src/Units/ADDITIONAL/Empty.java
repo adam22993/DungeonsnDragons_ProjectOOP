@@ -3,7 +3,7 @@ import Units.AbstractsAndInterfaces.*;
 
 import java.util.Vector;
 
-public class Empty extends NonIntractable{
+public class Empty extends NonPlayable {
 
     public Empty(char Char, String name) {
         super(Char, name);

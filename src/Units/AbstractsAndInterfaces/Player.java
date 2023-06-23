@@ -13,7 +13,7 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     //###################### Class related ######################
 
     protected EXP experience;
-    protected Integer level;
+    protected int level;
 
     public Player(String name, Integer Health_pool, Integer Attack_points, Integer Defense_points, MessageCallback m) {
         // TODO Random choose stats constructor stub
@@ -74,7 +74,6 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
 
     //###################### Getters ######################
 
-
     public boolean checkLevelUp() {
         return this.experience.checkLevelUp();
     }
@@ -99,6 +98,8 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
     private void setCurrEXP(int currEXP) {
         this.experience.add(currEXP);
     }
+
+    public abstract void castAbility(Vector<Enemy> enemies);
 
     public String toString(){
         if (this.isDead()){

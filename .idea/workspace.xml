@@ -5,26 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/Sound/music/1.xDeviruchi - Title Theme (Loop).wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/Sound/music/2.xDeviruchi - And The Journey Begins (Loop).wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/Sound/music/3.xDeviruchi - Exploring The Unknown (Loop).wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/Sound/music/4.xDeviruchi - Prepare for Battle! (Loop).wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/Sound/music/5.xDeviruchi - Decisive Battle (Loop).wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/Sound/music/DefeatSong/Sadness and Sorrow 8-bit (Remasterizado)-YoutubeConvert.cc.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/Sound/music/VictorySong/6.8-bit RPG Music  Victory Theme.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Sound/music/1xDeviruchi - Title Theme (Loop).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Sound/music/2xDeviruchi - And The Journey Begins (Loop).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Sound/music/3xDeviruchi - Exploring The Unknown (Loop).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Sound/music/4xDeviruchi - Prepare for Battle! (Loop).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Sound/music/xDeviruchi - Decisive Battle (Loop).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Sound/music/xDeviruchi - Minigame (Loop).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Sound/music/xDeviruchi - Take some rest and eat some food! (Loop).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Sound/music/xDeviruchi - The Icy Cave (Loop).wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ControlLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ControlLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameBoard/Levels/LevelLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameBoard/Levels/LevelLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/GameUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Empty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Position.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/ADDITIONAL/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/ADDITIONAL/Wall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/NonIntractable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/NonPlayable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/AbstractsAndInterfaces/Unit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,25 +43,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "openjdk-20",
-    "last_opened_file_path": "C:/Users/AdamS/OneDrive/Desktop/Smart Stuff Folder/Year 1 - Sapir/Semester 2/JavaProjects/DungeonsnDragons_ProjectOOP/resources/Sound/music/DefeatSong",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-20&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/AdamS/OneDrive/Desktop/Smart Stuff Folder/Year 1 - Sapir/Semester 2/JavaProjects/DungeonsnDragons_ProjectOOP/resources/Sound/music/DefeatSong&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Units.PlayerClasses" />
@@ -97,7 +87,7 @@
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="DungeonsnDragons_ProjectOOP" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;C:\Users\AdamS\OneDrive\Desktop\Smart Stuff Folder\Year 1 - Sapir\Semester 2\JavaProjects\DungeonsnDragons_ProjectOOP\src\GameBoard\Levels&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;src/GameBoard/Levels&quot;" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -156,6 +146,11 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="UI.GameUI$$Lambda$149/0x00000008010c7db0" memberName="arg$1" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DungeonsnDragons_ProjectOOP$Main.ic" NAME="Main Coverage Results" MODIFIED="1686434387333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

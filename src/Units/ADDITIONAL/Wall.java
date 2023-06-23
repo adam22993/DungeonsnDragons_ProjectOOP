@@ -4,7 +4,7 @@ import Units.AbstractsAndInterfaces.*;
 
 import java.util.Vector;
 
-public class Wall extends NonIntractable {
+public class Wall extends NonPlayable {
 
     public Wall(char Char, String name) {
         super(Char, name);
