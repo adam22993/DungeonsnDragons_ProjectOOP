@@ -1,6 +1,6 @@
 package Units.AbstractsAndInterfaces;
 
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 import Patterns.Visitor.*;
 import Units.ADDITIONAL.Empty;
 import Units.ADDITIONAL.Wall;

@@ -16,12 +16,6 @@ public class Wall extends NonPlayable {
     }
 
     @Override
-    public String getAbilityName() {
-        return null;
-    }
-
-
-    @Override
     public void accept(Unit visitor) {
         visitor.visit(this);
     }

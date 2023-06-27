@@ -1,7 +1,7 @@
 package Units.EnemyTypes;
 
 
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 
 public class Boss extends Monster {
 

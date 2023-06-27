@@ -1,9 +1,8 @@
 package Units.PlayerClasses;
 
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 import Units.ADDITIONAL.ConsumablePoints.*;
 import Units.AbstractsAndInterfaces.Enemy;
-import Units.AbstractsAndInterfaces.HeroicUnit;
 import Units.AbstractsAndInterfaces.Player;
 import Units.AbstractsAndInterfaces.Unit;
 

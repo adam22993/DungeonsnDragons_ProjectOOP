@@ -1,6 +1,6 @@
 package Patterns.Factory;
 
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 import Units.ADDITIONAL.*;
 import Units.AbstractsAndInterfaces.*;
 import Units.EnemyTypes.*;
@@ -28,13 +28,13 @@ public class TileFactory {
 
     private Map<Character, Supplier<Enemy>> initEnemies() {
         List<Supplier<Enemy>> enemies = Arrays.asList(
-                () -> new Monster('s', "Lannister Solider", 80, 8, 3, 25, 15, m),
+                () -> new Monster('s', "Lannister Solider", 80, 8, 3, 25, 3, m),
                 () -> new Monster('k', "Lannister Knight", 200, 14, 8, 50,   4, m),
                 () -> new Monster('q', "Queen's Guard", 400, 20, 15, 100,  5, m),
                 () -> new Boss('M', "The Mountain", 1000, 60, 25, 500, 6, 5, m),
                 () -> new Boss('C', "Queen Cersei", 100, 10, 10,1000, 1, 8, m),
-                () -> new Trap('B', "Bonus Trap", 1, 1, 1, 250,  1, 2, m),
-                () -> new Trap('Q', "Queen's Trap", 250, 50, 10, 100, 3, 10, m),
+                () -> new Trap('B', "Bonus Trap", 1, 1, 1, 250,  1, 5, m),
+                () -> new Trap('Q', "Queen's Trap", 250, 50, 10, 100, 3, 7, m),
                 () -> new Monster('z', "Wright", 600, 30, 15,100, 3, m),
                 () -> new Monster('b', "Bear-Wright", 1000, 75, 30, 250,  4, m),
                 () -> new Monster('g', "Giant-Wright",1500, 100, 40,500,   5, m),
@@ -50,11 +50,11 @@ public class TileFactory {
         return Arrays.asList(
                 () -> new Warrior("Jon Snow", 300, 30, 4, 3, m),
                 () -> new Warrior("The Hound", 400, 20, 6, 5, m),
-                () -> new Mage("Melisandre", 100, 5, 1, 300, 30, 150, 5, 6, m),
+                () -> new Mage("Melisandre", 100, 5, 1, 300, 30, 1500, 5, 150, m),
                 () -> new Mage("Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4, m),
                 () -> new Rogue("Arya Stark", 150, 40, 2, 20, m),
                 () -> new Rogue("Bronn", 250, 35, 3, 50, m),
-                () -> new Hunter("Ygritte", 220, 30, 2,7, 11, m)
+                () -> new Hunter("Ygritte", 220, 30, 2,6, 10, m)
         );
     }
 //    private Map<String, Supplier<Player>> initPlayers() {
@@ -77,6 +77,7 @@ public class TileFactory {
     public List<Player> listPlayers(){
         return playersList.stream().map(Supplier::get).collect(Collectors.toList());
     }
+
     public Map<Character, Supplier<Enemy>> getEnemiesMap() {
         return enemiesMap;
     }

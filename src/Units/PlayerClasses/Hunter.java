@@ -1,6 +1,6 @@
 package Units.PlayerClasses;
 
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 import Units.ADDITIONAL.ConsumablePoints.Arrows;
 import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
 import Units.AbstractsAndInterfaces.*;
@@ -46,6 +46,19 @@ public class Hunter extends Player {
         return 0;
     }
 
+    protected void levelUp() {
+        super.levelUp();
+        this.arrows.add(10 * this.getLevel());
+        attackPoints += 2 * this.getLevel();
+        defensePoints += this.getLevel();
+        this.m.update(String.format("Hunter %s reached level %d: +%d Health, +%d Attack, +%d Defense, +%d Arrows",
+                this.getName(), this.getLevel(), 10 * this.getLevel(), 6 * this.getLevel(), 2 * this.getLevel(), this.getLevel() * 10));
+        if (!this.experience.checkLevelUp()) {
+            return;
+        }
+        this.levelUp();
+    }
+
     @Override
     public String getAbilityName() {
         return abilityName;
@@ -62,14 +75,14 @@ public class Hunter extends Player {
         Enemy chosenTarget;
         for (Enemy unit : enemies) {
             if (this.getPosition().Range(unit.getPosition()) <= this.getRange()) {
-                if (closest.isEmpty() && unit.getChar() != '@') {
+                if (closest.isEmpty() && unit.getChar() != '@' && unit.toString() != "." ) {
                     closest.add(unit);
                 }
                 // if the unit is not the player and the unit is closer than the current closest units
-                else if (!closest.isEmpty() && unit.getChar() != '@' && this.getPosition().Range(unit.getPosition()) < this.getPosition().Range(closest.get(0).getPosition())) {
+                else if (!closest.isEmpty() && unit.getChar() != '@' && unit.toString() != "." && this.getPosition().Range(unit.getPosition()) < this.getPosition().Range(closest.get(0).getPosition())) {
                     closest.clear();
                     closest.add(unit);
-                } else if (!closest.isEmpty() && unit.getChar() != '@' && this.getPosition().Range(unit.getPosition()) == this.getPosition().Range(closest.get(0).getPosition())) {
+                } else if (!closest.isEmpty() && unit.getChar() != '@' && unit.toString() != "." && this.getPosition().Range(unit.getPosition()) == this.getPosition().Range(closest.get(0).getPosition())) {
                     closest.add(unit);
                 }
             }

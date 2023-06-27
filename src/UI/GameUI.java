@@ -1,26 +1,28 @@
 
 package UI;
 
-import Controller.MessageCallback;
-import Units.ADDITIONAL.ConsumablePoints.*;
+import Controller.Messages.MessageCallback;
 import Units.AbstractsAndInterfaces.Player;
+import Units.ADDITIONAL.ConsumablePoints.*;
 import Units.PlayerClasses.*;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Vector;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.jar.JarInputStream;
+import java.util.logging.Logger;
 
 public class GameUI {
 
-
     private JFrame window;
-    private JPanel labelsPanel, startButtonPanel, mainTextPanel, characterSelectOptions, headerLabelCS, WSImagesPanel, gameTickPanel;
-    private JLabel backgroundLabel, chooseACharacter, playerAttackLabel, playerDefenseLabel, playerSpecialAbilityLabel, playerLevel, gameTickLabel;
+    private JPanel labelsPanel, startButtonPanel, mainTextPanel, characterSelectOptions, headerLabelCS, WSImagesPanel, gameTickPanel, numberOfMonstersLeftPanel;
+    private JLabel numberOfMonstersLeft, backgroundLabel, chooseACharacter, playerAttackLabel, playerDefenseLabel, playerSpecialAbilityLabel, playerLevel, gameTickLabel;
     private JTextArea boardTextArea;
     private JProgressBar hpBar, expBar, resourceBar;
     private JLayeredPane gameScreenPanel, CCSBGPanel;
@@ -37,11 +39,11 @@ public class GameUI {
     private boolean musicPlaying = false;
     private Player player;
     private int currentSongIndex = 0;
-
+    private int numberOfMonstersLeftInt = 0;
     private int messageCount = 0;
 
     public GameUI(JFrame controlLayerWindow) {
-        loadMusicFolderToVector("resources/Sound/music");
+        loadMusicFolderToVector("\\resources\\Sound\\music");
         window = controlLayerWindow;
     }
 
@@ -50,7 +52,6 @@ public class GameUI {
     }
 
     private void displayMessage(String m) {
-        // create an if statement to delete the oldest message if there are more than 5 messages
 //        JLabel message = new JLabel(++messageCount + ". " + m);
         JLabel message = new JLabel(String.format("<HTML><body style='width: %dpx'>%d.%s</body></HTML>", 300, ++messageCount, m));
         message.setFont(monospacedSmallFont);
@@ -74,6 +75,16 @@ public class GameUI {
         labelsPanel.add(seperator, 0);
     }
 
+    public void updateBoard(String board, Vector<Player> players) {
+        System.out.println(board);
+        boardTextArea.setText(board);
+        accept(players.get(0));
+    }
+
+    public void updateGameTick(int gameTickCounter, int numberOfMonstersLeftInt) {
+        gameTickLabel.setText("Game Ticks: " + gameTickCounter);
+        numberOfMonstersLeft.setText("Monsters Left: " + numberOfMonstersLeftInt);
+    }
 
     // ################# GameUI stuff from here on #################
 
@@ -91,11 +102,12 @@ public class GameUI {
         WSImagesPanel.setLayout(null);
         WSImagesPanel.setBounds(0, 0, window.getWidth(), window.getHeight());
         WSImagesPanel.add(startButtonsPanel);
-        ImageIcon titleImage = new ImageIcon("resources/Images/titleName.png");
+        URL TNurl = getClass().getResource("/Images/titleName.png");
+        ImageIcon titleImage = new ImageIcon(TNurl);
         JLabel titleImageLabel = new JLabel(titleImage);
         titleImageLabel.setBounds(340, 20, 500, 140);
-
-        ImageIcon backgroundImage = new ImageIcon("resources/Images/WelcomeScreenImage.jpg");
+        URL WSurl = getClass().getResource("/Images/WelcomeScreenImage.jpg");
+        ImageIcon backgroundImage = new ImageIcon(WSurl);
         Image bgImage = backgroundImage.getImage();
         bgImage = bgImage.getScaledInstance(window.getWidth(), window.getHeight(), Image.SCALE_DEFAULT);
         backgroundImage = new ImageIcon(bgImage);
@@ -124,7 +136,8 @@ public class GameUI {
         CCSBGPanel.setLayout(null);
         CCSBGPanel.setOpaque(false);
         CCSBGPanel.setBounds(0, 0, window.getWidth(), window.getHeight());
-        ImageIcon backgroundImage = new ImageIcon("resources/Images/WelcomeScreenImage.jpg");
+        URL url = getClass().getResource("/Images/WelcomeScreenImage.jpg");
+        ImageIcon backgroundImage = new ImageIcon(url);
         Image bgImage = backgroundImage.getImage();
         bgImage = bgImage.getScaledInstance(window.getWidth(), window.getHeight(), Image.SCALE_DEFAULT);
         backgroundImage = new ImageIcon(bgImage);
@@ -182,16 +195,8 @@ public class GameUI {
     }
 
     public void createGameScreen(String board, Player player1, JPanel playerControlsPanel) {
-
-//        clip.stop();
-//        clip = loadMusic("resources/Sound/music/2xDeviruchi - And The Journey Begins (Loop).wav");
-//        assert clip != null;
-//        clip.loop(Clip.LOOP_CONTINUOUSLY);
         playNextMusic();
-        FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
         CCSBGPanel.setVisible(false);
-
 
         characterSelectOptions.setVisible(false);
         headerLabelCS.setVisible(false);
@@ -209,6 +214,8 @@ public class GameUI {
         boardTextArea = new JTextArea(board);
         boardTextArea.setBounds(0, 0, 750, 720);
 
+
+        //doesnt actually work
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -284,7 +291,6 @@ public class GameUI {
 
         window.add(scrollPane, BorderLayout.CENTER);
 
-
         gameTickPanel = new JPanel();
         gameTickPanel.setLayout(new BoxLayout(gameTickPanel, BoxLayout.Y_AXIS));
         gameTickPanel.setBackground(Color.pink);
@@ -301,6 +307,22 @@ public class GameUI {
         gameTickPanel.add(gameTickLabel);
         window.add(gameTickPanel);
 
+        numberOfMonstersLeftPanel = new JPanel();
+        numberOfMonstersLeftPanel.setLayout(new BoxLayout(numberOfMonstersLeftPanel, BoxLayout.Y_AXIS));
+        numberOfMonstersLeftPanel.setBackground(Color.black);
+        numberOfMonstersLeftPanel.setForeground(Color.white);
+        numberOfMonstersLeftPanel.setOpaque(false);
+        numberOfMonstersLeftPanel.setVisible(true);
+        numberOfMonstersLeftPanel.setBounds(850, 227, 400, 50);
+        numberOfMonstersLeft = new JLabel("Monsters left in this round: " + numberOfMonstersLeftInt);
+        numberOfMonstersLeft.setFont(smallFont);
+        numberOfMonstersLeft.setForeground(Color.white);
+        numberOfMonstersLeft.setBackground(Color.black);
+        numberOfMonstersLeft.setOpaque(false);
+        numberOfMonstersLeft.setVisible(true);
+        numberOfMonstersLeftPanel.add(numberOfMonstersLeft);
+        window.add(numberOfMonstersLeftPanel);
+
         gameScreenPanel.add(boardTextArea, gbc);
         window.add(gameScreenPanel, gbc);
         JPanel playerControls = playerControlsPanel;
@@ -309,7 +331,6 @@ public class GameUI {
         playerControls.setForeground(Color.white);
         playerControls.setOpaque(false);
         window.add(playerControls);
-
 
         window.revalidate();
         window.repaint();
@@ -372,11 +393,6 @@ public class GameUI {
     }
 
 
-    public void updateBoard(String board, Vector<Player> players) {
-        System.out.println(board);
-        boardTextArea.setText(board);
-        accept(players.get(0));
-    }
 
     // huge chunk of player updating info that is implemented poorly but with a lot of love QQ (,:
 
@@ -463,7 +479,7 @@ public class GameUI {
             resourceBar = new JProgressBar(0, hunter.getMaxArrows());
             resourceBar.setStringPainted(true);
             resourceBar.setValue(hunter.getArrows());
-            resourceBar.setString("Mana: " + hunter.getArrows() + "/" + hunter.getMaxArrows());
+            resourceBar.setString("Arrows: " + hunter.getArrows());
             resourceBar.setFont(smallFont);
             resourceBar.setBackground(Color.black);
             resourceBar.setForeground(new Color(150, 64, 0)); // brown rgb 150, 64, 0
@@ -587,14 +603,14 @@ public class GameUI {
         expBar.setValue(player.getCurrEXP());
         expBar.setMaximum(player.getMaxEXP());
         expBar.setString("XP: " + player.getCurrEXP() + "/" + player.getMaxEXP());
-        resourceBar.setMaximum(player.getMaxArrows());
+        resourceBar.setMaximum(player.getArrows());
         resourceBar.setValue(player.getArrows());
         if (player.getArrows() >= 1) {
             resourceBar.setForeground(new Color(196, 100, 64)); // yellow
-            resourceBar.setString("Arrows: " + player.getArrows() + "/" + player.getMaxArrows());
+            resourceBar.setString("Arrows: " + player.getArrows());
         } else {
             resourceBar.setForeground(new Color(32, 32, 32)); // gray is rg
-            resourceBar.setString("Arrows: " + player.getArrows() + "/" + player.getMaxArrows());
+            resourceBar.setString("Arrows: " + player.getArrows());
         }
         playerLevel.setText("Level: " + player.getLevel());
         playerAttackLabel.setText("Attack: " + player.getAttackPoints());
@@ -603,10 +619,9 @@ public class GameUI {
     }
 
 
-    private Clip loadMusic(String filePath) { // loads the music file
+    private Clip loadMusic(URL filePath) { // loads the music file
         try {
-            File audioFile = new File(filePath);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(filePath);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
             return clip;
@@ -616,54 +631,116 @@ public class GameUI {
         return null;
     }
 
-    private void loadMusicFolderToVector(String folderPath) { // loads the music folder to the vector
-        File folder = new File(folderPath);
+    private void loadMusicFolderToVector(String folderPath) {
         try {
-            if (folder.exists() && folder.isDirectory()) {
-                // Get all files in the folder
-                File[] files = folder.listFiles();
-
-                // Iterate over the files
-                if (files != null) {
-                    System.out.println("Loading music files from folder: " + folder.getName());
-                    for (File file : files) {
-                        // Process each file
-                        if (file.isFile() && (file.getName().endsWith(".wav") || file.getName().endsWith(".mp3"))) {
-                            System.out.println("File: " + file.getName());
-                            clips.add(loadMusic(file.getAbsolutePath()));
-                        }
-                    }
+            // Get the resource folder as a URL
+            JarFile jar = new JarFile("DungeonsnDragons_ProjectOOP.jar");
+            Enumeration<JarEntry> entries = jar.entries();
+            while (entries.hasMoreElements()) {
+                JarEntry entry = entries.nextElement();
+                if (entry.getName().endsWith(".wav")) {
+                    System.out.println("File: " + entry.getName());
+                    URL url = getClass().getResource("/" + entry.getName());
+                    clips.add(loadMusic(url));
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Error loading music files from folder: " + folder.getName());
+            // the laziest way to load the songs i want
+            clips.remove(clips.lastElement());
+            clips.remove(clips.lastElement());
+        } catch (IOException e) {
+            System.out.println("Failed to load music files from folder: " + folderPath);
             System.out.println(e.getMessage());
-            return;
         }
-        System.out.println("Finished loading music files from folder: " + folder.getName());
+        System.out.println("Finished loading music files from folder: " + folderPath);
     }
 
 
-    // music related functions that are not used - because they are not working properly (mostly loop issues)
+    public void playNextMusic() {
+        if (!clips.isEmpty()) {
+            try{
+                if(clip == null){
+                    clip = clips.get(currentSongIndex++);
+                } else {
+                    clip.stop();
+                    try {
+                        clip = clips.get(currentSongIndex++);
+                        if (clip == null) {
+                            throw new IndexOutOfBoundsException("Restarting playlist");
+                        }
+                    } catch (IndexOutOfBoundsException e){
+                        throw new IndexOutOfBoundsException("Restarting playlist");
+                    }
+                }
+            } catch (IndexOutOfBoundsException e) {
+                currentSongIndex = 0;
+                clip = clips.get(++currentSongIndex);
+            }
+            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+        } else {
+            Logger logger = Logger.getLogger("no music loaded");
+            logger.info("No music loaded");
+        }
+    }
+
+    public void playVictorySong() {
+        clip.stop();
+        clips.clear();
+        playSpecificMusicFile("Sound/music/VictorySong/6.8-bit RPG Music  Victory Theme.wav");
+        clip = clips.get(0);
+        FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    public void playDeathMusic() {
+        clip.stop();
+        clips.clear();
+        JarFile jar;
+        playSpecificMusicFile("Sound/music/DefeatSong/Sadness and Sorrow 8-bit (Remasterizado)-YoutubeConvert.cc.wav");
+        clip = clips.get(0);
+        FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        volumeControl.setValue(-15.0f); // inplace change of volume - change is done in decibels
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    public void playSpecificMusicFile(String filePath) {
+        try {
+            JarFile jar = new JarFile("DungeonsnDragons_ProjectOOP.jar");
+            filePath = filePath.startsWith("/") ? filePath.substring(1) : filePath; // Remove leading slash if present
+            JarEntry entry = jar.getJarEntry(filePath);
+            if (entry != null && entry.getName().endsWith(".wav")) {
+                System.out.println("File: " + entry.getName());
+                URL url = new URL("jar:file:" + jar.getName() + "!/" + entry.getName());
+                Clip clip = loadMusic(url);
+                if (clip != null) {
+                    clips.add(clip);
+                }
+            }
+            jar.close();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger("no music loaded");
+            logger.info("No music loaded");
+        }
+    }
+
 
     public void playRandomClip() {
         while (true) {
-            // Get a random clip from the vector
             clip.stop();
             Random random = new Random();
             System.out.println(clips.size());
-            Clip clip = clips.get(random.nextInt(1, clips.size() - 1));
+            Clip clip = clips.get(random.nextInt(clips.size()));
             try {
-                // Open and play the clip
                 clip.open();
                 FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
                 volumeControl.setValue(-10.0f); // inplace change of volume - change is done in decibels
                 clip.start();
 
-                // Wait for the clip to finish playing
                 Thread.sleep(clip.getMicrosecondLength() / 1000);
 
-                // Stop and close the clip
                 clip.stop();
                 clip.close();
             } catch (Exception e) {
@@ -678,16 +755,13 @@ public class GameUI {
         while (iterator.hasNext()) {
             Clip clip = iterator.next();
             try {
-                // Open and play the clip
                 clip.open();
                 FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
                 volumeControl.setValue(-10.0f); // inplace change of volume - change is done in decibels
                 clip.start();
 
-                // Wait for the clip to finish playing
                 Thread.sleep(clip.getMicrosecondLength() / 1000);
 
-                // Stop and close the clip
                 clip.stop();
                 clip.close();
             } catch (Exception e) {
@@ -717,41 +791,12 @@ public class GameUI {
         }
     }
 
-    public void playNextMusic() {
-        try {
-            clip.stop();
-            clip = clips.get(currentSongIndex++);
-            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (Exception e) {
-            currentSongIndex = 0;
-            clip = clips.get(currentSongIndex++);
-            FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            volumeControl.setValue(-30.0f); // inplace change of volume - change is done in decibels
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        }
+
+    public int getNumberOfMonstersLeftInt() {
+        return numberOfMonstersLeftInt;
     }
 
-
-    public void updateGameTick(int gameTickCounter) {
-        gameTickLabel.setText("Game Ticks: " + gameTickCounter);
-    }
-
-    public void playVictorySong() {
-        try {
-            clip.stop();
-            File audioFile = new File("resources/Sound/music/VictorySong/6.8-bit RPG Music  Victory Theme.wav");
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-
-            clip = AudioSystem.getClip();
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (UnsupportedAudioFileException e) {
-            throw new RuntimeException(e);
-        } catch (LineUnavailableException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void setNumberOfMonstersLeftInt(int numberOfMonstersLeftInt) {
+        this.numberOfMonstersLeftInt = numberOfMonstersLeftInt;
     }
 }

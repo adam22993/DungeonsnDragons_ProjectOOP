@@ -1,6 +1,6 @@
 package Units.AbstractsAndInterfaces;
 
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 import Patterns.Visitor.*;
 import Units.ADDITIONAL.ConsumablePoints.HP;
 import Units.ADDITIONAL.*;
@@ -34,14 +34,12 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     abstract public char onGameTick(Unit player, Vector<Unit> units);
 
     public int roleAD(){
-        return Random.nextInt(0, this.attackPoints);
+        return Random.nextInt(this.attackPoints);
     }
 
     public int roleDEF(){
-        return Random.nextInt(0, this.defensePoints);
+        return Random.nextInt(this.defensePoints);
     }
-
-    public abstract String getAbilityName();
 
     public String getName() {
         return name;
@@ -72,7 +70,7 @@ public abstract class Unit extends Tile implements UnitInteractionVisited, UnitI
     }
 
     public boolean isDead(){
-        return this.getHealthCurrent() <= 0;
+        return this.health.isDead();
     }
 
 

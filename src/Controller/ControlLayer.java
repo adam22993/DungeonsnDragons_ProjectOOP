@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.Messages.MessageCallback;
 import GameBoard.GameBoard;
 import Patterns.Factory.TileFactory;
 import UI.GameUI;
@@ -7,6 +8,7 @@ import UI.GameUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 
 public class ControlLayer implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
 
@@ -14,6 +16,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
     private int levelCounter;
     private boolean keyboardPressed = false;
     private boolean playerGamePlayInput = false;
+
     private char playerGamePlayInputVal = ' ';
 
     private final Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
@@ -34,7 +37,7 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         // Check the interface changes in the UI package.
         window = createWindow();
         gameUI = new GameUI(window);
-        MessageCallback m = gameUI.getMessageCallback();
+        m = gameUI.getMessageCallback();
         tileFactory = new TileFactory(m);
         gameboard.setTileFactory(tileFactory);
         gameBoard = gameboard;
@@ -46,12 +49,56 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         window.setFocusTraversalKeysEnabled(false); // this does not allow the TAB key to be used for focus traversal
         gameUI.openWelcomeScreen(welcomeScreenControls());
     }
+    private void handlePlayerChoice(){ // any other loading of the game
+        gameBoard.vectorGameTick(playerGamePlayInputVal);
+        if (gameBoard.getLevels().size() + 1 < this.levelCounter){
+            --this.levelCounter;
+            gameUI.playNextMusic();
+        }
+            gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
+            gameUI.setNumberOfMonstersLeftInt(gameBoard.getTurnSequence().size());
+            gameUI.updateGameTick(gameBoard.getGameTickCounter(), gameBoard.getTurnSequence().size());
+        if (!gameBoard.getPlayers().get(0).isDead() && gameBoard.getLevels().isEmpty() && gameBoard.getTurnSequence().isEmpty()) {
+            gameUI.playVictorySong();
+            int pressed = JOptionPane.showConfirmDialog(null, "You have won the game!", "Congratulation", JOptionPane.DEFAULT_OPTION);
+            window.dispose();
+            if (pressed == JOptionPane.OK_OPTION) {
+                System.exit(0);
+            }
+        } else if (gameBoard.getPlayers().get(0).isDead() && !gameBoard.getLevels().isEmpty()) {
+            gameUI.playDeathMusic();
+            int pressed = JOptionPane.showConfirmDialog(null, "You have lost the game!", "Game Over", JOptionPane.DEFAULT_OPTION);
+            window.dispose();
+            if (pressed == JOptionPane.OK_OPTION) {
+                System.exit(0);
+            }
+        }
+    }
+
+    private void handleGameStart(int choice){ // first loading of the game
+        gameBoard.setPlayerChoice(choice);
+        gameBoard.loadALevelFromString();
+        gameUI.setNumberOfMonstersLeftInt(gameBoard.getTurnSequence().size());
+        gameUI.createGameScreen(gameBoard.getBoardString(), gameBoard.getPlayers().get(0), playerControls());
+        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
+    }
+
+
+    //Swing components and related methods
+
+    private void handleDebugStart(int choice){ // first loading of the game
+        gameBoard.setPlayerChoice(choice);
+        gameBoard.loadALevelFromString();
+        gameUI.debugStart(gameBoard.getBoardString(), gameBoard.getPlayers().get(0), playerControls());
+        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
+    }
 
     public JFrame createWindow(){
         window = new JFrame();
         window.setTitle("Dungeons & Dragons OOP Project");
         window.setVisible(true);
-        window.setIconImage(new ImageIcon("resources/Images/DNDICON.png").getImage());
+        URL iconURL = getClass().getResource("/Images/DNDICON.png");
+        window.setIconImage(new ImageIcon(iconURL).getImage());
         window.setSize(1200, 720);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
@@ -59,6 +106,8 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         window.setResizable(false);
         return window;
     }
+
+
 
 
     public JPanel welcomeScreenControls(){
@@ -561,44 +610,6 @@ public class ControlLayer implements ActionListener, KeyListener, MouseListener,
         }
     }
 
-    private void handlePlayerChoice(){ // any other loading of the game
-        gameBoard.vectorGameTick(playerGamePlayInputVal);
-        if (gameBoard.getLevels().size() + 1 < this.levelCounter){
-            --this.levelCounter;
-            gameUI.playNextMusic();
-        }
-            gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
-            gameUI.updateGameTick(gameBoard.getGameTickCounter());
-        if (!gameBoard.getPlayers().get(0).isDead() && gameBoard.getLevels().isEmpty() && gameBoard.getTurnSequence().isEmpty()) {
-            gameUI.playVictorySong();
-            int pressed = JOptionPane.showConfirmDialog(null, "You have won the game!", "Congratulation", JOptionPane.DEFAULT_OPTION);
-            window.dispose();
-            if (pressed == JOptionPane.OK_OPTION) {
-                System.exit(0);
-            }
-        } else if (gameBoard.getPlayers().get(0).isDead() && !gameBoard.getLevels().isEmpty()) {
-            gameUI.stopMusic();
-            int pressed = JOptionPane.showConfirmDialog(null, "You have lost the game!", "Game Over", JOptionPane.DEFAULT_OPTION);
-            window.dispose();
-            if (pressed == JOptionPane.OK_OPTION) {
-                System.exit(0);
-            }
-        }
-    }
-
-    private void handleGameStart(int choice){ // first loading of the game
-        gameBoard.setPlayerChoice(choice);
-        gameBoard.loadNextLevel();
-        gameUI.createGameScreen(gameBoard.getBoardString(), gameBoard.getPlayers().get(0), playerControls());
-        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
-    }
-
-    private void handleDebugStart(int choice){ // first loading of the game
-        gameBoard.setPlayerChoice(choice);
-        gameBoard.loadNextLevel();
-        gameUI.debugStart(gameBoard.getBoardString(), gameBoard.getPlayers().get(0), playerControls());
-        gameUI.updateBoard(gameBoard.getBoardString(), gameBoard.getPlayers());
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) { // checks if mouse is clicked - after releasing press

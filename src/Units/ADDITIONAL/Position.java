@@ -17,22 +17,6 @@ public class Position {
         return this.y;
     }
 
-    public void moveUp(){
-        this.y -= 1;
-    }
-
-    public void moveDown(){
-        this.y += 1;
-    }
-
-    public void moveLeft(){
-        this.x -= 1;
-    }
-
-    public void moveRight(){
-        this.x += 1;
-    }
-
     public boolean equals(Position other){
         if (other == null)
             return false;

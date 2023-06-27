@@ -1,17 +1,14 @@
 package Units.EnemyTypes;
 
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 import Units.ADDITIONAL.Position;
-import Units.AbstractsAndInterfaces.Enemy;
-import Units.AbstractsAndInterfaces.Player;
-import Units.AbstractsAndInterfaces.Tile;
-import Units.AbstractsAndInterfaces.Unit;
+import Units.AbstractsAndInterfaces.*;
 
 import java.util.Random;
 import java.util.Vector;
 
 public class Monster extends Enemy  {
-    int experienceValue;
+    private int experienceValue;
     public Monster(char Char, String name, Integer healthPool, Integer attackPoints, Integer defensePoints, int experienceValue, int visionRange, MessageCallback m) {
         super(Char, name, healthPool, attackPoints, defensePoints ,visionRange , experienceValue, m);
         this.experienceValue = experienceValue;
@@ -35,12 +32,8 @@ public class Monster extends Enemy  {
         return 's';
     }
 
-    @Override
-    public String getAbilityName() {
-        return "Hard Hit";
-    }
 
-    public char moveTowardsPlayer(Position playerPosition, Vector<Unit> units) {
+    private char moveTowardsPlayer(Position playerPosition, Vector<Unit> units) {
         int countCols = 0;
         for (Unit unit : units) {
             if (unit.getPosition().getY() == 0) {
@@ -49,6 +42,7 @@ public class Monster extends Enemy  {
             break;
             }
         }
+
         int x = this.getPosition().getX();
         int y = this.getPosition().getY();
         int playerX = playerPosition.getX();
@@ -160,10 +154,7 @@ public class Monster extends Enemy  {
     private boolean checkIfNextStepEncountersMonster(Position monsterPosition, Tile[][] surroundings, char monsterChar) {
         int x = monsterPosition.getX();
         int y = monsterPosition.getY();
-        return (surroundings[y][x + 1].getChar() == monsterChar && x + 1 < surroundings[0].length)
-                || (surroundings[y][x - 1].getChar() == monsterChar && x - 1 >= 0)
-                || (surroundings[y + 1][x].getChar() == monsterChar && y + 1 < surroundings.length)
-                || (surroundings[y - 1][x].getChar() == monsterChar && y - 1 >= 0);
+        return surroundings[y][x + 1].getChar() == monsterChar && x + 1 < surroundings[0].length || surroundings[y][x - 1].getChar() == monsterChar || surroundings[y + 1][x].getChar() == monsterChar && y + 1 < surroundings.length || surroundings[y - 1][x].getChar() == monsterChar && y - 1 >= 0;
     }
     private boolean checkIfNextStepEncountersPlayer(Position playerPosition, Tile[][] surroundings){
         int x = this.getPosition().getX();

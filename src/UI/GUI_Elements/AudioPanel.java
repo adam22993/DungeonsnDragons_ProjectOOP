@@ -1,7 +1,7 @@
 package UI.GUI_Elements;
 
 import Controller.Messages.SystemMessagesController;
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;

@@ -1,6 +1,6 @@
 package Units.EnemyTypes;
 
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 import Units.AbstractsAndInterfaces.*;
 
 import java.util.Vector;
@@ -36,12 +36,6 @@ public class Trap extends Enemy {
         }
         return 'v';
     }
-
-    @Override
-    public String getAbilityName() {
-        return "Surprise!";
-    }
-
 
     @Override
     public void accept(Unit visitor) {

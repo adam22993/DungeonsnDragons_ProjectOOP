@@ -1,8 +1,9 @@
 package Units.ADDITIONAL.ConsumablePoints;
 
 public class Arrows extends ConsumablePoints{
-    public Arrows(int max) {
-        super(max);
+    public Arrows(int curr) {
+        super(Integer.MAX_VALUE);
+        this.current = curr;
     }
 
     public boolean use(){
@@ -11,5 +12,9 @@ public class Arrows extends ConsumablePoints{
             return true;
         }
         return false;
+    }
+
+    public void add(int amount) {
+        current += amount;
     }
 }

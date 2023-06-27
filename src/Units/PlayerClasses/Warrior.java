@@ -1,5 +1,5 @@
 package Units.PlayerClasses;
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 import Units.ADDITIONAL.ConsumablePoints.ABCD;
 import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
 import Units.AbstractsAndInterfaces.*;
@@ -11,7 +11,7 @@ public class Warrior extends Player {
 
     private final String abilityName;
     protected ABCD abilityCD; // Ability Cooldown
-    Random Random = new Random();
+    private Random Random = new Random();
     public Warrior(String name, int healthPool, int attackPoints, int defensePoints, int abilityCD, MessageCallback m) {
         super(name, healthPool, attackPoints, defensePoints, m);
         this.abilityCD = new ABCD(abilityCD);
@@ -66,10 +66,6 @@ public class Warrior extends Player {
 
     //################### Accepts Visitor ###################
 
-    @Override
-    public void accept(Unit visitor) {
-        visitor.visit(this);
-    }
 
     private void resetCD(){
         this.abilityCD.reset();
@@ -80,14 +76,14 @@ public class Warrior extends Player {
         Enemy chosenTarget;
         for (Enemy unit : enemies){
             if (this.getPosition().Range(unit.getPosition()) < 3) {
-                if (closest.isEmpty() && unit.getChar() != '@') {
+                if (closest.isEmpty() && unit.getChar() != '@' && unit.toString() != "." ) {
                     closest.add(unit);
                 }
                 // if the unit is not the player and the unit is closer than the current closest units
-                else if (!closest.isEmpty() && unit.getChar() != '@' && this.getPosition().Range(unit.getPosition()) < this.getPosition().Range(closest.get(0).getPosition())) {
+                else if (!closest.isEmpty() && unit.getChar() != '@' && unit.toString() != "."  && this.getPosition().Range(unit.getPosition()) < this.getPosition().Range(closest.get(0).getPosition())) {
                     closest.clear();
                     closest.add(unit);
-                } else if (!closest.isEmpty() && unit.getChar() != '@' && this.getPosition().Range(unit.getPosition()) == this.getPosition().Range(closest.get(0).getPosition())) {
+                } else if (!closest.isEmpty() && unit.getChar() != '@' && unit.toString() != "."  && this.getPosition().Range(unit.getPosition()) == this.getPosition().Range(closest.get(0).getPosition())) {
                     closest.add(unit);
                 }
             }

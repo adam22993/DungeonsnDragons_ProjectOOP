@@ -1,6 +1,6 @@
 package Units.PlayerClasses;
 
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
 import Units.ADDITIONAL.ConsumablePoints.MP;
 import Units.AbstractsAndInterfaces.*;
@@ -109,10 +109,6 @@ public class Mage extends Player {
     public char onGameTick(Unit playerPosition, Vector<Unit> units) {
         this.mana.tick(getLevel());
         return 0;
-    }
-
-    public int getManaCost() {
-        return manaCost;
     }
 
     public int getCurrMana() {

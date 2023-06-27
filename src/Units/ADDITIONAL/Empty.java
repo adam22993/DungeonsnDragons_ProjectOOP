@@ -14,11 +14,6 @@ public class Empty extends NonPlayable {
         return '\u0000';
     }
 
-    @Override
-    public String getAbilityName() {
-        return null;
-    }
-
 
     @Override
     public void accept(Unit visitor) {

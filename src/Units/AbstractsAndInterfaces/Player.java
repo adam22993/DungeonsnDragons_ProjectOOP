@@ -1,7 +1,7 @@
 package Units.AbstractsAndInterfaces;
 
 
-import Controller.MessageCallback;
+import Controller.Messages.MessageCallback;
 import Patterns.Visitor.UnitInteractionVisited;
 import Patterns.Visitor.UnitInteractionVisitor;
 import Units.ADDITIONAL.ConsumablePoints.ConsumablePoints;
@@ -45,6 +45,7 @@ public abstract class Player extends Unit implements UnitInteractionVisited, Uni
         this.health.setCurrentInBounds(getHealthPool());
     }
 
+    public abstract String getAbilityName();
     protected void gainExperience(int experience) {
         this.setCurrEXP(experience);
     }

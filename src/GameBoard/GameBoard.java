@@ -30,11 +30,9 @@ public class GameBoard {
 
     private LevelLoader levelLoader;
 
-    private Vector<String> unitsCallbacks = new Vector<String>();
 
     public GameBoard(LevelLoader loader) {
         this.levelLoader = loader;
-        this.tileFactory = tileFactory;
         this.tilesOfBoard = new Vector<Unit>();
         this.turnSequence = new Vector<Enemy>();
         this.levels = new Vector<Level>();
@@ -62,11 +60,11 @@ public class GameBoard {
         for (int i = 0; i < countLines; i++) {
             for (int j = 0; j < countColumns; j++) {
                 Unit unit = tilesOfBoard.get(i * countColumns + j);
-                if (unit.getPosition().Range(player.getPosition()) > 7 ) {
-                    boardString.append("*");
-                } else {
+//                if (unit.getPosition().Range(player.getPosition()) > 7 ) {
+//                    boardString.append("*");
+//                } else {
                     boardString.append(unit);
-                }
+//                }
             }
             boardString.append("\n");
         }
@@ -105,7 +103,7 @@ public class GameBoard {
         removeDeadUnitsFromTurnSequence();
 
         if (turnSequence.isEmpty() && !levelLoader.isEmpty()) {
-            loadNextLevel();
+            loadALevelFromString();
         }
     }
 
@@ -181,12 +179,12 @@ public class GameBoard {
         turnSequence.removeIf(Unit::isDead);
     }
 
-    public void loadNextLevel(){
-        loadNextLevel(levelLoader.loadNextLevel());
+    public void loadALevelFromString(){
+        loadALevelFromString(levelLoader.loadNextLevel());
         incrementCurrentLevelCounter();
     }
 
-    private void loadNextLevel(String[] levelText) {
+    private void loadALevelFromString(String[] levelText) {
         tilesOfBoard.clear();
         createNextLevel(levelText);
     }
