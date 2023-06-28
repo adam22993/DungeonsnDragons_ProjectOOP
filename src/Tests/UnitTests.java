@@ -39,6 +39,8 @@ public class UnitTests {
      * 1. the attack interaction and walk interaction + wall interaction of both the player and the enemies
      * 2. each character's ability
      * 3. the level up of the classes
+     *
+     * tests also check the ability of the tile factory to produce the correct tiles
      */
 
 
@@ -87,6 +89,7 @@ public class UnitTests {
         while (!unit.isDead()) {
             player.accept(unit);
         }
+
         // the player should have killed the enemy trap and moved to its position
         assertEquals(0, player.getPosition().getX());
         assertEquals(1, player.getPosition().getY());
@@ -94,7 +97,7 @@ public class UnitTests {
         assertTrue(unit.isDead()); // the enemy should be dead
         assertEquals(0, unit.getPosition().getX());
         assertEquals(0, unit.getPosition().getY());
-
+        // dead enemies get removed from the gameboard by the gameboard - not tested here
     }
 
     @Test
@@ -114,8 +117,6 @@ public class UnitTests {
         assertTrue(unit.isDead()); // the enemy should be dead
         assertEquals(0, unit.getPosition().getX());
         assertEquals(1, unit.getPosition().getY());
-
-
 
         // now we are going to test the mage's ability
         player = tileFactory.producePlayer(2, new Position(7, 0));

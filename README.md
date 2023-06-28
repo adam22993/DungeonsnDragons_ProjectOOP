@@ -7,17 +7,16 @@ The game will be a turn based game where the player will be able to move around 
 The game will be created using the pure java to create the logic and the JFrame library for the view and the controls.
 In the project, we will attempt to implement the following OOP principles:
 
-- **Inheritance** - The units in the game will be created using inheritance.
-- **Polymorphism** - The units will interact with each other using polymorphism.
-- **Abstraction** - The units will be created using abstraction -
-- **Encapsulation** - The information the units will have will be encapsulated.
-- **Composition** - The units will be composed of different objects.
-- **Aggregation** - The units will be aggregated to the map.
-- **Association** - The units will be associated with each other using interactions and design patterns.
-- **Delegation** - The interactions will be delegated to the units they interact with.
-- **Dependency** - The units will be dependent on the map, and the map will be dependent on the units.
-- **Coupling** - We will attempt to create a low coupling between the units and the map.
-- **Cohesion** - We will attempt to create a high cohesion between the units and the map. Cohesion is the degree to which the elements inside a module belong together.
+- **Inheritance**
+- **Polymorphism**
+- **Abstraction**
+- **Encapsulation**
+- **Composition**
+- **Aggregation**
+- **Association**
+- **Delegation**
+- **Coupling**
+- **Cohesion**
 
 We are also implementing the MVC design pattern to the project. A control layer is added to control the inputs and
 the flow of information with in the game, passing the information from the player to the model and the view.
@@ -35,12 +34,12 @@ To navigate the file directory, you need to use the cd command, for example:
 
 Then you need to run the following command:
 
-- ``` java -jar DungeonsnDragons_ProjectOOP.jar [OPTIONAL ARGUMENTS] ``` - The optional argument supported right now is a file directory in which you can add custom maps to the game.
+- ``` java -jar hw3.jar "[NECESSARY ARGUMENTS]" ``` - The necessary argument is a file directory in which the levels are stored.
 
 ### Prerequisites
 
 In order to run the game, you need to have Java installed on your computer.
 You can download Java from the following link:
 
-- https://www.java.com/en/download/ - Java download - **Windows version Java 15 is supported as per assignment requirements.**
+- https://www.java.com/en/download/ - Java download - **Windows version Java 15 is supported as per assignment requirements, yet is compatible with upto java 20 as well.**
 

@@ -102,7 +102,7 @@ public class Warrior extends Player {
         // not written in the instructions but the game does it
         chosenTarget.setHealthAmount(chosenTarget.getHealthCurrent() - dmg);
         this.setHealthAmount(this.getHealthCurrent() + this.getDefensePoints() * 10);
-        this.m.update(String.format("%s casted %s on %s for %d damage (%s attacked for %d attack points, %s rolled %d defense points), setting %s health to %d", this.getName(), this.getAbilityName(), chosenTarget.getName(), dmg, this.getName(), hit, chosenTarget.getName(), def, chosenTarget.getName(), chosenTarget.getHealthCurrent()));
+        this.m.update(String.format("Warrior %s casted %s on %s for %d damage (%s attacked for %d attack points, %s rolled %d defense points), setting %s health to %d", this.getName(), this.getAbilityName(), chosenTarget.getName(), dmg, this.getName(), hit, chosenTarget.getName(), def, chosenTarget.getName(), chosenTarget.getHealthCurrent()));
         if (chosenTarget.isDead()){
             this.m.update("Warrior " + this.getName() + " killed " + chosenTarget.getName() + "!");
             this.gainExperience(chosenTarget.giveExperience());
