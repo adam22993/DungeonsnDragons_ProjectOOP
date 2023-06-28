@@ -28,6 +28,7 @@ public class Position {
     public String toString(){
         return "(" + this.x + "," + this.y + ")";
     }
+
     public double Range(Position other){
         return Math.floor(Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2)));
     }

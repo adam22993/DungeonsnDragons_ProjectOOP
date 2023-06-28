@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="DungeonsnDragons_ProjectOOP:jar">
+  <artifact type="jar" name="DungeonsnDragons_ProjectOOP:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/DungeonsnDragons_ProjectOOP_jar</output-path>
     <root id="archive" name="DungeonsnDragons_ProjectOOP.jar">
       <element id="module-output" name="DungeonsnDragons_ProjectOOP" />

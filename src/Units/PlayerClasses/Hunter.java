@@ -74,7 +74,7 @@ public class Hunter extends Player {
         Vector<Enemy> closest = new Vector<Enemy>();
         Enemy chosenTarget;
         for (Enemy unit : enemies) {
-            if (this.getPosition().Range(unit.getPosition()) <= this.getRange()) {
+            if (this.getPosition().Range(unit.getPosition()) <= this.getRange() && !unit.isDead()) {
                 if (closest.isEmpty() && unit.getChar() != '@' && unit.toString() != "." ) {
                     closest.add(unit);
                 }

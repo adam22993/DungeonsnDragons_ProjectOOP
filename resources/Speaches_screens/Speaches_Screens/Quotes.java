@@ -1,4 +1,4 @@
-package Speaches_Screens;
+package Speaches_screens.Speaches_Screens;
 
 public class Quotes {
     // TODO - Add quotes for all characters, situations and enemies.

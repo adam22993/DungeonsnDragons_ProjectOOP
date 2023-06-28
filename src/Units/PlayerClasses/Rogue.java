@@ -78,6 +78,9 @@ public class Rogue extends Player {
             return;
         }
         for (Enemy unit : enemiesInRange) {
+            if (unit.isDead()) {
+                continue;
+            }
             int def = unit.roleDEF();
             int atk = this.getAttackPoints();
             int dmg = Math.max(0, atk - def);

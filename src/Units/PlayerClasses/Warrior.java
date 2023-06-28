@@ -75,7 +75,7 @@ public class Warrior extends Player {
         Vector<Enemy> closest = new Vector<Enemy>();
         Enemy chosenTarget;
         for (Enemy unit : enemies){
-            if (this.getPosition().Range(unit.getPosition()) < 3) {
+            if (this.getPosition().Range(unit.getPosition()) < 3 && !unit.isDead()) {
                 if (closest.isEmpty() && unit.getChar() != '@' && unit.toString() != "." ) {
                     closest.add(unit);
                 }

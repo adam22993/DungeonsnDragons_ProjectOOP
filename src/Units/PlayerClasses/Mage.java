@@ -40,7 +40,7 @@ public class Mage extends Player {
     public void castAbility(Vector<Enemy> enemies) {
         Vector<Enemy> enemiesInRange = new Vector<>();
         for (Enemy unit : enemies) {
-            if (unit.getPosition().Range(this.getPosition()) <= abilityRange) {
+            if (unit.getPosition().Range(this.getPosition()) <= abilityRange && !unit.isDead()) {
                 enemiesInRange.add(unit);
             }
         }
@@ -120,4 +120,11 @@ public class Mage extends Player {
         return mana.getMax();
     }
 
+    public int getManaCost() {
+        return manaCost;
+    }
+
+    public int getHitCount() {
+        return hitCount;
+    }
 }
