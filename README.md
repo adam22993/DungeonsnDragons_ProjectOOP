@@ -1,4 +1,6 @@
 # DungeonsnDragons_ProjectOOP
+Github project link: https://github.com/adam22993/DungeonsnDragons_ProjectOOP
+
 A 2D dnd style game to test and implement OOP principles.
 
 The project is attempting to create a 2D game that is in the light of Dungeons and Dragons taking the form
@@ -28,9 +30,11 @@ inputs and enemy logics. The information is then passed to the view, which will 
 To play the game, you need to download the project and run the jar file through the command line.
 In order to do so, you need to open the command line and navigate to the folder where the jar file is located.
 To navigate the file directory, you need to use the cd command, for example:
-- ``` cd C:\Users\user\Downloads\ ``` - Windows version
+- ``` cd C:\Users\user\Downloads\ ``` - Windows version - it is possible to right click the folder the jar is located
+in and open the terminal from the menu, that set the directory of the terminal directly in the folder the jar is in.
 - ``` cd /Users/user/Downloads/ ``` - Mac version
 - ``` cd /home/user/Downloads/ ``` - Linux version
+
 
 Then you need to run the following command:
 

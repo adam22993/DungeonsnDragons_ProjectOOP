@@ -9,17 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/DungeonsnDragons_ProjectOOP_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/DungeonsnDragons_ProjectOOP_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Inputs/ButtonSelectionListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Patterns/ButtonSelectionListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/GameBoardTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/TestPatterns.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/UITests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/UnitTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/UnitTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Units/PlayerClasses/Warrior.java" afterDir="false" />
-    </list>
+    <list default="true" id="1eff3e01-1f47-4aee-9a58-9488d21504f2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -153,6 +143,7 @@
       <workItem from="1687778984309" duration="32645000" />
       <workItem from="1687968194393" duration="14221000" />
       <workItem from="1687987459965" duration="68000" />
+      <workItem from="1687987888583" duration="461000" />
     </task>
     <servers />
   </component>
